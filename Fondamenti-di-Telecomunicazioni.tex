@@ -10,12 +10,15 @@
 \usepackage{mathrsfs}  
 \usepackage{lmodern}
 \usepackage{braket}
+\usepackage{steinmetz}
 \usepackage{hyperref}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
 }
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm}}
+
 
 \renewcommand{\contentsname}{Indice}
 
@@ -40,5 +43,245 @@
 \tableofcontents
 
 \clearpage
+
+\section{Segnali}
+
+Un segnale è definito come una qualsiasi grandezza fisica che varia nel tempo in maniera deterministica o aleatoria. Può essere un'onda di pressione come la voce, o un onda 
+elettromagnetica come segnali wireless e bluetooth. Un segnale è in grado di contenere informazioni come una sequenza di bit. Generalmente un segnale 
+analogico viene convertito in digitale come un segnale elettrico tramite un trasduttore, per facilitare la processazione, per poi essere riconvertito in analogico; alcuni 
+segnali sono creati direttamente in digitale. Un segnale è definito dalla sua banda, o spettro di banda, che ne determina la capicità di trasmettere informazione. L' 
+occupazione in frequenza di un segnale è analoga al numero di bit di un dato digitale. 
+
+
+
+Un segnale comune è il segnale voce, definito da un'onda di pressione, per cui è sempre strettamente positivo. Questo segnale è analogico, quindi continuo, ed il suo valoro è 
+noto in ogni istante di tempo $t$, e si identifica come $x(t)$. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(2,0)node[above]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,2)node[right]{$x(t)$};
+
+        \draw[-,very thick]plot[smooth, domain=0:2](\x,{e^(-\x)*sin((5*\x-pi/2) r)+1});
+    \end{tikzpicture}
+\end{center}
+
+Campionando un segnale anlogico si crea un segnale digitale, considerando prima alcune condizioni definite dal teroema del campionamento. Per campionare un segnale si estraggono
+valori, o campioni, dal segnale analogico ogni intervallo $T$. Il segnale così ottenuto è un segnale discreto $x_n$ o $x[n]$, che presenta un valore ogni multiplo del tempo di campionamenoto $T$ 
+scelto. 
+\begin{equation*}
+    x[n]:=\{x(n\cdot T)\,\forall n\in\mathbb{N}\}
+\end{equation*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(2.2,0)node[above]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,2)node[right]{$x[n]$};        
+
+        \filldraw[black](0,0)circle(0.5pt);
+        \filldraw[black](0.4,1.279)circle(0.5pt);
+        \filldraw[black](0.8,1.294)circle(0.5pt);
+        \filldraw[black](1.2,0.718)circle(0.5pt);
+        \filldraw[black](1.6,1.0294)circle(0.5pt);
+        \filldraw[black](2,1.1136)circle(0.5pt);
+
+        \draw[dashed,very thick](0.4,0)node[below]{$T$}--(0.4,1.279);
+        \draw[dashed,very thick](0.8,0)node[below]{$2T$}--(0.8,1.294);
+        \draw[dashed,very thick](1.2,0)node[below]{$3T$}--(1.2,0.718);
+        \draw[dashed,very thick](1.6,0)node[below]{$4T$}--(1.6,1.0294);
+        \draw[dashed,very thick](2,0)node[below]{$5T$}--(2,1.1136);
+    \end{tikzpicture}
+\end{center}
+
+Questi valori vengono poi convertiti in digitale assegnando un certo numero di bit per rappresentare l'intervallo massimo di valori descritti dal segnale. Questo processo 
+viene chiamato quantizzazione, si divide l'intervallo dei valori in piccoli intervalli ognuno con un univoco valore in bit, in modo da convertire tutti i valori in quell'
+intervallo in una sequenza di bit. Aumentando il numero di bit, quindi il numero di suddivisioni dell'itnervallo di partenza, aumenta la precisione, ma aumenta anche il costo 
+per processare lo stesso segnale. Dopo aver covnertito tutti i valori in una sequenza di bit, questo segnale in bit viene tramesso, ed in seguito decodificato in analogico. 
+Spesso i segnali vengono creati in digitale, per cui non è necessario campionare un segnale analogico. 
+
+
+Campionando un segnale si perdono le informazioni contenute tra i campioni, ma è possibile applicare fitri e trasformazioni in digitale utili da giustificare la questa perdita 
+di informazioni, per cui la maggior parte dei segnali vengono trasmessi in digitale. 
+
+
+
+
+I segnali possono essere classificati in certi (deterministici) o aleatori (non deterministici). I segnali certi sono segnali di cui è noto tutto l'andamento, come file salvati su un supporto, per cui non è necessario 
+trasmetterli. Mentre i segnali aleatori non sono noti a priori e vengono studiati dal punto di vista della statistica. 
+
+In generale un sistema di trasmissione di segnali è formato da un trasmettitore che processa e codifica il segnale, un canale che lo trasmette, ed un ricevitore che lo decodifica:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[block](tx)at(-0.5,0){$Tx$};
+        \node[block](rx)at(2.5,0){$Rx$};
+        \node[block](c)at(1,0){Canale};
+        \draw[->,very thick](tx.0)--(c.180);
+        \draw[->,very thick](c.0)--(rx.180);
+    \end{tikzpicture}
+\end{center}
+
+\subsection{Segnali a Tempo Continuo}
+
+Vengono definiti una serie di segnali canonici:
+
+\subsubsection{Seno Cardinale}
+
+\begin{equation}
+    x(t)=\mbox{sinc}(t):=\displaystyle\frac{\sin(\pi t)}{\pi t}
+\end{equation}
+Questo segnale si attenua asintoticamente come $1/t$: 
+\begin{equation*}
+    \displaystyle-\frac{1}{t}\leq\mbox{sinc}(t)\leq\frac{1}{t}
+\end{equation*}
+Viene incluso il fattore $\pi$ nell'argomento in modo che la funzione si annulli per ogni valore intero:
+\begin{equation*}
+    \mbox{sinc}(t)=0\,\forall t\in\mathbb{Z}
+\end{equation*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
+        \draw[->,very thick](-2,0)--(2,0)node[right]{$t$};
+        \draw[-,very thick]plot[smooth, domain=-1.9:1.9](\x,{1/(2*pi*\x)*sin(2*pi*\x r)});
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Coseno}
+
+\begin{equation}
+    x(t)=\cos\left(\displaystyle\frac{2\pi t}{T}\right)
+\end{equation}
+
+Il parametro $T$ rappresenta il periodo della funzione, per cui il valore della funzione ad un certo valore $t$ corrisponde al valore in $t-T$. Invece del periodo si può 
+usare la frequenza $f_0$, inverso del periodo. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](0,-1.5)--(0,1.5)node[right]{$x(t)$};
+        \draw[->,very thick](-2,0)--(2,0)node[right]{$t$};   
+        \draw[-,very thick]plot[smooth, domain=-1.9:1.9](\x,{cos(2*\x r)});
+        
+        \node[below]at(0.785,0){$\displaystyle\frac{T}{4}$};
+        \node[below]at(-0.785,0){$\displaystyle-\frac{T}{4}$};
+        \node[below left]at(1.5707,0){$\displaystyle\frac{T}{2}$};
+        \node[below right]at(-1.5707,0){$\displaystyle-\frac{T}{2}$};
+        \draw[dashed,very thick](1.5707,0)--(1.5707,-1);
+        \draw[dashed,very thick](-1.5707,0)--(-1.5707,-1);
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Gradino Periodico}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(3,0)node[right]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
+        
+        \draw[-,very thick](0,1)node[left]{$1$}--(0.5,1)--(0.5,0)node[below]{$T_1$}--(1,0)node[below]{$T$}--(1,1)--(2,1)--(2,0)node[below]{$T+T_1$}--(2.5,0)node[below]{$2T$}--(2.5,1)--(3,1);
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Esponenziale Complesso}
+
+\begin{equation}
+    x(t)=\displaystyle e^{i\frac{2\pi t}{T}}=\cos\left(\frac{2\pi t}{T}\right)+i\sin\left(\frac{2\pi t}{T}\right)
+\end{equation}
+
+Un segnale complesso può essere anlizzato mediante la sua fase ed il uso modulo in funzione del tempo:
+\begin{equation*}
+    x(t)=|x(t)|e^{\displaystyle\phase{x(t)}}
+\end{equation*}
+
+Dato che la fase è periodica si può rappresentare come una serie di rampe.
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(1.5,0)node[above]{$t$};
+        \draw[->,very thick](0,1)node[left]{$1$}--(1.5,1);
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$|x(t)|$};
+
+        \draw[->,very thick](2,0)--(4.1,0)node[above]{$t$};
+        \draw[->,very thick](2.5,-0.5)--(2.5,1.5)node[right]{$\phase{x(t)}$};
+        \draw[dashed,very thick](2.5,1)node[left]{$2\pi$}--(4,1);
+
+        \draw[-,very thick](2.5,0)--(3,1)--(3,0)node[below]{$T$}--(3.5,1)--(3.5,0)node[below]{$2T$}--(4,1)--(4,0)node[below]{$3T$};
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Esponenziale}
+
+\begin{equation}
+    x(t)=e^{-\alpha t},\,\alpha\in\mathbb{R}
+\end{equation}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(1.5,0)node[above]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t),\,\alpha>0$};
+        \draw[-,very thick]plot[smooth, domain=-0.5:1.5](\x,{1/2*e^(1/2*\x)});
+
+        \draw[->,very thick](2,0)--(4.1,0)node[above]{$t$};
+        \draw[->,very thick](2.5,-0.5)--(2.5,1.5)node[right]{$x(t),\,\alpha<0$};
+        \draw[-,very thick]plot[smooth, domain=2:4](\x,{1/2*e^(-(\x-2))});
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Finestra}
+
+\begin{equation}
+    x(t)=\mbox{rect}\left(\displaystyle\frac{t}{T}\right):=\begin{cases}
+        1 & \displaystyle-\frac{T}{2}\leq t <\frac{T}{2}\\
+        0 & \displaystyle t<-\frac{T}{2} \land t\geq\frac{T}{2}
+    \end{cases}
+\end{equation}
+
+$T$ viene chiamata base della finestra. Questo segnale presenta una discontinuità di salto per $t=\pm\displaystyle\frac{1}{2}$. La funzione finestra viene usata quando si 
+vuole analizzare solo una parte di un segnale, poiché il restante sarà pari a $0$. La trasformata di questa funzione rappresenta un filtro in frequenza. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1.5,0)--(1.5,0)node[above]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
+
+        \draw[-,very thick](-1.5,0)--(-0.5,0)node[below]{$\displaystyle-\frac{T}{2}$}--(-0.5,1)--(0,1)node[above right]{$1$}--(0.5,1)--(0.5,0)node[below]{$\displaystyle\frac{T}{2}$}--(1.5,0);        
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Triangolo}
+
+\begin{equation}
+    x(t)=\mbox{tri}\left(\displaystyle\frac{t}{T}\right):=\begin{cases}
+        1-|t| & -T\leq t < T\\
+        0 & t<-T \land t\geq T
+    \end{cases}
+\end{equation}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1.5,0)--(1.5,0)node[above]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
+
+        \draw[-,very thick](-1.5,0)--(-1,0)node[below]{$-T$}--(0,1)node[right]{$1$}--(1,0)node[below]{$T$}--(1.5,0);
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Gradino}
+
+\begin{equation}
+    x(t)=u(t):=\begin{cases}
+        1 & t\geq0\\
+        0 & t<0
+    \end{cases}
+\end{equation}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(1.5,0)node[above]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
+        \draw[-,very thick](-0.5,0)--(0,0)--(0,1)node[above right]{$1$}--(1.5,1);
+    \end{tikzpicture}
+\end{center}
+
+
 
 \end{document}
