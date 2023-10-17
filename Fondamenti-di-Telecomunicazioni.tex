@@ -177,7 +177,7 @@ usare la frequenza $f_0$, inverso del periodo.
         \draw[dashed,very thick](1.5707,0)--(1.5707,-1);
         \draw[dashed,very thick](-1.5707,0)--(-1.5707,-1);
         \node[above right]at(0,1){$1$};
-        \node[below left]at(0,1){$-1$};
+        \node[below left]at(0,-1){$-1$};
         \node[below right]at(0,0){$0$};
     \end{tikzpicture}
 \end{center}
@@ -524,13 +524,341 @@ Si determina la potenza del segnale coseno, di ampiezza $A$ e frequenza naturale
 Per esprimere il quadrato del coseno, si consdira la formula di bisezione del coseno:
 \begin{gather*}
     \cos(2x)=2\cos^2(x)-1\\
-    \cos^2(x)=\displaystyle\frac{\cos(2x)+1}{2}
+    \cos^2(x)=\displaystyle\frac{\cos(2x)+1}{2}\\
+    A^2\cos^2(2\pi f_0t)=\displaystyle\frac{A^2}{2}(\cos(4\pi f_0t)+1)
 \end{gather*}
-Si può esprimere inoltre mediante la notazione complessa delle funzioni trigonometriche. 
+Si può esprimere inoltre mediante la notazione complessa delle funzioni trigonometriche:
+\begin{gather*}
+    A\cos(2\pi f_0t)=\displaystyle\frac{A}{2}(e^{i2\pi f_0t}+e^{-i2\pi f_0t})\\
+    |x+y|^2\,\,x,y\in\mathbb{C}\\
+    (x+y)\cdot(x+y)^*=(x+y)\cdot(x^*+y^*)\\
+    xx^*+xy^*+yx^*+yy^*=|x|^2+|y|^2+xy^*+yx^*\\
+    xy^*+yx^*=(a_x+ib_x)\cdot(a_y-ib_y)+(a_x-ib_x)\cdot(a_y+ib_y)=(a_xa_y+b_xb_y)=2Re\{x^*y\}\\
+    |x|^2+|y|^2+2Re\{|x|e^{-\varphi_x}+|y|e^{i\varphi_y}\}\\
+    |x|^2+|y|^2+2|x||y|\cos(|\varphi_y-\varphi_x|)\\
+    \Bigg|\displaystyle\frac{A}{2}(e^{i2\pi f_0t}+e^{-i2\pi f_0t})\Bigg|^2=\frac{A^2}{4}\left(1+1+2Re\Bigl\{e^{i2\pi f_0t}\cdot\left(e^{-i2\pi f_0t}\right)^*\Bigr\}\right)\\
+    A^2\cos^2(2\pi f_0t)=\displaystyle\frac{A^2}{2}(1+\cos(4\pi f_0t))
+\end{gather*}
 Considerando questa sostituzione, l'integrale diventa:
 \begin{equation*}
     P_x=\displaystyle\frac{A^2f_0}{2}\int_{-\frac{1}{2f_0}}^{\frac{1}{2f_0}}(\cancelto{0}{\cos(4\pi f_0 t)}+1)dt=\frac{A^2f_0}{2}\left(\frac{1}{2f_0}+\frac{1}{2f_0}\right)=\frac{A^2}{2}
 \end{equation*}
 L'integrale su un periodo del coseno è nullo, poiché è una funzione pari, per cui la componente $\cos(4\pi f_0 t)$ fornisce un contributo nullo. 
+
+\subsection{Segnali a Tempo Discreto}
+
+Poiché la maggior parte dei segnali vengono trasmessi o generati in tempo discreto, è necessario essere a conoscenza del comportamento dei segnali continui campionati a 
+tempo discreto. 
+
+\subsubsection{Gradino}
+
+\begin{equation*}
+    x[n]=u[n]:=\begin{cases}
+        1&n\geq0\\
+        0&n<0
+    \end{cases}
+\end{equation*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(1.5,0)node[above]{$n$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x[n]$};
+        \filldraw[black](-0.5,0)circle(1pt);
+        \filldraw[black](-0.25,0)circle(1pt);
+        \filldraw[black](0,1)circle(1pt);
+        \filldraw[black](0.25,1)circle(1pt);
+        \filldraw[black](0.5,1)circle(1pt);
+        \filldraw[black](0.75,1)circle(1pt);
+        \filldraw[black](1,1)circle(1pt);
+        \filldraw[black](1.25,1)circle(1pt);
+        \filldraw[black](1.5,1)circle(1pt);
+
+        \node[above right]at(0,1){$1$};
+        \node[below right]at(0,0){$0$};
+    \end{tikzpicture}
+\end{center}
+
+Non avendo un segnale finestra a tempo discreto, essa può essere descritta come la differenza di due gradini discreti. Una finestra di base $2l$ nel discreto si esprime come:
+\begin{equation*}
+    u[n+l]-u[n-(l+1)]
+\end{equation*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1.5,0)--(1.5,0)node[above]{$n$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x[n]$};
+
+    
+        \filldraw[black](-1.5,0)circle(1pt);
+        \filldraw[black](-1.25,0)circle(1pt);
+        \filldraw[black](-1,0)circle(1pt);
+        \filldraw[black](-0.75,0)circle(1pt);
+        \filldraw[black](-0.5,1)circle(1pt);
+        \filldraw[black](-0.25,1)circle(1pt);
+        \filldraw[black](0,1)circle(1pt);
+        \filldraw[black](0.25,1)circle(1pt);
+        \filldraw[black](0.5,1)circle(1pt);
+        \filldraw[black](0.75,0)circle(1pt);
+        \filldraw[black](1,0)circle(1pt);
+        \filldraw[black](1.25,0)circle(1pt);
+
+        \node[below]at(-0.5,0){$l$};
+        \node[below]at(0.5,0){$l$};
+        \node[above right]at(0,1){$1$};
+        \node[below right]at(0,0){$0$};
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Esponenziale Unilatero}
+
+\begin{equation*}
+    x[n]=a^nu[n]
+\end{equation*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(1.5,0)node[above]{$n$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x[n]$};
+
+        \filldraw[black](-0.5,0)circle(1pt);
+        \filldraw[black](-0.25,0)circle(1pt);
+        \filldraw[black](0,1)circle(1pt);
+        
+        \filldraw[black](0.5,1.133)circle(1pt);
+        \filldraw[black](0.5,0.882)circle(1pt);
+        \filldraw[black](1,1.284)circle(1pt);
+        \filldraw[black](1,0.779)circle(1pt);
+        \filldraw[black](1.5,1.455)circle(1pt);
+        \filldraw[black](1.5,0.687)circle(1pt);
+
+        \node[above]at(1.5,1.455){$a>1$};
+        \node[above]at(1.5,0.687){$a<1$};
+
+        \node[above right]at(0,1){$1$};
+        \node[below right]at(0,0){$0$};
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Coseno}
+
+\begin{equation*}
+    x[n]=\cos(2\pi f_0n)
+\end{equation*}
+
+Il segnale è periodico nel discreto, solo se la frequenza è un numero intero $f_0\in\mathbb{Z}$. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](0,-1.5)--(0,1.5)node[right]{$x[n]$};
+        \draw[->,very thick](-2,0)--(2,0)node[right]{$n$};   
+        
+        \filldraw[black](0,1)circle(1pt);
+        \filldraw[black](0.5,0)circle(1pt);
+        \filldraw[black](1,-1)circle(1pt);
+        \filldraw[black](1.5,0)circle(1pt);
+        \filldraw[black](2,1)circle(1pt);
+        \filldraw[black](0,1)circle(1pt);
+        \filldraw[black](-0.5,0)circle(1pt);
+        \filldraw[black](-1,-1)circle(1pt);
+        \filldraw[black](-1.5,0)circle(1pt);
+        \filldraw[black](-2,1)circle(1pt);
+        
+        \node[above right]at(0,1){$1$};
+        \node[below left]at(0,-1){$-1$};
+        \node[below right]at(0,0){$0$};
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Impulso Matematico}
+
+L'impulso matematico o delta di Dirac, nel discreto assume solo un valore di $1$ per $n=0$. 
+\begin{equation*}
+    \delta[n]:=\begin{cases}
+        1&n=0\\
+        0&n\neq0
+    \end{cases}
+\end{equation*}
+
+Questo segnale presenta varie proprietà utili:
+
+
+L'area della delta è unitaria:
+\begin{equation*}
+    \displaystyle\sum_{n=-\infty}^\infty\delta[n]=1
+\end{equation*}
+
+
+
+Il prodotto di un qualsiasi segnale $x[n]$ per la delta equivale al valore del segnale in $0$ per la delta. Questa caratteristica viene chiamata propietà di campionamento 
+della delta di Dirac:
+\begin{equation*}
+    x[n]\cdot\delta[n]=x[0]\cdot\delta[n]
+\end{equation*}
+
+
+
+L'area del prodotto di un qualsiasi segnale $x[n]$ per la delta risulta nel valore del segnale in $0$, ciò segue banalmente da le precedenti proprietà:
+\begin{equation*}
+    \displaystyle\sum_{n=-\infty}^\infty x[n]\cdot\delta[n]=x[0]
+\end{equation*}
+
+
+
+La proprietà di campionamento può comprende una traslazione nella delta, cambiano il valore del segnale $x[n]$ campionato:
+\begin{equation*}
+    x[n]\cdot\delta[n-m]=x[m]\delta[n-m]
+\end{equation*}
+
+
+
+La convoluzione nel discreto per una delta di una sequenza di campioni $x_i$ corrisponde al segnale discreto che li ha generati. Ovvero un qualsiasi segnale discreto $x[n]$ può 
+essere espresso come una sommatoria dei suoi campioni moltiplicati ognuno per una delta traslata di un diverso fattore:
+\begin{equation*}
+    x[n]=\displaystyle\sum_{n=-\infty}^\infty x_i\delta[n-i]
+\end{equation*}
+
+
+
+La delta può essere rappresentta come la differenza tra due gradini:
+\begin{equation*}
+    \delta[n-m]=u[n-m]-u[n-(m+1)]
+\end{equation*}
+
+
+
+Analogamente un gradino può essere espresso come una sommatoria di delta traslate ognuna di un diverso fattore. Questa relazione viene espressa in forma canonica come:
+\begin{equation*}
+    u[n-m]=\displaystyle\sum_{n=-\infty}^{-m}\delta[n+1]
+\end{equation*}
+
+\subsubsection{Energia e Potenza}
+
+L'energia di un segnale tempo discreto si calcola come:
+\begin{equation*}
+    E_x:=\displaystyle\lim_{N\to\infty}\sum_{n=-N}^N|x[n]|^2
+\end{equation*}
+La potenza di un segnale tempo discreto è defintia come:
+\begin{equation*}
+    P_x:=\displaystyle\lim_{N\to\infty}\left(\frac{1}{2N+1}\sum_{n=-N}^N|x[n]|^2\right)
+\end{equation*}
+La potenza per segnali periodici tempo discreti si ottiene mediante:
+\begin{equation*}
+    P_x:=\displaystyle\frac{1}{M}\sum_{n=0}^{M-1}|x[n]|^2
+\end{equation*}
+Dove $M$ è il periodo del segnale
+
+\subsection{Impulso Tempo Continuo}
+
+Per definire l'impulso o delta di Dirac nel tempo continuo, si parte da un segnale finestra con una base $\Delta t$ e ampiezza inverso della base:
+\begin{equation*}
+    x(t)=\displaystyle\frac{1}{\Delta t}\mbox{rect}\left(\frac{t}{\Delta t}\right)
+\end{equation*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1.5,0)--(1.5,0)node[above]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
+        \node[below right]at(0,0){$0$};
+
+        \draw[-,very thick](-1.5,0)--(-0.5,0)node[below]{$\displaystyle-\frac{\Delta t}{2}$}--(-0.5,1)--(0,1)node[above right]{$\displaystyle\frac{1}{\Delta t}$}--(0.5,1)--(0.5,0)node[below]{$\displaystyle\frac{\Delta t}{2}$}--(1.5,0);        
+    \end{tikzpicture}
+\end{center}
+
+Al diminuire di $\Delta t$, la base si restringe, mentre l'ampiezza del segnale aumenta, ma complessivamente l'area del segnale rimane unitaria:
+\begin{equation*}
+    \displaystyle\int_{-\infty}^{+\infty}x(t)dt=\frac{1}{\Delta t}\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}dt=\frac{1}{\Delta t}\left(\frac{\Delta t}{2}+\frac{\Delta t}{2}\right)=1
+\end{equation*}
+
+Viene definito l'impulso o dela di Dirac come il limite di questa finestra per $\Delta t$ che tende ad un valore infinito:
+\begin{equation*}
+    \delta(t):=\lim_{\Delta t\to\infty}\displaystyle\frac{1}{\Delta t}\mbox{rect}\left(\frac{t}{\Delta t}\right)
+\end{equation*}
+
+Viene rappresentata graficamente come una freccia di altezza unitaria, poiché non è una funzione ma un funzionale. Si tratta in telecomunicazioni come un segnale qualuneque. 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.5,0)--(0.5,0)node[above]{$t$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
+        \node[below right]at(0,0){$0$};
+
+        \draw[->,ultra thick](0,0)--(0,1)node[above right]{$1$};
+    \end{tikzpicture}
+\end{center}
+
+Possiede delle proprietà analoghe alla delta nel tempo discreto:
+
+
+
+L'area descritta dalla delta è unitaria:
+\begin{equation*}
+    \displaystyle\int_{-\infty}^{+\infty}\delta(t)dt=1
+\end{equation*}
+
+
+
+Il prodotto di un qualsiasi segnale per la delta equivale al valore del segnale in $0$ moltiplicato per l'impulso, poiché per tutti gli altri valori del tempo questo prodotto 
+è nullo:
+\begin{equation*}
+    x(t)\cdot\delta(t)=x(0)\cdot\delta(t)
+\end{equation*}
+
+
+
+Segue da quest'ultima che l'integrale del prodotto di un segnale qualunque $x(t)$ per l'impulso equivale al valore del segnale $x$ in $0$:
+\begin{equation*}
+    \displaystyle\int_{-\infty}^{+\infty}x(t)\cdot\delta(t)dt=x(0)
+\end{equation*}
+
+
+
+Il prodotto dell'impulso traslato di un fattore $\tau$ per un qualunque segnale $x(t)$ corrisponde al valore del segnale in $\tau$ moltiplicato per l'impulso traslato:
+\begin{equation*}
+    x(t)\cdot\delta(t-\tau)=x(\tau)\cdot\delta(t-\tau)
+\end{equation*}
+
+
+
+La convoluzione di un qualsiasi segnale $x(t)$ con l'impulso risulta nel segnale originario $x(t)$, per l'inverso della proprietà precedente: 
+\begin{equation*}
+    x(t)*\delta(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\cdot\delta(t-\tau)d\tau=x(t)\int_{-\infty}^{+\infty}\delta(t-\tau)d\tau=x(t)
+\end{equation*}
+
+
+
+Poiché il segnale finestra può essere espresso come la differenza tra due gradini, allora anche la definizione dell'impulso può essere espressa come tale:
+\begin{equation*}
+    \delta(t):=\lim_{\Delta t\to\infty}\frac{1}{\Delta t}\left(u\left(t+\frac{\Delta t}{2}\right)-u\left(t-\frac{\Delta t}{2}\right)\right)
+\end{equation*}
+
+
+
+L'impulso corrisponde alla derivata rispetto al tempo del gradino. Analogamente il gradino corrisponde alla funzione integrale dell'impulso:
+\begin{gather*}
+    \delta(t)=\displaystyle\frac{du(t)}{dt}\\
+    u(t)=\displaystyle\int_{-\infty}^t\delta(\tau)d\tau
+\end{gather*}
+
+
+
+L'impulso è una funzione pari:
+\begin{equation*}
+    \delta(t)=\delta(-t)
+\end{equation*}
+
+
+
+L'impulso scalato di un fattore $a$ corrisponde all'impulso non scalato fratto il modulo del fattore $a$, se negativo. Questa proprietà di scala si dimostra considerando 
+la definizione dell'impulso. 
+\begin{equation*}
+    \delta(at)=\displaystyle\frac{\delta(t)}{a}
+\end{equation*}
+
+
+
+L'impulso è un segnale né di energia né di potenza. I funzionali, come l'impulso, vengono descritti in base agli effetti provocano sulle funzioni
+
+\subsection{Convoluzione}
+
+
 
 \end{document}
