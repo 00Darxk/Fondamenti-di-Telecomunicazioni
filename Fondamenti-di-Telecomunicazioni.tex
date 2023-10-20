@@ -12,12 +12,16 @@
 \usepackage{braket}
 \usepackage{steinmetz}
 \usepackage{bookmark}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
 }
-\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm}}
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},  
+         cross/.pic = {  \draw[rotate = 45] (-#1,0) -- (#1,0);
+                         \draw[rotate = 45] (0,-#1) -- (0, #1);}}
 
 
 \renewcommand{\contentsname}{Indice}
@@ -78,12 +82,12 @@ scelto.
         \draw[->,very thick](-0.5,0)--(2.2,0)node[above]{$t$};
         \draw[->,very thick](0,-0.5)--(0,2)node[right]{$x[n]$};        
 
-        \filldraw[black](0,0)circle(0.5pt);
-        \filldraw[black](0.4,1.279)circle(0.5pt);
-        \filldraw[black](0.8,1.294)circle(0.5pt);
-        \filldraw[black](1.2,0.718)circle(0.5pt);
-        \filldraw[black](1.6,1.0294)circle(0.5pt);
-        \filldraw[black](2,1.1136)circle(0.5pt);
+        \draw(0,0)pic[black]{cross=3pt};
+        \draw(0.4,1.279)pic[black]{cross=3pt};
+        \draw(0.8,1.294)pic[black]{cross=3pt};
+        \draw(1.2,0.718)pic[black]{cross=3pt};
+        \draw(1.6,1.0294)pic[black]{cross=3pt};
+        \draw(2,1.1136)pic[black]{cross=3pt};
 
         \draw[dashed,very thick](0.4,0)node[below]{$T$}--(0.4,1.279);
         \draw[dashed,very thick](0.8,0)node[below]{$2T$}--(0.8,1.294);
@@ -563,15 +567,15 @@ tempo discreto.
     \begin{tikzpicture}[scale=2]
         \draw[->,very thick](-0.5,0)--(1.5,0)node[above]{$n$};
         \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x[n]$};
-        \filldraw[black](-0.5,0)circle(1pt);
-        \filldraw[black](-0.25,0)circle(1pt);
-        \filldraw[black](0,1)circle(1pt);
-        \filldraw[black](0.25,1)circle(1pt);
-        \filldraw[black](0.5,1)circle(1pt);
-        \filldraw[black](0.75,1)circle(1pt);
-        \filldraw[black](1,1)circle(1pt);
-        \filldraw[black](1.25,1)circle(1pt);
-        \filldraw[black](1.5,1)circle(1pt);
+        \draw(-0.5,0)pic[black]{cross=3pt};
+        \draw(-0.25,0)pic[black]{cross=3pt};
+        \draw(0,1)pic[black]{cross=3pt};
+        \draw(0.25,1)pic[black]{cross=3pt};
+        \draw(0.5,1)pic[black]{cross=3pt};
+        \draw(0.75,1)pic[black]{cross=3pt};
+        \draw(1,1)pic[black]{cross=3pt};
+        \draw(1.25,1)pic[black]{cross=3pt};
+        \draw(1.5,1)pic[black]{cross=3pt};
 
         \node[above right]at(0,1){$1$};
         \node[below right]at(0,0){$0$};
@@ -589,18 +593,18 @@ Non avendo un segnale finestra a tempo discreto, essa può essere descritta come
         \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x[n]$};
 
     
-        \filldraw[black](-1.5,0)circle(1pt);
-        \filldraw[black](-1.25,0)circle(1pt);
-        \filldraw[black](-1,0)circle(1pt);
-        \filldraw[black](-0.75,0)circle(1pt);
-        \filldraw[black](-0.5,1)circle(1pt);
-        \filldraw[black](-0.25,1)circle(1pt);
-        \filldraw[black](0,1)circle(1pt);
-        \filldraw[black](0.25,1)circle(1pt);
-        \filldraw[black](0.5,1)circle(1pt);
-        \filldraw[black](0.75,0)circle(1pt);
-        \filldraw[black](1,0)circle(1pt);
-        \filldraw[black](1.25,0)circle(1pt);
+        \draw(-1.5,0)pic[black]{cross=3pt};
+        \draw(-1.25,0)pic[black]{cross=3pt};
+        \draw(-1,0)pic[black]{cross=3pt};
+        \draw(-0.75,0)pic[black]{cross=3pt};
+        \draw(-0.5,1)pic[black]{cross=3pt};
+        \draw(-0.25,1)pic[black]{cross=3pt};
+        \draw(0,1)pic[black]{cross=3pt};
+        \draw(0.25,1)pic[black]{cross=3pt};
+        \draw(0.5,1)pic[black]{cross=3pt};
+        \draw(0.75,0)pic[black]{cross=3pt};
+        \draw(1,0)pic[black]{cross=3pt};
+        \draw(1.25,0)pic[black]{cross=3pt};
 
         \node[below]at(-0.5,0){$l$};
         \node[below]at(0.5,0){$l$};
@@ -620,16 +624,16 @@ Non avendo un segnale finestra a tempo discreto, essa può essere descritta come
         \draw[->,very thick](-0.5,0)--(1.5,0)node[above]{$n$};
         \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x[n]$};
 
-        \filldraw[black](-0.5,0)circle(1pt);
-        \filldraw[black](-0.25,0)circle(1pt);
-        \filldraw[black](0,1)circle(1pt);
-        
-        \filldraw[black](0.5,1.133)circle(1pt);
-        \filldraw[black](0.5,0.882)circle(1pt);
-        \filldraw[black](1,1.284)circle(1pt);
-        \filldraw[black](1,0.779)circle(1pt);
-        \filldraw[black](1.5,1.455)circle(1pt);
-        \filldraw[black](1.5,0.687)circle(1pt);
+        \draw(-0.5,0)pic[black]{cross=3pt};
+        \draw(-0.25,0)pic[black]{cross=3pt};
+        \draw(0,1)pic[black]{cross=3pt};
+
+        \draw(0.5,1.133)pic[black]{cross=3pt};
+        \draw(0.5,0.882)pic[black]{cross=3pt};
+        \draw(1,1.284)pic[black]{cross=3pt};
+        \draw(1,0.779)pic[black]{cross=3pt};
+        \draw(1.5,1.455)pic[black]{cross=3pt};
+        \draw(1.5,0.687)pic[black]{cross=3pt};
 
         \node[above]at(1.5,1.455){$a>1$};
         \node[above]at(1.5,0.687){$a<1$};
@@ -651,18 +655,18 @@ Il segnale è periodico nel discreto, solo se la frequenza è un numero intero $
     \begin{tikzpicture}[scale=2]
         \draw[->,very thick](0,-1.5)--(0,1.5)node[right]{$x[n]$};
         \draw[->,very thick](-2,0)--(2,0)node[right]{$n$};   
-        
-        \filldraw[black](0,1)circle(1pt);
-        \filldraw[black](0.5,0)circle(1pt);
-        \filldraw[black](1,-1)circle(1pt);
-        \filldraw[black](1.5,0)circle(1pt);
-        \filldraw[black](2,1)circle(1pt);
-        \filldraw[black](0,1)circle(1pt);
-        \filldraw[black](-0.5,0)circle(1pt);
-        \filldraw[black](-1,-1)circle(1pt);
-        \filldraw[black](-1.5,0)circle(1pt);
-        \filldraw[black](-2,1)circle(1pt);
-        
+     
+        \draw (0,1)pic[black]{cross=3pt};
+        \draw (0.5,-1)pic[black]{cross=3pt};
+        \draw (-0.5,-1)pic[black]{cross=3pt};
+        \draw (1,1)pic[black]{cross=3pt};
+        \draw (-1,1)pic[black]{cross=3pt};
+        \draw (1.5,-1)pic[black]{cross=3pt};
+        \draw (-1.5,-1)pic[black]{cross=3pt};
+        \draw (2,1)pic[black]{cross=3pt};
+        \draw (-2,1)pic[black]{cross=3pt};
+
+
         \node[above right]at(0,1){$1$};
         \node[below left]at(0,-1){$-1$};
         \node[below right]at(0,0){$0$};
@@ -682,44 +686,45 @@ L'impulso matematico o delta di Dirac, nel discreto assume solo un valore di $1$
 Questo segnale presenta varie proprietà utili:
 
 
-L'area della delta è unitaria:
+L'area della delta è unitaria, poiché presenta un unico campione per $n=0$ di valore $1$:
 \begin{equation*}
-    \displaystyle\sum_{n=-\infty}^\infty\delta[n]=1
+    \displaystyle\sum_{n=-\infty}^{+\infty}\delta[n]=1
 \end{equation*}
 
 
 
-Il prodotto di un qualsiasi segnale $x[n]$ per la delta equivale al valore del segnale in $0$ per la delta. Questa caratteristica viene chiamata propietà di campionamento 
+Il prodotto di un qualsiasi segnale $x[n]$ per la delta equivale al valore del segnale in $0$ per la delta. Poiché l'unico valore della delta diverso da zero si trova in $n=0$ 
+e vale $1$, per cui estra dal segnale $x$ il campione in posizione $n=0$. Questo campione viene moltiplicato per la delta, poiché non è un segnale continuo, ma si presenta 
+solo in quell'istante. Questa caratteristica viene chiamata propietà di campionamento 
 della delta di Dirac:
 \begin{equation*}
     x[n]\cdot\delta[n]=x[0]\cdot\delta[n]
 \end{equation*}
-
-
-
-L'area del prodotto di un qualsiasi segnale $x[n]$ per la delta risulta nel valore del segnale in $0$, ciò segue banalmente da le precedenti proprietà:
+Questo campione può essere estratto ad un arbitrario valore $m$:
 \begin{equation*}
-    \displaystyle\sum_{n=-\infty}^\infty x[n]\cdot\delta[n]=x[0]
+    x[n]\cdot\delta[n-m]=x[m]\cdot\delta[n-m]
 \end{equation*}
 
 
-
-La proprietà di campionamento può comprende una traslazione nella delta, cambiano il valore del segnale $x[n]$ campionato:
+L'area del prodotto di un qualsiasi segnale $x[n]$ per la delta risulta nel valore del segnale in $0$, ciò si dimostra tramite la proprietà di campionamento della delta:
 \begin{equation*}
-    x[n]\cdot\delta[n-m]=x[m]\delta[n-m]
+    \displaystyle\sum_{n=-\infty}^{+\infty} x[n]\cdot\delta[n]=\sum_{n=-\infty}^{+\infty} x[0]\cdot\delta[n]=x[0]\cancelto{1}{\sum_{n=-\infty}^{+\infty}\delta[n]}=x[0]
 \end{equation*}
 
 
-
-La convoluzione nel discreto per una delta di una sequenza di campioni $x_i$ corrisponde al segnale discreto che li ha generati. Ovvero un qualsiasi segnale discreto $x[n]$ può 
-essere espresso come una sommatoria dei suoi campioni moltiplicati ognuno per una delta traslata di un diverso fattore:
+Invertendo la proprietà di campionamendo, ovvero partendo da tutti i campioni di un segnale $x[n]$ e sommandoli tra di loro, è possibile ottenere il segnale originario: 
 \begin{equation*}
-    x[n]=\displaystyle\sum_{n=-\infty}^\infty x_i\delta[n-i]
+    \cdots+x[-N]\delta[n+N]+\cdots+x[0]\delta[n]+\cdots+x[N]\delta[n-N]+\cdots=\displaystyle\sum_{i=-\infty}^{+\infty} x[i]\delta[n-i]=x[n]
 \end{equation*}
 
 
+La convoluzione di un qualsiasi segnale $x[n]$ per la delta risulta nel segnale $x$ stesso:
+\begin{equation*}
+    x[n]*\delta[n]=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]\delta[n-k]=\sum_{k=-\infty}^{+\infty}x[n]\delta[n-k]=x[n]\cancelto{1}{\sum_{k=-\infty}^{+\infty}\delta[n-k]}
+\end{equation*}
 
-La delta può essere rappresentta come la differenza tra due gradini:
+
+La delta può essere rappresentata come la differenza tra due gradini, considerando un unico campione in posizione $m$:
 \begin{equation*}
     \delta[n-m]=u[n-m]-u[n-(m+1)]
 \end{equation*}
@@ -789,38 +794,35 @@ Possiede delle proprietà analoghe alla delta nel tempo discreto:
 
 
 
-L'area descritta dalla delta è unitaria:
+L'integrale sui reali della delta è unitario in base alla sua definizione:
 \begin{equation*}
     \displaystyle\int_{-\infty}^{+\infty}\delta(t)dt=1
 \end{equation*}
 
 
 
-Il prodotto di un qualsiasi segnale per la delta equivale al valore del segnale in $0$ moltiplicato per l'impulso, poiché per tutti gli altri valori del tempo questo prodotto 
-è nullo:
+Il prodotto di un qualsiasi segnale per la delta equivale al valore del segnale in $0$ moltiplicato per l'impulso, poiché per tutti gli altri valori nel tempo questo prodotto 
+è nullo. Proprietà analoga a quella del campionamento per il continuo:
 \begin{equation*}
     x(t)\cdot\delta(t)=x(0)\cdot\delta(t)
 \end{equation*}
-
-
-
-Segue da quest'ultima che l'integrale del prodotto di un segnale qualunque $x(t)$ per l'impulso equivale al valore del segnale $x$ in $0$:
-\begin{equation*}
-    \displaystyle\int_{-\infty}^{+\infty}x(t)\cdot\delta(t)dt=x(0)
-\end{equation*}
-
-
-
-Il prodotto dell'impulso traslato di un fattore $\tau$ per un qualunque segnale $x(t)$ corrisponde al valore del segnale in $\tau$ moltiplicato per l'impulso traslato:
+Questa proprietà può essere estesa considerando un impulso traslato di un fattore $\tau$:
 \begin{equation*}
     x(t)\cdot\delta(t-\tau)=x(\tau)\cdot\delta(t-\tau)
 \end{equation*}
 
 
 
+Segue da quest'ultima che l'integrale del prodotto di un segnale qualunque $x(t)$ per l'impulso equivale al valore del segnale $x$ in $0$:
+\begin{equation*}
+    \displaystyle\int_{-\infty}^{+\infty}x(t)\cdot\delta(t)dt=\int_{-\infty}^{+\infty}x(0)\cdot\delta(t)dt=x(0)\cancelto{1}{\int_{-\infty}^{+\infty}\delta(t)dt}=x(0)
+\end{equation*}
+
+
+
 La convoluzione di un qualsiasi segnale $x(t)$ con l'impulso risulta nel segnale originario $x(t)$, per l'inverso della proprietà precedente: 
 \begin{equation*}
-    x(t)*\delta(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\cdot\delta(t-\tau)d\tau=x(t)\int_{-\infty}^{+\infty}\delta(t-\tau)d\tau=x(t)
+    x(t)*\delta(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\cdot\delta(t-\tau)d\tau=x(t)\cancelto{1}{\int_{-\infty}^{+\infty}\delta(t-\tau)d\tau}=x(t)
 \end{equation*}
 
 
@@ -855,10 +857,496 @@ la definizione dell'impulso.
 
 
 
-L'impulso è un segnale né di energia né di potenza. I funzionali, come l'impulso, vengono descritti in base agli effetti provocano sulle funzioni
+L'impulso è un segnale né di energia né di potenza. I funzionali, come l'impulso, vengono descritti in base agli effetti che provocano sulle funzioni
 
-\subsection{Convoluzione}
+\subsection{Convoluzione Tempo Continuo}
+
+La convoluzione rappresenta un'operazione tra due segnali, generandone uno nuovo. L'operazione si indica con il simbolo $*$:
+\begin{equation*}
+    x(t)*y(t)=z(t)
+\end{equation*}
+
+La convoluzione tra due segnali tempo continui produce un altro segnlae tempo continuo. La convoluzione risultante è sempre un segnale continuo:
+\begin{equation}
+    z(t)=x(t)*y(t):=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\cdot y(t-\tau)d\tau
+\end{equation}
+
+Il segnale convoluzione è una funzione nella stessa variabile dei segnali convoluti, questa variabile di uscita compare all'interno dell'integrale. Il segnale conoluzione 
+rappresenta l'area sottesa dal prodotto tra il segnale $x$ ed il segnale $y$, ribaltato e traslato di un fattore $t$, per ogni istante di tempo $t$. La convoluzione 
+è un'operazione commutativa, per cui è arbitraria la scelta di quale dei due segnali debba traslare. 
+
+Si rappresenta il segnale $x$ originiario rispetto alla variabile $\tau$, al di sotto si grafica il segnale $y$ ribaltato e traslato di un fattore $t$, per individuare gli 
+intervalli dove il prodotto tra i due segnali è nullo. La maggior parte dei segnali reali si attenuano nel tempo, per cui avranno un valore solo per un intervallo finito 
+di valori, ed in questi intervalli la convoluzione restituisce un valore non nullo. Anche nei segnali puramente matematici, spesso presentano valori finiti non nulli solo per 
+certi intervalli di tempo. Si considerano tutti i possibili casi di sovrapposizione, quindi di prodotto non nullo, tra i due segnali per ottenere 
+il segnale convoluzione in forma analitica, da ricordare che la convoluzione è un segnale continuo per cui non possono essere presenti discontinuità nella sua espressione 
+in forma anlitica. 
 
 
+
+Vengono forniti alcuni esempi di convoluzioni:
+
+\subsubsection{Esponenziale Unilatero per Gradino}
+
+Si considera $\alpha\in\mathbb{R}^+$. 
+\begin{equation*}
+    z(t)=e^{-\alpha t}u(t)*u(t)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\tau}u(\tau)u(t-\tau)d\tau
+\end{equation*}
+Poiché è presente un gradino nell'integrale, la convoluzione assumerà valori nulli per $t<0$, ciò si può anche individure graficamente, poiché per gli stessi valori i due 
+graficie del gradino e delò'esponenziale unilatero non si sovrappongono. All'aumentare del valore di $t$, il valore del segnale $z(t)$ aumenta sempre più lentamente, poiché i 
+contributi dell'esponenziale vanno diminuendo. Poiché entrambi i gradini nell'integrale assumono valori unitari per $t>0$, il valore del segnale in questo intervallo 
+dipende dalla funzione integrale dell'esponenziale, da $0$ al valore di $t$ corrente:
+\begin{equation*}
+    z(t)=\begin{cases}
+        0&t<0\\
+        \displaystyle\int_0^te^{-\alpha \tau}d\tau&t\geq0
+    \end{cases}
+\end{equation*}
+Risolvendo l'integrale si ottiene:
+\begin{equation*}
+    \displaystyle\int_0^te^{-\alpha \tau}d\tau=\left|-\frac{e^{-\alpha\tau}}{\alpha}\right|^t_0=\frac{1-e^{-\alpha t}}{\alpha}
+\end{equation*}
+Per cui il segnale convoluzione in forma analitica risulta:
+\begin{equation*}
+    z(t)=\begin{cases}
+        0&t<0\\
+        \displaystyle\frac{1-e^{-\alpha t}}{\alpha}&t\geq0
+    \end{cases}
+\end{equation*}
+Questo segnale tende asintoticamente a $1/\alpha$ per $t\to+\infty$. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1,0)--(1.5,0)node[above]{$\tau$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(\tau)$};
+        \node[below right]at(0,0){$0$};
+        \node[above right]at(0,1){$1$};
+
+        \draw[-,very thick]plot[smooth, domain=0:1.5](\x,{e^(-\x)});
+
+        \draw[->,very thick](-1,-2.1)--(1.5,-2.1)node[above]{$\tau$};
+        \draw[->,very thick](0,-2.6)--(0,-0.6)node[left]{$y(t-\tau)$};
+        \node[below right]at(0,-2.1){$0$};
+        \node[above right]at(0,-1.1){$1$};
+
+        \draw[-,very thick](-1,-1.1)--(0.4,-1.1)--(0.4,-2.1)node[below right]{$t$};
+        \draw[dashed,very thick](0.4,-1.1)--(0.4,0.67);
+
+
+        \draw[->,very thick](2,-1)--(4,-1)node[above]{$t$};
+        \draw[->,very thick](2.5,-1.5)--(2.5,0.5)node[right]{$z(t)$};
+        \node[below right]at(2.5,-1){$0$};
+        \node[left]at(2.5,0){$\displaystyle\frac{1}{\alpha}$};
+        \draw[dashed](2.5,0)--(4,0);
+        \draw[-,very thick]plot[smooth, domain=2.5:4](\x,{-e^(-2*(\x-2.5))});
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Autoconvoluzione di Un Esponenziale Unilatero}
+
+\begin{equation*}
+    z(t)=e^{-\alpha t}u(t)*e^{-\alpha t}u(t)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\tau}u(\tau)e^{-\alpha(t-\tau)}u(t-\tau)d\tau
+\end{equation*}
+Poiché sono unilateri, non si sovrapporrano per $t<0$, quindi la convoluzione è nulla per quei valori di tempo. Può essere spiegato tramite la prorpietà del gradino di 
+cambiare i limiti di integrazione, per cui invece di integrare da $-\infty$ a $+\infty$, si integra nell'intervallo dove si trova il gradino $u(\tau)$, ovvero da $0$ a $+\infty$: 
+\begin{equation*}
+    z(t)=\displaystyle\int_0^{+\infty}e^{-\alpha t}u(t-\tau)d\tau=e^{-\alpha t}\int_0^{+\infty}u(t-\tau)d\tau
+\end{equation*}
+L'area sottesa da un gradino ribaltato e traslato di un fattore $t>0$ da $0$ a $+\infty$ equivale all'area di un rettangolo di altezza $1$ e di base $t$:
+\begin{equation*}
+    z(t)=e^{-\alpha t}\displaystyle\int_0^td\tau=te^{-\alpha t}
+\end{equation*}
+
+In forma analitica risulta:
+\begin{equation*}
+    z(t)=\begin{cases}
+        0&t<0\\
+        te^{-\alpha t}&t\geq0
+    \end{cases}
+\end{equation*}
+ 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1,0)--(1.5,0)node[above]{$\tau$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(\tau)$};
+        \node[below right]at(0,0){$0$};
+        \node[above right]at(0,1){$1$};
+
+        \draw[-,very thick]plot[smooth, domain=0:1.5](\x,{e^(-\x)});
+
+        \draw[->,very thick](-1,-2.1)--(1.5,-2.1)node[above]{$\tau$};
+        \draw[->,very thick](0,-2.6)--(0,-0.6)node[left]{$y(t-\tau)$};
+        \node[below right]at(0,-2.1){$0$};
+        \node[above right]at(0,-1.1){$1$};
+
+        \draw[-,very thick]plot[smooth, domain=-1:0.4](\x,{e^(\x-0.67)-2.1});
+        \draw[-,very thick](0.4,-2.1)node[below]{$t$}--(0.4,-1.337);
+        \draw[dashed,very thick](0.4,-1.337)--(0.4,0.67);
+
+
+        \draw[->,very thick](2,-1)--(4,-1)node[below]{$t$};
+        \draw[->,very thick](2.5,-1.5)--(2.5,0)node[right]{$z(t)$};
+        \node[below right]at(2.5,-1){$0$};
+        \draw[-,very thick]plot[smooth, domain=2.5:4](\x,{2*(\x-2.5)*e^(-2*(\x-2.5))-1});
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Convoluzione tra Due Finestre}
+
+Si considerano due casi, dove le due finestra hanno base uguale, ed un caso dove hanno base differente. Si considera il caso $T_1=T_2$:
+\begin{equation*}
+    z(t)=\mbox{rect}\left(\displaystyle\frac{t}{T}\right)*\mbox{rect}\left(\frac{t}{T}\right)
+\end{equation*}
+
+La convoluzione assume valori nulli quando non si sovrappongono, ovvero per un valore $t+\displaystyle\frac{T}{2}<-\frac{T}{2}\to t<-T$. L'area sottesa dal prodotto 
+di queste due finestre aumenta linearmente fino a quando non si sovrappongono per $t=0$, dove l'area assume valore massimo $T\cdot 1$, dopo il quale 
+decresce linearmente fino a $t=T$. Se una delle due fosse stata traslata di un fattore $t_0$, l'intera convoluzione sarebbe stata traslata dello stesso fattore. Da notare 
+che la convoluzione di due segnali pari genera un segnale pari.  
+\begin{equation*}
+    z(t)=\begin{cases}
+        0&t<-T\\
+        \displaystyle\int_{-T}^td\tau&-T\leq t<0\\
+        \displaystyle\int_t^Td\tau&0\leq t<T\\
+        0&t>T
+    \end{cases}=\begin{cases}
+        0&t<-T\land t>T\\
+        T-|t|&-T\leq t<T\\
+    \end{cases}=T\,\mbox{tri}\left(\displaystyle\frac{t}{T}\right)
+\end{equation*}
+La convoluzione tra due finestre di base uguale risulta in un triangolo di base doppia $2T$, e scalata di un fattore pari alla base $T$. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1,0)--(1.5,0)node[above]{$\tau$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(\tau)$};
+        \node[below right]at(0,0){$0$};
+        \node[above right]at(0,1){$1$};
+
+        \draw[-,very thick](-0.5,0)node[below]{$-\displaystyle\frac{T}{2}$}--(-0.5,1)--(0.5,1)--(0.5,0)node[below]{$\displaystyle\frac{T}{2}$};
+
+        \draw[->,very thick](-1,-2.1)--(1.5,-2.1)node[above]{$\tau$};
+        \draw[->,very thick](0,-2.6)--(0,-0.6)node[left]{$y(t-\tau)$};
+        \node[below right]at(0,-2.1){$0$};
+        \node[above right]at(0,-1.1){$1$};
+
+        \draw[-,very thick](0.3,-2.1)node[below]{$t+\displaystyle\frac{T}{2}$}--(0.3,-1.1)--(-0.7,-1.1)--(-0.7,-2.1)node[below]{$t-\displaystyle\frac{T}{2}$};
+        \draw[dashed,very thick](0.3,-1.1)--(0.3,1);
+
+
+        \draw[->,very thick](2,-1)--(5,-1)node[below]{$t$};
+        \draw[->,very thick](3.5,-1.5)--(3.5,0.5)node[right]{$z(t)$};
+        \node[below right]at(3.5,-1){$0$};
+        \draw[-,very thick](2.5,-1)node[below]{$-T$}--(3.5,0)node[above right]{$T$}--(4.5,-1)node[below]{$T$};
+    \end{tikzpicture}
+\end{center}
+
+Si considera ora il caso dove le due finestre hanno basi $T_1>T_2$:
+\begin{equation*}
+    z(t)=\mbox{rect}\left(\displaystyle\frac{t}{T_1}\right)*\mbox{rect}\left(\frac{t}{T_2}\right)
+\end{equation*}
+
+Poiché le due finestre sono simmetriche, si analizzano solo i casi per $t<0$, per poi aggiungere per simmetria l'equazione analitica per $t\geq0$. Le due finestre non si 
+sovrappongono per $t+\displaystyle\frac{T_2}{2}<-\frac{T_1}{2}\to t<-\frac{1}{2}(T_1+T_2)$, per cui in quell'intervallo la convoluzione assume valore nullo. Il valore 
+della convoluzione aumenta linearmente fino a quando la finestra più piccola trasla fino ad essere completamente interna alla finestra di base $T_1$ per un valore 
+$t-\displaystyle\frac{T_2}{2}<-\frac{T_1}{2}\to t<-\frac{1}{2}(T_1-T_2)$. Quando le due finestre si sovrappongono, il valore della convoluzione è costante, e corrisponde 
+all'area di un rettangolo di base, base della finestra più piccola $T_2$ ed altezza unitaria $T_2\cdot1$ fino a raggiungere $t_0$. Ribaltando questo segnale ottenuto 
+si ottiene il segnale per valori $t\geq0$:
+\begin{gather*}
+    z(t)=\begin{cases}
+        0&t<-\displaystyle\frac{1}{2}(T_1+T_2)\\
+        \displaystyle\int_{-\frac{1}{2}(T_1+T_2)}^td\tau&-\frac{1}{2}(T_1+T_2)\leq t <-\frac{1}{2}(T_1-T_2)\\
+        T_2&-\frac{1}{2}(T_1-T_2)\leq t<\frac{1}{2}(T_1-T_2)\\
+        -\displaystyle\int_{-\frac{1}{2}(T_1+T_2)}^td\tau&\frac{1}{2}(T_1-T_2)\leq t <\frac{1}{2}(T_1+T_2)\\
+        0&t\geq\displaystyle\frac{1}{2}(T_1+T_2)
+    \end{cases}\\
+    z(t)=\begin{cases}
+        0&t<-\displaystyle\frac{1}{2}(T_1+T_2)\land t\geq\frac{1}{2}(T_1+T_2)\\
+        \displaystyle\frac{1}{2}(T_1+T_2)-|t| &-\frac{1}{2}(T_1+T_2)\leq t <-\frac{1}{2}(T_1-T_2)\land \frac{1}{2}(T_1-T_2)\leq t <\frac{1}{2}(T_1+T_2)\\
+        T_2&-\displaystyle\frac{1}{2}(T_1-T_2)\leq t<\frac{1}{2}(T_1-T_2)
+    \end{cases}
+\end{gather*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1,0)--(1.5,0)node[above]{$\tau$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(\tau)$};
+        \node[below right]at(0,0){$0$};
+        \node[above right]at(0,1){$1$};
+
+        \draw[-,very thick](-0.7,0)node[below]{$-\displaystyle\frac{T_1}{2}$}--(-0.7,1)--(0.7,1)--(0.7,0)node[below]{$\displaystyle\frac{T_1}{2}$};
+
+        \draw[->,very thick](-1,-2.1)--(1.5,-2.1)node[above]{$\tau$};
+        \draw[->,very thick](0,-2.6)--(0,-0.6)node[left]{$y(t-\tau)$};
+        \node[below right]at(0,-2.1){$0$};
+        \node[above right]at(0,-1.1){$1$};
+
+        \draw[-,very thick](0.3,-2.1)node[below]{$t+\displaystyle\frac{T_2}{2}$}--(0.3,-1.1)--(-0.8,-1.1)--(-0.8,-2.1)node[below]{$t-\displaystyle\frac{T_2}{2}$};
+        \draw[dashed,very thick](0.3,-1.1)--(0.3,1);
+
+
+        \draw[->,very thick](2,-1)--(5,-1)node[below]{$t$};
+        \draw[->,very thick](3.5,-1.5)--(3.5,0.5)node[right]{$z(t)$};
+        \node[above right]at(3.5,-1){$0$};
+        \draw[-,very thick](2.5,-1)node[below left]{$-\displaystyle\frac{1}{2}(T_1+T_2)$}--(3,0)--(3.5,0)node[above right]{$T_2$}--(4,0)--(4.5,-1)node[below right]{$\displaystyle\frac{1}{2}(T_1+T_2)$};
+        \draw[dashed, very thick](3,0)--(3,-1)node[below]{$\displaystyle-\frac{1}{2}(T_1-T_2)$};
+        \draw[dashed, very thick](4,0)--(4,-1)node[below]{$\displaystyle\frac{1}{2}(T_1-T_2)$};
+    \end{tikzpicture}
+\end{center}
+
+Il grafico di questa convoluzione rappresenta un trapezio di altezza $T_2$, base maggiore $T_1+T_2$ e base minore $T_1-T_2$ Si nota come l'autoconvoluzione di due finestre 
+di base uguali rappresenta un caso speciale di questo trapezio, avente base minore nulla $T-T=0$ e base doppia rispetto alla finestra $T+T=2T$, ciò equivale ad un triangolo 
+di altezza $T$ e base $2T$. 
+
+\subsubsection{Convoluzione tra Due Gaussiane}
+
+Date due gaussiane definite dai parametri $\alpha_1$ e $\alpha_2$, con $\alpha_1,\alpha_2\in\mathbb{R}^+$, si vuole determinare la convoluzione tra questi due segnali:
+\begin{gather*}
+    z(t)=e^{-\alpha_1t^2}*e^{-\alpha_2t^2}=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha_1\tau^2}e^{-\alpha_2(t-\tau)^2}d\tau=\int_{-\infty}^{+\infty}e^{-\alpha_1\tau^2}e^{-\alpha_2(t^2-2t\tau+\tau^2)}d\tau\\
+    \displaystyle e^{-\alpha_2 t^2}\int_{-\infty}^{+\infty}e^{-(\alpha_1+\alpha_2)\tau^2}e^{2\alpha_2t\tau^2}d\tau=e^{-\alpha_2 t^2}\int_{-\infty}^{+\infty}e^{-(\alpha_1+\alpha_2)\left[\tau^2-2\alpha_2\frac{t\tau}{\alpha_1+\alpha_2}\right]}d\tau
+\end{gather*}
+
+Si somma e si sottrae il fattore $\displaystyle\left(\frac{\alpha_2t}{\alpha_1+\alpha_2}\right)^2$ nell'esponenziale all'interno dell'integrale:
+\begin{gather*}
+    \displaystyle e^{-\alpha_2 t^2}\int_{-\infty}^{+\infty}e^{-(\alpha_1+\alpha_2)\left[\tau^2-2\alpha_2\frac{t\tau}{\alpha_1+\alpha_2}+\left(\frac{\alpha_2t}{\alpha_1+\alpha_2}\right)^2-\left(\frac{\alpha_2t}{\alpha_1+\alpha_2}\right)^2\right]}d\tau\\
+    \displaystyle e^{-\alpha_2 t^2}\int_{-\infty}^{+\infty}e^{-(\alpha_1+\alpha_2)\left[\left(\tau-\frac{\alpha_2t}{\alpha_1+\alpha_2}\right)^2-\left(\frac{\alpha_2t}{\alpha_1+\alpha_2}\right)^2\right]}d\tau\\
+    \displaystyle e^{-\left(\alpha_2-\frac{\alpha_2^2}{\alpha_1+\alpha_2}\right)t^2}\int_{-\infty}^{+\infty}e^{-(\alpha_1+\alpha_2)\left[\tau-\frac{\alpha_2t}{\alpha_1+\alpha_2}\right]^2}d\tau
+\end{gather*}
+Si applica la sostituzione $T=\displaystyle\sqrt{\alpha_1+\alpha_2}\left(\tau+\frac{\alpha_2t}{\alpha_1+\alpha_2}\right)$:
+\begin{equation*}
+    \displaystyle e^{-\left(\frac{\alpha_1\alpha_2}{\alpha_1+\alpha_2}\right)t^2}\int_{-\infty}^{+\infty}\frac{e^{-(\alpha_1+\alpha_2)T^2}}{\sqrt{\alpha_1+\alpha_2}}dT=\frac{e^{-\left(\frac{\alpha_1\alpha_2}{\alpha_1+\alpha_2}\right)t^2}}{\sqrt{\alpha_1+\alpha_2}}\int_{-\infty}^{+\infty}{e^{-(\alpha_1+\alpha_2)T^2}}dT
+\end{equation*}
+Il fattore integrale corrisponde all'integrale di Gauss, precedentemente discusso, che risulta su tutti i reali in un area di $\sqrt\pi$:
+\begin{equation*}
+    e^{-\alpha_1t^2}*e^{-\alpha_2t^2}=\displaystyle\sqrt{\frac{\pi}{\alpha_1+\alpha_2}}e^{-\frac{\alpha_1\alpha_2}{\alpha_1+\alpha_2}t^2}
+\end{equation*}
+Esprimendo le due gaussiane in forma normalizzata, risulta che la varianza della convoluzione equivale alla somma delle varianze delle due gaussiane $\sigma=\sigma_1+\sigma_2$:
+\begin{equation}
+    \displaystyle\frac{1}{\sqrt{2\pi}\sigma_1}e^{-\frac{t^2}{2\sigma_1}}*\frac{1}{\sqrt{2\pi}\sigma_2}e^{-\frac{t^2}{2\sigma_2}}=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}e^{-\frac{t^2}{2(\sigma_1^2+\sigma_2^2)}}
+\end{equation}
+
+\subsubsection{Proprietà}
+
+La convoluzione è un'operazione commutativa:
+\begin{equation*}
+    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y(t-\tau)d\tau \to^{T=t-\tau}\to \int_{-\infty}^{+\infty}y(T)x(t-T)dT=y(t)*x(t)
+\end{equation*}
+Vale la proprietà distributiva:
+\begin{gather*}
+    (x_1(t)+x_2(t))*y(t)=\displaystyle\int_{-\infty}^{+\infty}(x_1(\tau)+x_2(\tau))y(t-\tau)d\tau\\
+    \int_{-\infty}^{+\infty}x_1(\tau)y(t-\tau)d\tau+\int_{-\infty}^{+\infty}x_2(\tau)y(t-\tau)d\tau=x_1(t)*y(t)+x_2(t)*y(t)
+\end{gather*}
+
+Se una dei due segnali, o entrambi, convoluti tra di loro sono traslati allora il segnale convoluzione risultante è traslato della traslazione complessiva dei due segnali originali:
+\begin{gather*}
+    x(t-t_{x0})*y(t-t_{y0})=\displaystyle\int_{-\infty}^{+\infty}x(\tau-t_{x0})y(t-(\tau+t_{y0}))d\tau,\,{T=\tau-t_{x0}}\to\\
+    \int_{-\infty}^{+\infty}x(T)y((t-t_{x0}-t_{y0})+T)dT=z(t-t_{x0}-t_{y0})
+\end{gather*}
+
+\subsubsection{Convoluzione di Una Finestra per Segnale Periodico}
+
+
+Per semplificare i calcoli, si considera il segnale coseno, ma le proprietà ottenuta da quest'operazione valgono per ogni funzione periodica, non attenuata nel tempo. 
+
+\begin{equation*}
+    z(t)=\mbox{rect}\displaystyle\left(\frac{t}{T_1}\right)*\cos\left(\frac{2\pi t}{T_2}\right)=\int_{-\infty}^{+\infty}\cos\left(\frac{2\pi \tau}{T_2}\right)\mbox{rect}\displaystyle\left(\frac{t-\tau}{T_1}\right)d\tau
+\end{equation*}
+La funzione è periodica per cui non è necessario valutare quando la convoluzione è nulla. Il prodotto tra i due segnali è non nullo per valori di $\tau$ compresi tra 
+$\displaystyle\frac{T_1}{2}-t$ e $-\displaystyle\frac{T_1}{2}-t$:
+\begin{gather*}
+    z(t)=\displaystyle\int_{-\frac{T_1}{2}-t}^{\frac{T_1}{2}-t}\cos\left(\frac{2\pi\tau}{T_2}\right)d\tau=\frac{T_2}{2\pi}\sin\left(\frac{2\pi\tau}{T_2}\right)\Bigg|_{-\frac{T_1}{2}-t}^{\frac{T_1}{2}-t}\\
+    \displaystyle\frac{T_2}{2\pi}\left[\sin\left(\frac{2\pi(t+\frac{T_1}{2})}{T_2}\right)-\sin\left(\frac{2\pi(t-\frac{T_1}{2})}{T_2}\right)\right]
+\end{gather*}
+Per la seconda formula di prostaferesi si ottiene:
+\begin{gather*}
+    z(t)=\displaystyle\frac{T_2}{2\pi}\sin\left(\frac{2\pi}{T_2}t\right)\sin\left(\frac{2\pi}{T_2}\frac{T_1}{2}\right)=\left[\frac{T_2}{2\pi}\sin\left(\pi\frac{T_1}{T_2}\right)\right]\cos\left(\frac{2\pi t}{T_2}\right)
+\end{gather*}
+Se il periodo del coseno è uguale alla base della finestra, il seno è sempre nullo, quindi anche la convoluzione è nulla per ogni valore di $t$. I fattori invarianti nel 
+tempo si possono esprimere come una costante $A$, ampiezza del segnale ottenuto:
+\begin{equation*}
+    \mbox{rect}\left(\displaystyle\frac{t}{T_1}\right)*\cos\left(\frac{2\pi t}{T_2}\right)=A\cos\left(\frac{2\pi t}{T_2}\right)
+\end{equation*}  
+Il risultato della convoluzione è il segnale periodico originario moltiplicato per un fattore costante, che dipende dal periodo $T_2$ e dalla base del segnale finestra $_1$. 
+Il segnale di convoluzione quindi oscilla come la funzione periodica di partenza. In generale il risultato della convoluzione di una finestra con una funzione periodica è un fattore 
+$A$ moltiplicato per il segnale originario:
+\begin{equation*}
+    \mbox{rect}\left(\frac{t}{T_1}\right)*y(t)=Ay(t)
+\end{equation*}
+
+Questa proprietà si indica come un'operazione a media mobile, che amplifica o riduce l'ampiezza di un segnale periodico, oppure lo rende nullo. 
+
+\subsubsection{Convoluzione Tempo Discreto}
+
+\begin{equation*}
+    x[n]*y[n]:=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]y[n-k]
+\end{equation*}
+
+Nel discreto, quando si applica la convoluzione, il numero di campioni totali della convoluzione è uguale alla somma dei campioni dei due segnali meno uno. Per le convoluzioni 
+a tempo continuo si usa la continuità, per quelle a tempo discreto il numero dei campioni se sono convoluzini valide. Per le convoluzioni a tempo discreto valgono le proprietà 
+commutiativa e distributiava. I singoli campioni di un segnale nel discreto possono essere rappresentati come una costante che moltiplica un impulso traslato di un certo fattore:
+\begin{equation*}
+    x[n]=\displaystyle\sum_{k=1}^Nx_k\delta[n-k]
+\end{equation*}
+Ciò è possibile per ogni segnale discreto, per cui la convoluzione di due segnali discreti si può esprimere come:
+\begin{equation*}
+    x[n]*y[n]=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]y[n-k]=\sum_{k=-\infty}^{+\infty}\left[\sum_{i=1}^Nx_i\delta[k-i]\sum_{j=1}^Ny_j\delta[n-k-j]\right]
+\end{equation*}
+Una convoluzione quindi rappresenta una media tra una serie di campioni, può essere estesa a segnali multimensionali come delle immagini, dove la convoluzione viene 
+usata negli algoritmi di compressione dell'immagini per diminuire il costo della trasmissione del segnale. 
+
+\subsection{Correlazione}
+
+La correlazione è un'operazione simile alla convoluzione, calcolabile come una convoluzione. Le convoluzioni vengono usate per modellare l'effetto del passaggio di un segnale 
+attraverso un sistema, ciò corrisponde al processamento di un segnale. Alcuni di questi sistemi corrispondono nel dominio della frequenza in filtri. 
+
+
+Una correlazione si applica quando due segnali sono simili tra loro, viene definita come un segnale continuo nel dominio del tempo:
+\begin{equation}
+    R_{xy}(t)=x(t)\otimes y(t)=\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau
+\end{equation}
+VIene definito $R_{xy}$ il fattore di correlazione tra i due segnali $x$ e $y$. La correlazione al contrario della convoluzione non commuta:
+\begin{gather*}
+    \displaystyle R_{xy}(t)=\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau\to T=t+\tau\\
+    \displaystyle\int_{-\infty}^{+\infty}x(T)y^*(-t+T)dT=\left[\int_{-\infty}^{+\infty}x^*(T)y(-t+T)\right]^*=R_{yx}^*(-t)
+\end{gather*}
+Il fattore di convoluzione $R_{xy}(t)$ tra due segnali $x$ e $y$ corrisponde al complesso coniugato del fattore di convoluzione ribaltato dei segnali $y$ e $x$ $R_{yx}^*(-t)$, 
+quindi la correlazione è una proprietà anticommutativa. La correlazione tra due segnali $x$ e $y$ equivale alla convoluzione dei segnli $y^*$ e $x$
+\begin{gather*}
+    x(t)\otimes y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau\\
+    y^*(-t)* x(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y^*(-(t-\tau))d\tau\to T=\tau-t\\
+    -\int_{+\infty}^{-\infty}x(t+T)y^*(T)dT=\int_{-\infty}^{+\infty}x(t+T)y^*(T)dT=R_{xy}(t)\\
+    x(t)\otimes y(t)=y^*(-t)*x(t)
+\end{gather*}
+Quando si analizza la correlazione tra due segnali $x$ e $y$, uno dei quali pari $y(t)=y(-t)$ e reale $y\in\mathbb{R}$, la correlazione tra di loro è uguale alla convoluzione 
+tra di loro:
+\begin{equation*}
+    x(t)\otimes y(t)=y^*(-t)*x(t)=y(-t)*x(t)=x(t)*y(t)
+\end{equation*}
+
+\subsubsection{Correlazione tra Due Finestre}
+
+\begin{equation*}
+    \mbox{rect}\displaystyle\left(\frac{t-\frac{T_1}{2}}{T_1}\right)\otimes\mbox{rect}\left(\frac{t-\frac{T_2}{2}}{T_2}\right)
+\end{equation*}
+
+Si considera la prima finestra di base maggiore $T_1>T_2$. Per facilitare il calcolo si esprime come una convoluzione. I due segnali non si sovrappongono per valori 
+$T_2-t<0\to t\geq T_2$, per cui la correlazione è nulla. Cominciano a sovrapporsi da $t<T_2$ fino a quando la finestra più piccola non si trova interamente nella prima 
+finestra per $-t<0\to t\geq0$. La finestra più piccola si trova interamente in quella più grande, risultando in un'area di $T_2$, fino ad un valore 
+$T_2-t<T_1\to t\geq -(T_1-T_2)$. L'area comincia a scendere fino ad un valore $-t<T_1\to t\geq -T_1$. Per valori più piccoli di $-T_1$ le due finestre non si sovrappongono e la 
+correlazione risulta nulla.
+\begin{equation*}
+    R_{xy}(t)=\begin{cases}
+        0&t\geq T_2\\
+        \displaystyle\int_t^{T_2}dt& 0\leq t<T_2\\
+        T_2& -(T_1+T_2)\leq t<0\\
+        \displaystyle\int_{-T_1}^tdt& -T_1\leq t<-(T_1-T_2)\\
+        0&t<-T_1
+    \end{cases}=\begin{cases}
+        0& t<-T_1\land t\geq T_2\\
+        T_1+t& T_1\leq t<-(T_1-T_2)\\
+        T_2& -(T_1-T_2)\leq t<0\\
+        T_2-t &  0\leq t<T_2
+    \end{cases}
+\end{equation*}
+
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1,0)--(1.5,0)node[above]{$\tau$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(\tau)$};
+        \node[below right]at(0,0){$0$};
+        \node[above right]at(0,1){$1$};
+
+        \draw[-,very thick](0,0)--(0,1)--(1.2,1)--(1.2,0)node[below]{$T_1$};
+
+        \draw[->,very thick](-1,-2.1)--(1.5,-2.1)node[above]{$\tau$};
+        \draw[->,very thick](0,-2.6)--(0,-0.6)node[left]{$y(t+\tau)$};
+        \node[below left]at(0,-2.1){$0$};
+        \node[above right]at(0,-1.1){$1$};
+
+        \draw[-,very thick](0.3,-2.1)node[below]{$T_2-t$}--(0.3,-1.1)--(-0.8,-1.1)--(-0.8,-2.1)node[below]{$-t$};
+        \draw[dashed,very thick](0.3,-1.1)--(0.3,1);
+
+
+        \draw[->,very thick](2,-1)--(4.5,-1)node[below]{$t$};
+        \draw[->,very thick](3.5,-1.5)--(3.5,0.5)node[right]{$z(t)$};
+        \node[above right]at(3.5,-1){$0$};
+        \draw[-,very thick](2.5,-1)node[below left]{$-T_1$}--(3,0)--(3.5,0)--(4,-1)node[below]{$T_2$};
+        \draw[dashed, very thick](3,0)--(3,-1)node[below]{$-(T_1-T_2)$};
+    \end{tikzpicture}
+\end{center}
+
+\subsection{Sistema Ingresso-Uscita}
+
+Un sistema di ingress-uscita applica determinate trasformazioni al segnale $x$ in entrata, per ottenere un altro segnale $y$ in uscita, questo segnale è un funzionale 
+del segnale di ingresso $x$. Questa trasformazione si basa su dei parametri interni $\sum$ al sistema per cui passa l'ingresso. 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[block](s){$\sum$};
+        \draw[->,ultra thick](-1,0)--(s.180)node[above left]{$x(t)$};
+        \draw[->,ultra thick](s.0)node[above right]{$y(t)$}--(1,0);
+    \end{tikzpicture}
+\end{center}
+
+Un sistema ingresso-uscita si definisce lineare, se ad una combinazione lineare degli ingressi, corrisponde una combinazione lineare delle uscite:
+\begin{equation*}
+    x(t)=a_1(t)x_1(t)+\cdots+a_n(t)x_n(t)\to y(t)=b(t)_1y_1(t)+\cdots+b_n(t)y_n(t)
+\end{equation*}
+
+Un amplificatore rappresenta un sistema lineare, poiché moltiplica di un fattore $A$ un segnale in entrata:
+\begin{gather*}
+    x_1(t)\to y_1(t)=Ax_1(t)\\
+    x_2(t)\to y_2(t)=Ax_2(t)\\
+    ax_1(t)+bx_2(t)\to ay_1(t)+by_2(t)=A(ax_1(t)+bx_2(t))
+\end{gather*} 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,very thick]plot[smooth, domain=-3:-0.75](\x,{0.25*sin(5*(\x+3) r)});
+        \draw[-,very thick]plot[smooth, domain=0.75:3](\x,{1*sin(5*(\x-0.75) r)});
+        \node[block](s)at(0,0){};
+        \node[below]at(-3,0){$x(t)$};
+        \node[below]at(0.75,0){$y(t)$};
+    \end{tikzpicture}
+\end{center}
+Un sistema lineare non distorce gli ingressi. Un sistema che restituisce il segnale originario sommato per una costante $A$ non è lineare:
+\begin{gather*}
+    x(t)\to y(t)=x(t)+A\\
+    x_1(t)+x_2(t)\to y(t)=x_1(t)+x_2(t)+A\neq y_1(t)+y_2(t)
+\end{gather*}
+
+
+Un sistema tempo invariante o permanente, non dipende da quando viene inserito il segnale in entrata:
+\begin{gather*}
+    x(t)\to y(t)\\
+    x(t-\tau)\to y(t-\tau)
+\end{gather*}
+La linearità e la permanenza sono due proprietà indipendenti tra di loro. Un sistema può essere lineare e non pemanente e viceversa, oppure nessuno delle due. 
+L'operazione di modulazione di un segnale, il prodotto tra l'entrata ed una funzione sinusoidale, è un sistema lineare e non permanente:
+\begin{gather*}
+    x(t)\to y(t)=x(t)\cos\displaystyle\left(\frac{2\pi t}{T}\right)\\
+    x(t-\tau)\to y(t-\tau)=x(t-\tau)\displaystyle\cos\left(\frac{2\pi t}{T}\right)\neq x(t-\tau)\cos\left(\frac{2\pi (t-\tau)}{T}\right)
+\end{gather*}
+Per cui dipende dall'istante di tempo quando viene inserito il segnale. 
+
+La linearità e la permanenza sono due proprietà fondamentali per cui un sistema si identifica come filtro. L'uscita di un filtro dipende solo da una funzione $h(t)$, chiamata 
+risposta impulsiva, e si ottiene mediante la convoluzione tra l'entrata e quest'ultima:
+\begin{equation*}
+    x(t)\to y(t)=x(t)*h(t)
+\end{equation*}
+Si chiama risposta impulsiva, poiché se è presente un impulso in entrata, l'uscita è la funzione $h(t)$ stessa, per la proprietà della convoluzione di un impulso:
+\begin{equation*}
+    \delta(t)\to y(t)=\delta(t)*h(t)=h(t)
+\end{equation*}
+
+Si considera:
+\begin{gather*}
+    x(t)=x(t)*\delta(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\delta(t-\tau)d\tau\\
+    y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau=\int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}x(T)\delta(\tau-T)dt\right)h(t-\tau)d\tau
+\end{gather*}
+Invertendo l'ordine di integrazione:
+\begin{gather*}
+    \displaystyle\int_{-\infty}^{+\infty}x(T)\left(\int_{-\infty}^{+\infty}\delta(\tau-T)h(t-\tau)d\tau\right)dT=\int_{-\infty}^{+\infty}x(T)h(t-T)dT=x(t)*h(t)
+\end{gather*}
+Per cui l'uscita di un filtro corrisponde alla convoluzione tra l'entrata e la sua risposta impulsiva. 
 
 \end{document}
