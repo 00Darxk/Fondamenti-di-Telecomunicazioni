@@ -20,6 +20,8 @@
     linkcolor=black,
 }
 \tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},  
+         square/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm},  
          cross/.pic = {  \draw[rotate = 45] (-#1,0) -- (#1,0);
                          \draw[rotate = 45] (0,-#1) -- (0, #1);}}
 
@@ -859,7 +861,7 @@ la definizione dell'impulso.
 
 L'impulso è un segnale né di energia né di potenza. I funzionali, come l'impulso, vengono descritti in base agli effetti che provocano sulle funzioni
 
-\subsection{Convoluzione Tempo Continuo}
+\subsection{Convoluzione}
 
 La convoluzione rappresenta un'operazione tra due segnali, generandone uno nuovo. L'operazione si indica con il simbolo $*$:
 \begin{equation*}
@@ -1114,7 +1116,7 @@ Si somma e si sottrae il fattore $\displaystyle\left(\frac{\alpha_2t}{\alpha_1+\
 \end{gather*}
 Si applica la sostituzione $T=\displaystyle\sqrt{\alpha_1+\alpha_2}\left(\tau+\frac{\alpha_2t}{\alpha_1+\alpha_2}\right)$:
 \begin{equation*}
-    \displaystyle e^{-\left(\frac{\alpha_1\alpha_2}{\alpha_1+\alpha_2}\right)t^2}\int_{-\infty}^{+\infty}\frac{e^{-(\alpha_1+\alpha_2)T^2}}{\sqrt{\alpha_1+\alpha_2}}dT=\frac{e^{-\left(\frac{\alpha_1\alpha_2}{\alpha_1+\alpha_2}\right)t^2}}{\sqrt{\alpha_1+\alpha_2}}\int_{-\infty}^{+\infty}{e^{-(\alpha_1+\alpha_2)T^2}}dT
+    \displaystyle e^{-\left(\frac{\alpha_1\alpha_2}{\alpha_1+\alpha_2}\right)t^2}\int_{-\infty}^{+\infty}\frac{e^{-T^2}}{\sqrt{\alpha_1+\alpha_2}}dT=\frac{e^{-\left(\frac{\alpha_1\alpha_2}{\alpha_1+\alpha_2}\right)t^2}}{\sqrt{\alpha_1+\alpha_2}}\int_{-\infty}^{+\infty}{e^{-T^2}}dT
 \end{equation*}
 Il fattore integrale corrisponde all'integrale di Gauss, precedentemente discusso, che risulta su tutti i reali in un area di $\sqrt\pi$:
 \begin{equation*}
@@ -1223,6 +1225,11 @@ tra di loro:
     x(t)\otimes y(t)=y^*(-t)*x(t)=y(-t)*x(t)=x(t)*y(t)
 \end{equation*}
 
+L'autocorrelazione di un segnale $x$ nell'istante di tempo $t=0$, corrisponde all'energia del segnale $x$:
+\begin{equation*}
+    R_{xx}(0)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)x^*(\tau)d\tau=\int_{-\infty}^{+\infty}|x(\tau)|^2d\tau=E_x
+\end{equation*}
+
 \subsubsection{Correlazione tra Due Finestre}
 
 \begin{equation*}
@@ -1279,7 +1286,7 @@ correlazione risulta nulla.
 \subsection{Sistema Ingresso-Uscita}
 
 Un sistema di ingress-uscita applica determinate trasformazioni al segnale $x$ in entrata, per ottenere un altro segnale $y$ in uscita, questo segnale è un funzionale 
-del segnale di ingresso $x$. Questa trasformazione si basa su dei parametri interni $\sum$ al sistema per cui passa l'ingresso. 
+del segnale di ingresso $y(t)=\mathscr{F}\{x(t)\}$. Questa trasformazione si basa su dei parametri interni $\sum$ al sistema per cui passa l'ingresso. 
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \node[block](s){$\sum$};
@@ -1328,8 +1335,20 @@ L'operazione di modulazione di un segnale, il prodotto tra l'entrata ed una funz
 \end{gather*}
 Per cui dipende dall'istante di tempo quando viene inserito il segnale. 
 
-La linearità e la permanenza sono due proprietà fondamentali per cui un sistema si identifica come filtro. L'uscita di un filtro dipende solo da una funzione $h(t)$, chiamata 
-risposta impulsiva, e si ottiene mediante la convoluzione tra l'entrata e quest'ultima:
+
+Un sistema può presentare un'altra proprietà chiamata causalità, che presenta un senso fisico. Un sistema si definisce causale se per ogni uscita all'istante $t_0$, dipende 
+da valori entrate al massimo fino al tempo $t_0$: 
+\begin{equation*}
+    y(t_0)\propto x(t),\,\,t\leq t_0
+\end{equation*}
+L'uscita non può dipendere da entrate future, se il sistema è causale.
+Data un'uscita $y$ dipendente dall'entrata $x$ traslata di un fattore $\tau$ $y(t)=x(t+\tau)$, se questo fattore di traslazione $\tau$ è negativo, l'uscita dipende da entrate ritardate 
+per cui dipende da entrate passate, mentre se il fattore $\tau$ è positivo l'uscita dipende da entrate anticipate, quindi per un certo istante $t$ l'uscita dipende da entrate 
+future. 
+
+
+La linearità e la permanenza sono due proprietà fondamentali per cui un sistema si identifica come filtro, o SLI, Sistema Lineare Invariante. L'uscita di un filtro dipende 
+solo da una funzione $h(t)$, chiamata risposta impulsiva, e si ottiene mediante la convoluzione tra l'entrata e quest'ultima:
 \begin{equation*}
     x(t)\to y(t)=x(t)*h(t)
 \end{equation*}
@@ -1338,15 +1357,123 @@ Si chiama risposta impulsiva, poiché se è presente un impulso in entrata, l'us
     \delta(t)\to y(t)=\delta(t)*h(t)=h(t)
 \end{equation*}
 
-Si considera:
+Per dimostrare l'uscita di un filtro, si considera il segnale $x$ come la somma integrale di impulsi moltiplicati per il valore della funzione in $x(\tau)$, ovvero la sua 
+convoluzione:
 \begin{gather*}
-    x(t)=x(t)*\delta(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\delta(t-\tau)d\tau\\
-    y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau=\int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}x(T)\delta(\tau-T)dt\right)h(t-\tau)d\tau
+    x(t)=x(t)*\delta(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\delta(t-\tau)d\tau=\int_{-\infty}^{+\infty}dx(t)\\
 \end{gather*}
-Invertendo l'ordine di integrazione:
+Poiché il filtro è lineare si può considerare l'uscita $y$ come la somma integrale di tutte le uscite $dy$ per ogni entrata $dx=x(\tau)\delta(t-\tau)d\tau$. Poiché il fattore 
+$x(\tau)$ non dipende dal tempo si considera una costante, per cui l'uscita $dy$ uguale al prodotto tra la costante $x(\tau)$ per la convoluzione tra l'impulso e la 
+rispsosta impulsiva:
 \begin{gather*}
-    \displaystyle\int_{-\infty}^{+\infty}x(T)\left(\int_{-\infty}^{+\infty}\delta(\tau-T)h(t-\tau)d\tau\right)dT=\int_{-\infty}^{+\infty}x(T)h(t-T)dT=x(t)*h(t)
+    dx(t)=x(\tau)\delta(t-\tau)d\tau\\
+    dy(t)=x(\tau)(\delta(t-\tau)*h(t))d\tau=x(\tau)h(t-\tau)d\tau
 \end{gather*}
+L'uscita totale si ottiene integrando su tutti i reali l'uscita infinitesima $dy(t)$:
+\begin{equation*}
+    y(t)=\displaystyle\int_{-\infty}^{+\infty}dy(t)=\int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau=x(t)*h(t)
+\end{equation*}
 Per cui l'uscita di un filtro corrisponde alla convoluzione tra l'entrata e la sua risposta impulsiva. 
+
+Per determinare la risoluzione di uno schermo, dispostivo che opera come un filtro, si inserisce in entrata un impulso bidimensionale, rappresentato come un singolo punto 
+su una superficie. L'uscita di questa entrata risulta in una macchia, più questa macchia, formata da vari pixel, è piccola maggiore è la risoluzione del dato schermo.  
+
+
+
+Nel tempo discreto un sistema può essere caratterizzato dalle stesse propriettà. 
+Linearità:
+\begin{gather*}
+    x_1[n]\to y_1[n]\\
+    x_2[n]\to y_2[n]\\
+    a_1x_1[n]+a_2x_2[n]\to a_1y_1[n]+a_2y_2[n]
+\end{gather*}
+Tempo invariante:
+\begin{gather*}
+    x[n+N]\to y[n+N]
+\end{gather*}
+Causalità:
+\begin{equation*}
+    y[n_0]\propto x[n],\,\, n\leq n_0
+\end{equation*}
+Si può esprimere formalmente questa condizione di causalità considerando un filtro con una risposta impulsiva $h[n]$:
+\begin{equation*}
+    y[n]=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]h[n-k]
+\end{equation*} 
+Se questo filtro fosse causale allora la variabile $k$ non potrebbe superare il valore $n$, poiché ciò implicherebbe che l'uscita dipenda da entrate future:
+\begin{equation*}
+    y[n]=\displaystyle\sum_{k=-\infty}^nx[k]h[n-k]
+\end{equation*}
+Inoltre la risposta impulsiva deve essere nulla se il valore di $k$ è maggiore di $n$:
+\begin{equation*}
+    h[n-k]=0,\,\, k>n\to^{n-k=N}\to h[N],\,\, N<0
+\end{equation*} 
+Si può attuare lo stesso ragionamento per la causalità a tempo continuo. Un filtro è causale solo se:
+\begin{gather*}
+    y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau\to \int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau\\
+    h(t-\tau)=0,\,\, \tau>t\to^{t-\tau=T}\to h(T)=0,\,\, T<0
+\end{gather*}
+Per cui:
+\begin{equation*}
+    y(t):\mbox{ causale}\iff \begin{cases}
+        h[n]=0& n<0\\
+        h(t)=0& t<0
+    \end{cases}
+\end{equation*}
+
+
+Un filtro operante su tempo discreto viene definito, come nel contiuo, da un'unica funzione risposta impulsiva $h[n]$:
+\begin{equation*}
+    \delta[n]*h[n]=h[n]
+\end{equation*}
+Si esprime per la proprietà di campionamento dell'impulso, un qualsiasi segnale $x$ come:
+\begin{equation*}
+    x[n]=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]\delta[n-k]
+\end{equation*}
+Poiché il filtro è un sistema lineare, si possono considera le singole entrate della sommatoria e poi sommare le loro uscite corrispondenti per ottenere l'uscita complessiva. 
+Si considera l'uscita per un qualsiasi $k$, pari alla convoluzione tra l'impulso $\delta[n-k]$ e la risposta impulsiva $h[n]$, si considera il parametro $x[k]$ costante poiché 
+non dipende dalla variabile $n$:
+\begin{equation*}
+    y_k[n]=x[k](\delta[n-k]*h[n])=x[k]h[n-k]
+\end{equation*}
+La somma su tutti gli interi di questo valore $y_k$ corrisponde all'uscita totale $y$ del sistema per l'entrata $x$:
+\begin{equation*}
+    y[n]=\displaystyle\sum_{k=-\infty}^{+\infty}y_k[n]=\sum_{k=-\infty}^{+\infty}x[k]h[n-k]=x[n]*h[n]
+\end{equation*}
+Questa uscita $y$ corrisponde alla convoluzione tra l'entrata $x$ e la risposta impulsiva $h$. 
+
+
+Data la struttura del sistema è possibile individuare l'uscita in forma analitica rispetto ad una generica entrata. Dopo aver determinaro la risposta impulsiva inserendo 
+al posto di una generica entrata $x$ l'impulso $\delta$, è possibile sostituire l'intero modello strutturale del sistema con un singolo blocco funzionale, un'oggetto che 
+applica all'entrata la convoluzione per i parametri contenuti, contenente la risposta impulsiva.  
+Si considera un generico schema di un circuito sommatore, un tipo di sistema controllore a feedforward:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[sum](+)at(2,0){$+$};
+        \draw[->,ultra thick](0,0)node[above]{$x[n]$}--(+.180);
+        \filldraw[black](0.5,0)circle(1pt);
+
+        \node[square](t)at(1,-0.5){$T$};
+        \draw[->,ultra thick](0.5,0)--(0.5,-0.5)--(t.180);
+
+        \node[sum](x)at(1.5,-0.5){$\times$};
+        \draw[->,ultra thick](t.0)--(x.180);
+        \draw[->,ultra thick](1.5,-1)node[right]{$a$}--(x.270);
+
+        \draw[->,ultra thick](x.0)--(2,-0.5)--(+.270);
+        \draw[->,ultra thick](+.0)--(2.5,0)node[above]{$y[n]$};
+    \end{tikzpicture}
+\end{center}
+Per ottenere l'uscita si somma il segnale originario per lo stesso segnale ritardato di un campione e moltiplicato per un fattore $a$:
+\begin{gather*}
+    y[n]=x[n]+ax[n-1]\\
+    h[n]=\delta[n]+a\delta[n-1]
+\end{gather*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[block](s){$h[n]$};
+        \draw[->,ultra thick](-1,0)--(s.180)node[above left]{$x[n]$};
+        \draw[->,ultra thick](s.0)node[above right]{$y[n]$}--(1,0);
+    \end{tikzpicture}
+\end{center}
 
 \end{document}
