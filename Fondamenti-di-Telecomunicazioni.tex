@@ -1209,7 +1209,7 @@ Una correlazione si applica quando due segnali sono simili tra loro, viene defin
 VIene definito $R_{xy}$ il fattore di correlazione tra i due segnali $x$ e $y$. La correlazione al contrario della convoluzione non commuta:
 \begin{gather*}
     \displaystyle R_{xy}(t)=\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau\to T=t+\tau\\
-    \displaystyle\int_{-\infty}^{+\infty}x(T)y^*(-t+T)dT=\left[\int_{-\infty}^{+\infty}x^*(T)y(-t+T)\right]^*=R_{yx}^*(-t)
+    \displaystyle\int_{-\infty}^{+\infty}x(T)y^*(-t+T)dT=\left[\int_{-\infty}^{+\infty}x^*(T)y(-t+T)dT\right]^*=R_{yx}^*(-t)
 \end{gather*}
 Il fattore di convoluzione $R_{xy}(t)$ tra due segnali $x$ e $y$ corrisponde al complesso coniugato del fattore di convoluzione ribaltato dei segnali $y$ e $x$ $R_{yx}^*(-t)$, 
 quindi la correlazione è una proprietà anticommutativa. La correlazione tra due segnali $x$ e $y$ equivale alla convoluzione dei segnli $y^*$ e $x$
@@ -1475,5 +1475,181 @@ Per ottenere l'uscita si somma il segnale originario per lo stesso segnale ritar
         \draw[->,ultra thick](s.0)node[above right]{$y[n]$}--(1,0);
     \end{tikzpicture}
 \end{center}
+
+\clearpage
+
+\section{Espansione di Fourier}
+
+Dati due segnali in frequenza doppia come il La$4$ a $\approx 440Hz$ ed il La$5$ a $\approx 880Hz$, non si nota la differenza poiché sono esattamente una il doppio dell'altra. 
+In genera segnali musicali affinché suonino bene devono avere frequenze tra di loro o multipli oppure relati da frazioni semplici, non possono essere scelte arbitrariamente. 
+Queste frequenze sono associate a varie note, inserendo una serie di queste note è possible scrivere un segnale musicale. Viene attuato un processo analogo tramite la serie di 
+Fuorier. Questo tipo di analisi venne introdatta da Fouriere nella sua teoria analitica del calore, dove oltre all'omonima serie e trasformata, introdusse molti concetti 
+matematici importanti. 
+
+
+
+La serie di Fourier è uno strumento per esprimere solo i segnali periodici, 
+se il segnale non è periodico si usa la trasformata di Fourier, se rispetta le condizioni di Dirichlet, ma per i nostri fini si considerano sempre verificate. 
+I segnali si esprimono rispetto alle sue armoniche. Dato un segnale $x(t)$ di periodo $T$, può essere rappresentato come una serie, ovvero una sommatoria, di alcuni 
+coefficienti di Fourier per un fattore esponenziale, chiamato armonica, di frequenza multiplo della frequenza del segnale originario:
+\begin{equation*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi  k t}{T}}
+\end{equation*}
+Il fattore $c_k$ indica se una data frequenza è presente nel segnale analizzato. Le armoniche sono note a priori, dal punto di vista fisico non esistono armoniche di frequenze 
+negative, ma in ambito matematico sono necessarie per esprimere il segnale. Considerando la rappresentazione di Eulero si può esprimere la serie di Fourier come:
+\begin{equation*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_k\left[\cos\left(\frac{2\pi k t}{T}\right)+i\sin\left(\frac{2\pi k t}{T}\right)\right]
+\end{equation*}
+Poiché le armoniche sono le stesse, l'unica differenza tra varie rappresentazioni di Fourier è il valore dei coefficienti $c_k$ assegnati. Lo spazio dei segnali periodici, 
+aventi lo stesso periodo $T$, può essere scritto come uno spazio vettoriale dotato di prodotto scalare, dove ogni segnale è espresso come un vettore. Questo spazio può essere 
+espresso data una base ortonormale.
+
+\subsection{Spazio Vettoriale}
+
+Dato uno spazio euclideo $\mathbb{R}^3$ descritto da tre vettori ortonormali $\hat x=(1,0,0)$, $\hat y=(0,1,0)$ e $\hat z=(0,0,1)$, chiamati base canonica dello spazio vettoriale. 
+Dei vettori di uno spazio vettoriale si dicono base, se sono ortonormali tra di loro, quindi il prodotto scalare tra di loro è nullo ovvero sono linearmente indipendenti, 
+mentre si dicono basi canoniche se il quadrato di un vettore, il prodotto scalare per sé stesso, equivale ad uno. 
+Il prodotto scalare è un'operazione binaria interna ad uno spazio vettoriale $V$ che resitituisce uno scalare:
+\begin{equation*}
+    \langle \cdot \; , \; \cdot \rangle : V \times V  \rightarrow \mathbb{R}
+\end{equation*}
+Si definisce come il prodotto matriciale tra il primo vettore per la trasposta del secondo:
+\begin{equation*}
+    \langle\vec v,\,\vec w\rangle=\vec v\cdot \vec w^T=\begin{pmatrix}
+        v_x &v_y&v_z
+    \end{pmatrix}\cdot\begin{pmatrix}
+        w_x\\ w_y \\ w_z
+    \end{pmatrix}
+\end{equation*} 
+Per ottenere una certa componente di un generico vettore $\vec{v}$ si considera il prodotto tra quel vettore e la base della componente desiderata:
+\begin{equation*}
+    \langle\vec v,\,\hat x\rangle=\vec v\cdot \hat x^T=\begin{pmatrix}
+        v_x &v_y&v_z
+    \end{pmatrix}\cdot\begin{pmatrix}
+        1\\ 0 \\0
+    \end{pmatrix}=v_x
+\end{equation*} 
+
+
+
+Il segnale periodico $x(t)$ può essere scritto come una somma di coefficienti moltiplicati per una base ortonormale dello spazio vettoriale dei segnali periodici di periodo 
+$T$. In questo spazio sono presenti infiniti vettori ortonormali tra di loro, a differenza dello spazio euclideo $\mathbb{R}^3$, dove sono presenti tre vettori base. Questo 
+spazio è quindi uno spazio euclideo di dimensione numerabile, ma infinita, poiché le basi ortonormali corrispondono alle infinite armoniche di periodo $T$. 
+Il prodotto scalare tra due segnali $x$ e $y$ viene definito come:
+\begin{equation*}
+    \langle x(t),\,y(t)\rangle=x(t)\cdot y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t)\cdot y^*(t)dt
+\end{equation*}
+Il prodotto scalare tra due segnali periodici viene definito come:
+\begin{equation*}
+    \langle x(t),\,y(t)\rangle=x(t)\cdot y(t)=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cdot y^*(t)dt
+\end{equation*}
+Per cui per ottenere i coefficienti di Fourier $c_k$ rispetto ad una determinata armonica $k$ di un segnale $x$ si considera il prodotto scalare tra quel segnale per l'
+armonica $k$:
+\begin{equation*}
+    c_k=\langle x(t),\,e^{i\frac{2\pi  k t}{T}}\rangle=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cdot e^{-i\frac{2\pi  k t}{T}}dt
+\end{equation*} 
+
+Il prodotto tra due basi è nullo, tranne nel caso dove sono la stessa base, in quel caso il risultato è $1$. Per dimostrare che le armoniche rappresentano una base dello 
+spazio vettoriale si considera il prodotto scalare tra un'armonica $k$ ed una $l$:
+\begin{gather*}
+    \langle e^{i\frac{2\pi kt}{T}},e^{i\frac{2\pi lt}{T}}\rangle=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{i\frac{2\pi kt}{T}}e^{-i\frac{2\pi lt}{T}}dt=
+    \frac{1}{T}\left[e^{i\frac{2\pi(k-l)t}{T}}\frac{T}{2i\pi (k-l)}\right]^{\frac{T}{2}}_{-\frac{T}{2}}\\
+    \displaystyle\frac{e^{i\pi(l-k)}-e^{-i\pi(l-k)}}{2i}\frac{1}{\pi (k-l)}=\frac{\sin(\pi(k-l))}{\pi (k-l)}
+\end{gather*} 
+Questa funzione risulta essere una sinc, e per definizione è un segnale che si annulla per ogni valore intero, e poiché $k$ e $l$ sono due interi la loro differenza lo è 
+poiché l'insieme degli interi è chiuso rispetto alla somma: $k-l\in\mathbb{Z}$. Quindi il prodotto scalare tra due armoniche $k$ e $l$, non triviale: $k\neq l$, è di valore 
+nullo:
+\begin{equation*}
+    \forall k\neq l\in\mathbb{Z}\implies \langle e^{i\frac{2\pi kt}{T}},e^{i\frac{2\pi lt}{T}}\rangle=0
+\end{equation*}
+\'{E} stato dimostrato che le armoniche sono una base dello spazio vettoriale dei segnali periodici di periodo $T$. 
+
+\subsection{Serie Notevoli}
+
+Si considera un segnale costante $x(t)=A$. Per determinare i coefficienti della sua serie di Taylor si considera il prodotto scalare tra il segnale ed una generica armonica $k$: 
+\begin{gather*}
+    c_k=\langle x(t),e^{i\frac{2\pi kt}{T}}\rangle=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}Ae^{-i\frac{2\pi kt}{T}}dt=\left[A\frac{e^{-i\frac{2\pi kt}{T}}}{-2i\pi k}\right]_{-\frac{T}{2}}^{\frac{T}{2}}\\
+    \displaystyle\frac{A(e^{-i\pi k}-e^{i\pi k})}{-2i\pi k}=A\frac{-\sin(\pi k)}{-\pi k}=A\,\mbox{sinc}[k]
+\end{gather*}
+L'unico valore per cui il seno cardinale discreto in funzione di $k$ assume un valore non nullo è per $k=0$:
+\begin{equation*}
+    c_0=A\,\cancelto{1}{\mbox{sinc}[0]}\to x(t)=c_0e^{\cancelto{0}{i\frac{2\pi kt}{T}}}
+\end{equation*}
+
+Si considera un coseno di periodo $T$: $x(t)=A\cos\left(\frac{2\pi t}{T}\right)$. Si vuole determinare la sua espansione di Fourier, per cui si considera il suo prodotto 
+scalare con una generica armonica $k$. Si esprime il coseno tramite le formule di Eulero, in questo modo assume la stessa forma di una differenze di due armoniche: 
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}A\cos\left(\frac{2\pi t}{T}\right)e^{-i\frac{2\pi kt}{T}}dt=
+    \frac{A}{2T}\left(\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{i\frac{2\pi t}{T}}e^{-i\frac{2\pi kt}{T}}dt+\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\frac{2\pi t}{T}}e^{-i\frac{2\pi kt}{T}}dt\right)
+\end{gather*}
+Il prodotto scalare tra due armoniche è stato precedentemente individuato come un seno cardinale:
+\begin{equation*}
+    \displaystyle c_k=\frac{A\,\mbox{sinc}[1-k]+A\,\mbox{sinc}[-(1+k)]}{2}
+\end{equation*}
+Il seno cardinale nel discreto assume gli stessi valori dell'impulso discreto. 
+Quindi il coefficiente è nullo per ogni $k\neq1\lor-1$, gli unici coefficienti non nulli della sua serie di Fourier sono $c_{-1}$ e $c_1$:
+\begin{gather*}
+    \displaystyle c_1=c_{-1}=\frac{A}{2}\\
+    \displaystyle x(t)=c_{-1}e^{-i\frac{2\pi t}{T}}+c_1e^{i\frac{2\pi t}{T}}
+\end{gather*}
+
+
+Si applica un processo analogo per determinare l'espansione di Fourier di un segnale sinusoidale $x(t)=\sin\left(\frac{2\pi t}{T}\right)$:
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}A\sin\left(\frac{2\pi t}{T}\right)e^{-i\frac{2\pi kt}{T}}dt=
+    \frac{A}{2iT}\left(\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{i\frac{2\pi t}{T}}e^{-i\frac{2\pi kt}{T}}dt-\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\frac{2\pi t}{T}}e^{-i\frac{2\pi kt}{T}}dt\right)\\
+    \displaystyle c_k=\frac{A\,\mbox{sinc}[1-k]-A\,\mbox{sinc}[-(1+k)]}{2i}\\
+    c_1=-c_{-1}=\frac{A}{2i}\\
+    x(t)=c_{-1}e^{-i\frac{2\pi t}{T}}+c_1e^{i\frac{2\pi t}{T}}
+\end{gather*}
+
+Si considera ora un segnale $x(t)=A\cos^2\left(\frac{2\pi t}{T}\right)$. Per le fofmula di duplicazione del coseno si può riscrivere come:
+\begin{equation*}
+    A\cos^2\left(\frac{2\pi t}{T}\right)=\frac{A}{2}\left(\cos\left(\frac{4\pi t}{T}\right)+1\right)
+\end{equation*}
+Si calcola il valore di un coefficiente generico $k$:
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}A\cos^2\left(\frac{2\pi t}{T}\right)e^{-i\frac{2\pi kt}{T}}dt=
+    \frac{A}{2T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\left(\cos\left(\frac{4\pi t}{T}\right)+1\right)e^{-i\frac{2\pi kt}{T}}dt\\
+    \displaystyle\frac{A}{2T}\left(\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{i\frac{4\pi t}{T}}e^{-i\frac{2\pi kt}{T}}dt+\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\frac{4\pi t}{T}}e^{-i\frac{2\pi kt}{T}}dt+\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\frac{2\pi kt}{T}}dt\right)\\
+    \displaystyle\frac{A}{2}\left(2\mbox{sinc}[2-k]-2\mbox{sinc}[-(2+k)]+\mbox{sinc}[k]\right)
+\end{gather*}
+I coefficienti non si annullano per valori di $k$ pari a $\pm2$ e $0$:
+\begin{equation*}
+    x(t)=c_{-2}e^{-i\frac{4\pi t}{T}}+c_0+c_2e^{i\frac{4\pi t}{T}}
+\end{equation*}
+
+
+Si considera un segnale onda quadra di periodo $T$ e di base $\tau$: 
+\begin{equation*}
+    x(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\mbox{rect}\left(\frac{t-nT}{\tau}\right)
+\end{equation*}
+Si determina il valore di un coefficiente generico $k$:
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\sum_{n=-\infty}^{+\infty}\mbox{rect}\left(\frac{t-nT}{\tau}\right)e^{-i\frac{2\pi k t}{T}}dt
+\end{gather*}
+Nell'intervallo $[-T/2,T/2]$ cade una sola finestra di base $\tau$, per $n=0$, per cui si può riscrivere come:
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\mbox{rect}\left(\frac{t}{\tau}\right)e^{-i\frac{2\pi k t}{T}}dt=\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi k t}{T}}=
+    \left[\frac{e^{-i\frac{2\pi kt}{T}}}{-2i\pi k}\right]_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\\
+    \displaystyle\frac{e^{-i\pi k\frac{\tau}{T}}-e^{i\pi k\frac{\tau}{T}}}{-2i}\frac{1}{\pi k}=\frac{\tau}{T}\frac{\sin\left(\frac{\pi k \tau}{T}\right)}{\frac{\pi k \tau}{T}}=\frac{\tau}{T}\mbox{sinc}\left(\frac{k \tau}{T}\right)
+\end{gather*}
+
+Il seno cardinale non è discreto, poiché l'argomento non necessariamente assume valore intero. 
+\begin{equation*}
+    x(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\mbox{rect}\left(\frac{t-nT}{\tau}\right)=\sum_{k=-\infty}^{+\infty}\frac{\tau}{T}\mbox{sinc}\left(\frac{k \tau}{T}\right)e^{i\frac{2\pi kt}{T}}
+\end{equation*}
+All'aumentare di $k$ e quindi della frequenza delle armoniche, il valore dei coefficienti diminuisce, quindi diminuiscono anche i contributi che le armoniche a frequenza 
+maggiore per la ricostruzione del segnale originale. I coefficienti rappresentano il peso di quanto le armoniche contribuiscono al segnale originario. La precisione 
+aumenta sempre di meno per ogni nuova armonica aggiunta, fino a ricostruire completamente il segnale originale se $k$ tende asintoticamente ad infinito. Da notare che se 
+$T=2\tau$, per $k$ pari i coefficienti della serie di Fourier dell'onda quadra che ha periodo esattamente il doppio della base sono nulli. In generale se $T=n\tau$, dove 
+$n\in\mathbb{N}$, i contributi delle armoniche con frequenza multiplo di $n/T$ sono nulli, ovvero i coefficienti con $k$ multiplo di $n$ sono nulli:
+\begin{gather*}
+    c_k=\frac{1}{n}\mbox{sinc}\left(\frac{k}{n}\right)=0\;\forall k=\alpha\cdot n,\;\alpha\in\mathbb{Z}
+\end{gather*}
+In generale se $T/\tau\notin\mathbb{Z}$ e $\tau/T\notin\mathbb{Z}$, i coefficienti dell'espansione di Fourier non sono mai nulli, poiché non comprendono mai zeri triviali 
+della funione seno cardinale. 
+
+
 
 \end{document}
