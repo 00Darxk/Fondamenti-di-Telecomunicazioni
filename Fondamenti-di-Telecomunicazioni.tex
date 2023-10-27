@@ -1563,6 +1563,11 @@ nullo:
     \forall k\neq l\in\mathbb{Z}\implies \langle e^{i\frac{2\pi kt}{T}},e^{i\frac{2\pi lt}{T}}\rangle=0
 \end{equation*}
 \'{E} stato dimostrato che le armoniche sono una base dello spazio vettoriale dei segnali periodici di periodo $T$. 
+Per $k=0$ l'armonica corrispondente è un segnale costante. In generale un'armonica di ordine $k$ si può esprimere mediante la rappresentazione di Eulero:
+\begin{equation*}
+    \displaystyle e^{i\frac{2\pi kt}{T}}=\sin\left(\frac{2\pi kt}{T}\right)+i\sin\left(\frac{2\pi kt}{T}\right)
+\end{equation*}
+Per cui la parte reale di un'armonica oscilla come un segnale coseno di frequenza dell'armonica. 
 
 \subsection{Serie Notevoli}
 
@@ -1602,6 +1607,9 @@ Si applica un processo analogo per determinare l'espansione di Fourier di un seg
     c_1=-c_{-1}=\frac{A}{2i}\\
     x(t)=c_{-1}e^{-i\frac{2\pi t}{T}}+c_1e^{i\frac{2\pi t}{T}}
 \end{gather*}
+Altrimenti è possible calcolare i coefficienti tramite confronto diretto dalla rappresentazione di Eulero delle funzioni trigonometriche, in questo modo si individuano le due 
+armoniche che producono il segnale sinusoidale, di ordine $1$ e $-1$. 
+
 
 Si considera ora un segnale $x(t)=A\cos^2\left(\frac{2\pi t}{T}\right)$. Per le fofmula di duplicazione del coseno si può riscrivere come:
 \begin{equation*}
@@ -1612,7 +1620,7 @@ Si calcola il valore di un coefficiente generico $k$:
     c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}A\cos^2\left(\frac{2\pi t}{T}\right)e^{-i\frac{2\pi kt}{T}}dt=
     \frac{A}{2T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\left(\cos\left(\frac{4\pi t}{T}\right)+1\right)e^{-i\frac{2\pi kt}{T}}dt\\
     \displaystyle\frac{A}{2T}\left(\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{i\frac{4\pi t}{T}}e^{-i\frac{2\pi kt}{T}}dt+\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\frac{4\pi t}{T}}e^{-i\frac{2\pi kt}{T}}dt+\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\frac{2\pi kt}{T}}dt\right)\\
-    \displaystyle\frac{A}{2}\left(2\mbox{sinc}[2-k]-2\mbox{sinc}[-(2+k)]+\mbox{sinc}[k]\right)
+    \displaystyle\frac{A}{2}\left(2\,\mbox{sinc}[2-k]-2\,\mbox{sinc}[-(2+k)]+\mbox{sinc}[k]\right)
 \end{gather*}
 I coefficienti non si annullano per valori di $k$ pari a $\pm2$ e $0$:
 \begin{equation*}
@@ -1649,6 +1657,123 @@ $n\in\mathbb{N}$, i contributi delle armoniche con frequenza multiplo di $n/T$ s
 \end{gather*}
 In generale se $T/\tau\notin\mathbb{Z}$ e $\tau/T\notin\mathbb{Z}$, i coefficienti dell'espansione di Fourier non sono mai nulli, poiché non comprendono mai zeri triviali 
 della funione seno cardinale. 
+
+\subsection{Proprietà}
+
+
+Cercare il periodo del segnale in alcuni casi, non specificato dal testo del problema. Il contenuto informativo del segnale è descritto dai coefficienti della serie di Fourier 
+$c_k$. 
+
+\subsubsection{Linearità}
+
+Poiché segnali $x(t)$ e $y(t)$, periodici di periodo $T$, possono essere espresso come espansione di Fourier rispetto alle stesse armoniche, la loro combinazione lineare 
+può essere espressa come una combinazione lineare dei coefficienti delle due espansioni di Fourier:
+\begin{gather*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi  k t}{T}}\\    
+    y(t)=\displaystyle\sum_{k=-\infty}^{+\infty}d_ke^{i\frac{2\pi  k t}{T}}\\
+    ax(t)+by(t)=\displaystyle\sum_{k=-\infty}^{+\infty}(ac_k+bd_k)e^{i\frac{2\pi  k t}{T}}\\
+    \displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}(ax(t)+by(t))dt=\frac{a}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)e^{-i\frac{2\pi  k t}{T}}dt
+    +\frac{b}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}y(t)e^{-i\frac{2\pi  k t}{T}}dt=ac_k+bd_k
+\end{gather*}
+
+Data un'onda quadra $z(t)$ che assume valori di $1$ e $-1$ periodicamente, con periodo $T$, può essere espressa come una differenza tra due onde quadre $x(t)$ e $y(t)$ in 
+opposizione di fase che assumono valori di $1$ e $0$ con periodo $T$. Una delle quali ha una base di lunghezza $\tau$, mentre l'altra lunghezza di $T-\tau$ e traslata di un 
+semiperiodo $T/2$:
+\begin{equation*}
+    z(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\left[\mbox{rect}\left(\frac{t-kT}{\tau}\right)-\mbox{rect}\left(\frac{t-nT-\frac{T}{2}}{T-\tau}\right)\right]
+\end{equation*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
+        \draw[->](0,-1)--(0,1)node[right]{$z(t)$};
+        \draw[-](-2.5,0.5)--(-2,0.5)--(-1.5,0.5)--(-1.5,-0.5)--(-0.5,-0.5)--(-0.5,0.5)--(0.5,0.5)--(0.5,-0.5)--(1.5,-0.5)--(2,-0.5)--(2,0.5)--(2.5,0.5);
+        \node[above right]at(0,0.5){$1$};
+        \node[below right]at(0,-0.5){$-1$};
+
+    \end{tikzpicture}
+\end{center}
+
+Si calcolano ora i coefficienti dell'espansione di Fourier:
+\begin{gather*}
+    a_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\left[\mbox{rect}\left(\frac{t-kT}{\tau}\right)-\mbox{rect}\left(\frac{t-kT-\frac{T}{2}}{T-\tau}\right)\right]dt\\
+    \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\mbox{rect}\left(\frac{t-kT}{\tau}\right)dt-\frac{1}{T}\int_{-\frac{T-\tau}{2}}^{\frac{T-\tau}{2}}\mbox{rect}\left(\frac{t-kT-\frac{T}{2}}{T-\tau}\right)dt\\
+    \displaystyle\frac{e^{-i\pi k\frac{\tau}{T}}-e^{i\pi k\frac{\tau}{T}}}{-2i}\frac{1}{\pi k}\frac{\tau}{T}-\frac{e^{-i2\pi k\frac{T-\tau/2}{T}}-e^{i2\pi k\frac{T-\tau/2}{T}}}{-2i}\frac{1}{\pi k}\frac{\tau}{T}
+\end{gather*}
+Per $k=0$ si ottiene una forma indeterminata, per cui bisogna risolvere l'integrale considerando il valor medio assunto dal segnale nell'intervallo $\left[-T/2,T/2\right]$. 
+\begin{gather*}
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{k\tau}{T}\right)-\frac{e^{i\pi k\frac{\tau}{T}}-e^{-i\pi k\frac{\tau}{T}}}{-2i}\frac{1}{\pi k}\\
+    c_k=\displaystyle\frac{2\tau}{T}\mbox{sinc}\left(\frac{k\tau}{T}\right)
+\end{gather*}
+
+
+Generalmente si differenziano i casi dove l'esponeniale assume valore unitario, per $k=0$, dai casi dove è presente un'armonica generica. 
+
+Il segnale originale può essere espresso come un'onda quadra doppia, di stesso periodo $T$ e base $\tau$, e traslata verso il basso:
+\begin{equation*}
+    z(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\left[2\,\mbox{rect}\left(\frac{t-kT}{\tau}\right)\right]-1=2x(t)-1
+\end{equation*}
+In questo modo si effettuano meno calcoli per determinare i coefficienti di Fourier, usufruendo della proprietà di linearità bisogna tenere conto che il fattore costante $-1$, 
+assume un valore non nullo solo per $k=0$. Si considerano i coefficienti del segnale $x$ come $c_k$, mentre del segnale costante $d_k$, per cui in questo caso i coefficienti 
+del segnale $z$ si esprimono come: 
+\begin{equation*}
+    a_k=\begin{cases}
+        2c_k+d_k &k=0\\
+        2c_k&k\neq0
+    \end{cases}=\begin{cases}
+        \displaystyle\frac{2\tau}{T}-1&k=0\\
+        \displaystyle\frac{2\tau}{T}\mbox{sinc}\left(\frac{k\tau}{T}\right)&k\neq0
+    \end{cases}
+\end{equation*}
+
+\subsubsection{Traslazione nel Tempo}
+
+Si considera un segnale ritardato nel tempo di un fattore $t_0$: $x(t-t_0)$, dati i coefficienti del segnale non traslato $c_k$. Per confronto diretto si ottiene:
+\begin{gather*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\\
+    x(t-t_0)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi k(t-t_0)}{T}}=\sum_{k=-\infty}^{+\infty}\left(c_ke^{i\frac{2\pi kt}{T}}+c_ke^{-i\frac{2\pi kt_0}{T}}\right)\\
+\end{gather*}
+Per cui tutti i coefficienti equivalgono ai coefficienti non traslati $c_k$ moltiplicati per un fattore esponenziale, che dipende dalla traslazione $t_0$:
+\begin{equation*}
+    \displaystyle d_k=c_ke^{-i\frac{2\pi kt_0}{T}}
+\end{equation*}
+
+Altrimenti si possono determinare i coefficienti tramite la definizione, attuando una sostituzione $t-t_0\to\tau$:
+\begin{gather*}
+    d_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t-t_0)e^{-i\frac{2\pi kt}{T}}dT\to\int_{-\frac{T}{2}-t_0}^{\frac{T}{2}-t_0}x(\tau)e^{-i\frac{2pi kt_0}{T}}e^{-i\frac{2\pi k\tau}{T}}d\tau\\
+    d_k=\displaystyle\frac{1}{T}e^{-i\frac{2\pi kt_0}{T}}\int_{-\frac{T}{2}-t_0}^{\frac{T}{2}-t_0}x(\tau)e^{-i\frac{2\pi k\tau}{T}}d\tau=\frac{1}{T}e^{-i\frac{2\pi kt_0}{T}}c_k
+\end{gather*}
+Dove $c_k$ sono i coefficienti del segnale non traslato. 
+
+
+%grafico(?)
+% EX:
+Si considera un'onda quadra di periodo $T$ traslata di un fattore $\tau$, corrispondente alla lunghezza della sua base. Dati i coefficienti di un onda quadra non traslata 
+$c_k$ si possono esprimere direttamente i coefficienti del segnale traslato $d_k$:
+\begin{equation*}
+    d_k=\displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{k\tau}{T}\right)e^{-i\frac{2\pi k\tau}{T}}
+\end{equation*}
+
+In caso il periodo sia esattamente il doppio della base $T=2\tau$:
+\begin{equation*}
+    d_k=\displaystyle\frac{1}{2}\mbox{sinc}\left(\frac{k}{2}\right)e^{-i\pi k}=\frac{1}{2}\frac{e^{i\frac{\pi k}{2}}-e^{-i\frac{\pi k}{2}}}{i\pi k}e^{-i\pi k}=
+    \frac{e^{-i\frac{\pi k}{2}}-e^{-i\frac{3\pi k}{2}}}{2i\pi k}
+\end{equation*}
+Per cui i coefficienti dell'onda quadra di armoniche di ordine pari risultano nulli. 
+
+\subsubsection{Traslazione in Frequenza}
+
+Si considera un segnale $x$ moltiplicato per un'armonica di ordine $n$:
+\begin{equation*}
+    y(t)=x(t)\cdot e^{i\frac{2\pi nt}{T}}=\displaystyle\sum_{K=-\infty}^{+\infty}c_ke^{i\frac{2pi kt}{T}}e^{i\frac{2\pi nt}{T}}
+\end{equation*}
+Si considera la sotituzione $l=n+k$:
+\begin{equation*}
+    y(t)=\displaystyle\sum_{l=-\infty}^{+\infty}c_{l-n}e^{i\frac{2\pi lt}{T}}
+\end{equation*}
+
+Ciò equivale a traslare i coefficienti di Fourier, associando i coefficienti $c_k$ ad armoniche di ordine $k+n$. 
+
 
 
 
