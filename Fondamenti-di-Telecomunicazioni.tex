@@ -1565,7 +1565,7 @@ nullo:
 \'{E} stato dimostrato che le armoniche sono una base dello spazio vettoriale dei segnali periodici di periodo $T$. 
 Per $k=0$ l'armonica corrispondente è un segnale costante. In generale un'armonica di ordine $k$ si può esprimere mediante la rappresentazione di Eulero:
 \begin{equation*}
-    \displaystyle e^{i\frac{2\pi kt}{T}}=\sin\left(\frac{2\pi kt}{T}\right)+i\sin\left(\frac{2\pi kt}{T}\right)
+    \displaystyle e^{i\frac{2\pi kt}{T}}=\cos\left(\frac{2\pi kt}{T}\right)+i\sin\left(\frac{2\pi kt}{T}\right)
 \end{equation*}
 Per cui la parte reale di un'armonica oscilla come un segnale coseno di frequenza dell'armonica. 
 
@@ -1660,7 +1660,6 @@ della funione seno cardinale.
 
 \subsection{Proprietà}
 
-
 Cercare il periodo del segnale in alcuni casi, non specificato dal testo del problema. Il contenuto informativo del segnale è descritto dai coefficienti della serie di Fourier 
 $c_k$. 
 
@@ -1740,7 +1739,7 @@ Per cui tutti i coefficienti equivalgono ai coefficienti non traslati $c_k$ molt
 
 Altrimenti si possono determinare i coefficienti tramite la definizione, attuando una sostituzione $t-t_0\to\tau$:
 \begin{gather*}
-    d_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t-t_0)e^{-i\frac{2\pi kt}{T}}dT\to\int_{-\frac{T}{2}-t_0}^{\frac{T}{2}-t_0}x(\tau)e^{-i\frac{2pi kt_0}{T}}e^{-i\frac{2\pi k\tau}{T}}d\tau\\
+    d_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t-t_0)e^{-i\frac{2\pi kt}{T}}dT\to\int_{-\frac{T}{2}-t_0}^{\frac{T}{2}-t_0}x(\tau)e^{-i\frac{2\pi kt_0}{T}}e^{-i\frac{2\pi k\tau}{T}}d\tau\\
     d_k=\displaystyle\frac{1}{T}e^{-i\frac{2\pi kt_0}{T}}\int_{-\frac{T}{2}-t_0}^{\frac{T}{2}-t_0}x(\tau)e^{-i\frac{2\pi k\tau}{T}}d\tau=\frac{1}{T}e^{-i\frac{2\pi kt_0}{T}}c_k
 \end{gather*}
 Dove $c_k$ sono i coefficienti del segnale non traslato. 
@@ -1765,14 +1764,193 @@ Per cui i coefficienti dell'onda quadra di armoniche di ordine pari risultano nu
 
 Si considera un segnale $x$ moltiplicato per un'armonica di ordine $n$:
 \begin{equation*}
-    y(t)=x(t)\cdot e^{i\frac{2\pi nt}{T}}=\displaystyle\sum_{K=-\infty}^{+\infty}c_ke^{i\frac{2pi kt}{T}}e^{i\frac{2\pi nt}{T}}
+    y(t)=x(t)\cdot e^{i\frac{2\pi nt}{T}}=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}e^{i\frac{2\pi nt}{T}}=\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k+n)t}{T}}
 \end{equation*}
 Si considera la sotituzione $l=n+k$:
 \begin{equation*}
     y(t)=\displaystyle\sum_{l=-\infty}^{+\infty}c_{l-n}e^{i\frac{2\pi lt}{T}}
 \end{equation*}
 
-Ciò equivale a traslare i coefficienti di Fourier, associando i coefficienti $c_k$ ad armoniche di ordine $k+n$. 
+Per cui i coefficienti dell'espansione di Fourier di $y$, corrispondo agli stessi coefficienti del segnale originario $x$, ma ad un generico coefficienti $c_k$ viene 
+associata l'armonica di ordine $k+n$.   
+Tramite la definizione integrale dei coefficienti di Fourier, si arriva allo stesso risultato:
+\begin{gather*}
+    \langle y(t),\;e^{i\frac{2\pi kt}{T}}\rangle=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\left(x(t)\cdot e^{i\frac{2\pi nt}{T}}\right)e^{-i\frac{2\pi kt}{T}}dt=\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\left(e^{i\frac{2\pi nt}{T}}e^{-i\frac{2\pi kt}{T}}\right)dt\\
+    \displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)e^{i\frac{2\pi (n-k)t}{T}}dt=d_k=c_{k-n}
+\end{gather*}
+Si ottiene lo stesso risultato, i coefficienti associati alle armoniche vengono traslati di un fattore $n$, fattore del ritardo in frequenza del segnale.  
+
+
+\subsubsection{Teorema della Modulazione}
+Quando un segnale viene moltiplicato per un conseno ad una determinata frequenza si indica quest'operazione come modulazione. 
+\begin{gather*}
+    y(t)=x(t)\cos\displaystyle\left(\frac{2\pi t}{T}\right)=x(t)\left[\frac{e^{i\frac{2\pi t}{T}}+e^{-i\frac{2\pi t}{T}}}{2}\right]\\
+    \displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\frac{e^{i\frac{2\pi t}{T}}+e^{-i\frac{2\pi t}{T}}}{2}\\
+    y(t)=\displaystyle\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k+1)t}{T}}+\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k-1)t}{T}}\\
+    y(t)=\displaystyle\frac{1}{2}\left(\sum_{m=-\infty}^{+\infty}c_{m-1}e^{i\frac{2\pi mt}{T}}+\sum_{m=-\infty}^{+\infty}c_{m+1}e^{i\frac{2\pi mt}{T}}\right)\\
+    d_k=\displaystyle\frac{1}{2}c_{k-1}+\frac{1}{2}c_{k+1}
+\end{gather*}
+
+
+\subsubsection{Teroema della Derivazione}
+Espansione di Fourier della derivata di un segnale $x(t)$:
+\begin{gather*}
+    y(t)=\displaystyle\frac{d}{dt}x(t)=\frac{d}{dt}\left(\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\right)=\sum_{k=-\infty}^{+\infty}c_k\frac{2i\pi k}{T}e^{i\frac{2\pi kt}{T}}\\
+    d_k=c_k\displaystyle\frac{2i\pi k}{T}
+\end{gather*}
+Tramite la definizione, si risolve tramite integraazione per parti:
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\frac{d}{dt}x(t)e^{-i\frac{2\pi kt}{T}}dt=
+    \left[\frac{1}{T}x(t)e^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}-\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\frac{2i\pi k}{T}e^{-i\frac{2\pi kt}{T}}dt
+\end{gather*}
+%% risolvi
+
+\subsubsection{Teorema di Perceval}
+
+Questo teorema permette di calcolare velocemente la potenza di un segnale periodico, la potenza di un segnale periodico è definita come:
+\begin{gather*}
+    P_x=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)x^*(t)dt=
+    \frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\left(\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\right)\cdot\left(
+    \sum_{n=-\infty}^{+\infty}c_n^*e^{-i\frac{2\pi nt}{T}}\right)dt\\
+    P_x=\displaystyle\sum_{k=-\infty}^{+\infty}\sum_{n=-\infty}^{\infty}\frac{1}{T}c_kc^*_n\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{i\frac{2\pi (k-n)t}{T}}dt
+\end{gather*}
+L'integrale corrisponde all'impulso discreto di argomento $k-n$:
+\begin{equation*}
+    P_x=\displaystyle\sum_{k=-\infty}^{+\infty}\sum_{n=-\infty}^{\infty}\frac{1}{T}c_kc_n^*\delta[k-n]=\sum_{k=-\infty}^{+\infty}c_kc_k^*=\sum_{k=-\infty}^{+\infty}|c_k|^2
+\end{equation*}
+Si possono raggurppare le sommatorie, poiché l'impulso assume valori non nulli solo quando i coefficienti sono uguali. 
+
+\subsection{Onda Quadra}
+
+Data un'onda quadra: 
+\begin{gather*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\mbox{rect}{\left(\frac{t-kT}{\tau}\right)},\;\; T>\tau
+\end{gather*}
+Si vuole descrivere l'espansione  di Fourier della derivata di questo segnale. Si esprime come la differenza tra due gradini:
+\begin{gather*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}u\left(t-kT+\frac{\tau}{2}\right)-u\left(t-kT-\frac{\tau}{2}\right)\\
+    \displaystyle\frac{d}{dt}x(t)=\sum_{k=-\infty}^{+\infty}\delta\left(t-kT+\frac{\tau}{2}\right)-\delta\left(t-kT-\frac{\tau}{2}\right)
+\end{gather*}
+Poiché per definizione la derivata di un gradino è l'impulso di Dirac. La derivata corrisponde ad una serie di impulsi nei punti dove l'onda quadra presenta delle discontinuità. 
+%% graf x(t) e x'(t)
+
+
+I coefficienti di Fourier corrispondenti alla derivata di $x$ risultano essere:
+\begin{gather*}
+    d_k=c_k\displaystyle\frac{2i\pi k}{T}=\frac{\tau}{T}\frac{2i\pi k}{T}\mbox{sinc}\left({\frac{k\tau}{T}}\right)=\frac{\tau}{T}\frac{2i\pi k}{T}\frac{\sin(k\pi \tau/T)}{k\pi \tau/T}\\
+    d_k=\displaystyle\frac{2i}{T}\sin\left(\frac{k\pi\tau}{T}\right)
+\end{gather*}
+
+Per un'onda quadra avente periodo $T$ pari al doppio della base delle fineste $\tau$: $T=2\tau$, i suoi coefficienti di Fourier risultano essere:
+\begin{equation*}
+    d_k=\displaystyle\frac{i}{\tau}\sin\left(\frac{k\pi}{2}\right)
+\end{equation*}
+Poiché $k\in\mathbb{Z}$, il valore dei coefficienti è o $\pm1$ o assume un valore nullo. 
+
+Si calcolano tramite la definizione:
+\begin{gather*}
+    d_k=\displaystyle\int_{-\frac{T}{2}}^{\frac{T}{2}}\delta\left(t-kT+\frac{\tau}{2}\right)-\delta\left(t-kT-\frac{\tau}{2}\right)dt=
+    \int_{-\frac{T}{2}}^{\frac{T}{2}}\delta\left(t+\frac{\tau}{2}\right)-\delta\left(t-\frac{\tau}{2}\right)dt\\
+\end{gather*}
+Poiché all'interno dell'intervallo di integrazione cade un singolo impulso
+
+
+\subsection{Segnale Treno di Impulsi o Campionatore}
+
+Questo segnale corrisponde ad una serie di impulsi di periodo $T$. Questo segnale è anche noto come segnale pettine o rastregliera.  
+\begin{equation*}
+    x(t)=\pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\delta(t-kT)
+\end{equation*}
+Permette di passare da un segnale analogico ad un segnale digitale, estraendo campioni ad intervalli regolari dal segnale in tempo continuo. 
+
+%% grafico
+
+
+
+Si calcolano i coefficienti dell'espansioen di Fourier del segnale pettine. Si considera l'unico impulso che cade all'interno dell'intervallo di integrazione, centrato 
+in $t=0$, per la priopiertà di campionamento della delta e per l'area della delta si ottiene:
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\delta(t)e^{-i\frac{2\pi kt}{T}}dt=\frac{1}{T}\cancelto{1}{e^{-i{\frac{2\pi k0}{T}}}}\cancelto{1}{\int_{-\frac{T}{2}}^{\frac{T}{2}}\delta(t)dt}\\
+    c_k=\displaystyle\frac{1}{T}
+\end{gather*}
+
+Tutti i coefficienti della serie di Fourier della rastregliera assumono lo stesso valore costante $1/T$. 
+
+\subsection{Espansione del Modulo di Coseno}
+Dato il segnale:
+\begin{equation*}
+    x(t)=\left|\cos\left(\displaystyle\frac{2\pi t}{T}\right)\right|
+\end{equation*}
+
+Si determinano i coefficienti dell'espansione di Fourier tramite la definizione:
+\begin{gather*}
+    c_k=\displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\displaystyle\frac{2\pi t}{T}\right)e^{-i\frac{4\pi kt}{T}}dt\\
+    \displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\displaystyle\frac{2\pi t}{T}\right)\left[\cos\left(\frac{4\pi kt}{T}\right)-i\sin\left(\frac{4\pi kt}{T}\right)\right]dt\\
+    \displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)dt
+    \cancelto{0}{-i\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\sin\left(\frac{4\pi kt}{T}\right)dt}\\
+    \displaystyle\frac{4}{T}\int_{0}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)dt
+\end{gather*}
+Poiché è una funzione pari, l'integrale corrisponde al doppio dell'integrale su solo una metà dell'intervallo di integrazione. 
+
+
+Per le formule di prostaferesi si ottiene:
+\begin{gather*}
+    c_k=\displaystyle\frac{4}{T}\frac{1}{2}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2(2k+1)\pi t}{T}\right)+\cos\left(\frac{2(2k-1)\pi t}{T}\right)dt\\
+    \displaystyle\left[\frac{2}{T}\frac{T}{2(2k+1)\pi}\sin\left(\frac{2(2k+1)\pi t}{T}\right)+
+    \frac{2}{T}\frac{T}{2(2k-1)\pi}\sin\left(\frac{2(2k-1)\pi t}{T}\right)\right]_{0}^{\frac{T}{4}}\\
+    \left[\displaystyle\frac{\sin(2(2k+1)\pi t/T)}{(2k+1)\pi}+\frac{\sin(2(2k-1)\pi t/T)}{(2k-1)\pi}\right]_0^{\frac{T}{4}}\\
+    c_k=\displaystyle\frac{\sin(2(2k+1)\pi/2)}{(2k+1)\pi}+\frac{\sin(2(2k-1)\pi/2)}{(2k-1)\pi}
+\end{gather*}
+
+L'argomento del seno, lo rende tale che assumi solo valori $\pm1$. Per valori pari di $k$, uno assume valore $1$, mentre l'altro $-1$, analogamente per valori dispari di $k$. 
+I due seni assumono sempre valori discordi. Si possono esprimere come: 
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{\pi}\frac{(-1)^k}{2k+1}-\frac{1}{\pi}\frac{(-1)^k}{2k-1}=\frac{-2}{\pi}\frac{1}{4k^2-1}(-1)^k
+\end{gather*}
+
+\subsection{Segnali Reali}
+Se un segnale è reale, i suoi coefficienti possono essere espressi in un alltro modo. Considerando la forma integrale dei coefficienti, e la formula di Eulero per gli 
+esponenziali
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\left[\cos\left(\frac{2\pi kt}{T}\right)-i\sin\left(\frac{2\pi kt}{T}\right)\right]dt\\
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cos\left(\frac{2\pi kt}{T}\right)dt-\frac{i}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\sin\left(\frac{2\pi kt}{T}\right)dt
+\end{gather*}
+Si definoscono due coefficienti $a_k$ e $b_k$ pari alla parte reale ed immaginaria del coefficienti $c_k$:
+\begin{gather*}
+    c_k=a_k+ib_k\\
+    a_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cos\left(\frac{2\pi kt}{T}\right)dt\\
+    b_k=\displaystyle-\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\sin\left(\frac{2\pi kt}{T}\right)dt
+\end{gather*}
+I coefficienti $a_k$ sono pari, mentre i coefficienti $b_k$ sono dispari:
+\begin{gather*}
+    a_k=a_{-k}\\
+    b_k=-b_{-k}\\
+    c_{-k}=a_{-k}+ib_{-k}=a_{k}-ib_k=c_k^*
+\end{gather*}
+In forma polare si può esprimere come:
+\begin{gather*}
+    c_k=\rho_k e^{i\phi_k}\\
+    c_{-k}=\rho_{-k}e^{i\phi{-k}}=\rho_k e^{-i\phi}=c_k^*
+\end{gather*}
+
+Un qualsiasi segnale reale si può esprimere come: 
+\begin{gather*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{-1}c_ke^{i\frac{2\pi kt}{T}}+c_0+\sum_{k=1}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}=\sum_{k=1}^{+\infty}c_{-k}e^{-i\frac{2\pi kt}{T}}+c_0+\sum_{k=1}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\\
+    \displaystyle\left(\sum_{k=1}^{+\infty}c_k^*e^{-i\frac{2\pi kt}{T}}+c_ke^{i\frac{2\pi kt}{T}}\right)+c_0=\left(\sum_{k=1}^{+\infty}\rho_k e^{-i\phi}e^{-i\frac{2\pi kt}{T}}+\rho_ke^{i\phi}e^{i\frac{2\pi kt}{T}}\right)+c_0\\
+    x(t)=\displaystyle\sum_{k=1}^{+\infty}\rho_k \left(e^{i\left(\frac{2\pi kt}{T}+\phi_k\right)}+e^{-i\left(\frac{2\pi kt}{T}+\phi_k\right)}\right)+c_0=\displaystyle c_0+\sum_{k=1}^{+\infty}2\rho_k\cos\left(\frac{2\pi kt}{T}+\phi_k\right)
+\end{gather*}
+Questo rappresentazione è possibile solo per segnali $x$ reali. 
+Considerando le formule del coseno della somma si pul esprimere come:
+\begin{gather*}
+    \displaystyle c_0+\sum_{k=1}^{+\infty}2\rho_k\cos\left(\frac{2\pi kt}{T}+\phi_k\right)=
+    c_0+\sum_{k=-\infty}^{+\infty}2\rho_k\cos(\phi_k)\cos\left(\frac{2\pi kt}{T}\right)-2\rho_k\sin(\phi_k)\sin\left(\frac{2\pi kt}{T}\right)\\
+    x(t)=\displaystyle c_0+2\sum_{k=1}^{+\infty}a_k\cos\left(\frac{2\pi kt}{T}\right)-b_k\sin\left(\frac{2\pi kt}{T}\right)\\
+    a_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cos\left(\frac{2\pi kt}{T}\right)dt\\
+    b_k=\displaystyle-\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\sin\left(\frac{2\pi kt}{T}\right)dt
+\end{gather*}
+Se il segnale $x$ è raele e pari, allora i coefficienti $b_k$ sono nulli, se il segnale è immaginario e dispari, i coefficienti $a_k$ sono nulli. 
+Per cui i coefficienti $c_k$ di Fourier di un segnale reale e pari sono pari e raeli, i coefficienti $c_k$ di Fourier di un segnale immaginario e 
+dispari sono immaginari e dispari. 
 
 
 
