@@ -1686,10 +1686,9 @@ semiperiodo $T/2$:
     \begin{tikzpicture}[scale=2]
         \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
         \draw[->](0,-1)--(0,1)node[right]{$z(t)$};
-        \draw[-](-2.5,0.5)--(-2,0.5)--(-1.5,0.5)--(-1.5,-0.5)--(-0.5,-0.5)--(-0.5,0.5)--(0.5,0.5)--(0.5,-0.5)--(1.5,-0.5)--(2,-0.5)--(2,0.5)--(2.5,0.5);
+        \draw[-](-2.5,0.5)--(-2,0.5)--(-2,-0.5)--(-0.5,-0.5)--(-0.5,0.5)--(0.5,0.5)--(0.5,-0.5)--(2,-0.5)--(2,0.5)--(2.5,0.5);
         \node[above right]at(0,0.5){$1$};
         \node[below right]at(0,-0.5){$-1$};
-
     \end{tikzpicture}
 \end{center}
 
@@ -1780,19 +1779,17 @@ Tramite la definizione integrale dei coefficienti di Fourier, si arriva allo ste
 \end{gather*}
 Si ottiene lo stesso risultato, i coefficienti associati alle armoniche vengono traslati di un fattore $n$, fattore del ritardo in frequenza del segnale.  
 
-
 \subsubsection{Teorema della Modulazione}
+
 Quando un segnale viene moltiplicato per un conseno ad una determinata frequenza si indica quest'operazione come modulazione. 
 \begin{gather*}
-    y(t)=x(t)\cos\displaystyle\left(\frac{2\pi t}{T}\right)=x(t)\left[\frac{e^{i\frac{2\pi t}{T}}+e^{-i\frac{2\pi t}{T}}}{2}\right]\\
-    \displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\frac{e^{i\frac{2\pi t}{T}}+e^{-i\frac{2\pi t}{T}}}{2}\\
-    y(t)=\displaystyle\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k+1)t}{T}}+\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k-1)t}{T}}\\
-    y(t)=\displaystyle\frac{1}{2}\left(\sum_{m=-\infty}^{+\infty}c_{m-1}e^{i\frac{2\pi mt}{T}}+\sum_{m=-\infty}^{+\infty}c_{m+1}e^{i\frac{2\pi mt}{T}}\right)\\
+    y(t)=x(t)\cos\displaystyle\left(\frac{2\pi t}{T}\right)=x(t)\left[\frac{e^{i\frac{2\pi t}{T}}+e^{-i\frac{2\pi t}{T}}}{2}\right]=\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\frac{e^{i\frac{2\pi t}{T}}+e^{-i\frac{2\pi t}{T}}}{2}\\
+    y(t)=\displaystyle\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k+1)t}{T}}+\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k-1)t}{T}}=\frac{1}{2}\left(\sum_{m=-\infty}^{+\infty}c_{m-1}e^{i\frac{2\pi mt}{T}}+\sum_{m=-\infty}^{+\infty}c_{m+1}e^{i\frac{2\pi mt}{T}}\right)\\
     d_k=\displaystyle\frac{1}{2}c_{k-1}+\frac{1}{2}c_{k+1}
 \end{gather*}
 
-
 \subsubsection{Teroema della Derivazione}
+
 Espansione di Fourier della derivata di un segnale $x(t)$:
 \begin{gather*}
     y(t)=\displaystyle\frac{d}{dt}x(t)=\frac{d}{dt}\left(\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\right)=\sum_{k=-\infty}^{+\infty}c_k\frac{2i\pi k}{T}e^{i\frac{2\pi kt}{T}}\\
@@ -1800,10 +1797,12 @@ Espansione di Fourier della derivata di un segnale $x(t)$:
 \end{gather*}
 Tramite la definizione, si risolve tramite integraazione per parti:
 \begin{gather*}
-    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\frac{d}{dt}x(t)e^{-i\frac{2\pi kt}{T}}dt=
-    \left[\frac{1}{T}x(t)e^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}-\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\frac{2i\pi k}{T}e^{-i\frac{2\pi kt}{T}}dt
+    d_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\frac{d}{dt}x(t)e^{-i\frac{2\pi kt}{T}}dt=
+    \left[\frac{1}{T}x(t)e^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}+\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\frac{2i\pi k}{T}e^{-i\frac{2\pi kt}{T}}dt\\
+    \displaystyle-\frac{1}{T}x(t)\left(e^{i\pi k}-e^{-i\pi k}\right)+c_k\frac{2i\pi k}{T}\\
+    \displaystyle-\frac{2i}{T}\cancelto{0}{\sin(\pi k)}+c_k\frac{2i\pi k}{T}\\
+    d_k=c_k\displaystyle\frac{2i\pi k}{T}
 \end{gather*}
-%% risolvi
 
 \subsubsection{Teorema di Perceval}
 
@@ -1820,20 +1819,45 @@ L'integrale corrisponde all'impulso discreto di argomento $k-n$:
 \end{equation*}
 Si possono raggurppare le sommatorie, poiché l'impulso assume valori non nulli solo quando i coefficienti sono uguali. 
 
-\subsection{Onda Quadra}
+\subsection{Espansione di Onda Quadra}
 
 Data un'onda quadra: 
 \begin{gather*}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\mbox{rect}{\left(\frac{t-kT}{\tau}\right)},\;\; T>\tau
 \end{gather*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
+        \draw[->](0,-1)--(0,1)node[right]{$x(t)$};
+        \draw[-](-2.5,0.5)--(-2,0.5)--(-2,0)node[below]{$ \displaystyle -T+\frac{\tau}{2}$}--(-0.5,0)node[below]{$ \displaystyle-\frac{\tau}{2}$}--(-0.5,0.5)--(0.5,0.5)--(0.5,0)node[below]{$ \displaystyle\frac{\tau}{2}$}--(2,0)node[below]{$ \displaystyle T+\frac{\tau}{2}$}--(2,0.5)--(2.5,0.5);
+        \node[above right]at(0,0.5){$1$};
+        \node[below right]at(0,-0.5){$-1$};
+
+    \end{tikzpicture}
+\end{center}
+
 Si vuole descrivere l'espansione  di Fourier della derivata di questo segnale. Si esprime come la differenza tra due gradini:
 \begin{gather*}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}u\left(t-kT+\frac{\tau}{2}\right)-u\left(t-kT-\frac{\tau}{2}\right)\\
     \displaystyle\frac{d}{dt}x(t)=\sum_{k=-\infty}^{+\infty}\delta\left(t-kT+\frac{\tau}{2}\right)-\delta\left(t-kT-\frac{\tau}{2}\right)
 \end{gather*}
 Poiché per definizione la derivata di un gradino è l'impulso di Dirac. La derivata corrisponde ad una serie di impulsi nei punti dove l'onda quadra presenta delle discontinuità. 
-%% graf x(t) e x'(t)
 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
+        \draw[->](0,-1)--(0,1)node[right]{$\displaystyle\frac{dx(t)}{dt}$};
+        \draw[->](-2,0)node[below]{$ \displaystyle -T+\frac{\tau}{2}$}--(-2,0.5);
+        \draw[->](-0.5,0)node[below]{$ \displaystyle-\frac{\tau}{2}$}--(-0.5,0.5);
+        \draw[->](0.5,0)node[below]{$ \displaystyle\frac{\tau}{2}$}--(0.5,0.5);
+        \draw[->](2,0)node[below]{$ \displaystyle T+\frac{\tau}{2}$}--(2,0.5);
+        \node[above right]at(0,0.5){$1$};
+        \node[below right]at(0,-0.5){$-1$};
+
+    \end{tikzpicture}
+\end{center}
 
 I coefficienti di Fourier corrispondenti alla derivata di $x$ risultano essere:
 \begin{gather*}
@@ -1854,7 +1878,6 @@ Si calcolano tramite la definizione:
 \end{gather*}
 Poiché all'interno dell'intervallo di integrazione cade un singolo impulso
 
-
 \subsection{Segnale Treno di Impulsi o Campionatore}
 
 Questo segnale corrisponde ad una serie di impulsi di periodo $T$. Questo segnale è anche noto come segnale pettine o rastregliera.  
@@ -1863,8 +1886,22 @@ Questo segnale corrisponde ad una serie di impulsi di periodo $T$. Questo segnal
 \end{equation*}
 Permette di passare da un segnale analogico ad un segnale digitale, estraendo campioni ad intervalli regolari dal segnale in tempo continuo. 
 
-%% grafico
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        \draw[->](0,-0.25)--(0,1.5)node[right]{$x(t)$};
+        \draw[->](-2,0)--(2,0)node[above]{$t$};
 
+        \draw[->](-0.8,0)--(-0.8,1);
+        \draw[->](-1.2,0)--(-1.2,1);
+        \draw[->](-1.6,0)--(-1.6,1);
+        \draw[->](-0.4,0)--(-0.4,1);
+        \draw[->](0,0)--(0,1);
+        \draw[->](0.4,0)--(0.4,1);
+        \draw[->](0.8,0)--(0.8,1);
+        \draw[->](1.2,0)--(1.2,1);
+        \draw[->](1.6,0)--(1.6,1);
+    \end{tikzpicture}
+\end{center}
 
 
 Si calcolano i coefficienti dell'espansioen di Fourier del segnale pettine. Si considera l'unico impulso che cade all'interno dell'intervallo di integrazione, centrato 
@@ -1952,7 +1989,7 @@ Se il segnale $x$ è raele e pari, allora i coefficienti $b_k$ sono nulli, se il
 Per cui i coefficienti $c_k$ di Fourier di un segnale reale e pari sono pari e raeli, i coefficienti $c_k$ di Fourier di un segnale immaginario e 
 dispari sono immaginari e dispari. 
 
-
+\subsection{02/11}
 
 
 \end{document}
