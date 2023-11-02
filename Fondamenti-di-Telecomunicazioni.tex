@@ -1819,7 +1819,7 @@ L'integrale corrisponde all'impulso discreto di argomento $k-n$:
 \end{equation*}
 Si possono raggurppare le sommatorie, poiché l'impulso assume valori non nulli solo quando i coefficienti sono uguali. 
 
-\subsection{Espansione di Onda Quadra}
+\subsection{Espansione di Un'Onda Quadra}
 
 Data un'onda quadra: 
 \begin{gather*}
@@ -1924,13 +1924,16 @@ Si determinano i coefficienti dell'espansione di Fourier tramite la definizione:
     c_k=\displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\displaystyle\frac{2\pi t}{T}\right)e^{-i\frac{4\pi kt}{T}}dt\\
     \displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\displaystyle\frac{2\pi t}{T}\right)\left[\cos\left(\frac{4\pi kt}{T}\right)-i\sin\left(\frac{4\pi kt}{T}\right)\right]dt\\
     \displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)dt
-    \cancelto{0}{-i\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\sin\left(\frac{4\pi kt}{T}\right)dt}\\
-    \displaystyle\frac{4}{T}\int_{0}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)dt
+    {-i\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\sin\left(\frac{4\pi kt}{T}\right)dt}
 \end{gather*}
-Poiché è una funzione pari, l'integrale corrisponde al doppio dell'integrale su solo una metà dell'intervallo di integrazione. 
+Poiché è una funzione pari, il primo integrale corrisponde al doppio dell'integrale su solo una metà dell'intervallo, mentre il secondo integrale, essendo una funzione 
+dispari, assume valore nullo su un intervallo simmetrico:
+\begin{equation*}
+    \displaystyle\frac{4}{T}\int_{0}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)dt-i\cdot0
+\end{equation*}
 
 
-Per le formule di prostaferesi si ottiene:
+Per le formule di prostaferesi si ottiene una somma di due coseni. Integrandoli separatamente si ottiene:
 \begin{gather*}
     c_k=\displaystyle\frac{4}{T}\frac{1}{2}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2(2k+1)\pi t}{T}\right)+\cos\left(\frac{2(2k-1)\pi t}{T}\right)dt\\
     \displaystyle\left[\frac{2}{T}\frac{T}{2(2k+1)\pi}\sin\left(\frac{2(2k+1)\pi t}{T}\right)+
@@ -1939,10 +1942,11 @@ Per le formule di prostaferesi si ottiene:
     c_k=\displaystyle\frac{\sin(2(2k+1)\pi/2)}{(2k+1)\pi}+\frac{\sin(2(2k-1)\pi/2)}{(2k-1)\pi}
 \end{gather*}
 
-L'argomento del seno, lo rende tale che assumi solo valori $\pm1$. Per valori pari di $k$, uno assume valore $1$, mentre l'altro $-1$, analogamente per valori dispari di $k$. 
-I due seni assumono sempre valori discordi. Si possono esprimere come: 
+L'argomento del seno, lo rende tale che assume solo valori pari a $\pm1$. Per valori pari di $k$, il primo seno assume valore di $1$, mentre l'altro $-1$, accade l'opposto per 
+valori dispari di $k$. 
+I due seni assumono sempre valori discordi e unitari, quindi si possono esprimere come: 
 \begin{gather*}
-    c_k=\displaystyle\frac{1}{\pi}\frac{(-1)^k}{2k+1}-\frac{1}{\pi}\frac{(-1)^k}{2k-1}=\frac{-2}{\pi}\frac{1}{4k^2-1}(-1)^k
+    c_k=\displaystyle\frac{1}{\pi}\frac{(-1)^k}{2k+1}-\frac{1}{\pi}\frac{(-1)^k}{2k-1}=-\frac{2}{\pi}\frac{1}{4k^2-1}(-1)^k
 \end{gather*}
 
 \subsection{Segnali Reali}
@@ -1970,7 +1974,7 @@ In forma polare si può esprimere come:
     c_{-k}=\rho_{-k}e^{i\phi{-k}}=\rho_k e^{-i\phi}=c_k^*
 \end{gather*}
 
-Un qualsiasi segnale reale si può esprimere come: 
+Un qualsiasi segnale reale può essere espresso come:
 \begin{gather*}
     x(t)=\displaystyle\sum_{k=-\infty}^{-1}c_ke^{i\frac{2\pi kt}{T}}+c_0+\sum_{k=1}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}=\sum_{k=1}^{+\infty}c_{-k}e^{-i\frac{2\pi kt}{T}}+c_0+\sum_{k=1}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\\
     \displaystyle\left(\sum_{k=1}^{+\infty}c_k^*e^{-i\frac{2\pi kt}{T}}+c_ke^{i\frac{2\pi kt}{T}}\right)+c_0=\left(\sum_{k=1}^{+\infty}\rho_k e^{-i\phi}e^{-i\frac{2\pi kt}{T}}+\rho_ke^{i\phi}e^{i\frac{2\pi kt}{T}}\right)+c_0\\
@@ -1980,7 +1984,7 @@ Questo rappresentazione è possibile solo per segnali $x$ reali.
 Considerando le formule del coseno della somma si pul esprimere come:
 \begin{gather*}
     \displaystyle c_0+\sum_{k=1}^{+\infty}2\rho_k\cos\left(\frac{2\pi kt}{T}+\phi_k\right)=
-    c_0+\sum_{k=-\infty}^{+\infty}2\rho_k\cos(\phi_k)\cos\left(\frac{2\pi kt}{T}\right)-2\rho_k\sin(\phi_k)\sin\left(\frac{2\pi kt}{T}\right)\\
+    c_0+\sum_{k=1}^{+\infty}2\rho_k\cos(\phi_k)\cos\left(\frac{2\pi kt}{T}\right)-2\rho_k\sin(\phi_k)\sin\left(\frac{2\pi kt}{T}\right)\\
     x(t)=\displaystyle c_0+2\sum_{k=1}^{+\infty}a_k\cos\left(\frac{2\pi kt}{T}\right)-b_k\sin\left(\frac{2\pi kt}{T}\right)\\
     a_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cos\left(\frac{2\pi kt}{T}\right)dt\\
     b_k=\displaystyle-\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\sin\left(\frac{2\pi kt}{T}\right)dt
@@ -1989,7 +1993,148 @@ Se il segnale $x$ è raele e pari, allora i coefficienti $b_k$ sono nulli, se il
 Per cui i coefficienti $c_k$ di Fourier di un segnale reale e pari sono pari e raeli, i coefficienti $c_k$ di Fourier di un segnale immaginario e 
 dispari sono immaginari e dispari. 
 
-\subsection{02/11}
+\subsection{Esercizi sulla Rappresentazione di Fourier}
 
+
+Dato un segnale periodico:
+\begin{gather*}
+    x(t)=2\cos\displaystyle\left(\frac{2\pi t}{T}+\frac{\pi}{4}\right)+6\sin\left(\frac{2\pi t}{3T}\right)
+\end{gather*}
+Il primo passaggio nella rappresentazione di Fourier corrisponde all'individuazione del periodo del segnale $x$. Il periodo della somma di due seganli periodici corrisponde 
+al minimo comune multiplo tra il periodo dei due segnali. In questo caso il periodo del segnale $x$ è $T'=3T$. Per cui si può riscrivere come:
+\begin{gather*}
+    x(t)=\displaystyle2\cos\left(\frac{6\pi t}{T'}+\frac{\pi}{4}\right)+6\sin\left(\frac{2\pi t}{T'}\right)\\
+    \displaystyle e^{i\left(\frac{6\pi t}{T'}+\frac{\pi}{4}\right)}+e^{-i\left(\frac{6\pi t}{T'}+\frac{\pi}{4}\right)}+\frac{3}{i}e^{i\frac{2\pi t}{T'}}-\frac{3}{i}e^{-i\frac{2\pi t}{T'}}
+\end{gather*} 
+Per confronto diretto si ottengono i seguenti coefficienti:
+\begin{gather*}
+    c_k=0\;\; \forall k\neq\pm1\land\pm3\\
+    c_1=-c_{-1}=\displaystyle\frac{3}{i}=-3i=-3e^{\frac{\pi}{2}}\\
+    c_{3}=c_{-3}^*=\displaystyle e^{\frac{\pi}{4}}=\frac{1}{\sqrt{2}}(1+i)
+\end{gather*}
+
+
+Dato un segnale:
+\begin{gather*}
+    x(t)=\sin\displaystyle(2\pi t)+\cos(4\pi t+\phi)
+\end{gather*}
+Questo segnale ha un periodo $T=1$. Per confronto diretto si ottengono dei coefficienti:
+\begin{gather*}
+    x(t)=\displaystyle \frac{e^{2i\pi t}-e^{-2i\pi t}}{2i}+\frac{e^{i\phi}e^{4i\pi t}+e^{-i\phi}e^{-4i\pi t}}{2}\\
+    c_k=0\;\;\forall k\neq\pm1\land\pm2\\
+    c_1=-c_{-1}=\displaystyle\frac{1}{2i}=-\frac{i}{2}\\
+    c_2=c_{-2}^*=\displaystyle\frac{e^{i\phi}}{2}
+\end{gather*}
+
+Dato il segnale:
+\begin{gather*}
+    x(t)=\sin^2\displaystyle\left(\frac{2\pi t}{T}+\phi\right)=\frac{1}{2}\left(1-\cos\left(\frac{4\pi t}{T}+2\phi\right)\right)
+\end{gather*}
+Questo segnale ha periodo $T/2$. Per confronto diretto si ottengono i coefficienti:
+\begin{gather*}
+    x(t)=\displaystyle\frac{1}{2}-\frac{1}{4}e^{2i\phi}e^{i\frac{4\pi t}{T}}-\frac{1}{4}e^{-2i\phi}e^{-i\frac{4\pi t}{T}}\\
+    c_k=0\;\;\forall k\neq0\land\pm2\\
+    c_0=\displaystyle\frac{1}{2}\\
+    c_1=c_{-1}^*=-\displaystyle\frac{1}{4}e^{2i\phi}
+\end{gather*}
+
+
+Dato il seguente segnale dente di sega:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
+        \draw[->](0,-1)--(0,1)node[right]{$x(t)$};
+        \draw[-](-2.5,-0.5)--(-1.5,0.5)--(-1.5,-0.5)--(-0.5,0.5)--(-0.5,0)node[above right]{$\displaystyle-\frac{T}{2}$}--(-0.5,-0.5)--(0.5,0.5)--(0.5,0)node[above right]{$\displaystyle\frac{T}{2}$}--(0.5,-0.5)--(1.5,0.5)--(1.5,-0.5)--(2.5,0.5);
+        \draw[dashed](-2.5,0.5)--(0,0.5)node[above right]{$\displaystyle\frac{T}{2}$}--(2.5,0.5);
+        \draw[dashed](-2.5,-0.5)--(0,-0.5)node[below right]{$\displaystyle\frac{T}{2}$}--(2.5,-0.5);
+    \end{tikzpicture}
+\end{center}
+
+
+Si calcolano i coefficienti di Fourier tramite la definizione, e si calcola l'integrale per parti: 
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}te^{-i\frac{2\pi kt}{T}}dt=\displaystyle\left[-\frac{1}{T}\frac{T}{2i\pi k}te^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}-
+    \frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}-\frac{T}{2i\pi k}e^{-i\frac{2\pi kt}{T}dt}\\
+    \displaystyle-\frac{T}{2i\pi k}\left(\frac{e^{-i\pi k}+e^{i\pi k}}{2}\right)+\frac{1}{2i\pi k}\left[\frac{T}{2i\pi k}e^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}\\
+    \displaystyle-\frac{T}{2i\pi k}\left(\frac{e^{i(-\pi k)}+e^{-i(-\pi k)}}{2}\right)-\frac{2iT}{4\pi^2k^2}\left(\frac{e^{i(-\pi k)}-e^{-i(-\pi k)}}{2i}\right)\\
+    \displaystyle-\frac{T}{2i\pi k}\cos\left(-\pi k\right)+\frac{2iT}{4\pi^2k^2}\sin(-\pi k)
+\end{gather*}
+La componente sinusoidale è nulla per ogni valore di $k$, per cui il coefficiente generico si esprime come:
+\begin{gather*}
+    c_k=\displaystyle-\frac{T}{2i\pi k}\cos(-\pi k)=\frac{Ti}{2\pi k}\cos(\pi k)=\frac{Ti}{2\pi k}(-1)^k
+\end{gather*}
+Il coefficiente $c_0$ è nullo, poiché rappresenta il valor medio del periodo. In questo caso essendo un segnale dispari, il valor medio nel periodo è nullo:
+\begin{equation*}
+    c_0=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}t\,dt=0
+\end{equation*}
+
+Dato il seguente segnale dente di sega:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-3,-0.5)--(2,-0.5)node[above]{$t$};
+        \draw[->](-0.5,-1.25)--(-0.5,0.75)node[right]{$x(t)$};
+        \draw[-](-2.5,-0.5)--(-1.5,0.5)--(-1.5,-0.5)--(-0.5,0.5)--(-0.5,0)--(-0.5,-0.5)--(0.5,0.5)--(0.5,0)--(0.5,-0.5)node[below right]{$T$}--(1.5,0.5)--(1.5,-0.5);
+        \draw[dashed](-3,0.5)--(0,0.5)node[above right]{$T$}--(2,0.5);
+    \end{tikzpicture}
+\end{center}
+Si può esprimere come il precedente segnale analizzato, traslato nel tempo e nello spazio di uno stesso fattore $T/2$. La traslazione nello spazio può essere sia un ritardo 
+che un anticipo, poiché si ottiene lo stesso segnale risultante:
+\begin{equation*}
+    y(t)=x\left(t\pm\frac{T}{2}\right)+\displaystyle\frac{T}{2}
+\end{equation*}
+Si considera in questo caso un ritardo di $T/2$. Conoscendo i coefficienti di $c_k$, si può attuare una traslazione nel tempo, per ottenere i coefficienti della serie di Fourier 
+del segnale $y$:
+\begin{gather*}
+    d_k=\begin{cases}
+        \displaystyle c_0+\frac{T}{2}=\frac{T}{2} &k=0\\
+        c_ke^{-i\frac{2\pi k}{T}\frac{T}{2}}=\displaystyle\frac{T}{2i\pi k}(-1)^ke^{-i\pi k}&k\neq0
+    \end{cases}
+\end{gather*}
+
+
+
+Dato un segnale treno di triangoli:
+\begin{equation*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\mbox{tri}\left(\frac{2(t-kT)}{\tau}\right)
+\end{equation*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
+        \draw[->](0,-0.5)--(0,1.5)node[right]{$x(t)$};
+
+        \draw[-](-2,0)--(-1.5,1)--(-1,0)--(-0.5,0)node[below]{$\displaystyle-\frac{\tau}{2}$}--(0,1)node[above right]{$T$}--(0.5,0)node[below]{$\displaystyle\frac{\tau}{2}$}--(1,0)--(1.5,1)--(2,0);
+        \draw[dashed](-2.5,1)--(2.5,1);
+    \end{tikzpicture}
+\end{center}
+Si calcolano i coefficienti tramite la definizione. Poiché è presente un solo triangolo nell'intervallo di intergrazione, si può restringere l'intervallo: 
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\mbox{tri}\left(\frac{2t}{\tau}\right)e^{-i\frac{2\pi kt}{T}}dt=\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\left(1-\left|\frac{2t}{\tau}\right|\right)e^{-i\frac{2\pi kt}{T}}dt\\
+    \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi kt}{T}}dt+\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}-\left|\frac{2t}{\tau}\right|e^{-i\frac{2\pi kt}{T}}dt\\
+    \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi kt}{T}}dt-\frac{1}{T}\left(\int_{-\frac{\tau}{2}}^{0}-\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt\right)
+\end{gather*}
+Il primo integrale corrisponde all'integrale ai coefficienti di una finestra, ed è stato già precedentemente calcolato, per cui si omette la risoluzione. Si considera la 
+sostituzione $t=-t'$ nel secondo integrale:
+\begin{gather*}
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int_{-\frac{-\tau}{2}}^{0}-\frac{2(-t)}{\tau}e^{-i\frac{2\pi k(-t)}{T}}d(-t)+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt\right)\\
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(-\int_{\frac{\tau}{2}}^{0}\frac{2t}{\tau}e^{i\frac{2\pi kt}{T}}dt+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt\right)\\
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int^{\frac{\tau}{2}}_{0}\frac{2t}{\tau}e^{i\frac{2\pi kt}{T}}dt+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt\right)\\
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{1}{T}\int^{\frac{\tau}{2}}_{0}\frac{4t}{\tau}\frac{e^{i\frac{2\pi kt}{T}}+e^{-i\frac{2\pi kt}{T}}}{2}dt\\
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{4}{\tau T}\int_{0}^{\frac{\tau}{2}}t\cos\left(\frac{2\pi kt}{T}\right)dt
+\end{gather*}
+Quest'ultimo integrale così ottenuto si risolve mediante integrazione per parti:
+\begin{gather*}
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{4}{\tau T}\left[\frac{T}{2\pi k}t\sin\left(\frac{2\pi kt}{T}\right)\right]^{\frac{\tau}{2}}_0
+    +\frac{4}{\tau T}\int_{0}^{\frac{\tau}{2}}\frac{T}{2\pi k}\sin\left(\frac{2\pi kt}{T}\right)dt\\
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{\tau}{T}\frac{T}{\pi k\tau}\sin\left(\frac{\pi k\tau}{T}\right)+0+
+    \frac{4}{\tau T}\left[-\left(\frac{T}{2\pi k}\right)^2\cos\left(\frac{2\pi kt}{T}\right)\right]^{\frac{\tau}{2}}_0\\
+    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-
+    \frac{T}{\pi^2k^2\tau}\left[\cos\left(\frac{\pi k\tau}{T}\right)-1\right]\\
+    \displaystyle\frac{2T}{\pi^2k^2\tau}\sin^2\left(\frac{\pi kt}{2T}\right)=
+    \frac{\tau}{2T}\left[\frac{2T}{\pi k\tau}\sin\left(\frac{\pi kt}{2T}\right)\right]\left[\frac{2T}{\pi k\tau}\sin\left(\frac{\pi kt}{2T}\right)\right]\\
+    c_k=\displaystyle\frac{\tau}{2T}\mbox{sinc}^2\left(\frac{k\tau }{2T}\right)
+\end{gather*}
+I coefficienti di un treno di triangoli risultano essere dei seni cardinali quadrati. 
+
+\subsection{3/10}
 
 \end{document}
