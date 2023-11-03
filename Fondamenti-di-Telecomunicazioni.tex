@@ -1569,7 +1569,7 @@ Per $k=0$ l'armonica corrispondente è un segnale costante. In generale un'armon
 \end{equation*}
 Per cui la parte reale di un'armonica oscilla come un segnale coseno di frequenza dell'armonica. 
 
-\subsection{Serie Notevoli}
+\subsection{Serie Elementari}
 
 Si considera un segnale costante $x(t)=A$. Per determinare i coefficienti della sua serie di Taylor si considera il prodotto scalare tra il segnale ed una generica armonica $k$: 
 \begin{gather*}
@@ -2135,6 +2135,214 @@ Quest'ultimo integrale così ottenuto si risolve mediante integrazione per parti
 \end{gather*}
 I coefficienti di un treno di triangoli risultano essere dei seni cardinali quadrati. 
 
-\subsection{3/10}
+\section{Traformata di Fourier}
+Quando si trattano segnali non periodici, non si possono esprimere mediante una serie di Fourier, quindi si analizzano mediante la trasformata di Fourier. 
+La trasformata di Fuorier si può applicare solamente a segnali impulsivi. Segnali impulsivi sono definiti dalla seguente espressione:
+\begin{equation*}
+    \displaystyle\int_{-\infty}^{+\infty}|x(t)|dt\neq\infty
+\end{equation*}
+Come la serie di Fourier la trasformata di Fourier è uno strumento per analizzare i segnanli. Questi segnali possono essere nel dominio del tempo $x(t)$ o dominio 
+della frequenza $X(f)$. La trasformata è quindi un funzionale che dipende dalla variabile della frequenza, non più dalla variabile del tempo del segnale originale $x(t)$. 
+La trasformata $X(f)$ è univoca per ogni segnale $x(t)$ nel tempo. Questa trasformata trasferisce lo stesso segnale dal dominio del tempo al dominio della frequenza:  
+\begin{equation*}
+    \mathscr{F}\{x(t)\}=X(f)
+\end{equation*}
+
+Ricordando la serie di un segnale periodico $x$ di periodo $T$:
+\begin{gather*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}
+\end{gather*}
+Nello spazio vettoriale dei segnali periodico è stato definito il prodotto scalare:
+\begin{equation*}
+    \langle x_1(t),\;x_2(t)\rangle=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x_1(t)x_2^*(t)dt
+\end{equation*}
+Nello spazio vettoriale di Fourier, la base ortonormale è formata da tutte le armonica:
+\begin{gather*}
+    \langle e^{i\frac{2\pi kt}{T}},\;e^{i\frac{2\pi nt}{T}}\rangle=\begin{cases}
+        0&\forall k\neq n\\
+        1&\forall k=n
+    \end{cases}
+\end{gather*} 
+Da queste armoniche si può ricavare il coefficiente di ordine $k$ di un qualsiasi segnale periodico di periodo $T$:
+\begin{equation*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)e^{-i\frac{2\pi kt}{T}}dt
+\end{equation*}
+
+
+
+Si considerareranno per semplicità tutti i segnali trattati come impulsivi. Per cui non sarà necessario dimostrare l'esistenza della trasformata di un certo segnale $x(t)$ 
+non necessariamente periodico. Si vuole rappresentare questo segnale in modo equivalente alla serie di Fourier. Per rappresentare questo segnale sono necessarie un numero 
+infinito non numerabile di armoniche, per cui si considera un integrale, dove il coefficiente dipende dalla varibile dell'integrale. E l'armonica non dipende dal parametro 
+$k$, ma dalla stessa variabile dell'integrale:
+\begin{equation*}
+    x(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)e^{2i\pi tf}df
+\end{equation*}
+Il segnale si esprime quindi tramite un insieme infinito non numerabile di armoniche, sempre uguali per ogni segnale. Per cui la differenza tra due segnali, come per 
+l'espansione di Fourier, è il peso di ogni armonica $X(f)$. Bisogna comunque dimostrare che queste armoniche siano una base ortonormale in questo spazio di Fourier. Si 
+introduce il prodotto scalare nello spazio dei segnali impulsivi:
+\begin{equation*}
+    \langle x_1(t),\;x_2(t)\rangle=\displaystyle\int_{-\infty}^{+\infty}x_1(t)x_2^*(t)dt
+\end{equation*}
+Questo prodotto scalare corrisponde alla correlazione tra due segnali a ritardo nullo. 
+
+Per determinare se due armoniche di frequenze diverse $f_1$ e $f_2$ sono una base si considera il loro prodotto scalare:
+\begin{gather*}
+    \langle e^{2i\pi f_1t},\;e^{2i\pi f_2t}\rangle=\displaystyle\lim_{\Delta t\to\infty}\int_{-\frac{\Delta t}{2}}^{+\frac{\Delta t}{2}}e^{2i\pi f_1t}e^{-2i\pi f_2t}dt\\
+    \displaystyle\lim_{\Delta t\to\infty}\left[\frac{e^{2i\pi(f_1-f_2)t}}{2i\pi(f_1-f_2)}\right]^{\frac{\Delta t}{2}}_{-\frac{\Delta t}{2}}=
+    \Delta t\frac{\sin(\pi(f_1-f_2)\Delta t)}{\pi(f_1-f_2)\Delta t}\\
+    \displaystyle\lim_{\Delta t\to\infty}\Delta t\,\mbox{sinc}(\Delta t(f_1-f_2))
+\end{gather*}
+Per $\Delta t\to\infty$, la sinc diventa un impulso tempo continuo:
+\begin{equation*}
+    \langle e^{2i\pi f_1t},\;e^{2i\pi f_2t}\rangle=\delta(f_1-f_2)
+\end{equation*}
+Per cui tutte le armoniche di frequenza diversa hanno prodotto scalare nullo, e solo due armoniche di frequenza uguale hanno prodotto scalare di valore unitario. 
+Bisogna dimostrare che i coefficienti trasformata di Fourier $X(f)$ si ottengono analogamente ai coefficienti $c_k$:
+\begin{gather*}
+    X(f)=\langle x(t),\;e^{2i\pi ft}\rangle=\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi ft}dt
+\end{gather*}
+Nello spazio di Fourier si può poi analizzare la banda di un segnale, ovvero il contenuto informativo rispetto alla frequenza. Quest'informazione è necessaria per poter 
+trasmettere un determinato segnale. I due domini del tempo e della frequenza sono due domini separati. 
+
+\subsection{Trasformate Elementari}
+
+Dato un segnale finestra:
+\begin{gather*}
+    x(t)=\mbox{rect}\displaystyle\left(\frac{t}{\tau}\right)\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}\mbox{rect}\left(\frac{t}{\tau}\right)e^{-2i\pi ft}dt=\left[\frac{e^{-2i\pi ft}}{2i\pi ft}\right]^{+\frac{\tau}{2}}_{-\frac{\tau}{2}}\\
+    \displaystyle\frac{e^{-i\pi f\tau}-e^{-i\pi f\tau}}{-2i\pi f}=\frac{\sin(\pi f\tau)}{\pi f}=\tau\,\mbox{sinc}(f\tau)
+\end{gather*}
+Quidni la trasfromata di un segnale fienstra di base $\tau$ è un seno cardinale moltiplicato per la base, di argomento moltiplicato per la base:
+\begin{gather*}
+    x(t)=\mbox{rect}\displaystyle\left(\frac{t}{\tau}\right)\rightarrow X(f)=\tau\,\mbox{sinc}(f\tau)
+\end{gather*}
+La trasformata in $f=0$, corrisponde al valore medio del segnale finestra:
+\begin{equation*}
+    X(0)=\displaystyle\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}dt=\tau
+\end{equation*}
+%% grafo
+Questa proprietà si chiama teormea del valor medio. Ovvero per ogni segnale $x$, la trasformata per la frequenza nulla $f=0$ corrisponde al valore medio del segnale. 
+
+
+
+Dato un segnale impulso di Dirac:
+\begin{gather*}
+    x(t)=\delta(t)\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}\delta(t)e^{-2i\pi ft}dt=1
+\end{gather*}
+Per la proprietà di campionamento dell'impulso e per l'area dell'impulso, si ottiene che la trasformata di Fourier dell'impulso è sempre costante è unitario per ogni frequenza. 
+
+
+Tanto più è limitato nel tempo, tanto più è largo il contenuto spettrale o la banda del segnale. Dove lo spettro di un segnale indica la sua trasformata di Fourier 
+$\mathscr{F}$. 
+
+
+Dato un segnale costante:
+\begin{gather*}
+    x(t)=1\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}e^{-2i\pi ft}dt=\delta (f)
+\end{gather*}
+Analogamente al prodotto scalare tra due armoniche. 
+Tanto più p esteso un segnale nel dominio del tempo, tanto più è limitato nel domino della frequenza. 
+
+
+Dato il segnale impulso traslato:
+\begin{gather*}
+    x(t)=\delta (t-t_0)\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}\delta(t-t_0)e^{-2i\pi ft}dt=e^{-2i\pi ft_0}
+\end{gather*}
+Dato il segnale armonica di frequenza $f_0$:
+\begin{gather*}
+    x(t)=e^{2i\pi f_0t}\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}e^{2i\pi(f_0-f)t}dt=\delta(f_0-f)
+\end{gather*}
+Analogamente al prodotto scalare tra due armoniche di frequenza diversa. 
+
+
+Dato il segnale coseno:
+\begin{gather*}
+    x(t)=\cos(2\pi f_0t)\\
+    X(f)=\displaystyle\frac{1}{2}\int_{-\infty}^{+\infty}\left(e^{2i\pi f_0t}+e^{-2i\pi f_0t}\right)e^{-2i\pi ft}dt=\frac{\delta(f-f_0)+\delta(f+f_0)}{2}\\
+    x(t)=\cos(2\pi f_0t)\rightarrow X(f)=\displaystyle\frac{\delta(f-f_0)+\delta(f+f_0)}{2}
+\end{gather*}
+Nella notazione di Fourier un coseno viene rappresentato come due frequenze $\pm f_0$. 
+Analogamente per il seno:
+\begin{gather*}
+    x(t)=\sin(2\pi f_0t)\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}\frac{1}{2i}(e^{2i\pi f_0t}-e^{-2i\pi f_0t})e^{-2i\pi ft}dt=\frac{\delta (f-f_0)-\delta(f+f_0)}{2i}
+\end{gather*}
+Dato un coseno di ampiezza $A$ con un anticipo di fase $\phi$: 
+\begin{gather*}
+    x(t)=A\cos(2\pi f_0t+\phi)\\
+    X(f)=\displaystyle\frac{A}{2}\int_{-\infty}^{+\infty}\left(e^{2i\pi f_0t}e^{i\phi}+e^{-2i\pi f_0t}e^{-i\phi}\right)e^{-2i\pi ft}dt\\
+    X(f)=\frac{A\delta(f-f_0)e^{i\phi}+A\delta(f+f_0)e^{-i\phi}}{2}
+\end{gather*}
+
+\subsection{Proprietà di Linearità}
+
+La trasformata di Fourier è un operatore linerae. Dati due segnali $x(t)$ e $y(t)$:
+\begin{gather*}
+    x(t)\to X(f)\\
+    y(t)\to Y(f)\\
+    ax(t)+by(t)=\displaystyle\int_{-\infty}^{+\infty}(ax(t)+by(t))e^{-2i\pi ft}dt\\
+    a\int_{-\infty}^{+\infty}x(t)e^{-2i\pi ft}dt+b\int_{-\infty}^{+\infty}y(t)e^{-2i\pi ft}dt= 
+    aX(f)+bY(f)
+\end{gather*}
+
+\subsection{Proprietà di Dualità}
+
+La trasformata di Fourier accoppia due segnali nei due domini. Se la trasformata di un segnale $x$ nel tempo è una funzione $y$ nella frequenza, la trasfromata di un segnale $y$ 
+nel tempo è un segnale $x$ nella frequenza, di variabile opposta $-f$.
+
+Per dimostrare questa prorpietà si considerano la formula di trasformazione:
+\begin{equation*}
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi ft}dt
+\end{equation*}
+E la formula di antitrasformazione:
+\begin{equation*}
+    x(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)e^{2i\pi ft}df
+\end{equation*}
+
+Data la trasformata di un segnale $x(t)$ $X(f)$, per riportarla nel dominio del tempo, si considera l'integrale di trasformazione di $X(t)$:
+\begin{gather*}
+    \displaystyle\int_{-\infty}^{+\infty}X(t)e^{-2i\pi ft}dt
+\end{gather*}
+Si considera la sotituzione $f=t'$ e $t=f'$, l'integrale diventa l'integrale di antitrasformazione:
+\begin{equation*}
+    \displaystyle\int_{-\infty}^{+\infty}X(f')e^{-2i\pi f't'}df'=x(-t')
+\end{equation*}
+Allora:
+\begin{gather*}
+    x(t)\to^{\mathscr{F}} X(f)\to^{\mathscr{F}}x(-t)
+\end{gather*}
+
+\subsection{Proprietà di Scala}
+
+Si considera la trasformata di un segnale:
+\begin{gather*}
+    x(at)\to\displaystyle\int_{-\infty}^{+\infty}x(at)e^{-2i\pi ft}dt\\
+    t'=at\\
+    \displaystyle\frac{1}{a}\int_{-\infty}^{+\infty}x(t')e^{-2i\pi \frac{f}{a}t'}dt'=\frac{1}{a}X\left(\frac{f}{a}\right)
+\end{gather*}
+Se $a=-1$, la trasformata corrisponde a:
+\begin{gather*}
+    \displaystyle\int_{-\infty}^{+\infty}x(-t)e^{-2i\pi ft}dt\\
+    t'=-t\\
+    \displaystyle\int_{-\infty}^{+\infty}x(t')e^{-2i\pi(- f)t'}dt'=X(-f)
+\end{gather*}
+Per cui quando $a<0$:
+\begin{gather*}
+    x(at)\to\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi ft}dt\\
+    t'=at\\
+    \displaystyle\frac{1}{|a|}\int_{-\infty}^{+\infty}x(t')e^{-2i\pi \left(-\frac{f}{a}\right)t'}dt'=\frac{1}{|a|}X\left(-\frac{f}{a}\right)
+\end{gather*}
+Per cui in generale dato un segnale scalato di un fattore $a$, la sua trasformata è:
+\begin{gather*}
+    x(at)\to\displaystyle\frac{1}{|a|}X\left(\frac{f}{a}\right)
+\end{gather*}
+
+
+
+
 
 \end{document}
