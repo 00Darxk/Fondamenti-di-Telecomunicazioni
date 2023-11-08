@@ -1,4 +1,4 @@
-    \documentclass{article}
+\documentclass{article}
 
 \usepackage{cancel}
 \usepackage{tikz}
@@ -1814,7 +1814,7 @@ Tramite la definizione, si risolve tramite integraazione per parti:
     d_k=c_k\displaystyle\frac{2i\pi k}{T}
 \end{gather*}
 
-\subsubsection{Teorema di Perceval}
+\subsubsection{Teorema di Parceval}
 
 Questo teorema permette di calcolare velocemente la potenza di un segnale periodico, la potenza di un segnale periodico è definita come:
 \begin{gather*}
@@ -2144,6 +2144,8 @@ Quest'ultimo integrale così ottenuto si risolve mediante integrazione per parti
     c_k=\displaystyle\frac{\tau}{2T}\mbox{sinc}^2\left(\frac{k\tau }{2T}\right)
 \end{gather*}
 I coefficienti di un treno di triangoli risultano essere dei seni cardinali quadrati. 
+
+\clearpage
 
 \section{Traformata di Fourier}
 Quando si trattano segnali non periodici, non si possono esprimere mediante una serie di Fourier, quindi si analizzano mediante la trasformata di Fourier. 
@@ -2520,7 +2522,7 @@ Quest'operazione si chiama modulazione di ampiezza (AM). Il segnale trasmesso co
     \frac{1}{2}\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi(f-f_0)t}dt+\frac{1}{2}\int_{-\infty}^{+\infty}x(t)e^{-2i\pi (f+f_0)t}dt=\frac{X(f-f_0)}{2}+\frac{X(f+f_0)}{2}
 \end{gather*}
 
-\subsection{Esercizi sulla Trasformata}
+\subsection{Trasformate della Finestra}
 
 Si considera una finestra di base $T$ moltiplicata per un coseno di frequenza costante $f_0$, ovvero modulata di una frequenza $f_0$:
 \begin{gather*}
@@ -2546,7 +2548,197 @@ Per la linearità della trasformata e per la proprietà di traslazione nel tempo
     2iT\displaystyle\frac{\sin(\pi fT)}{\pi fT}\sin(\pi fT)=2i\frac{\sin^2(\pi fT)}{\pi f}
 \end{gather*}
 
+\subsection{Proprietà Operative della Trasformata}
 
+\subsubsection{Proprietà della Derivazione}
+
+La trasformata, nel trasportare una funzione da un dominio all'altro, può offrire una serie di semplificazioni ad operazioni come integrali e derivate nei due domini. Si vuole 
+determinare la trasformata della derivata di un noto segnale $x$, di trasformata $X$. 
+
+Si considera il segnale derivata $x_1$:
+\begin{gather*}
+    x_1(t)=\displaystyle\frac{d}{dt}x(t)\\
+    X_1(f)=\displaystyle\int_{-\infty}^{+\infty}\left(\frac{d}{dt}x(t)\right)e^{-2i\pi ft}dt
+\end{gather*}
+Si considera l'antitrasformata del segnale originale $x$ e si derivano entrambi i lati rispetto al tempo: 
+
+\begin{gather*}
+    x(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)e^{2i\pi ft}df\\
+    \displaystyle\frac{d}{dt}x(t)=\int_{-\infty}^{+\infty}2i\pi fX(f)e^{2i\pi ft}df=x_1
+\end{gather*}
+Quest'integrale rappresenta l'antitrasformata del segnale derivata $x_1$, per cui la sua trasformata può essere espressa come:
+\begin{gather*} 
+    X_1(t)=2i\pi fX(f)
+\end{gather*}
+
+\subsubsection{Duale della Derivazione}
+Dato un segnale $x(t)$ e la sua trasformata $X(f)$, si dimostra che vale la proprietà duale della derivazione: 
+\begin{gather*}
+    x_1(t)=2i\pi tx(t)\\
+    X_1(f)=\displaystyle\int_{-\infty}^{+\infty}2i\pi tx(t)e^{-2i\pi ft}dt\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi ft}dt\\
+    \displaystyle\frac{d}{df}X(f)=\int_{-\infty}^{+\infty}-2i\pi t x(t)e^{2i\pi ft}dt=-\int_{-\infty}^{+\infty}x_1(t)e^{2i\pi ft}dt=-X_1(f)\\
+    \displaystyle\frac{d}{df}X(f)=-X_1(f)
+\end{gather*}
+
+
+Si considera il seguente segnale in frequenza:
+\begin{gather*}
+    X_1(f)=\displaystyle\frac{1}{(\alpha+2i\pi f)^2}
+\end{gather*}
+Per ottenere la trasformata del segnale, si considera il duale della proprietà della derivazione della trasformata. Si considera il segnale esponenziale unilatero e la sua 
+trasformata:
+\begin{gather*}
+    x(t)=e^{-\alpha t}u(t)\\
+    X(f)=\displaystyle\frac{1}{\alpha+2i\pi f}\\
+    \displaystyle\frac{d}{df}X(f)=\frac{-2i\pi}{(\alpha+2i\pi f)^2}\\
+    X_1(f)=\displaystyle-\frac{1}{2i\pi}\frac{d}{df}X(f)=-\frac{1}{2i\pi}(-2i\pi tx(t))=te^{-\alpha t}u(t)
+\end{gather*}
+
+\subsubsection{Prorpietà dell'Integrazione}
+
+Dato un segnale $x$ di trasformata $X$, si considera il suo integrale fino ad un valore $\tau$, ciò equivale ad attuare una convoluzione con il gradino $u(t)$:
+\begin{gather*}
+    x_1(t)=\displaystyle\int_{-\infty}^{+\tau}x(\tau)d\tau=\int_{-\infty}^{*\infty}u(t-\tau)x(\tau)d\tau=x(t)*u(t)
+\end{gather*}
+Nel domino della frequenza la trasformata del segnale $x_1$ è quindi il prodotto tra la trasformata do $x$ e del segnale gradino:
+\begin{gather*}
+    X_1(f)=X(f)\left[\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}\right]=\frac{1}{2}X(0)\delta(f)+\frac{X(f)}{2i\pi f}
+\end{gather*}
+
+\subsubsection{Proprietà del Coniugato}
+
+Dato un segnale $x$ di trasformata $X$, si considera il suo coniugato $x*$, e si vuole calcolare la sua trasformata:
+\begin{gather*}
+    x_1(t)=x^*(t)\\
+    X_1(f)=\displaystyle\int_{-\infty}^{+\infty}x^*(t)e^{2i\pi ft}dt=\left(\int_{-\infty}^{+\infty}x(t)e^{-2i\pi ft}dt\right)^*=X^*(-f)
+\end{gather*}
+La coniugazione ha quindi una simmetria ermetiana, nella trasformata di Fourier. 
+
+\subsubsection{Proprietà della Correlazione}
+
+Dato una una correlazione $z$ tra due segnali $x$ e $y$, si può esprimere come una convoluzione. Tramite il teorema della convoluzione e del coniugato, la sua trasformata può 
+essere espressa come il prodotto tra due trasformate: 
+\begin{gather*}
+    z(t)=x(t)\otimes y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau=x(t)*y^*(-t)\\
+    Z(f)=X(f)\cdot Y^*(f)
+\end{gather*}
+
+\subsection{Finestra e Triangolo tramite Derivata}
+Dato un segnale finestra e la sua trasformata:
+\begin{gather*}
+    x(t)=\mbox{rect}\displaystyle\left(\frac{t}{T}\right)\\
+    X(f)=T\mbox{sinc}\displaystyle\left(Tf\right)
+\end{gather*}
+Si considera ora la derivata del segnale finestra. Questo segnale è costante per tutti valori eccetto per le discontinuità in $\pm T/2$, dove presenta una variazione istantanea. 
+Esprimendola come due gradini, questa variazione viene espressa nella derivata come la differenza tra due impulsi, nota la derivata di un gradino: 
+\begin{gather*}
+    x(t)=u(t-T/2)-u(t+T/2)\\
+    \displaystyle\frac{d}{dt}x(t)=\delta(t-T/2)-\delta(t+T/2)
+\end{gather*}
+La trasformata della derivata risulta essere:
+\begin{gather*}
+    X(f)=2i\pi fT\,\mbox{sinc}(Tf)=\displaystyle2i\pi fT\frac{\sin(\pi Tf)}{\pi Tf}\\
+    2i\sin(\pi Tf)=2i\frac{e^{i\pi Tf}-e^{-i\pi Tf}}{2i}\\
+    X(f)=e^{i\pi Tf}-e^{-i\pi Tf}
+\end{gather*}
+
+
+Si considera ora un segnale triangolo di base $T$, e si attua un processo analogo. La sua derivata è quindi la differenza tra due finestre, poiché aumenta costantemente da 
+$-T$ a $0$ e decresce costantemente da $0$ a $T$. 
+\begin{gather*}
+    x(t)=\mbox{tri}\displaystyle\left(\frac{t}{T}\right)\\
+    \displaystyle\frac{d}{dt}x(t)=\frac{1}{T}\mbox{rect}\left(\frac{t+T/2}{T}\right)-\frac{1}{T}\mbox{rect}\left(\frac{t-T/2}{T}\right)\\
+    X'(f)=2i\pi f\displaystyle\left(\frac{1}{T}T\mbox{sinc}(Tf)e^{i\pi Tf}-\frac{1}{T}T\mbox{sinc}(Tf)e^{-i\pi Tf}\right)\\
+    2i\,\mbox{sinc}(Tf)\sin(Tf)=\displaystyle2i\frac{\sin^2(Tf)}{\pi Tf}
+\end{gather*}
+
+Per ottenere la trasformata del segnale triangolo, si considera la trasformata della sua derivata:
+\begin{gather*}
+    X'(f)=2i\pi fX(f)\\
+    X(f)=\displaystyle2i\frac{\sin^2(Tf)}{\pi fT}\frac{1}{2i\pi f}=T\,\mbox{sinc}(Tf)
+\end{gather*}
+La derivata nel dominio del tempo corrisponde a moltiplicare nel dominio della frequenza per il fattore $2i\pi f$. 
+
+\subsection{Teorema della Convoluzione}
+
+Data la convoluzione tra due segnali $x$ e $y$:
+\begin{gather*}
+    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t-\tau)y(\tau)d\tau
+\end{gather*}
+Si esprime il segnale $y$ antitrasformata:
+\begin{gather*}
+    y(\tau)=\displaystyle\int_{-\infty}^{+\infty}Y(f)e^{2i\pi f\tau}df\\
+    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t-\tau)\left(\int_{-\infty}^{+\infty}Y(f)e^{2i\pi f\tau}df\right)d\tau
+\end{gather*}
+Si inverte l'ordine di integrazione, possibile poiché i due integrali sono indipendenti tra di loro, e si applica la sostituzione $t'=t-\tau$: 
+\begin{gather*}
+    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}Y(f)\left(\int_{-\infty}^{+\infty}x(t-\tau)e^{2i\pi f\tau}d\tau\right)df\\
+    t'=t-\tau\\
+    \int_{-\infty}^{+\infty}Y(f)e^{2i\pi ft}\left(\int_{-\infty}^{+\infty}x(t')e^{-2i\pi ft'}dt'\right)df\\
+    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}Y(f)X(f)e^{2i\pi ft}df
+\end{gather*}
+
+\subsection{Filtri}
+
+I filtri sono sistemi ingresso-uscita caratterizzati da un'unica funzione chiamata risposta impulsiva $h(t)$, che permette di calcolare l'uscita come la convoluzione tra l'
+entrata e la risposta impulsiva. Per cui considerando il teorema appena dimostrato, l'uscita si può rappresentare nel domino della frequenza più semplicemente come un prodotto:
+\begin{gather*}
+    y(t)=x(t)*h(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)H(f)e^{2i\pi ft}df\\
+    Y(f)=X(f)\cdot H(f)
+\end{gather*}
+Per cui si può rappresentare molto più semplicemente l'uscita di un sistema nel dominio della frequenza, ovvero analizzando lo spettro dell'uscita. 
+
+Si considera un segnale $x$ in entrata ad un filtro $h$:
+\begin{gather*}
+    h(t)=\displaystyle\frac{1}{T}\mbox{sinc}\left(\frac{t}{T}\right)\\
+    x(t)=\cos(2\pi f_0t)
+\end{gather*}
+Per la proprietà di scala:
+\begin{gather*}
+    H(f)=\mbox{rect}(Tf)\\
+    X(f)=\displaystyle\frac{1}{2}\delta(f-f_0)+\frac{1}{2}\delta(f+f_0)\\
+    Y(f)=\frac{1}{2}\mbox{rect}(Tf)(\delta(f-f_0)+\delta(f+f_0))\\
+    \displaystyle\frac{1}{2}\mbox{rect}(Tf_0)\delta(f-f_0)+\frac{1}{2}\mbox{rect}(-Tf_0)\delta(f+f_0)
+\end{gather*}
+
+
+Dato un sistema definito dall'espressione:
+\begin{gather*}
+    \displaystyle\frac{d}{dt}y(t)+\alpha y(t)=x(t)
+\end{gather*}
+Si può semplificare l'analisi passando per il domino della frequenza: 
+\begin{gather*}
+    2i\pi fY(f)+\alpha Y(f)=X(f)\\
+    Y(f)=\displaystyle\frac{1}{\alpha+2i\pi f}X(f)
+\end{gather*}
+Quindi la funzione di trasferimento del sistema risulta essere:
+\begin{gather*}
+    H(f)=\displaystyle\frac{1}{\alpha+2i\pi f}
+\end{gather*}
+E la sua antitrasformata è la risposta impulsiva del sistema, in questo caso un esponenziale uniltatero: 
+\begin{gather*}
+    h(t)=e^{-\alpha t}u(t)
+\end{gather*}
+
+\subsection{Teorema di Parceval}
+
+Si considera una convoluzione $z$, ed il suo valore nell'origine:
+\begin{gather*}
+    z(t)=x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t-\tau)y(\tau)d\tau=\int_{-\infty}^{+\infty}X(f)Y(f)e^{2i\pi ft}df\\
+    z(t)=\displaystyle\int_{-\infty}^{+\infty}x(-\tau)y(\tau)d\tau=\int_{-\infty}^{+\infty}X(f)Y(f)df
+\end{gather*}
+Si considera ora la convoluzione tra $x(t)$ e $y^*(-t)$, sempre calcolata nell'origine
+\begin{gather*}
+    z(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y^*(-(t-\tau))d\tau=\int_{-\infty}^{+\infty}X(f)Y^*(f)e^{2i\pi ft}df\\
+    z(0)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y^*(\tau)d\tau=\int_{-\infty}^{+\infty}X(f)Y^*(f)df
+\end{gather*}
+Se si considera $y=x$, allora la convoluzione diventa un'autoconvoluzione. Calcolata nell'origne corrisponde all'energia di un segnale:
+\begin{gather*}
+    z(0)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)x^*(\tau)d\tau=\int_{-\infty}^{+\infty}X(f)X^*(f)df\\
+    E_x=\displaystyle\int_{-\infty}^{+\infty}|x(\tau)|^2d\tau=\int_{-\infty}^{+\infty}|X(f)|^2df
+\end{gather*}
+Per cui l'energia di un segnale si calcola esattamente allo stesso modo sia nel dominio del tempo che nel dominio della frequenza. 
 
 
 \end{document}
