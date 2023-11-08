@@ -1,4 +1,4 @@
-\documentclass{article}
+    \documentclass{article}
 
 \usepackage{cancel}
 \usepackage{tikz}
@@ -50,7 +50,7 @@
 
 \clearpage
 
-\section{Segnali}
+\section{Introduzione}
 
 Un segnale è definito come una qualsiasi grandezza fisica che varia nel tempo in maniera deterministica o aleatoria. Può essere un'onda di pressione come la voce, o un onda 
 elettromagnetica come segnali wireless e bluetooth. Un segnale è in grado di contenere informazioni come una sequenza di bit. Generalmente un segnale 
@@ -126,11 +126,13 @@ In generale un sistema di trasmissione di segnali è formato da un trasmettitore
     \end{tikzpicture}
 \end{center}
 
-\subsection{Segnali a Tempo Continuo}
+\clearpage
 
-Vengono definiti in questa sezione una serie di segnali canonici:
+\section{Segnali a Tempo Continuo}
 
-\subsubsection{Seno Cardinale}
+Vengono definiti in questa sezione una serie di segnali canonici, e le operazioni attuabili su questo tipo di segnali:
+
+\subsection{Seno Cardinale}
 
 \begin{equation}
     x(t)=\mbox{sinc}(t):=\displaystyle\frac{\sin(\pi t)}{\pi t}
@@ -161,7 +163,7 @@ Viene incluso il fattore $\pi$ nell'argomento in modo che la funzione si annulli
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Coseno}
+\subsection{Coseno}
 
 \begin{equation}
     x(t)=\cos\left(\displaystyle\frac{2\pi t}{T}\right)
@@ -188,7 +190,7 @@ usare la frequenza $f_0$, inverso del periodo.
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Gradino Periodico}
+\subsection{Gradino Periodico o Onda Quadra}
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -200,7 +202,7 @@ usare la frequenza $f_0$, inverso del periodo.
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Esponenziale Complesso}
+\subsection{Esponenziale Complesso}
 
 \begin{equation}
     x(t)=\displaystyle e^{i\frac{2\pi t}{T}}=\cos\left(\frac{2\pi t}{T}\right)+i\sin\left(\frac{2\pi t}{T}\right)
@@ -229,7 +231,7 @@ Dato che la fase è periodica si può rappresentare come una serie di rampe.
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Esponenziale}
+\subsection{Esponenziale}
 
 \begin{equation}
     x(t)=e^{-\alpha t},\,\alpha\in\mathbb{R}
@@ -251,7 +253,7 @@ Dato che la fase è periodica si può rappresentare come una serie di rampe.
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Finestra}
+\subsection{Finestra}
 
 \begin{equation}
     x(t)=\mbox{rect}\left(\displaystyle\frac{t}{T}\right):=\begin{cases}
@@ -273,7 +275,7 @@ vuole analizzare solo una parte di un segnale, poiché il restante sarà pari a 
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Triangolo}
+\subsection{Triangolo}
 
 \begin{equation}
     x(t)=\mbox{tri}\left(\displaystyle\frac{t}{T}\right):=\begin{cases}
@@ -292,7 +294,7 @@ vuole analizzare solo una parte di un segnale, poiché il restante sarà pari a 
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Gradino}
+\subsection{Gradino}
 
 \begin{equation}
     x(t)=u(t):=\begin{cases}
@@ -310,7 +312,7 @@ vuole analizzare solo una parte di un segnale, poiché il restante sarà pari a 
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Gaussiana}
+\subsection{Gaussiana}
 
 \begin{equation*}
     x(t)=e^{-\alpha t^2}\,\,\alpha\in\mathbb{R}^+
@@ -334,7 +336,7 @@ Il valore $\sigma$ rappresenta la deviazione standard, mentre il suo quadrato $\
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Esponenziale Unilatero}
+\subsection{Esponenziale Unilatero}
 
 \begin{equation*}
     x(t)=e^{-\alpha t}\cdot u(t)\,\,\alpha\in\mathbb{R}^+
@@ -352,7 +354,7 @@ Il valore $\sigma$ rappresenta la deviazione standard, mentre il suo quadrato $\
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Costante}
+\subsection{Costante}
 
 \begin{equation*}
     x(t)=a
@@ -369,7 +371,7 @@ Il valore $\sigma$ rappresenta la deviazione standard, mentre il suo quadrato $\
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Segno}
+\subsection{Segno}
 
 \begin{equation*}
     x(t)=\mbox{sign}(t):=\begin{cases}
@@ -551,12 +553,12 @@ Considerando questa sostituzione, l'integrale diventa:
 \end{equation*}
 L'integrale su un periodo del coseno è nullo, poiché è una funzione pari, per cui la componente $\cos(4\pi f_0 t)$ fornisce un contributo nullo. 
 
-\subsection{Segnali a Tempo Discreto}
+\section{Segnali a Tempo Discreto}
 
 Poiché la maggior parte dei segnali vengono trasmessi o generati in tempo discreto, è necessario essere a conoscenza del comportamento dei segnali continui campionati a 
 tempo discreto. 
 
-\subsubsection{Gradino}
+\subsection{Gradino}
 
 \begin{equation*}
     x[n]=u[n]:=\begin{cases}
@@ -615,7 +617,7 @@ Non avendo un segnale finestra a tempo discreto, essa può essere descritta come
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Esponenziale Unilatero}
+\subsection{Esponenziale Unilatero}
 
 \begin{equation*}
     x[n]=a^nu[n]
@@ -645,7 +647,7 @@ Non avendo un segnale finestra a tempo discreto, essa può essere descritta come
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Coseno}
+\subsection{Coseno}
 
 \begin{equation*}
     x[n]=\cos(2\pi f_0n)
@@ -675,7 +677,7 @@ Il segnale è periodico nel discreto, solo se la frequenza è un numero intero $
     \end{tikzpicture}
 \end{center}
 
-\subsubsection{Impulso Matematico}
+\subsection{Impulso Matematico Tempo Discreto}
 
 L'impulso matematico o delta di Dirac, nel discreto assume solo un valore di $1$ per $n=0$. 
 \begin{equation*}
@@ -738,7 +740,7 @@ Analogamente un gradino può essere espresso come una sommatoria di delta trasla
     u[n-m]=\displaystyle\sum_{n=-\infty}^{-m}\delta[n+1]
 \end{equation*}
 
-\subsubsection{Energia e Potenza}
+\subsection{Energia e Potenza}
 
 L'energia di un segnale tempo discreto si calcola come:
 \begin{equation*}
@@ -754,7 +756,14 @@ La potenza per segnali periodici tempo discreti si ottiene mediante:
 \end{equation*}
 Dove $M$ è il periodo del segnale
 
-\subsection{Impulso Tempo Continuo}
+\clearpage
+
+\section{Convoluzione e Correlazione}
+
+Prima di analizzare queste due importanti operazioni tra segnali tempo continuo e discreto, bisogna fornire una definizione adeguata per l'impulso matematico tempo 
+continuo, segnale necessario per poter analizzare facilmente le proprietà di queste operazioni. 
+
+\subsection{Impulso Matematico Tempo Continuo}
 
 Per definire l'impulso o delta di Dirac nel tempo continuo, si parte da un segnale finestra con una base $\Delta t$ e ampiezza inverso della base:
 \begin{equation*}
@@ -1729,7 +1738,8 @@ del segnale $z$ si esprimono come:
 Si considera un segnale ritardato nel tempo di un fattore $t_0$: $x(t-t_0)$, dati i coefficienti del segnale non traslato $c_k$. Per confronto diretto si ottiene:
 \begin{gather*}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\\
-    x(t-t_0)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi k(t-t_0)}{T}}=\sum_{k=-\infty}^{+\infty}\left(c_ke^{i\frac{2\pi kt}{T}}+c_ke^{-i\frac{2\pi kt_0}{T}}\right)\\
+    x(t-t_0)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi k(t-t_0)}{T}}=\sum_{k=-\infty}^{+\infty}\left(c_ke^{-i\frac{2\pi kt_0}{T}}\right)e^{i\frac{2\pi kt}{T}}\\
+    x(t-t_0)=\displaystyle\sum_{k=-\infty}^{+\infty}d_ke^{i\frac{2\pi kt}{T}}
 \end{gather*}
 Per cui tutti i coefficienti equivalgono ai coefficienti non traslati $c_k$ moltiplicati per un fattore esponenziale, che dipende dalla traslazione $t_0$:
 \begin{equation*}
@@ -2046,7 +2056,7 @@ Dato il seguente segnale dente di sega:
         \draw[->](0,-1)--(0,1)node[right]{$x(t)$};
         \draw[-](-2.5,-0.5)--(-1.5,0.5)--(-1.5,-0.5)--(-0.5,0.5)--(-0.5,0)node[above right]{$\displaystyle-\frac{T}{2}$}--(-0.5,-0.5)--(0.5,0.5)--(0.5,0)node[above right]{$\displaystyle\frac{T}{2}$}--(0.5,-0.5)--(1.5,0.5)--(1.5,-0.5)--(2.5,0.5);
         \draw[dashed](-2.5,0.5)--(0,0.5)node[above right]{$\displaystyle\frac{T}{2}$}--(2.5,0.5);
-        \draw[dashed](-2.5,-0.5)--(0,-0.5)node[below right]{$\displaystyle\frac{T}{2}$}--(2.5,-0.5);
+        \draw[dashed](-2.5,-0.5)--(0,-0.5)node[below right]{$-\displaystyle\frac{T}{2}$}--(2.5,-0.5);
     \end{tikzpicture}
 \end{center}
 
@@ -2141,9 +2151,10 @@ La trasformata di Fuorier si può applicare solamente a segnali impulsivi. Segna
 \begin{equation*}
     \displaystyle\int_{-\infty}^{+\infty}|x(t)|dt\neq\infty
 \end{equation*}
-Come la serie di Fourier la trasformata di Fourier è uno strumento per analizzare i segnanli. Questi segnali possono essere nel dominio del tempo $x(t)$ o dominio 
+Come la serie di Fourier la trasformata di Fourier è uno strumento per analizzare i segnali. Questi segnali possono essere nel dominio del tempo $x(t)$ o dominio 
 della frequenza $X(f)$. La trasformata è quindi un funzionale che dipende dalla variabile della frequenza, non più dalla variabile del tempo del segnale originale $x(t)$. 
-La trasformata $X(f)$ è univoca per ogni segnale $x(t)$ nel tempo. Questa trasformata trasferisce lo stesso segnale dal dominio del tempo al dominio della frequenza:  
+La trasformata $X(f)$ è univoca per ogni segnale $x(t)$ nel tempo. Questa trasformata assoccia univocamente un segnale nel dominio del tempo ad un segnale nel dominio della 
+frequenza:   
 \begin{equation*}
     \mathscr{F}\{x(t)\}=X(f)
 \end{equation*}
@@ -2203,6 +2214,7 @@ Bisogna dimostrare che i coefficienti trasformata di Fourier $X(f)$ si ottengono
 \end{gather*}
 Nello spazio di Fourier si può poi analizzare la banda di un segnale, ovvero il contenuto informativo rispetto alla frequenza. Quest'informazione è necessaria per poter 
 trasmettere un determinato segnale. I due domini del tempo e della frequenza sono due domini separati. 
+Il nucleo o kernel della trasformata di Fourier corrisponde all'armonica, ovvero il componente esponenziale complesso nell'integrale. 
 
 \subsection{Trasformate Elementari}
 
@@ -2313,7 +2325,8 @@ Si considera la sotituzione $f=t'$ e $t=f'$, l'integrale diventa l'integrale di 
 \end{equation*}
 Allora:
 \begin{gather*}
-    x(t)\to^{\mathscr{F}} X(f)\to^{\mathscr{F}}x(-t)
+    \mathscr{F}\{x(t)\}= X(f)\\
+    \mathscr{F}\{X(t)\}=x(-f)
 \end{gather*}
 
 \subsection{Proprietà di Scala}
@@ -2338,9 +2351,200 @@ Per cui quando $a<0$:
 \end{gather*}
 Per cui in generale dato un segnale scalato di un fattore $a$, la sua trasformata è:
 \begin{gather*}
-    x(at)\to\displaystyle\frac{1}{|a|}X\left(\frac{f}{a}\right)
+    \mathscr{F}\{x(at)\}=\displaystyle\frac{1}{|a|}X\left(\frac{f}{a}\right)
 \end{gather*}
 
+\subsection{Altre Trasformate Elementari}
+
+Si considera la trasformata del segnale gaussiano:
+\begin{gather*}
+    x(t)=e^{-\alpha t^2}\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha t^2}e^{-2i\pi ft}dt=\int_{-\infty}^{+\infty}e^{-\alpha\left(\frac{2i\pi ft}{\alpha} + t^2\right)}dt\\
+    \displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\left[t^2+\frac{2i\pi ft}{\alpha}+\left(\frac{i\pi f}{\alpha}\right)^2-+\left(\frac{i\pi f}{\alpha}\right)^2\right]}dt\\
+    e^{-\frac{\pi^2f^2}{\alpha}}\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\left(t+\frac{i\pi f}{\alpha}\right)^2}dt
+\end{gather*}
+Si applica la sotituzione $\tau=\sqrt{\alpha}(t+i\pi f/\alpha)$, l'integrale diventa allora:
+\begin{gather*}
+    e^{-\frac{\pi^2f^2}{\alpha}}\displaystyle\int_{-\infty}^{+\infty}e^{-\tau^2}\frac{d\tau}{\sqrt{\alpha}}=e^{-\frac{\pi^2f^2}{\alpha}}\sqrt{\frac{\pi}{\alpha}}\\
+    X(f)=\sqrt{\frac{\pi}{\alpha}}e^{-\frac{\pi^2f^2}{\alpha}}
+\end{gather*}
+
+In forma normalizzata la gaussiana si esprime direttamente rispetto alla deviazione standard $\sigma$ e alla sua varianza $\sigma^2$:
+\begin{gather*}
+    x(t)=e^{-\frac{t^2}{2\sigma^2}}\\
+    X(f)=\sqrt{2\pi}\sigma e^{-2\pi^2\sigma^2f^2}
+\end{gather*}
+L'area sottesa dalla gaussiana risulta essere il valor medio, esprimibile tramite la 
+\begin{equation*}
+    X(0)=\sqrt{2\pi}\sigma
+\end{equation*}
+La gaussiana è una delle pochissime funzioni che si autotrasforma. 
+
+Si determina la trasformata dell'esponenziale unilatero:
+\begin{gather*}
+    x(t)=e^{-\alpha t}u(t)\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha t}u(t)e^{-2i\pi ft}dt=\int_0^{+\infty}e^{-(2i\pi f+\alpha)t}dt\\
+    \left[\displaystyle\frac{e^{-(2i\pi f+\alpha)t}}{-(\alpha+2i\pi f)}\right]^{+\infty}_0=0+\frac{1}{\alpha+2i\pi f}\\
+    X(f)=\frac{1}{\alpha+ 2i\pi f}
+\end{gather*}
+Il modulo quadro del segnale corrisponde ad una Lorentziana, una funzione simile ad una gaussiana: 
+\begin{equation*}
+    \left|X(f)\right|^2=\frac{1}{\alpha^2+4\pi^2f^2}
+\end{equation*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-1.5,0)--(1.5,0)node[above right]{$f$};
+        \draw[->](0,-0.5)--(0,1.5)node[right]{$X(f)$};
+
+        \draw[-]plot[smooth, domain=-1.5:1.5](\x,{1/(2*(\x)^2+1)});
+    \end{tikzpicture}
+\end{center}
+
+
+Dato il segnale esponenziale del modulo. Si può esprimere il segnale come due esponenziali unilateri:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-1.5,0)--(1.5,0)node[above]{$f$};
+        \draw[->](0,-0.5)--(0,1.5)node[right]{$X(f)$};
+
+        \draw[-]plot[smooth, domain=0:1.5](\x,{e^(-2*(\x))});
+        \draw[-]plot[smooth, domain=-1.5:0](\x,{e^(2*(\x))});
+    \end{tikzpicture}
+\end{center}
+\begin{gather*}
+    x_1(t)=e^{-\alpha|t|}\\
+    x_1(t)=x(t)+x(-t)\\
+    X_1(f)=X(f)+X(-f)=\displaystyle\frac{1}{\alpha+2i\pi f}+\frac{1}{\alpha-2i\pi ft}=\frac{2\alpha}{\alpha^2+4\pi^2f^2}
+\end{gather*}
+Per cui la sua trasformata corrisponde alla Lorentziana. 
+
+
+Dato il segnale Lorentziana, si può calcolare la sua trasformata tramite la proprietà di dualità della trasformata: 
+\begin{gather*}
+    x_2(t)=\displaystyle\frac{1}{\alpha+2i\pi t}\\
+    X(f)=x(-f)=e^{\alpha f}u(-f)
+\end{gather*}
+
+
+
+Dato il segnale gradino, si può esprimere come il limite di un esponenziale unilatero:
+\begin{equation*}
+    x_3(t)=u(t)=\lim_{\alpha\to0}e^{-\alpha t}{u(t)}
+\end{equation*}
+Poiché non è un segnale impulsivo, questo risultato non rappresenta la trasformata su tutte le frequenza. 
+\begin{gather*}
+    X(f)=\displaystyle\lim_{\alpha\to0}\frac{1}{\alpha+2i\pi f}=\frac{1}{2i\pi f}
+\end{gather*}
+Razionalizzando l'argomento del limite si osserva come il risultato ottenuto per frequenze nulle perda informazioni sulla trasformata:
+\begin{gather*}
+    \displaystyle\lim_{\alpha\to0}\frac{1}{\alpha+2i\pi f}=\lim_{\alpha\to0}\left(\frac{\alpha}{\alpha^2+4\pi^2f^2}-\frac{2i\pi f}{\alpha^2+4\pi^2f^2}\right)
+\end{gather*}
+
+
+Per cui si esprime la trasformata di un gradino come il limite ottenuto sommato ad una costante $A$ moltiplicata per l'impulso, per considerare il valore della trasformata 
+per frequenze nulle: 
+\begin{gather*}
+    X(f)=\displaystyle\lim_{\alpha\to0}\frac{1}{\alpha+2i\pi f}=\frac{1}{2i\pi f}+\delta(f)A
+\end{gather*}
+Il fattore $A$ si ottiene integrando il fattore che si annulla nel limite:
+\begin{gather*}
+    A=\displaystyle\int_{-\infty}^{+\infty}\frac{\alpha}{\alpha^2+4\pi^2f^2}df=\int_{-\infty}^{+\infty}\frac{1}{\alpha\left(1+\frac{4\pi^2f^2}{\alpha^2}\right)}dt\\
+    f'=\displaystyle\frac{2\pi f}{\alpha}\\
+    \displaystyle\frac{1}{\alpha}\frac{\alpha}{2\pi}\int_{-\infty}^{+\infty}\frac{1}{1+f'^2}df'=\left[\frac{1}{2\pi}\arctan f'\right]^{+\infty}_{-\infty}=\frac{1}{2\pi}\left[\frac{\pi}{2}-\left(-\frac{\pi}{2}\right)\right]=\frac{1}{2}
+\end{gather*}
+Per cui la trasofrmata di un gradino, segnale non impulsivo, risulta essere:
+\begin{equation*}
+    X_3(f)=\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}
+\end{equation*}
+
+
+Si considera il segnale segno, e si vuole determinare la sua trasformata:
+\begin{gather*}
+    x_4(t)=\mbox{sign}(t)=u(t)-u(-t)\\
+    X_4(f)=X_3(f)-X_3(-f)=\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}-\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}=\frac{1}{i\pi f}
+\end{gather*}
+
+\subsection{Funzioni di Trasferimento}
+
+Per determinare la risposta impulsiva di un filtro si considera in entrata un impulso, ma inviare un segnale infinitesimo in un sistema non è semplice. Per cui generalmente 
+si inserisce in ingresso un armonica a frequenza costante $f_0$:
+\begin{gather*}
+    y(t)=\displaystyle\int_{-\infty}^{+\infty}h(t)e^{2i\pi f_0(t-\tau)}d\tau\\
+    e^{2i\pi f_0t}\displaystyle\int_{-\infty}^{+\infty}h(t)e^{-2i\pi f_0\tau}d\tau=e^{2i\pi f_0t}H(f_0)
+\end{gather*}
+Si definisce la risposta impulsiva nel dominio della frequenza la funzione di trasferimento del sistema. I filtri sono sistemi che filtrano nel dominio delle frequenze. 
+
+Per cui un filtro è caratterizzato dalla risposta impulsiva o dalla sua funzione di trasferimento, che indica quale frequenze vengono eliminate dal filtro. 
+
+
+
+
+Una Lorentziana è un segnale dove la maggior parte del contenuto informativo è all'interno di un'intervallo finito. Si definiscono quindi dei segnali passa basso, 
+ovvero dei sengali il cui contenuto informativo è presente nell'intorno dell'origine. Se un filtro ha funzione di trasferimento passa basso, allora si definisce segnale 
+passa basso. La banda del segnale è legata alla frequenza massima $f_{max}$, non è necessario sia una finestra in frequenza, una qualsiasi funzione che assume valori nulli 
+per frequenze maggiori della frequenza massima è una funzione passa basso valida per essere funzione di trasferimento di un fitro. 
+
+Tutti i segnali inviati per cavi presentano una banda base, ovvero sono segnali passa basso. 
+
+
+Esistono altri segnali chiamati passa banda, o modulati. Il segnale è centrato in una frequenza $\pm f_0$, chiamata portante. Si usano per la trasmissioni di segnali 
+che vengono inviati nell'etere, tutti questi segnali devono essere modulati. 
+
+\subsection{Traslazione nel Tempo}
+
+Data la trasformata di Fourier di un segnale tempo continuo, è nota anche la trasformata del segnale ritardato o anticipiato:
+\begin{gather*}
+    \mathscr{F}\{x(t)\}=X(f)\\
+    \mathscr{F}\{x(t-t_0)\}=\displaystyle\int_{-\infty}^{+\infty}x(t-t_0)e^{-2i\pi ft}dt\\
+    \tau=t-t_0\\
+    \displaystyle\int_{-\infty}^{+\infty}x(\tau)e^{-2i\pi f(\tau+t_0)}d\tau=e^{-2i\pi ft_0}\int_{-\infty}^{+\infty}x(\tau)e^{-2i\pi f\tau}d\tau=e^{-2i\pi ft_0}X(f)
+\end{gather*}
+
+Data una gaussiana traslata nel tempo:
+\begin{gather*}
+    x(t)=e^{-\alpha(t-t_0)^2}\\
+    X(f)=\displaystyle\sqrt{\frac{\pi}{\alpha}}e^{-\left(\frac{\pi^2f^2}{\alpha}+2i\pi ft_0\right)}
+\end{gather*}
+
+\subsection{Traslazione in Frequenza}
+
+Questa proprietà si indica anche come proprietà di modulazione. 
+Si considera un segnale moltiplicato per un armonica di frequenza costante $f_0$:
+\begin{gather*}
+    \mathscr{F}\left\{e^{2i\pi f_0t}x(t)\right\}=\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi(f-f_0)t}dt=X(f-f_0)
+\end{gather*}
+
+Quest'operazione si chiama modulazione di ampiezza (AM). Il segnale trasmesso cossiponde ad un coseno di ampiezza pari al segnale originario.
+\begin{gather*}
+    \mathscr{F}\{x(t)\cos(2\pi f_0t)\}=\displaystyle\frac{1}{2}\int_{-\infty}^{+\infty}x(t)\left[e^{2i\pi f_0t}+e^{-2i\pi f_0t}\right]e^{-2i\pi ft}dt\\
+    \frac{1}{2}\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi(f-f_0)t}dt+\frac{1}{2}\int_{-\infty}^{+\infty}x(t)e^{-2i\pi (f+f_0)t}dt=\frac{X(f-f_0)}{2}+\frac{X(f+f_0)}{2}
+\end{gather*}
+
+\subsection{Esercizi sulla Trasformata}
+
+Si considera una finestra di base $T$ moltiplicata per un coseno di frequenza costante $f_0$, ovvero modulata di una frequenza $f_0$:
+\begin{gather*}
+    x(t)=\mbox{rect}\displaystyle\left(\frac{t}{T}\right)\cos(2\pi f_0t)\\
+    \mathscr{F}\{x(t)\}=\frac{T}{2}\mbox{sinc}((f-f_0)T)+\frac{T}{2}\mbox{sinc}\left((f+f_0)T\right)
+\end{gather*}
+Si considera il seguente segnale:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-1.5,0)--(1.5,0)node[above]{$t$};
+        \draw[->](0,-1)--(0,1)node[right]{$x(t)$};
+        \draw[-](-1,0)node[below]{$-T$}--(-1,0.5)--(0,0.5)node[right]{$T$}--(0,-0.5)node[left]{$-T$}--(1,-0.5)--(1,0)node[below right]{$T$};
+    \end{tikzpicture}
+\end{center}
+
+Si vuole calcolare la sua trasformata:
+\begin{gather*}
+    x(t)=\mbox{rect}\left(\displaystyle\frac{t+T/2}{T}\right)-\mbox{rect}\left(\displaystyle\frac{t-T/2}{T}\right)
+\end{gather*}
+Per la linearità della trasformata e per la proprietà di traslazione nel tempo la trasformata si ottiene come:
+\begin{gather*}
+    X(f)=T\left(e^{i\pi fT}-e^{-i\pi fT}\right)\mbox{sinc}\left(T f\right)=2Ti\sin(\pi fT)\mbox{sinc}(Tf)\\
+    2iT\displaystyle\frac{\sin(\pi fT)}{\pi fT}\sin(\pi fT)=2i\frac{\sin^2(\pi fT)}{\pi f}
+\end{gather*}
 
 
 
