@@ -477,7 +477,7 @@ Per cui l'energia di una gaussiana risulta essere:
 
 
 
-Moltiplicando un segnale $x(t)$ moltiplicato per un gradino e calcolandone l'integrale sui tutti i reali $\mathbb{R}$, equivale all'integrale del segnale originiario sui soli 
+Moltiplicando un segnale $x(t)$ per un gradino e calcolandone l'integrale su tutti i reali $\mathbb{R}$, equivale a calcolare l'integrale del segnale originiario sui soli 
 reali positivi $\mathbb{R}^+$, poiché il segnale assume valori nulli da $-\infty$ a $0$: 
 \begin{equation*}
     \displaystyle\int_{\mathbb{R}}x(t)\cdot u(t)dt=\int_{\mathbb{R}^+}x(t)dt
@@ -542,7 +542,7 @@ Si può esprimere inoltre mediante la notazione complessa delle funzioni trigono
     (x+y)\cdot(x+y)^*=(x+y)\cdot(x^*+y^*)\\
     xx^*+xy^*+yx^*+yy^*=|x|^2+|y|^2+xy^*+yx^*\\
     xy^*+yx^*=(a_x+ib_x)\cdot(a_y-ib_y)+(a_x-ib_x)\cdot(a_y+ib_y)=(a_xa_y+b_xb_y)=2Re\{x^*y\}\\
-    |x|^2+|y|^2+2Re\{|x|e^{-\varphi_x}+|y|e^{i\varphi_y}\}\\
+    |x|^2+|y|^2+2Re\{|x|e^{-i\varphi_x}+|y|e^{i\varphi_y}\}\\
     |x|^2+|y|^2+2|x||y|\cos(|\varphi_y-\varphi_x|)\\
     \Bigg|\displaystyle\frac{A}{2}(e^{i2\pi f_0t}+e^{-i2\pi f_0t})\Bigg|^2=\frac{A^2}{4}\left(1+1+2Re\Bigl\{e^{i2\pi f_0t}\cdot\left(e^{-i2\pi f_0t}\right)^*\Bigr\}\right)\\
     A^2\cos^2(2\pi f_0t)=\displaystyle\frac{A^2}{2}(1+\cos(4\pi f_0t))
@@ -552,6 +552,8 @@ Considerando questa sostituzione, l'integrale diventa:
     P_x=\displaystyle\frac{A^2f_0}{2}\int_{-\frac{1}{2f_0}}^{\frac{1}{2f_0}}(\cancelto{0}{\cos(4\pi f_0 t)}+1)dt=\frac{A^2f_0}{2}\left(\frac{1}{2f_0}+\frac{1}{2f_0}\right)=\frac{A^2}{2}
 \end{equation*}
 L'integrale su un periodo del coseno è nullo, poiché è una funzione pari, per cui la componente $\cos(4\pi f_0 t)$ fornisce un contributo nullo. 
+
+\clearpage
 
 \section{Segnali a Tempo Discreto}
 
@@ -754,7 +756,7 @@ La potenza per segnali periodici tempo discreti si ottiene mediante:
 \begin{equation*}
     P_x:=\displaystyle\frac{1}{M}\sum_{n=0}^{M-1}|x[n]|^2
 \end{equation*}
-Dove $M$ è il periodo del segnale
+Dove $M$ è il periodo del segnale.
 
 \clearpage
 
@@ -785,9 +787,9 @@ Al diminuire di $\Delta t$, la base si restringe, mentre l'ampiezza del segnale 
     \displaystyle\int_{-\infty}^{+\infty}x(t)dt=\frac{1}{\Delta t}\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}dt=\frac{1}{\Delta t}\left(\frac{\Delta t}{2}+\frac{\Delta t}{2}\right)=1
 \end{equation*}
 
-Viene definito l'impulso o dela di Dirac come il limite di questa finestra per $\Delta t$ che tende ad un valore infinito:
+Viene definito l'impulso o dela di Dirac come il limite di questa finestra per $\Delta t$ che tende ad un valore nullo:
 \begin{equation*}
-    \delta(t):=\lim_{\Delta t\to\infty}\displaystyle\frac{1}{\Delta t}\mbox{rect}\left(\frac{t}{\Delta t}\right)
+    \delta(t):=\lim_{\Delta t\to0}\displaystyle\frac{1}{\Delta t}\mbox{rect}\left(\frac{t}{\Delta t}\right)
 \end{equation*}
 
 Viene rappresentata graficamente come una freccia di altezza unitaria, poiché non è una funzione ma un funzionale. Si tratta in telecomunicazioni come un segnale qualuneque. 
@@ -2739,6 +2741,113 @@ Se si considera $y=x$, allora la convoluzione diventa un'autoconvoluzione. Calco
     E_x=\displaystyle\int_{-\infty}^{+\infty}|x(\tau)|^2d\tau=\int_{-\infty}^{+\infty}|X(f)|^2df
 \end{gather*}
 Per cui l'energia di un segnale si calcola esattamente allo stesso modo sia nel dominio del tempo che nel dominio della frequenza. 
+
+\subsection{Esercizi sulle Trasformate}
+
+Calcolare l'energia del dato segnale:
+\begin{gather*}
+    x(t)=\displaystyle\frac{\sin(\pi t)}{\pi t}\cos(2\pi \alpha t)=\frac{1}{2}\mbox{sinc}(t)(e^{2i\pi\alpha t}+e^{-2i\pi\alpha t})\\
+\end{gather*}
+Per il teroema della traslazioen in frequenza, la trasformata del segnale $x$ risulta essere:
+\begin{gather*}
+    X(f)=\displaystyle\frac{1}{2}\mbox{rect}(f+\alpha)+\frac{1}{2}\mbox{rect}(f-\alpha)
+\end{gather*}
+La sua energia si calcola come:
+\begin{gather*}
+    E_x=\displaystyle\int_{-\infty}^{+\infty}|X(f)|^2df\\
+    \displaystyle\frac{1}{4}\left(\int_{-\infty}^{+\infty}\left[\mbox{rect}(f+\alpha)+\mbox{rect}(f-\alpha)\right]^2df\right)\\
+    E_x=\begin{cases}
+        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{-\alpha+1/2}df+\frac{1}{4}\int_{\alpha-1/2}^{\alpha+1/2}df& \alpha\geq1/2\\
+        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{\alpha-1/2}df+\frac{1}{2}\int_{\alpha-1/2}^{-\alpha+1/2}df+\frac{1}{4}\int_{-\alpha+1/2}^{\alpha+1/2}df&\alpha<1/2
+    \end{cases}\\
+    E_x=\begin{cases}
+        \displaystyle\frac{1}{2}&\alpha\geq1/2\\
+        \displaystyle\frac{2\alpha}{4}+\frac{2\alpha}{4}+1-2\alpha=1-\alpha&\alpha<1/2
+    \end{cases}
+\end{gather*}
+
+
+Calcolare la trasformata del segnale $x$, tramite la proprietà di ribaltamento e di scala: 
+\begin{gather*}
+    x(t)=e^{3t}u(-t)\\
+    x_1(t)=e^{-3t}u(t)\\
+    X_1(f)=X(-f)=\displaystyle\frac{1}{3+2i\pi f}\\
+    X(f)=\displaystyle\frac{1}{3-2i\pi f}
+\end{gather*}
+
+
+Calcolare la trasformata del segnale $x$, per la proprietà della traslazione del tempo:
+\begin{gather*}
+    x(t)=e^{-2t+4}u(t-2)=e^{-2*(t-2)}u(t-2)\\
+    x_1(t)=e^{-2t}u(t)\\
+    X_1(f)=\displaystyle\frac{1}{2+2i\pi f}\\
+    X(f)=\displaystyle\frac{1}{2+2i\pi f}e^{-4i\pi f}
+\end{gather*}
+
+Calcolare la trasformata del segnale $x$, si applica la proprietà di modulazione: 
+\begin{gather*}
+    x(t)=e^{-t/2}\cos(100\pi t)u(t)\\
+    x_1(t)=e^{-t/2}u(t)\\
+    X_1(f)=\displaystyle\frac{1}{1/2+2i\pi f}\\
+    X(f)=\displaystyle\frac{1}{2}\left(X_1(f-50)+X_1(f+50)\right)\\
+    X(f)=\displaystyle\frac{1}{2}\frac{1}{1/2+2i\pi (f-50)}+\frac{1}{2}\frac{1}{1/2+2i\pi (f+50)}\\
+    X(f)=\displaystyle\frac{1}{1+4i\pi (f-50)}+\frac{1}{1+4i\pi (f+50)}
+\end{gather*}
+
+
+Calcolare l'autoconvoluzione del segnale $x$, passando per la sua trasformata: 
+\begin{gather*}
+    x(t)=A\,\mbox{rect}\displaystyle\left(\frac{2(t-3T/4)}{T}\right)-A\,\mbox{rect}\displaystyle\left(\frac{2(t-T/4)}{T}\right)\\
+    X(f)=\displaystyle\frac{AT}{2}\,\mbox{sinc}\left(\frac{Tf}{2}\right)e^{-3i\pi fT/2}-\displaystyle\frac{AT}{2}\,\mbox{sinc}\left(\frac{T}{2}f\right)e^{-i\pi fT/2}\\
+    X(f)=\displaystyle\frac{AT}{2}\,\mbox{sinc}\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT/2}-e^{-i\pi fT/2}\right)\\
+    X^2(f)=\displaystyle\frac{A^2T^2}{4}\,\mbox{sinc}^2\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\right)\\
+    x(t)*x(t)=\displaystyle\int_{-\infty}^{+\infty}X^2(f)e^{2i\pi ft}df\\
+    \displaystyle\int_{-\infty}^{+\infty}\left[\frac{A^2T^2}{4}\,\mbox{sinc}^2\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\right)\right]e^{2i\pi ft}df
+\end{gather*}
+Un prodotto nel domino delle frequenze corrisponde ad una convoluzione nel domino del tempo, per cui si può esprimere l'autoconvoluzione come la convoluzione tra un segnale 
+triangolo e una combinazione lineare di impulsi:
+\begin{gather*}
+    X_1(f)=\displaystyle\frac{A^2T^2}{4}\,\mbox{sinc}^2\left(\frac{Tf}{2}\right)\\
+    x_1(t)=\displaystyle\frac{A^2T^2}{4}\frac{2}{T}\,\mbox{tri}\left(\frac{2t}{T}\right)\\
+    X_2(f)=e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\\
+    x_2(t)=\delta(t-3T/2)+\delta(t-T/2)-2\delta(t-T)\\
+    x(t)*x(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)^2e^{2i\pi ft}df=\int_{-\infty}^{+\infty}X_1(f)X_2(f)e^{2i\pi ft}df=x_1(t)*x_2(t)\\
+    \displaystyle\frac{A^2T^2}{4}\frac{2}{T}\,\mbox{tri}\left(\frac{2t}{T}\right)*\left[\delta(t-3T/2)+\delta(t-T/2)-2\delta(t-T)\right]\\
+    \displaystyle\frac{A^2T^2}{4}\left(\mbox{tri}\left(\frac{2}{T}(t-3T/2)\right)+\mbox{tri}\left(\frac{2}{T}(t-T/2)\right)-2\,\mbox{tri}\left(\frac{2}{T}(t-T)\right)\right)
+\end{gather*}
+%% grafo segnale convoluzione 
+
+Calcolare la trasformata del segnale $x$, per la proprietà di scala e di traslazione nel tempo:
+\begin{gather*}
+    x(t)=\mbox{rect}(3t-1/2)=\mbox{rect}(3(t-1/6))\\
+    X(f)=\displaystyle\frac{1}{3}\mbox{sinc}\left(\frac{f}{3}\right)e^{-i\pi f/3}
+\end{gather*}
+
+
+Calcolare la trasformata del segnale $x$, esprimibile come un segnale triangolo moltiplicato per un gradino, oppure una retta moltiplicata per una finestra, si sceglie 
+quest'ulima rappresentazione per facilitare il calcolo:
+\begin{gather*}
+    x(t)=A\,\displaystyle\mbox{tri}\left(\frac{t+T/2}{T}\right)u(t+T/2)\lor x(t)=A\left(\frac{1}{2}-\frac{t}{T}\right)\mbox{rect}\left(\frac{t}{T}\right)\\
+    \displaystyle\frac{A}{2}\mbox{rect}\left(\frac{t}{T}\right)-\frac{A}{T}t\,\mbox{rect}\left(\frac{t}{T}\right)
+\end{gather*}
+%% grafo segnale
+Per la prorpietà duale alla derivazione, si calcola il secondo componente: 
+\begin{gather*}
+    x_1(t)=-2i\pi tx_2(t)\\
+    X_1(f)=\displaystyle\frac{dX_2}{df}\\
+    x_1(t)=-\displaystyle\frac{A}{T}t\,\mbox{rect}\left(\frac{t}{T}\right)\\
+    x_2(t)=\displaystyle\frac{1}{2i\pi}\frac{A}{T}\mbox{rect}\left(\frac{t}{T}\right)\\
+    X_2(f)=\displaystyle\frac{1}{2i\pi}\frac{A}{T}T\,\mbox{sinc}(Tf)=\frac{A}{\pi T}\frac{\sin(\pi Tf)}{f}\\
+    X_1(f)=\displaystyle\frac{dX_2}{df}=\frac{1}{2i\pi}\frac{A}{\pi T}\frac{\cos(\pi Tf)\pi Tf-\sin(\pi Tf)}{f^2}\\
+\end{gather*}
+Per cui la trasformata complessiva è:
+\begin{gather*}
+    X(f)=\displaystyle\frac{AT}{2}\mbox{sinc}(Tf)+\frac{A}{\pi Tf^2(2\pi i)}\left[\cos(\pi Tf)\pi Tf-\sin (\pi Tf)\right]\\
+    \displaystyle\frac{AT}{2\pi Tf}\frac{i}{i}\sin(\pi Tf)+\frac{A}{2i\pi f}\cos(\pi Tf)-\frac{A}{2i\pi f}\frac{\sin(\pi Tf)}{\pi Tf}\\
+    \displaystyle\frac{A}{2i\pi f}\frac{i}{i}\left[\cos(\pi Tf)+i\sin(\pi Tf)\right]-\frac{A}{2i\pi f}\frac{i}{i}\mbox{sinc}( Tf)\\
+    X(f)=\displaystyle-\frac{Ai}{2\pi f}\left(e^{i\pi fT}-\mbox{sinc}(fT)\right)
+\end{gather*}
+
 
 
 \end{document}
