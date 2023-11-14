@@ -208,7 +208,7 @@ usare la frequenza $f_0$, inverso del periodo.
     x(t)=\displaystyle e^{i\frac{2\pi t}{T}}=\cos\left(\frac{2\pi t}{T}\right)+i\sin\left(\frac{2\pi t}{T}\right)
 \end{equation}
 
-Un segnale complesso può essere anlizzato mediante la sua fase ed il uso modulo in funzione del tempo:
+Un segnale complesso può essere analizzato mediante la sua fase ed il uso modulo in funzione del tempo:
 \begin{equation*}
     x(t)=|x(t)|e^{\displaystyle\phase{x(t)}}
 \end{equation*}
@@ -240,13 +240,13 @@ Dato che la fase è periodica si può rappresentare come una serie di rampe.
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[->,very thick](-0.5,0)--(1.5,0)node[above]{$t$};
-        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t),\,\alpha>0$};
+        \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t),\,\alpha<0$};
         \draw[-,very thick]plot[smooth, domain=-0.5:1.5](\x,{1/2*e^(1/2*\x)-0.1});
         \node[above right]at(0,0.5){$1$};
         \node[below right]at(0,0){$0$};
 
         \draw[->,very thick](2,0)--(4.1,0)node[above]{$t$};
-        \draw[->,very thick](2.5,-0.5)--(2.5,1.5)node[right]{$x(t),\,\alpha<0$};
+        \draw[->,very thick](2.5,-0.5)--(2.5,1.5)node[right]{$x(t),\,\alpha>0$};
         \draw[-,very thick]plot[smooth, domain=2:4](\x,{1/2*e^(-(\x-2))+0.1});
         \node[above right]at(2.5,0.5){$1$};
         \node[below right]at(2.5,0){$0$};
@@ -2658,7 +2658,7 @@ $-T$ a $0$ e decresce costantemente da $0$ a $T$.
 Per ottenere la trasformata del segnale triangolo, si considera la trasformata della sua derivata:
 \begin{gather*}
     X'(f)=2i\pi fX(f)\\
-    X(f)=\displaystyle2i\frac{\sin^2(Tf)}{\pi fT}\frac{1}{2i\pi f}=T\,\mbox{sinc}(Tf)
+    X(f)=\displaystyle2i\frac{\sin^2(Tf)}{\pi fT}\frac{1}{2i\pi f}=T\,\mbox{sinc}^2(Tf)
 \end{gather*}
 La derivata nel dominio del tempo corrisponde a moltiplicare nel dominio della frequenza per il fattore $2i\pi f$. 
 
@@ -2741,6 +2741,56 @@ Se si considera $y=x$, allora la convoluzione diventa un'autoconvoluzione. Calco
     E_x=\displaystyle\int_{-\infty}^{+\infty}|x(\tau)|^2d\tau=\int_{-\infty}^{+\infty}|X(f)|^2df
 \end{gather*}
 Per cui l'energia di un segnale si calcola esattamente allo stesso modo sia nel dominio del tempo che nel dominio della frequenza. 
+
+\subsection{Trasformate di Segnali Reali}
+
+Se un segnale $x(t)$ è reale, la sua trasformata di Fourier, gode delle seguenti proprietà:
+\begin{gather*}
+    x(t)\in\mathbb{R}\\
+    X(f)=\displaystyle\int_{-\infty}^{+\infty}x_1(t)e^{-2i\pi ft}dt=\int_{-\infty}^{+\infty}x_1(t)\left[\cos(2\pi ft)-i\sin(2\pi ft)\right]dt\\
+    \displaystyle\int_{-\infty}^{+\infty}x_1(t)\cos(2\pi ft)dt-i\int_{-\infty}^{+\infty}x_1(t)\sin(2\pi ft)dt\\
+    \Re\left\{X(f)\right\}=\displaystyle\int_{-\infty}^{+\infty}x_1(t)\cos(2\pi ft)dt\\
+    \Im\left\{X(f)\right\}=\displaystyle-\int_{-\infty}^{+\infty}x_1(t)\sin(2\pi ft)dt
+\end{gather*}
+La parte reale della trasformata di un segnale reale è pari, mentre la sua parte immaginaria è dispari:
+\begin{gather*}
+    \Re\left\{X(-f)\right\}=\Re\left\{X(f)\right\}\\
+    \Im\left\{X(-f)\right\}=-\Im\left\{X(f)\right\}
+\end{gather*}
+Per cui la trasformata di un segnale reale ha simmetria ermetiana:
+\begin{gather*}
+    X(-f)=\Re\{X(-f)\}+i\Im\{X(-f)\}=\Re\{X(f)\}-i\Im\{X(f)\}=X^*(f)
+\end{gather*}
+Se il segnale $x$ è reale e pari, allora la sua trasformata è anch'essa reale e pari, poiché $\Im\left\{X(f)\right\}=0$. 
+Analogamente se $x$ è reale e dispari, allora la sua trasformata è puramente immaginaria e dispari, poiché $\Re\{X(f)\}=0$. 
+
+\subsection{Trasformata di Seganli Periodici}
+
+Data l'espansione di Fourier di un segnale periodico $x$, di periodo $T$:
+\begin{gather*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{2i\pi kt/T}
+\end{gather*}
+La sua trasformata di Fourier corrisponde ad un treno di impulsi, centrati nei multipli della frequenza naturale $f_0=1/T$, di ampiezza pari al valore del coefficiente $k-$
+esimo: 
+\begin{gather*}
+    X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}c_k\delta\left(f-\frac{k}{T}\right)
+\end{gather*}
+La trasformata di un segnale periodico è sempre un treno di impulsi, moltiplicati ciascuno per un coefficiente $c_k$.
+
+
+Si considera la formula del coefficiente di Fourier:
+\begin{gather*}
+    c_k=\frac{1}{T}\displaystyle\int_{-T/2}^{T/2}x(t)e^{-2i\pi kt/T}dt
+\end{gather*}
+Poiché considera un singolo componente nell'intervallo, si può ottenre lo stesso coefficiente, considerando il segnale $\dot x(t)$, replica del segnale $x(t)$ nel solo periodo 
+centrato in $t=0$, e nullo fuori dal periodo:
+\begin{gather*}
+    c_k=\frac{1}{T}\displaystyle\int_{-T/2}^{T/2}\dot x(t)e^{-2i\pi kt/T}dt=\frac{1}{T}\dot X\left(\frac{n}{T}\right)
+\end{gather*}
+Assume il valore della trasformata del segnale $\dot x$, rispetto alla frequenza $f_k=k/T$. 
+%% \dot più spesso
+
+Si dimostra in questo modo, nella sezione successiva, che il treno campionatore è uno dei pochi segnali che si autotrasforma, insieme con la gaussiana. 
 
 \subsection{Esercizi sulle Trasformate}
 
@@ -2845,9 +2895,94 @@ Per cui la trasformata complessiva è:
     X(f)=\displaystyle\frac{AT}{2}\mbox{sinc}(Tf)+\frac{A}{\pi Tf^2(2\pi i)}\left[\cos(\pi Tf)\pi Tf-\sin (\pi Tf)\right]\\
     \displaystyle\frac{AT}{2\pi Tf}\frac{i}{i}\sin(\pi Tf)+\frac{A}{2i\pi f}\cos(\pi Tf)-\frac{A}{2i\pi f}\frac{\sin(\pi Tf)}{\pi Tf}\\
     \displaystyle\frac{A}{2i\pi f}\frac{i}{i}\left[\cos(\pi Tf)+i\sin(\pi Tf)\right]-\frac{A}{2i\pi f}\frac{i}{i}\mbox{sinc}( Tf)\\
-    X(f)=\displaystyle-\frac{Ai}{2\pi f}\left(e^{i\pi fT}-\mbox{sinc}(fT)\right)
+    X(f)=\displaystyle-\frac{Ai}{2\pi f}\left[e^{i\pi fT}-\mbox{sinc}(fT)\right]
 \end{gather*}
 
+
+Calcolare ora questa trasformata usando la proprietà alla derivazione:
+\begin{gather*}
+    x_1(t)=\displaystyle\frac{A}{2}\mbox{rect}\left(\frac{t}{T}\right)-\frac{A}{T}t\,\mbox{rect}\left(\frac{t}{T}\right)
+    \displaystyle\frac{dx_1}{dt}=x_2(t)
+\end{gather*}
+Il segnale $x_1$ presente una discontinuità in $-T/2$, e rimane costante fino al valore $T/2$:
+\begin{gather*}
+    x_2(t)=A\delta(t+T/2)-\displaystyle\frac{A}{T}\mbox{rect}\left(\frac{t}{T}\right)\\
+    X_2(f)=Ae^{i\pi fT}-\displaystyle\frac{A}{T}T\mbox{sinc}(Tf)\\
+    X_2(f)=2i\pi fX_1(f)\\
+    X_1(f)=\displaystyle\frac{A}{2i\pi f}\frac{i}{i}\left[e^{i\pi fT}-\mbox{sinc}(Tf)\right]\\
+    X_1(f)=\displaystyle-\frac{Ai}{2\pi f}\left[e^{i\pi fT}-\mbox{sinc}(Tf)\right]
+\end{gather*}
+
+
+Calcolare l'antitrasformata di $X_1$:
+\begin{gather*}
+    X_1(f)=\displaystyle\frac{1}{2}\left[X(f-f_0)+X(f+f_0)\right]\cos(2\pi f/f_0)
+\end{gather*}
+Per l'inverso della proprietà di modulazione, e per la proprietà di convoluzione:
+\begin{gather*}
+    x_1(t)=\left[x(t)\cos(2\pi tf_0)\right]*\left[\displaystyle\frac{1}{2}\delta(t+1/f_0)+\frac{1}{2}\delta(t-1/f_0)\right]\\
+    x_1(t)=\displaystyle\frac{1}{2}x\left(t+\frac{1}{f_0}\right)\cos\left[2\pi f_0\left(t+\frac{1}{f_0}\right)\right]+\frac{1}{2}x\left(t-\frac{1}{f_0}\right)\cos\left[2\pi f_0\left(t-\frac{1}{f_0}\right)\right]\\
+    x_1(t)=\left[\displaystyle\frac{1}{2}x\left(t+\frac{1}{f_0}\right)+\frac{1}{2}x\left(t-\frac{1}{f_0}\right)\right]\cos(2\pi tf_0)
+\end{gather*}
+Poiché il coseno è traslato di un periodo $1/f_0$. 
+
+
+Calcolare la trasformata del segnale $x$:
+\begin{gather*}
+    x(t)=2\,\mbox{rect}(2t)-\mbox{rect}(t)=\mbox{rect}(2t)-\mbox{rect}\left[\displaystyle4\left(t-\frac{3}{2}\right)\right]-\mbox{rect}\left[\displaystyle4\left(t-\frac{3}{8}\right)\right]\\
+    X(f)=\displaystyle\frac{1}{2}\mbox{sinc}\left(\frac{f}{2}\right)-\frac{1}{4}\mbox{sinc}\left(\frac{f}{4}\right)e^{-3i\pi f/4}-\frac{1}{4}\mbox{sinc}\left(\frac{f}{4}\right)e^{-3i\pi f}\\
+    X(f)=\displaystyle\frac{1}{2}\left[\mbox{sinc}\left(\frac{f}{2}\right)-\mbox{sinc}\left(\frac{f}{4}\right)\cos\left(\frac{3\pi f}{4}\right)\right]
+\end{gather*}
+Per le formule di duplicazione del coseno. 
+
+Calcolare la trasformata del seguente segnale onda quadra di base $\tau$ e di periodo $T$:
+\begin{gather*}
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\mbox{rect}\left(\frac{t-kT}{\tau}\right)\\
+    X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)\delta\left(f-\frac{k}{T}\right)\\
+    c_k=\displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)
+\end{gather*}
+
+Calcolare la trasformata del treno campionatore, o segnale pettine:
+\begin{gather*}
+    \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\delta(t-kT)\\
+    c_k=\displaystyle\frac{1}{k}\\
+    \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}e^{2i\pi kt/T}
+    \Pi(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}\delta\left(f-\frac{k}{T}\right)
+\end{gather*}
+Questo è uno dei pochi segnali oltre alla gaussiana che si autotrasforma. 
+
+
+Calcolare la trasformata di un treno di trapezi di base maggiore $2T$, di base minore $T$ e di altezza $T$, di periodo $\overline T=5T/2$:
+%% grafo segnale 
+\begin{gather*}
+    X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}c_k\delta\left(f-\frac{k}{\overline T}\right)
+\end{gather*}
+Per calcolare i coefficienti della serie, si può esprimere un singolo trapezio come l'autoconvoluzione di un segnale finestra. Inoltre è sufficiente calcoalre la 
+trasformata di un singolo trapezio per ottenere i coefficienti:
+\begin{gather*}
+    x_1(t)=2\displaystyle\mbox{rect}\left(\frac{2t}{3T}\right)\\
+    x_2(t)=\displaystyle\mbox{rect}\left(\frac{2t}{T}\right)\\
+    c_k=\displaystyle\frac{1}{\overline T}\int_{-\overline T/2}^{\overline T/2}x_1(t)*x_2(t)e^{-2i\pi kt/\overline T}dt\\
+    c_k=\displaystyle\frac{1}{\overline T}X_1\left(\frac{k}{ T}\right)X_2\left(\frac{k}{ T}\right)\\
+    c_k=\displaystyle\frac{2}{\overline T}\left[\frac{3T}{2}\mbox{sinc}\left(\frac{3T}{2}\frac{k}{ T}\right)\frac{T}{2}\mbox{sinc}\left(\frac{T}{2}\frac{k}{ T}\right)\right]\\
+    c_k=\displaystyle\frac{6T^2}{4}\frac{2}{5T}\mbox{sinc}\left(\frac{3T}{2}\frac{k}{ T}\right)\mbox{sinc}\left(\frac{T}{2}\frac{k}{ T}\right)\\
+    c_k=\displaystyle\frac{3T}{5}\mbox{sinc}\left(\frac{3k}{2}\right)\mbox{sinc}\left(\frac{k}{2}\right)
+\end{gather*}
+
+Calcolare la seguente convoluzione:
+\begin{gather*}
+    x(t)=\left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*\displaystyle\frac{\sin(3\pi f_0t)}{\pi t}\\
+    \left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*\displaystyle3f_0\frac{\sin(3\pi f_0t)}{3\pi f_0t}\\
+    \left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*3f_0\mbox{sinc}(3f_0 t)
+\end{gather*}
+Si applica la formula di duplicazione del seno, e si passa per il dominio della frequenza:
+\begin{gather*}
+    x(t)=\displaystyle\frac{3f_0}{2}\sin(4\pi f_0t)*\mbox{sinc}(3f_0t)\\
+    X(f)=\displaystyle\frac{1}{4i}\left[\delta(f-2f_0)-\delta(f+2f_0)\right]\frac{3f_0}{3f_0}\mbox{rect}\left(\frac{f}{3f_0}\right)\\
+    \displaystyle\frac{1}{4i}\left[\mbox{rect}\left(-\frac{2f_0}{3f_0}\right)\delta(f-2f_0)-\mbox{rect}\left(\frac{2f_0}{3f_0}\right)\delta(f+2f_0)\right]\\
+    \displaystyle\frac{1}{4i}\mbox{rect}\left(\frac{2}{3}\right)\left[\delta(f-2f_0)-\delta(f+2f_0)\right]
+\end{gather*}
+Poiché la finestra di base $3/2$ non comprende i due impulsi, questa trasformata assume valore nullo. 
 
 
 \end{document}
