@@ -13,6 +13,7 @@
 \usepackage{steinmetz}
 \usepackage{bookmark}
 \usepackage{pgfplots}
+\usepackage[italian]{babel}
 \pgfplotsset{compat=1.16}
 
 \hypersetup{
@@ -1194,6 +1195,37 @@ Esprimendo le due gaussiane in forma normalizzata, risulta che la varianza della
     \displaystyle\frac{1}{\sqrt{2\pi}\sigma_1}e^{-\frac{t^2}{2\sigma_1}}*\frac{1}{\sqrt{2\pi}\sigma_2}e^{-\frac{t^2}{2\sigma_2}}=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}e^{-\frac{t^2}{2(\sigma_1^2+\sigma_2^2)}}
 \end{equation}
 
+\subsection{Convoluzione a Media Mobile}
+Calcolare la convoluzione tra una finestra ed un segnale periodico $y$, 
+per semplificare i calcoli si considera il segnale coseno, ma le proprietà ottenute da quest'operazione valgono per ogni funzione periodica, non attenuata nel tempo. 
+
+\begin{equation*}
+    z(t)=\mbox{rect}\displaystyle\left(\frac{t}{T_1}\right)*\cos\left(\frac{2\pi t}{T_2}\right)=\int_{-\infty}^{+\infty}\cos\left(\frac{2\pi \tau}{T_2}\right)\mbox{rect}\displaystyle\left(\frac{t-\tau}{T_1}\right)d\tau
+\end{equation*}
+La funzione è periodica per cui non è necessario valutare quando la convoluzione è nulla. Il prodotto tra i due segnali è non nullo per valori di $\tau$ compresi tra 
+$\displaystyle\frac{T_1}{2}-t$ e $-\displaystyle\frac{T_1}{2}-t$:
+\begin{gather*}
+    z(t)=\displaystyle\int_{-\frac{T_1}{2}-t}^{\frac{T_1}{2}-t}\cos\left(\frac{2\pi\tau}{T_2}\right)d\tau=\frac{T_2}{2\pi}\sin\left(\frac{2\pi\tau}{T_2}\right)\Bigg|_{-\frac{T_1}{2}-t}^{\frac{T_1}{2}-t}\\
+    \displaystyle\frac{T_2}{2\pi}\left[\sin\left(\frac{2\pi(t+\frac{T_1}{2})}{T_2}\right)-\sin\left(\frac{2\pi(t-\frac{T_1}{2})}{T_2}\right)\right]
+\end{gather*}
+Per la seconda formula di prostaferesi si ottiene:
+\begin{gather*}
+    z(t)=\displaystyle\frac{T_2}{2\pi}\sin\left(\frac{2\pi}{T_2}t\right)\sin\left(\frac{2\pi}{T_2}\frac{T_1}{2}\right)=\left[\frac{T_2}{2\pi}\sin\left(\pi\frac{T_1}{T_2}\right)\right]\cos\left(\frac{2\pi t}{T_2}\right)
+\end{gather*}
+Se il periodo del coseno è uguale alla base della finestra, il seno è sempre nullo, quindi anche la convoluzione è nulla per ogni valore di $t$. I fattori invarianti nel 
+tempo si possono esprimere come una costante $A$, ampiezza del segnale ottenuto:
+\begin{equation*}
+    \mbox{rect}\left(\displaystyle\frac{t}{T_1}\right)*\cos\left(\frac{2\pi t}{T_2}\right)=A\cos\left(\frac{2\pi t}{T_2}\right)
+\end{equation*}  
+Il risultato della convoluzione è il segnale periodico originario moltiplicato per un fattore costante, che dipende dal periodo $T_2$ e dalla base del segnale finestra $_1$. 
+Il segnale di convoluzione quindi oscilla come la funzione periodica di partenza. In generale il risultato della convoluzione di una finestra con una funzione periodica è un fattore 
+$A$ moltiplicato per il segnale originario:
+\begin{equation*}
+    \mbox{rect}\left(\frac{t}{T_1}\right)*y(t)=Ay(t)
+\end{equation*}
+
+Questa proprietà si indica come un'operazione a media mobile, che amplifica o riduce l'ampiezza di un segnale periodico, oppure lo rende nullo. 
+
 \subsection{Esercizi su Convoluzioni, Correlazioni e Sistemi}
 
 Calcolare la convoluzione tra un esponenziale unilatero ed un gradino, 
@@ -1406,35 +1438,6 @@ di base uguali rappresenta un caso speciale di questo trapezio, avente base mino
 di altezza $T$ e base $2T$. 
 
 
-Calcolare la convoluzione tra una finestra ed un segnale periodico $y$, 
-per semplificare i calcoli si considera il segnale coseno, ma le proprietà ottenute da quest'operazione valgono per ogni funzione periodica, non attenuata nel tempo. 
-
-\begin{equation*}
-    z(t)=\mbox{rect}\displaystyle\left(\frac{t}{T_1}\right)*\cos\left(\frac{2\pi t}{T_2}\right)=\int_{-\infty}^{+\infty}\cos\left(\frac{2\pi \tau}{T_2}\right)\mbox{rect}\displaystyle\left(\frac{t-\tau}{T_1}\right)d\tau
-\end{equation*}
-La funzione è periodica per cui non è necessario valutare quando la convoluzione è nulla. Il prodotto tra i due segnali è non nullo per valori di $\tau$ compresi tra 
-$\displaystyle\frac{T_1}{2}-t$ e $-\displaystyle\frac{T_1}{2}-t$:
-\begin{gather*}
-    z(t)=\displaystyle\int_{-\frac{T_1}{2}-t}^{\frac{T_1}{2}-t}\cos\left(\frac{2\pi\tau}{T_2}\right)d\tau=\frac{T_2}{2\pi}\sin\left(\frac{2\pi\tau}{T_2}\right)\Bigg|_{-\frac{T_1}{2}-t}^{\frac{T_1}{2}-t}\\
-    \displaystyle\frac{T_2}{2\pi}\left[\sin\left(\frac{2\pi(t+\frac{T_1}{2})}{T_2}\right)-\sin\left(\frac{2\pi(t-\frac{T_1}{2})}{T_2}\right)\right]
-\end{gather*}
-Per la seconda formula di prostaferesi si ottiene:
-\begin{gather*}
-    z(t)=\displaystyle\frac{T_2}{2\pi}\sin\left(\frac{2\pi}{T_2}t\right)\sin\left(\frac{2\pi}{T_2}\frac{T_1}{2}\right)=\left[\frac{T_2}{2\pi}\sin\left(\pi\frac{T_1}{T_2}\right)\right]\cos\left(\frac{2\pi t}{T_2}\right)
-\end{gather*}
-Se il periodo del coseno è uguale alla base della finestra, il seno è sempre nullo, quindi anche la convoluzione è nulla per ogni valore di $t$. I fattori invarianti nel 
-tempo si possono esprimere come una costante $A$, ampiezza del segnale ottenuto:
-\begin{equation*}
-    \mbox{rect}\left(\displaystyle\frac{t}{T_1}\right)*\cos\left(\frac{2\pi t}{T_2}\right)=A\cos\left(\frac{2\pi t}{T_2}\right)
-\end{equation*}  
-Il risultato della convoluzione è il segnale periodico originario moltiplicato per un fattore costante, che dipende dal periodo $T_2$ e dalla base del segnale finestra $_1$. 
-Il segnale di convoluzione quindi oscilla come la funzione periodica di partenza. In generale il risultato della convoluzione di una finestra con una funzione periodica è un fattore 
-$A$ moltiplicato per il segnale originario:
-\begin{equation*}
-    \mbox{rect}\left(\frac{t}{T_1}\right)*y(t)=Ay(t)
-\end{equation*}
-
-Questa proprietà si indica come un'operazione a media mobile, che amplifica o riduce l'ampiezza di un segnale periodico, oppure lo rende nullo. 
 
 Calcolare la convoluzione tra i segnali $x$ e $y$:
 \begin{gather*}
@@ -1450,6 +1453,26 @@ Calcolare la convoluzione tra i segnali $x$ e $y$:
         0&t<-2T\land t\geq2T\\
         \displaystyle\frac{1}{2}t^2+2Tt+2T^2&-2T\leq t<0\\
         \displaystyle2T^2-\frac{1}{2}t^2&0\leq t<2T
+    \end{cases}
+\end{gather*}
+
+
+Calcolare la convoluzione tra queste due finestre:
+\begin{gather*}
+    z(t)=z(t)*y(t)\\
+    x(t)=\displaystyle\mbox{rect}\left(\frac{t-3T}{4T}\right)\\
+    y(t)=-\displaystyle\mbox{rect}\left(\frac{t+2T}{2T}\right)\\
+    z(t)=\begin{cases}
+        0&t<-2T\\
+        -\displaystyle\int^{3T+t}-{T}d\tau&-2T\leq t<0\\
+        -2T&0\geq t<2T\\
+        -\displaystyle\int_{T+t}^{5T}d\tau&2T\leq t<4T\\
+        0&t\geq 4T
+    \end{cases}=\begin{cases}
+        0&t<-2T \land t\geq 4T\\
+        -2T-t&-2T\leq t<0\\
+        -2T&0\leq t<2T\\
+        -4T+t&2T\leq t<4T
     \end{cases}
 \end{gather*}
 
@@ -1521,6 +1544,23 @@ Si dimostra che non è tempo invariante:
     x(t-\tau)\to x(t-\tau)+3u(t-1)\neq y(t-\tau)=x(t-\tau)+3u(t-\tau-1)
 \end{gather*}
 Sicuramente non è un filtro. Mentre è causale, poiché il gradino è ritardato, e quindi l'uscita non dipende da valori futuri.
+
+
+Calcolare l'uscita di un filtro discreto $h[n]$, con un entrata parametrizzata $x[n]$:
+\begin{gather*}
+    h[n]=\displaystyle\frac{1}{4}\delta[n+1]+\frac{1}{2}\delta[n]+\frac{1}{4}\delta[n-1]\\
+    x[n]=\cos(2\pi\phi n)\\
+    \phi_1=0\to x_1[n]=1\\
+    y[n]=h[n]*x[n]=\displaystyle\frac{1}{4}\left[\delta[n+1]+\frac{1}{2}\delta[n]+\frac{1}{4}\delta[n-1]\right]*x[n]\\
+    \displaystyle\frac{1}{4}x[n+1]+\frac{1}{2}x[n]+\frac{1}{4}x[n-1]=\frac{1}{4}+\frac{1}{2}+\frac{1}{4}=1\\
+    \phi_2=\displaystyle\frac{1}{4}\to x[n]=\cos\left(\displaystyle\frac{\pi n}{2}\right)\\
+    y[n]=\left[\displaystyle\frac{1}{4}\delta[n+1]+\frac{1}{2}\delta[n]+\frac{1}{4}\delta[n-1]\right]*\cos\left(\frac{\pi n}{2}\right)\\
+    y[n]=\displaystyle\frac{1}{4}\cos\left(\frac{\pi (n+1)}{2}\right)+\frac{1}{2}\cos\left(\frac{\pi n}{2}\right)+\frac{1}{4}\cos\left(\frac{\pi (n-1)}{2}\right)\\
+    \displaystyle\frac{1}{4}\cos\left(\frac{\pi (n+1)}{2}\right)=\frac{1}{4}\cos\left(\frac{\pi (n-1)}{2}\right)\,\forall k\in\mathbb{Z}\\
+    y[n]=\displaystyle\frac{1}{2}\cos\left(\frac{\pi n}{2}\right)\\
+    \phi_3=\displaystyle\frac{1}{2}\to x[n]=\cos\left(\displaystyle{\pi n}\right)\\
+    y[n]=\displaystyle\frac{1}{4}\cos(\pi (n+1))+\frac{1}{2}\cos(\pi n)+\frac{1}{4}\cos(\pi(n-1))=0
+\end{gather*}
 
 \clearpage
 
@@ -2777,7 +2817,7 @@ Se si considera $y=x$, allora la convoluzione diventa un'autoconvoluzione. Calco
 \end{gather*}
 Per cui l'energia di un segnale si calcola esattamente allo stesso modo sia nel dominio del tempo che nel dominio della frequenza. 
 
-\subsection{Trasformate di Segnali Reali}
+\subsection{Trasformata di Segnali Reali}
 
 Se un segnale $x(t)$ è reale, la sua trasformata di Fourier, gode delle seguenti proprietà:
 \begin{gather*}
@@ -2936,7 +2976,7 @@ Per cui la trasformata complessiva è:
 
 Calcolare ora questa trasformata usando la proprietà alla derivazione:
 \begin{gather*}
-    x_1(t)=\displaystyle\frac{A}{2}\mbox{rect}\left(\frac{t}{T}\right)-\frac{A}{T}t\,\mbox{rect}\left(\frac{t}{T}\right)
+    x_1(t)=\displaystyle\frac{A}{2}\mbox{rect}\left(\frac{t}{T}\right)-\frac{A}{T}t\,\mbox{rect}\left(\frac{t}{T}\right)\\
     \displaystyle\frac{dx_1}{dt}=x_2(t)
 \end{gather*}
 Il segnale $x_1$ presente una discontinuità in $-T/2$, e rimane costante fino al valore $T/2$:
@@ -2981,7 +3021,7 @@ Calcolare la trasformata del treno campionatore, o segnale pettine:
 \begin{gather*}
     \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\delta(t-kT)\\
     c_k=\displaystyle\frac{1}{k}\\
-    \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}e^{2i\pi kt/T}
+    \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}e^{2i\pi kt/T}\\
     \Pi(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}\delta\left(f-\frac{k}{T}\right)
 \end{gather*}
 Questo è uno dei pochi segnali oltre alla gaussiana che si autotrasforma. 
@@ -3060,6 +3100,56 @@ di trasformazione:
 \begin{gather*}
     X(f)=c_{-1}\delta\left(f+\displaystyle\frac{1}{4T_0}\right)+c_{4}\delta\left(f-\displaystyle\frac{1}{T_0}\right)
 \end{gather*}
+
+
+
+Caclolare la trasformata del segnale $x$:
+\begin{gather*}
+    x(t)=\cos\left[\displaystyle\frac{\pi(t-T)}{2T}\right]\cos\left(\frac{2\pi t}{T}\right)=\cos\left[\displaystyle\frac{2\pi(t-T)}{4T}\right]\cos\left(\frac{2\pi t}{T}\right)
+\end{gather*}
+Questo segnale ha periodo $4T$. Espandendo l'argomento del primo coseno si ottiene:
+\begin{gather*}
+    x(t)=\displaystyle\cos\left[\frac{2\pi t}{4T}-\frac{\pi}{2}\right]\cos\left(\frac{2\pi t}{T}\right)\\
+    \sin\left(\displaystyle\frac{2\pi t}{4T}\right)\cos\left(\frac{2\pi t}{T}\right)
+\end{gather*}
+Si rappresenta il segnale in forma esponenziale:
+\begin{gather*}
+    x(t)=\displaystyle\frac{1}{2i}\left(e^{2i\pi t/4T}-e^{-2i\pi t/4T}\right)\cdot\displaystyle\frac{1}{2}\left(e^{2i\pi t/T}+e^{-2i\pi t/T}\right)\\
+    \displaystyle\frac{1}{4i}\left[e^{\frac{2\pi t}{T}\left(\frac{1}{4}+1\right)}-e^{\frac{2\pi t}{T}\left(1-\frac{1}{4}\right)}+e^{\frac{2\pi t}{T}\left(\frac{1}{4}-1\right)}-e^{-\frac{2\pi t}{T}\left(1+\frac{1}{4}\right)}\right]\\
+    \displaystyle\frac{1}{4i}\left[e^{\frac{2\pi t}{T}\frac{5}{4}}-e^{\frac{2\pi t}{T}\frac{3}{4}}+e^{-\frac{2\pi t}{T}\frac{3}{4}}-e^{-\frac{2\pi t}{T}\frac{5}{4}}\right]\\
+    X(f)=\displaystyle\frac{1}{4i}\left[\delta\left(f+\frac{5}{4T}\right)-\delta\left(f+\frac{3}{4T}\right)+\delta\left(f-\frac{3}{4T}\right)-\delta\left(f-\frac{5}{4T}\right)\right]\\
+    X(f)=\displaystyle\frac{1}{4i}\left[\delta\left(f+\frac{5}{4T}\right)-\delta\left(f-\frac{5}{4T}\right)\right]-\frac{1}{4i}\left[\delta\left(f+\frac{3}{4T}\right)-\delta\left(f-\frac{3}{4T}\right)\right]
+\end{gather*}
+Per cui il segnale orginale corrisponde ad una differenza di due seni, considerando operazioni trigonometriche del segnale originario. Alternametivamente, per la 
+proprietà della convoluzione, si può calcolare come convoluzione tra le due trasformate dei segnali moltiplicati:
+\begin{gather*}
+    x(t)=\cos\left[\displaystyle\frac{\pi(t-T)}{2T}\right]\cos\left(\frac{2\pi t}{T}\right)=x_1(t)\cdot x_2(t)\\
+    X(f)=X_1(f)*X_2(f)\\
+    X_1(f)=\displaystyle\frac{1}{2}\left[\delta\left(f+\frac{1}{4T}\right)+\delta\left(f-\frac{1}{4T}\right)\right]e^{-2i\pi fT}\\
+    \displaystyle\frac{1}{2}e^{-2i\pi/4}\delta\left(f+\frac{1}{4T}\right)+\frac{1}{2}e^{2i\pi /4}\delta\left(f-\frac{1}{4T}\right)\\
+    \displaystyle-\frac{i}{2}\delta\left(f+\frac{1}{4T}\right)+\frac{i}{2}\delta\left(f-\frac{1}{4T}\right)\\
+    X_2(f)=\displaystyle\frac{1}{2}\left[\delta\left(f+\frac{1}{T}\right)+\delta\left(f-\frac{1}{T}\right)\right]
+\end{gather*}
+Si attua quindi una convoluzione nel dominio della frequenza per ottenere la trasformata del segnale orginale:
+\begin{gather*}
+    X(f)=\displaystyle\frac{i}{2}\left[\delta\left(f-\frac{1}{4T}\right)-\delta\left(f+\frac{1}{4T}\right)\right]*\frac{1}{2}\left[\delta\left(f+\frac{1}{T}\right)+\delta\left(f-\frac{1}{T}\right)\right]\\
+    X(f)=\displaystyle\frac{i}{4}\left[-\delta\left(f+\frac{5}{4T}\right)+\delta\left(f+\frac{3}{4T}\right)-\delta\left(f-\frac{3}{4T}\right)+\delta\left(f-\frac{5}{4T}\right)\right]
+\end{gather*}
+
+Dato un filtro di risposta impulsiva $h(t)$, calcolare la sua funzione di trasferimento, e la la risposta ad un gradino:
+\begin{gather*}
+    h(t)=\delta(t-2T)+\delta(t)-\delta(t-T)\\
+    H(f)=e^{-4i\pi fT}+1-e^{-2i\pi fT}\\
+    y(t)=h(t)*u(t)=\delta(t-2T)+\delta(t)-\delta(t-T)*u(t)\\
+    y(t)=\delta(t-2T)u(t-2T)+\delta(t)u(t)-\delta(t-T)u(t-T)\\
+\end{gather*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.5,0)--(2,0)node[above]{$t$};
+        \draw[->](0,-0.25)--(0,1.5)node[right]{$y(t)$};
+        \draw[-](0,1)node[left]{$1$}--(0.5,1)--(0.5,0)node[below]{$T$}--(1,0)node[below]{$2T$}--(1,1)--(2,1);
+    \end{tikzpicture}
+\end{center}
 
 
 
