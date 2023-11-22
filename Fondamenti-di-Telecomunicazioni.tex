@@ -16,6 +16,9 @@
 \usepackage[italian]{babel}
 \pgfplotsset{compat=1.16}
 
+
+%% numerare equazioni nella versione finale
+
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -3150,6 +3153,180 @@ Dato un filtro di risposta impulsiva $h(t)$, calcolare la sua funzione di trasfe
         \draw[-](0,1)node[left]{$1$}--(0.5,1)--(0.5,0)node[below]{$T$}--(1,0)node[below]{$2T$}--(1,1)--(2,1);
     \end{tikzpicture}
 \end{center}
+
+\clearpage
+
+\section{Trasformata di Fourier Tempo Discreto}
+
+Si considera un filtro descritto da una risposta impulsiva $h(t)$, definita come la risposta $y(t)=x(t)*h(t9)$ corrispodnente ad un impulso in entrata $x(t)=u(t)$. Se viene 
+inserita un'armonica nel sistema:
+\begin{gather*}
+    x(t)=e^{2i\pi f_0t}\\
+    y(t)=h(t)*x(t)=\displaystyle\int_{-\infty}^{+\infty}h(\tau)e^{2i\pi f_0(t-\tau)}d\tau=e^{2i\pi f_0t}\int_{-\infty}^{+\infty}h(\tau)e^{2i\pi f_0\tau}d\tau\\
+    H(f)=\displaystyle\int_{-\infty}^{+\infty}h(\tau)e^{2i\pi f_0\tau}d\tau\\
+    y(t)=e^{2i\pi f_0t}H(f_0)
+\end{gather*}
+Si è definita la trasformata della rispsota impulsiva la funzione di trasferimento del filtro. L'uscita del sistema in frequenza si esprime quindi come il prodotto 
+tra le trasformate delle due entrate. Poiché agisce selettivamente sulle varie frequenze in entrata si definisce questo tipo di sistema filtro. 
+
+Si considera ora un filtro tempo discreto, descritto da una rispsota impulsiva $h[n]$, definita come nel continuo dall'uscita del sistema ad un impulso in entrata. L'uscita 
+$y[n]$ di un sistema tempo discreto si ottiene come la convoluzione tra l'entrata $x[n]$ e la rispsota impulsiva:
+\begin{gather*}
+    y[n]=x[n]*h[n]
+\end{gather*}
+Continuando le analogie con il tempo continuo, sarà quindi possibile riportare questa relazione in frequenza, considerando un'armonica tempo discreta in entrata:
+\begin{gather*}
+    x[n]=e^{2i\pi f_0nT}
+\end{gather*}
+Poiché spesso un segnale tempo discreto corrispodne ad un segnale tempo continuo $x(t)$ campionato ad intervalli regolari $T$, creando così una sequenza di valori equamente 
+distribuiti rispetto al tempo $x[n]$. Per cui questo segnale viene definito rispetto al tempo di campionamento, periodico, $T$. Si conisdera ora l'uscita del sistema 
+data quest'entrata:
+\begin{gather*}
+    y[n]=e^{2i\pi f_0nT}*h[n]=\displaystyle\sum_{k=-\infty}^{+\infty}h[k]e^{2i\pi f_0(n-k)T}=e^{2i\pi f_0nT}\displaystyle\sum_{k=-\infty}^{+\infty}h[k]e^{-2i\pi f_0k}
+\end{gather*}
+Si definisce quindi la trasformata di Fourier discreta come la sommatoria così ottenuta, equivalente alla funzione di trasferimento tempo discreto della risposta 
+impulsiva $h[n]$:
+\begin{gather*}
+    H(f_0)=\displaystyle\sum_{k=-\infty}^{+\infty}h[k]e^{-2i\pi f_0kT}\\
+    y[n]=e^{2i\pi g_0nT}H(f_0)
+\end{gather*}
+Analogamente al tempo continuo, il sistema filtra l'armonica in entrata rispetto alla funzione di trasferimento del sistema. 
+La prima informazione ricavabile da questo processo è che la trasformata di Fourier di una sequenza di valori, il segnale in discreto, è una funzione continua, nella 
+variabile $f_0$. Per cui dato un generico segnale $x[n]$, la sua trasformata si ottiene come:
+\begin{gather*}
+    \mathscr{F}\{x[n]\}=\displaystyle\sum_{k=-\infty}^{+\infty}x[n]e^{-2i\pi fkT}=X(f)
+\end{gather*}
+Questo segnale risultante è periodico e di periodo $1/T$, si dimostra considerando la trasformata ritardata di un fattore $1/T$:
+\begin{gather*}
+    X\left(\displaystyle f-\frac{1}{T}\right)=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{2i\pi (f-1/T)T}=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{-2\pi fkT}\cancelto{1}{e^{2i\pi k}}=X(f)
+\end{gather*}
+Per analizzare un segnale periodico in frequenza, si consdira la frequenza normalizzata $\Phi$, definita come il prodotto tra la frequenza ed il reciproco del periodo:
+\begin{gather*}
+    \Phi=TF
+\end{gather*}
+La funzione di trasferimento può essere espressa come:
+\begin{gather*}
+    X(\Phi)=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi k\Phi}
+\end{gather*}
+La funzione misurata rispetto alla frequenza normalizzata ha periodo unitario. 
+Se la trasformata tempo discreta è un segnale periodico rispetto alla frequenza, allora per confronto diretto è la sua stessa rappresentazione di Fourier:
+\begin{gather*}
+    X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi kfT}=\sum_{k=-\infty}^{+\infty}c_ke^{-2i\pi kfT}\\
+    c_k=x[k]
+\end{gather*}
+La sequenza stessa coincidono esattametne come i coefficienti della serie di Fourier del segnale trasformata. Si considera ora la definizione di un coefficiente di Fourier, 
+per ottenere la relazione opposta, ovvero l'antitrasformata dal dominio della frequenza al dominio tempo discreto:
+\begin{gather*}
+    c_k=\displaystyle T\int_{-1/2T}^{1/2T}X(f)e^{2i\pi kfT}df=x[k]
+\end{gather*}
+
+\subsection{Trasformate Elementari}
+
+Si considera un impulso discreto $\delta[n]$, e si vuole calcolare la sua trasformata di Fourier tramite la definizione:
+\begin{gather*}
+    X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\delta[k]e^{2i\pi fkT}=\delta[0]e^{-2i\pi 0fT}=1
+\end{gather*}
+Poiché l'unico campione non nullo dell'impulso si trova in $k=0$, e l'armonica assume valore unitario. Quindi la trasformata assume valore unitario e costante. 
+
+
+Si considera un segnale discreto, analogo ad una finestra traslata, che presenta campioni di valore unitario da $k=0$, fino a $k=N-1$. La sua trasformata è quindi:
+\begin{gather*}
+    X(f)=\displaystyle\sum_{k=0}^{N-1}1\cdot e^{-2i\pi kfT}
+\end{gather*}
+Corrisponde ad una somma di potenze di base $x=e^{-2i\pi fT}$, per cui converge ad un valore:
+\begin{gather*}
+    X(f)=\displaystyle\sum_{k=0}^{N-1}x^k=\frac{1-x^N}{1-x}=\frac{1-e^{-2i\pi NfT}}{1-e^{-2i\pi fT}}\\
+    \frac{e^{-i\pi NfT}}{e^{-i\pi fT}}\frac{e^{i\pi NfT}-e^{-i\pi NfT}}{e^{i\pi fT}-e^{-i\pi fT}}=e^{-i\pi(N-1)fT}\frac{\sin(\pi fNT)}{\sin(\pi fT)}
+\end{gather*}
+Il modulo della trasformata corrisponde ad un rapporto tra due seni:
+\begin{gather*}
+    |X(f)|=\displaystyle\frac{\sin(\pi fNT)}{\sin(\pi fT)}
+\end{gather*}
+Il segnale si annunlla ogni multiplo del fattore $1/NT$, un valore massimo $N$ per $f=0$, ed ha un periodo di $1/T$:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-2.1,0)--(2.1,0)node[above right]{$f$};
+        \draw[->](0,-0.25)--(0,2)node[above right]{$|X(f)|$};
+        \node[above right]at(0,1.5){$N$};
+
+        \draw[-]plot[smooth, domain=-1.99:-0.01](\x,{abs((sin(6*pi*\x r))/(4*sin(pi*\x r)))});        
+        \draw[-]plot[smooth, domain=0.01:1.99](\x,{abs((sin(6*pi*\x r))/(4*sin(pi*\x r)))});
+        \draw[dashed](1,1.5)--(1,0)node[below]{$\displaystyle\frac{1}{T}$};
+        \draw[dashed](-1,1.5)--(-1,0)node[below]{$-\displaystyle\frac{1}{T}$};
+        \draw[dashed](2,1.5)--(2,0)node[below]{$\displaystyle\frac{2}{T}$};
+        \draw[dashed](-2,1.5)--(-2,0)node[below]{$-\displaystyle\frac{2}{T}$};
+    \end{tikzpicture}
+\end{center}
+
+
+Si conisderano due campioni in $k=0,1$. La trasformata corrispondente si ottiene come:
+\begin{gather*}
+    x[n]=\delta[n]+\delta[n-1]\\
+    X(f)=\displaystyle\sum_{k=0}^1e^{-2i\pi kfT}=1+e^{-2i\pi fT}=e^{-i\pi fT}\left(e^{i\pi fT}+e^{-i\pi fT}\right)=2e^{-i\pi fT}\cos(\pi fT)\\
+    |X(f)|=2\cos(\pi fT)
+\end{gather*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-1.6,0)--(1.6,0)node[above right]{$f$};
+        \draw[->](0,-0.25)--(0,1.5)node[above right]{$|X(f)|$};
+
+        \draw[-]plot[smooth, domain=-1.5:1.5](\x,{abs(cos(pi*\x r))});
+        \node[below]at(0.5,0){$\displaystyle\frac{1}{T}$};
+        \node[below]at(-0.5,0){$-\displaystyle\frac{1}{T}$};
+        \node[below]at(1.5,0){$\displaystyle\frac{2}{T}$};
+        \node[below]at(-1.5,0){$-\displaystyle\frac{2}{T}$};
+    \end{tikzpicture}
+\end{center}
+
+
+Questa trasformata corrisponde ad un filtro passa basso, ovvero filtra le alte frequenze, e permette alle basse frequenze di passare. Si considera invece la differenza 
+tra due impulsi, la sua trasforamta corrisponde ad un filtro passa alto:
+\begin{gather*}
+    x[n]=\delta[n]-\delta[n-1]\\
+    X(f)=\displaystyle\sum_{k=0}^1e^{-2i\pi kfT}=1-e^{-2i\pi fT}=e^{-i\pi fT}\left(e^{i\pi fT}-e^{-i\pi fT}\right)=2ie^{-i\pi fT}\sin(\pi fT)\\
+    |X(f)|=2\sin(\pi fT)
+\end{gather*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-1.6,0)--(1.6,0)node[above right]{$f$};
+        \draw[->](0,-0.25)--(0,1.5)node[above right]{$|X(f)|$};
+
+        \draw[-]plot[smooth, domain=-1.5:1.5](\x,{abs(sin(pi*\x r))});
+        \draw[dashed](0.5,1)--(0.5,0)node[below]{$\displaystyle\frac{1}{T}$};
+        \draw[dashed](-0.5,1)--(-0.5,0)node[below]{$\displaystyle\frac{1}{T}$};
+        \draw[dashed](1.5,1)--(1.5,0)node[below]{$\displaystyle\frac{2}{T}$};
+        \draw[dashed](-1.5,1)--(-1.5,0)node[below]{$\displaystyle\frac{2}{T}$};
+    \end{tikzpicture}
+\end{center}
+
+\subsection{Proprietà del Valor Medio}
+
+Il valor della trasformata di Fourier calcolata in $f=0$ corrisponde al valor medio della sequenza di campioni:
+\begin{gather*}
+    X(0)=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]
+\end{gather*}
+Analogamente vale la proprietà duale; il valore del campione in $k=0$, corrisponde al valore medio della trasformata:
+\begin{gather*}
+    x[0]=\displaystyle\int_{-1/2T}^{1/2T}X(f)df
+\end{gather*}
+
+\subsection{Traslazione nel Tempo Discreto ed in Frequenza}
+
+Dato un segnale tempo discreto $x[n]$ e la sua trasformata $X(f)$, si consdiera un ritardo di $n_0$ campioni e si calcola la sua trasformata rispetto alla trasformata del 
+segnale non traslato:
+\begin{gather}
+    \mathscr{F}\{x[n-n_0]\}=\displaystyle\sum_{n=-\infty}^{+\infty}x[n-n_0]e^{-2i\pi fnT}=e^{-2i\pi fn_0T}\sum_{m=-\infty}^{+\infty}x[m]e^{-2i\pi mfT}=X(f)e^{-2i\pi fn_0T}
+\end{gather}
+Si considera la proprietà duale della traslazione in frequenza, nota una sequenza di campioni $x[n]$ e la sua trasformata di Fourier $X(f)$:
+\begin{gather*}
+    \mathscr{F}\left\{x[n]e^{2i\pi f_0nT}\right\}=\displaystyle\sum_{k=-\infty}^{+\infty}x[n]e^{2i\pi f_0nT}e^{-2i\pi fkT}=\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi (f-f_0)kT}=X(f-f_0)
+\end{gather*} 
+
+
+
+
+
+
 
 
 
