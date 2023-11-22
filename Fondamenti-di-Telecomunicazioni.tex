@@ -3314,9 +3314,9 @@ Analogamente vale la proprietà duale; il valore del campione in $k=0$, corrispo
 
 Dato un segnale tempo discreto $x[n]$ e la sua trasformata $X(f)$, si consdiera un ritardo di $n_0$ campioni e si calcola la sua trasformata rispetto alla trasformata del 
 segnale non traslato:
-\begin{gather}
+\begin{gather*}
     \mathscr{F}\{x[n-n_0]\}=\displaystyle\sum_{n=-\infty}^{+\infty}x[n-n_0]e^{-2i\pi fnT}=e^{-2i\pi fn_0T}\sum_{m=-\infty}^{+\infty}x[m]e^{-2i\pi mfT}=X(f)e^{-2i\pi fn_0T}
-\end{gather}
+\end{gather*}
 Si considera la proprietà duale della traslazione in frequenza, nota una sequenza di campioni $x[n]$ e la sua trasformata di Fourier $X(f)$:
 \begin{gather*}
     \mathscr{F}\left\{x[n]e^{2i\pi f_0nT}\right\}=\displaystyle\sum_{k=-\infty}^{+\infty}x[n]e^{2i\pi f_0nT}e^{-2i\pi fkT}=\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi (f-f_0)kT}=X(f-f_0)
