@@ -212,11 +212,7 @@ usare la frequenza $f_0$, inverso del periodo.
     x(t)=\displaystyle e^{i\frac{2\pi t}{T}}=\cos\left(\frac{2\pi t}{T}\right)+i\sin\left(\frac{2\pi t}{T}\right)
 \end{equation}
 
-<<<<<<< HEAD
-Un segnale complesso può essere analizzato mediante la sua fase ed il uso modulo in funzione del tempo:
-=======
-Un segnale complesso può essere anlizzato mediante la sua fase ed il suo modulo in funzione del tempo:
->>>>>>> 2ce920ee1714da5117f62e926751e9e91dfb2b3a
+Un segnale complesso può essere analizzato mediante la sua fase ed il suo modulo in funzione del tempo:
 \begin{equation*}
     x(t)=|x(t)|e^{\displaystyle\phase{x(t)}}
 \end{equation*}
@@ -270,7 +266,7 @@ Dato che la fase è periodica si può rappresentare come una serie di rampe.
     \end{cases}
 \end{equation}
 
-$T$ viene chiamata base della finestra. Questo segnale presenta una discontinuità di salto per $t=\pm\displaystyle\frac{1}{2}$. La funzione finestra viene usata quando si 
+$T$ viene chiamata base della finestra. Questo segnale presenta una discontinuità di salto per $t=\pm\displaystyle\frac{T}{2}$. La funzione finestra viene usata quando si 
 vuole analizzare solo una parte di un segnale, poiché il restante sarà pari a $0$. La trasformata di questa funzione rappresenta un filtro in frequenza. 
 
 \begin{center}
@@ -322,9 +318,9 @@ vuole analizzare solo una parte di un segnale, poiché il restante sarà pari a 
 
 \subsection{Gaussiana}
 
-\begin{equation*}
+\begin{equation}
     x(t)=e^{-\alpha t^2}\,\,\alpha\in\mathbb{R}^+
-\end{equation*}
+\end{equation}
 
 La larghezza della campana centrale dipende dal fattore $\alpha$. Nello sturio delle probabiltà, si usa la sua forma normalizzata:
 \begin{equation*}
@@ -346,9 +342,9 @@ Il valore $\sigma$ rappresenta la deviazione standard, mentre il suo quadrato $\
 
 \subsection{Esponenziale Unilatero}
 
-\begin{equation*}
+\begin{equation}
     x(t)=e^{-\alpha t}\cdot u(t)\,\,\alpha\in\mathbb{R}^+
-\end{equation*}
+\end{equation}
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -364,29 +360,29 @@ Il valore $\sigma$ rappresenta la deviazione standard, mentre il suo quadrato $\
 
 \subsection{Costante}
 
-\begin{equation*}
+\begin{equation}
     x(t)=a
-\end{equation*}
+\end{equation}
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[->,very thick](-1.5,0)--(1.5,0)node[above]{$t$};
         \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
         \node[below right]at(0,0){$0$};
-        \node[above right]at(0,1){$a$};
+        \node[above right]at(0,0.75){$a$};
 
-        \draw[-,very thick](-1.5,1)--(1.5,1);
+        \draw[-,very thick](-1.5,0.75)--(1.5,0.75);
     \end{tikzpicture}
 \end{center}
 
 \subsection{Segno}
 
-\begin{equation*}
+\begin{equation}
     x(t)=\mbox{sign}(t):=\begin{cases}
         1&t>0\\
         -1&t<0
     \end{cases}
-\end{equation*}
+\end{equation}
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -430,24 +426,24 @@ L'operazione di traslazione, sposta un segnale $x(t)$ lungo l'asse delle ascisse
     z(t)=x(t-\tau)
 \end{equation*}
 
-L'operazione di cambio di scale corrisponde ad un rimpicciolimento o allargamento di un segnale $x(t)$ di un fattore $a\in\mathbb{R}$:
+L'operazione di cambio di scala corrisponde ad un rimpicciolimento o allargamento di un segnale $x(t)$ di un fattore $a\in\mathbb{R}$:
 \begin{equation*}
     z(t)=x(at)
 \end{equation*}
 
 \subsection{Energia e Potenza}
 
-L'energia e la potenza di un segnale rappresentano caratteristiche utili nella loro analisi e processazione. 
+L'energia e la potenza di un segnale rappresentano caratteristiche utili nella loro analisi e processamento. 
 
-Viene definita energia $E_x$ di un segnale $x(t)$, come il limite per $\Delta t\to0$ di un integrale:
+Viene definita energia $E_x$ di un segnale $x(t)$, come il limite per $\Delta t\to\infty$ dell'integrale del modulo quadro del segnale: 
 \begin{equation}
     E_x:=\lim_{\Delta t\to\infty}\displaystyle\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}|x(t)|^2dt=\int_{-\infty}^{\infty}|x(t)|^2dt
 \end{equation}
 L'energia di un segnale è sempre strettamente positiva, poiché si considera tutta l'area sottesa dal quadrato del modulo del segnale, necessariamente positivo; mentre è nulla 
-solo se lo è anche il segnale analizzato. Teoricamente non esiste un limite per l'energia contenuta in un segnale, ma sono fisicamente realizzabile solo segnali con energia 
-finita e non infinita. 
+solo se lo è anche il segnale analizzato. Teoricamente non esiste un limite per l'energia contenuta in un segnale, ma sono fisicamente realizzabili solo segnali con energia 
+finita. 
 
-Se l'energia di un segnale è finita e diversa da zero $E_x\neq\infty$ e $E_x\neq0$, il segnale $x(t)$ si chiama segnale di energia.
+Se l'energia di un segnale è finita $E_x\neq\infty$ e diversa da zero $E_x\neq0$, il segnale $x(t)$ si chiama segnale di energia.
 
 
 Viene definita la potenza $P_x$ di un segnale $x(t)$ in maniera simile alla sua energia:
@@ -456,11 +452,11 @@ Viene definita la potenza $P_x$ di un segnale $x(t)$ in maniera simile alla sua 
 \end{equation}
 Anche la potenza di un segnale è strettamente positiva $P_x\geq0$, se la potenza assume valori diversi da zero e finiti, il segnale $x(t)$ si chiama segnale di potenza. 
 
-Vengono così create due classi di segnali, di potenza e di energi. Per la definizione delle due grandezze antisimmetriche poiché se un segnale è di potenza, non è di energia 
-e viceversa: 
+Vengono così create due classi di segnali, di potenza e di energia. Per la definizione, queste due grandezze sono antisimmetriche poiché se un segnale è di potenza non può 
+essere di energia, e viceversa: 
 \begin{gather*}
-    E\implies\neg P\\
-    P\implies\neg E
+    x\in E\implies x\notin P\\
+    x\in P\implies x\notin E
 \end{gather*}
 
 Si determina l'energia di una gaussiana di ampiezza $A$:
@@ -507,13 +503,13 @@ L'esponenziale complesso è quindi un segnale di potenza.
 
 Si determina l'energia di un esponenziale unilatero:
 \begin{equation*}
-    E_x=\displaystyle\int_{\mathbb{R}^+}e^{-2\alpha t}dt=\frac{1}{2\alpha}
+    E_x=\displaystyle\int_{-\infty}^{+\infty}\left[e^{-\alpha t}u(t)\right]^2dt=\int_0^{+\infty}e^{-2\alpha t}dt=-\frac{1}{2\alpha}\left(\cancelto{0}{e^{-\infty}}-\cancelto{1}{e^{0}}\right)=\frac{1}{2\alpha}
 \end{equation*}
 Per cui questo segnale non è né di energia né di potenza. 
 
 
-I segnali periodici non possono essere di energia, per cui un segnale perdiodico senza attenuazione non è fisicamente realizzabile. Quindi possono essere solo di potenza, 
-si determina la potenza di un segnale periodico:
+I segnali periodici non possono essere di energia poiché l'integrale assume sempre valori non finiti, per cui un segnale perdiodico senza attenuazione non è fisicamente 
+realizzabile. Possono essere solo di potenza, si determina la potenza di un segnale periodico:
 \begin{equation*}
     P_x=\lim_{\Delta t\to\infty}\displaystyle\left(\frac{1}{\Delta t}\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}|x(t)|^2dt\right)
 \end{equation*}
@@ -533,10 +529,11 @@ Quest'ultimo integrale può essere espresso in termini della frequenza naturale:
 
 
 
-Si determina la potenza del segnale coseno, di ampiezza $A$ e frequenza naturale $f_0$ $A\cos\left(2\pi f_0t\right)$:
-\begin{equation*}
+Si determina la potenza del segnale coseno, di ampiezza $A$ e frequenza naturale $f_0$:
+\begin{gather*}
+    x(t)=A\cos\left(2\pi f_0t\right)\\
     P_x=\displaystyle A^2f_0\int_{-\frac{1}{2f_0}}^{\frac{1}{2f_0}}\cos^2(2\pi f_0 t)dt
-\end{equation*}
+\end{gather*}
 Per esprimere il quadrato del coseno, si considera la formula di bisezione del coseno:
 \begin{gather*}
     \cos(2x)=2\cos^2(x)-1\\
@@ -545,14 +542,14 @@ Per esprimere il quadrato del coseno, si considera la formula di bisezione del c
 \end{gather*}
 Si può esprimere inoltre mediante la notazione complessa delle funzioni trigonometriche:
 \begin{gather*}
-    A\cos(2\pi f_0t)=\displaystyle\frac{A}{2}(e^{i2\pi f_0t}+e^{-i2\pi f_0t})\\
+    A\cos(2\pi f_0t)=\displaystyle\frac{A}{2}(e^{2i\pi f_0t}+e^{-2i\pi f_0t})\\
     |x+y|^2\,\,x,y\in\mathbb{C}\\
     (x+y)\cdot(x+y)^*=(x+y)\cdot(x^*+y^*)\\
     xx^*+xy^*+yx^*+yy^*=|x|^2+|y|^2+xy^*+yx^*\\
-    xy^*+yx^*=(a_x+ib_x)\cdot(a_y-ib_y)+(a_x-ib_x)\cdot(a_y+ib_y)=(a_xa_y+b_xb_y)=2Re\{x^*y\}\\
-    |x|^2+|y|^2+2Re\{|x|e^{-i\varphi_x}+|y|e^{i\varphi_y}\}\\
+    xy^*+yx^*=(a_x+ib_x)\cdot(a_y-ib_y)+(a_x-ib_x)\cdot(a_y+ib_y)=2(a_xa_y+b_xb_y)=2\Re\{x^*y\}\\
+    |x|^2+|y|^2+2\Re\{|x|e^{-i\varphi_x}+|y|e^{i\varphi_y}\}\\
     |x|^2+|y|^2+2|x||y|\cos(|\varphi_y-\varphi_x|)\\
-    \Bigg|\displaystyle\frac{A}{2}(e^{i2\pi f_0t}+e^{-i2\pi f_0t})\Bigg|^2=\frac{A^2}{4}\left(1+1+2Re\Bigl\{e^{i2\pi f_0t}\cdot\left(e^{-i2\pi f_0t}\right)^*\Bigr\}\right)\\
+    \Bigg|\displaystyle\frac{A}{2}\left(e^{2i\pi f_0t}+e^{-2i\pi f_0t}\right)\Bigg|^2=\frac{A^2}{4}\left(1+1+2\Re\Bigl\{e^{2i\pi f_0t}\cdot\left(e^{-2i\pi f_0t}\right)^*\Bigr\}\right)\\
     A^2\cos^2(2\pi f_0t)=\displaystyle\frac{A^2}{2}(1+\cos(4\pi f_0t))
 \end{gather*}
 Considerando questa sostituzione, l'integrale diventa:
@@ -570,12 +567,12 @@ tempo discreto.
 
 \subsection{Gradino}
 
-\begin{equation*}
+\begin{equation}
     x[n]=u[n]:=\begin{cases}
         1&n\geq0\\
         0&n<0
     \end{cases}
-\end{equation*}
+\end{equation}
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -629,9 +626,9 @@ Non avendo un segnale finestra a tempo discreto, essa può essere descritta come
 
 \subsection{Esponenziale Unilatero}
 
-\begin{equation*}
+\begin{equation}
     x[n]=a^nu[n]
-\end{equation*}
+\end{equation}
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -659,9 +656,9 @@ Non avendo un segnale finestra a tempo discreto, essa può essere descritta come
 
 \subsection{Coseno}
 
-\begin{equation*}
+\begin{equation}
     x[n]=\cos(2\pi f_0n)
-\end{equation*}
+\end{equation}
 
 Il segnale è periodico nel discreto, solo se la frequenza è un numero intero $f_0\in\mathbb{Z}$. 
 
@@ -690,12 +687,12 @@ Il segnale è periodico nel discreto, solo se la frequenza è un numero intero $
 \subsection{Impulso Matematico Tempo Discreto}
 
 L'impulso matematico o delta di Dirac, nel discreto assume solo un valore di $1$ per $n=0$. 
-\begin{equation*}
+\begin{equation}
     \delta[n]:=\begin{cases}
         1&n=0\\
         0&n\neq0
     \end{cases}
-\end{equation*}
+\end{equation}
 
 Questo segnale presenta varie proprietà utili:
 
@@ -708,13 +705,13 @@ L'area della delta è unitaria, poiché presenta un unico campione per $n=0$ di 
 
 
 Il prodotto di un qualsiasi segnale $x[n]$ per la delta equivale al valore del segnale in $0$ per la delta. Poiché l'unico valore della delta diverso da zero si trova in $n=0$ 
-e vale $1$, per cui estra dal segnale $x$ il campione in posizione $n=0$. Questo campione viene moltiplicato per la delta, poiché non è un segnale continuo, ma si presenta 
+e vale $1$, per cui estrae dal segnale $x$ il campione in posizione $n=0$. Questo campione viene moltiplicato per la delta, poiché non è un segnale continuo, ma si presenta 
 solo in quell'istante. Questa caratteristica viene chiamata propietà di campionamento 
 della delta di Dirac:
 \begin{equation*}
     x[n]\cdot\delta[n]=x[0]\cdot\delta[n]
 \end{equation*}
-Questo campione può essere estratto ad un arbitrario valore $m$:
+Questo campione può essere estratto ad un arbitraria posizione $m$:
 \begin{equation*}
     x[n]\cdot\delta[n-m]=x[m]\cdot\delta[n-m]
 \end{equation*}
@@ -726,9 +723,9 @@ L'area del prodotto di un qualsiasi segnale $x[n]$ per la delta risulta nel valo
 \end{equation*}
 
 
-Invertendo la proprietà di campionamendo, ovvero partendo da tutti i campioni di un segnale $x[n]$ e sommandoli tra di loro, è possibile ottenere il segnale originario: 
+Invertendo la proprietà di campionamento, ovvero partendo da tutti i campioni di un segnale $x[n]$ e sommandoli tra di loro, è possibile ottenere il segnale originario: 
 \begin{equation*}
-    \cdots+x[-N]\delta[n+N]+\cdots+x[0]\delta[n]+\cdots+x[N]\delta[n-N]+\cdots=\displaystyle\sum_{i=-\infty}^{+\infty} x[i]\delta[n-i]=x[n]
+    \cdots+x[-N]\delta[n+N]+\cdots+x[0]\delta[n]+\cdots+x[N]\delta[n-N]+\cdots=\displaystyle\sum_{k=-\infty}^{+\infty} x[k]\delta[n-k]=x[n]
 \end{equation*}
 
 
@@ -744,8 +741,7 @@ La delta può essere rappresentata come la differenza tra due gradini, considera
 \end{equation*}
 
 
-
-Analogamente un gradino può essere espresso come una sommatoria di delta traslate ognuna di un diverso fattore. Questa relazione viene espressa in forma canonica come:
+Analogamente un gradino può essere espresso come una somma di impulsi traslati ognuno di un diverso fattore. Questa relazione viene espressa in forma canonica come:
 \begin{equation*}
     u[n-m]=\displaystyle\sum_{n=-\infty}^{-m}\delta[n+1]
 \end{equation*}
@@ -756,7 +752,7 @@ L'energia di un segnale tempo discreto si calcola come:
 \begin{equation*}
     E_x:=\displaystyle\lim_{N\to\infty}\sum_{n=-N}^N|x[n]|^2
 \end{equation*}
-La potenza di un segnale tempo discreto è defintia come:
+La potenza di un segnale tempo discreto è definita come:
 \begin{equation*}
     P_x:=\displaystyle\lim_{N\to\infty}\left(\frac{1}{2N+1}\sum_{n=-N}^N|x[n]|^2\right)
 \end{equation*}
@@ -771,7 +767,7 @@ Dove $M$ è il periodo del segnale.
 \section{Convoluzione e Correlazione}
 
 Prima di analizzare queste due importanti operazioni tra segnali tempo continuo e discreto, bisogna fornire una definizione adeguata per l'impulso matematico tempo 
-continuo, segnale necessario per poter analizzare facilmente le proprietà di queste operazioni. 
+continuo, segnale utile nello studio, e nel calcolo di queste operazioni.  
 
 \subsection{Impulso Matematico Tempo Continuo}
 
@@ -790,17 +786,18 @@ Per definire l'impulso o delta di Dirac nel tempo continuo, si parte da un segna
     \end{tikzpicture}
 \end{center}
 
-Al diminuire di $\Delta t$, la base si restringe, mentre l'ampiezza del segnale aumenta, ma complessivamente l'area del segnale rimane unitaria:
+Al diminuire di $\Delta t$, la base si restringe, mentre l'ampiezza del segnale aumenta, ma complessivamente l'area del segnale rimane costante:
 \begin{equation*}
     \displaystyle\int_{-\infty}^{+\infty}x(t)dt=\frac{1}{\Delta t}\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}dt=\frac{1}{\Delta t}\left(\frac{\Delta t}{2}+\frac{\Delta t}{2}\right)=1
 \end{equation*}
 
 Viene definito l'impulso o delta di Dirac come il limite di questa finestra per $\Delta t$ che tende ad un valore nullo:
-\begin{equation*}
+\begin{equation}
     \delta(t):=\lim_{\Delta t\to0}\displaystyle\frac{1}{\Delta t}\mbox{rect}\left(\frac{t}{\Delta t}\right)
-\end{equation*}
+\end{equation}
 
-Viene rappresentata graficamente come una freccia di altezza unitaria, poiché non è una funzione ma un funzionale. Si tratta in telecomunicazioni come un segnale qualunque. 
+Viene rappresentata graficamente come una freccia di altezza unitaria, poiché non è una funzione ma un funzionale, ma questa differenza non verrà trattata nei seguenti 
+studi.  
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[->,very thick](-0.5,0)--(0.5,0)node[above]{$t$};
@@ -823,7 +820,7 @@ L'integrale sui reali della delta è unitario in base alla sua definizione:
 
 
 Il prodotto di un qualsiasi segnale per la delta equivale al valore del segnale in $0$ moltiplicato per l'impulso, poiché per tutti gli altri valori nel tempo questo prodotto 
-è nullo. Proprietà analoga a quella del campionamento per il continuo:
+è nullo. Proprietà analoga a quella del campionamento, per il continuo:
 \begin{equation*}
     x(t)\cdot\delta(t)=x(0)\cdot\delta(t)
 \end{equation*}
@@ -870,11 +867,14 @@ L'impulso è una funzione pari:
 
 
 
-L'impulso scalato di un fattore $a$ corrisponde all'impulso non scalato fratto il modulo del fattore $a$, se negativo. Questa proprietà di scala si dimostra considerando 
-la definizione dell'impulso. 
-\begin{equation*}
+L'impulso scalato di un fattore $a$ corrisponde al rapportro tra l'impulso non scalato ed il modulo del fattore $a$, se negativo. Questa proprietà di scala si dimostra 
+considerando la definizione dell'impulso: 
+\begin{gather*}
+    \delta(at)=\displaystyle\lim_{\Delta t\to0}\frac{1}{\Delta t}\mbox{rect}\left(\frac{at}{\Delta t}\right)\\
+    \Delta\tau=\displaystyle\frac{\Delta t}{a}\\
+    \displaystyle\lim_{\Delta\tau\to0}\frac{1}{a\Delta\tau}\mbox{rect}\left(\frac{t}{\Delta\tau}\right)=\frac{1}{a}\lim_{\Delta\tau\to0}\frac{1}{\Delta\tau}\mbox{rect}\left(\frac{t}{\Delta\tau}\right)\\
     \delta(at)=\displaystyle\frac{\delta(t)}{a}
-\end{equation*}
+\end{gather*}
 
 
 
@@ -887,31 +887,28 @@ La convoluzione rappresenta un'operazione tra due segnali, generandone uno nuovo
     x(t)*y(t)=z(t)
 \end{equation*}
 
-La convoluzione tra due segnali tempo continui produce un altro segnlae tempo continuo. La convoluzione risultante è sempre un segnale continuo:
+La convoluzione tra due segnali tempo continui produce sempre un segnale continuo: 
 \begin{equation}
     z(t)=x(t)*y(t):=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\cdot y(t-\tau)d\tau
 \end{equation}
 
-Il segnale convoluzione è una funzione nella stessa variabile dei segnali convoluti, questa variabile di uscita compare all'interno dell'integrale. Il segnale conoluzione 
+Il segnale convoluzione è una funzione nella stessa variabile dei segnali convoluti, questa variabile di uscita compare all'interno dell'integrale. Il segnale convoluzione 
 rappresenta l'area sottesa dal prodotto tra il segnale $x$ ed il segnale $y$, ribaltato e traslato di un fattore $t$, per ogni istante di tempo $t$. La convoluzione 
 è un'operazione commutativa, per cui è arbitraria la scelta di quale dei due segnali debba traslare. 
 
 Si rappresenta il segnale $x$ originiario rispetto alla variabile $\tau$, al di sotto si grafica il segnale $y$ ribaltato e traslato di un fattore $t$, per individuare gli 
-intervalli dove il prodotto tra i due segnali è nullo. La maggior parte dei segnali reali si attenuano nel tempo, per cui avranno un valore solo per un intervallo finito 
-di valori, ed in questi intervalli la convoluzione restituisce un valore non nullo. Anche nei segnali puramente matematici, spesso presentano valori finiti non nulli solo per 
-certi intervalli di tempo. Si considerano tutti i possibili casi di sovrapposizione, quindi di prodotto non nullo, tra i due segnali per ottenere 
-il segnale convoluzione in forma analitica, da ricordare che la convoluzione è un segnale continuo per cui non possono essere presenti discontinuità nella sua espressione 
+intervalli dove il prodotto tra i due segnali è nullo. La maggior parte dei segnali reali si attenuano nel tempo, per cui avranno un valore diverso da zero solo per un 
+intervallo finito di valori, ed in questi intervalli la convoluzione restituisce un valore non nullo. Anche i segnali puramente matematici spesso presentano valori finiti 
+non nulli solo per certi intervalli di tempo. Si considerano tutti i possibili casi di sovrapposizione, quindi di prodotto non nullo, tra i due segnali, per ottenere 
+il segnale convoluzione in forma analitica. Da notare che la convoluzione è un segnale continuo per cui non possono essere presenti discontinuità nella sua espressione 
 in forma anlitica. 
-
-
-
-Vengono forniti alcuni esempi di convoluzioni:
+Verrano forniti alcuni esempi di convoluzioni in coda a questa sezione. 
 
 \subsubsection{Proprietà}
 
 La convoluzione è un'operazione commutativa:
 \begin{equation*}
-    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y(t-\tau)d\tau \to^{T=t-\tau}\to \int_{-\infty}^{+\infty}y(T)x(t-T)dT=y(t)*x(t)
+    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y(t-\tau)d\tau\to{T=t-\tau}\to \int_{-\infty}^{+\infty}y(T)x(t-T)dT=y(t)*x(t)
 \end{equation*}
 Vale la proprietà distributiva:
 \begin{gather*}
@@ -919,10 +916,11 @@ Vale la proprietà distributiva:
     \int_{-\infty}^{+\infty}x_1(\tau)y(t-\tau)d\tau+\int_{-\infty}^{+\infty}x_2(\tau)y(t-\tau)d\tau=x_1(t)*y(t)+x_2(t)*y(t)
 \end{gather*}
 
-Se una dei due segnali, o entrambi, convoluti tra di loro sono traslati allora il segnale convoluzione risultante è traslato della traslazione complessiva dei due segnali originali:
+Se uno dei due segnali convoluti, o entrambi, sono traslati allora il segnale convoluzione risultante è traslato della traslazione complessiva dei due segnali originali:
 \begin{gather*}
-    x(t-t_{x0})*y(t-t_{y0})=\displaystyle\int_{-\infty}^{+\infty}x(\tau-t_{x0})y(t-(\tau+t_{y0}))d\tau,\,{T=\tau-t_{x0}}\to\\
-    \int_{-\infty}^{+\infty}x(T)y((t-t_{x0}-t_{y0})+T)dT=z(t-t_{x0}-t_{y0})
+    x(t-t_{x0})*y(t-t_{y0})=\displaystyle\int_{-\infty}^{+\infty}x(\tau-t_{x0})y[t-(\tau+t_{y0})]d\tau\\
+    {T=\tau-t_{x0}}\\\
+    \int_{-\infty}^{+\infty}x(T)y[(t-t_{x0}-t_{y0})+T]dT=z(t-t_{x0}-t_{y0})
 \end{gather*}
 
 \subsubsection{Convoluzione Tempo Discreto}
@@ -932,7 +930,7 @@ Se una dei due segnali, o entrambi, convoluti tra di loro sono traslati allora i
 \end{equation*}
 
 Nel discreto, quando si applica la convoluzione, il numero di campioni totali della convoluzione è uguale alla somma dei campioni dei due segnali meno uno. Per le convoluzioni 
-a tempo continuo si usa la continuità, per quelle a tempo discreto il numero dei campioni se sono convoluzini valide. Per le convoluzioni a tempo discreto valgono le proprietà 
+a tempo continuo si usa la continuità, per quelle a tempo discreto il numero dei campioni, per indentificare se sono convoluzini valide. Per le convoluzioni a tempo discreto valgono le proprietà 
 commutiativa e distributiava. I singoli campioni di un segnale nel discreto possono essere rappresentati come una costante che moltiplica un impulso traslato di un certo fattore:
 \begin{equation*}
     x[n]=\displaystyle\sum_{k=1}^Nx_k\delta[n-k]
@@ -942,7 +940,7 @@ Ciò è possibile per ogni segnale discreto, per cui la convoluzione di due segn
     x[n]*y[n]=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]y[n-k]=\sum_{k=-\infty}^{+\infty}\left[\sum_{i=1}^Nx_i\delta[k-i]\sum_{j=1}^Ny_j\delta[n-k-j]\right]
 \end{equation*}
 Una convoluzione quindi rappresenta una media tra una serie di campioni, può essere estesa a segnali multimensionali come delle immagini, dove la convoluzione viene 
-usata negli algoritmi di compressione dell'immagini per diminuire il costo della trasmissione del segnale. 
+usata negli algoritmi di compressione dell'immagini per diminuire il costo della trasmissione del segnale, diminuendo l'informazione necessaria. 
 
 \subsection{Correlazione}
 
@@ -954,45 +952,47 @@ Una correlazione si applica quando due segnali sono simili tra loro, viene defin
 \begin{equation}
     R_{xy}(t)=x(t)\otimes y(t)=\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau
 \end{equation}
-VIene definito $R_{xy}$ il fattore di correlazione tra i due segnali $x$ e $y$. La correlazione al contrario della convoluzione non commuta:
+Viene definito $R_{xy}$ il fattore di correlazione tra i due segnali $x$ e $y$. La correlazione al contrario della convoluzione non commuta:
 \begin{gather*}
-    \displaystyle R_{xy}(t)=\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau\to T=t+\tau\\
+    \displaystyle R_{xy}(t)=\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau\\
+    T=t+\tau\\
     \displaystyle\int_{-\infty}^{+\infty}x(T)y^*(-t+T)dT=\left[\int_{-\infty}^{+\infty}x^*(T)y(-t+T)dT\right]^*=R_{yx}^*(-t)
 \end{gather*}
 Il fattore di convoluzione $R_{xy}(t)$ tra due segnali $x$ e $y$ corrisponde al complesso coniugato del fattore di convoluzione ribaltato dei segnali $y$ e $x$ $R_{yx}^*(-t)$, 
-quindi la correlazione è una proprietà anticommutativa. La correlazione tra due segnali $x$ e $y$ equivale alla convoluzione dei segnli $y^*$ e $x$
+quindi la correlazione è un'operazione anticommutativa. La correlazione tra due segnali $x$ e $y$ equivale alla convoluzione dei segnli $y^*$ e $x$
 \begin{gather*}
     x(t)\otimes y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)d\tau\\
-    y^*(-t)* x(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y^*(-(t-\tau))d\tau\to T=\tau-t\\
+    x(t)*y^*(-t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y^*(-(t-\tau))d\tau\\
+    T=\tau-t\\
     -\int_{+\infty}^{-\infty}x(t+T)y^*(T)dT=\int_{-\infty}^{+\infty}x(t+T)y^*(T)dT=R_{xy}(t)\\
-    x(t)\otimes y(t)=y^*(-t)*x(t)
+    x(t)\otimes y(t)=x(t)*y^*(-t)
 \end{gather*}
 Quando si analizza la correlazione tra due segnali $x$ e $y$, uno dei quali pari $y(t)=y(-t)$ e reale $y\in\mathbb{R}$, la correlazione tra di loro è uguale alla convoluzione 
 tra di loro:
 \begin{equation*}
-    x(t)\otimes y(t)=y^*(-t)*x(t)=y(-t)*x(t)=x(t)*y(t)
+    x(t)\otimes y(t)=x(t)*y^*(-t)=x(t)*y(-t)=x(t)*y(t)
 \end{equation*}
 
-L'autocorrelazione di un segnale $x$ nell'istante di tempo $t=0$, corrisponde all'energia del segnale $x$:
+L'autocorrelazione di un segnale $x$ nell'istante di tempo $t=0$, corrisponde all'energia del segnale:
 \begin{equation*}
     R_{xx}(0)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)x^*(\tau)d\tau=\int_{-\infty}^{+\infty}|x(\tau)|^2d\tau=E_x
 \end{equation*}
 
 \subsection{Sistema Ingresso-Uscita}
 
-Un sistema di ingress-uscita applica determinate trasformazioni al segnale $x$ in entrata, per ottenere un altro segnale $y$ in uscita, questo segnale è un funzionale 
-del segnale di ingresso $y(t)=\mathscr{F}\{x(t)\}$. Questa trasformazione si basa su dei parametri interni $\sum$ al sistema per cui passa l'ingresso. 
+Un sistema di ingresso-uscita applica determinate trasformazioni al segnale $x$ in entrata, per ottenere un altro segnale $y$ in uscita, questo segnale è un funzionale 
+del segnale di ingresso $y(t)=\mathcal{F}\{x(t)\}$. Questa trasformazione si basa su dei parametri interni $\sum$ al sistema per cui passa l'ingresso. 
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \node[block](s){$\sum$};
-        \draw[->,ultra thick](-1,0)--(s.180)node[above left]{$x(t)$};
-        \draw[->,ultra thick](s.0)node[above right]{$y(t)$}--(1,0);
+        \draw[->,ultra thick](-1,0)--(s.180)node[midway, above]{$x(t)$};
+        \draw[->,ultra thick](s.0)--(1,0)node[midway, above]{$y(t)$};
     \end{tikzpicture}
 \end{center}
 
 Un sistema ingresso-uscita si definisce lineare, se ad una combinazione lineare degli ingressi, corrisponde una combinazione lineare delle uscite:
 \begin{equation*}
-    x(t)=a_1(t)x_1(t)+\cdots+a_n(t)x_n(t)\to y(t)=b(t)_1y_1(t)+\cdots+b_n(t)y_n(t)
+    x(t)=a_1(t)x_1(t)+\cdots+a_n(t)x_n(t)\to y(t)=b_1(t)y_1(t)+\cdots+b_n(t)y_n(t)
 \end{equation*}
 
 Un amplificatore rappresenta un sistema lineare, poiché moltiplica di un fattore $A$ un segnale in entrata:
@@ -1032,7 +1032,7 @@ Per cui dipende dall'istante di tempo quando viene inserito il segnale.
 
 
 Un sistema può presentare un'altra proprietà chiamata causalità, che presenta un senso fisico. Un sistema si definisce causale se per ogni uscita all'istante $t_0$, dipende 
-da valori entrate al massimo fino al tempo $t_0$: 
+da valori entrati al massimo fino al tempo $t_0$: 
 \begin{equation*}
     y(t_0)\propto x(t),\,\,t\leq t_0
 \end{equation*}
@@ -1055,11 +1055,11 @@ Si chiama risposta impulsiva, poiché se è presente un impulso in entrata, l'us
 Per dimostrare l'uscita di un filtro, si considera il segnale $x$ come la somma integrale di impulsi moltiplicati per il valore della funzione in $x(\tau)$, ovvero la sua 
 convoluzione:
 \begin{gather*}
-    x(t)=x(t)*\delta(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\delta(t-\tau)d\tau=\int_{-\infty}^{+\infty}dx(t)\\
+    x(t)=x(t)*\delta(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)\delta(t-\tau)d\tau=\int_{-\infty}^{+\infty}dx(t)
 \end{gather*}
 Poiché il filtro è lineare si può considerare l'uscita $y$ come la somma integrale di tutte le uscite $dy$ per ogni entrata $dx=x(\tau)\delta(t-\tau)d\tau$. Poiché il fattore 
 $x(\tau)$ non dipende dal tempo si considera una costante, per cui l'uscita $dy$ uguale al prodotto tra la costante $x(\tau)$ per la convoluzione tra l'impulso e la 
-rispsosta impulsiva:
+risposta impulsiva:
 \begin{gather*}
     dx(t)=x(\tau)\delta(t-\tau)d\tau\\
     dy(t)=x(\tau)(\delta(t-\tau)*h(t))d\tau=x(\tau)h(t-\tau)d\tau
@@ -1071,7 +1071,7 @@ L'uscita totale si ottiene integrando su tutti i reali l'uscita infinitesima $dy
 Per cui l'uscita di un filtro corrisponde alla convoluzione tra l'entrata e la sua risposta impulsiva. 
 
 Per determinare la risoluzione di uno schermo, dispostivo che opera come un filtro, si inserisce in entrata un impulso bidimensionale, rappresentato come un singolo punto 
-su una superficie. L'uscita di questa entrata risulta in una macchia, più questa macchia, formata da vari pixel, è piccola maggiore è la risoluzione del dato schermo.  
+su una superficie. L'uscita di questa entrata risulta in una macchia formata da vari pixel; più questa macchia è piccola maggiore è la risoluzione del dato schermo.  
 
 
 
@@ -1082,7 +1082,7 @@ Linearità:
     x_2[n]\to y_2[n]\\
     a_1x_1[n]+a_2x_2[n]\to a_1y_1[n]+a_2y_2[n]
 \end{gather*}
-Tempo invariante:
+Tempo invarianza:
 \begin{gather*}
     x[n+N]\to y[n+N]
 \end{gather*}
@@ -1100,14 +1100,14 @@ Se questo filtro fosse causale allora la variabile $k$ non potrebbe superare il 
 \end{equation*}
 Inoltre la risposta impulsiva deve essere nulla se il valore di $k$ è maggiore di $n$:
 \begin{equation*}
-    h[n-k]=0,\,\, k>n\to^{n-k=N}\to h[N],\,\, N<0
+    h[n-k]=0,\,\, k>n\to{n-k=N}\to h[N],\,\, N<0
 \end{equation*} 
 Si può attuare lo stesso ragionamento per la causalità a tempo continuo. Un filtro è causale solo se:
 \begin{gather*}
-    y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau\to \int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau\\
-    h(t-\tau)=0,\,\, \tau>t\to^{t-\tau=T}\to h(T)=0,\,\, T<0
+    y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)h(t-\tau)d\tau\to \int_{-\infty}^{t}x(\tau)h(t-\tau)d\tau\\
+    h(t-\tau)=0,\,\, \tau>t\to{t-\tau=T}\to h(T)=0,\,\, T<0
 \end{gather*}
-Per cui:
+Per cui si definisce un filtro di uscita $y$ causale se e solo se:
 \begin{equation*}
     y(t):\mbox{ causale}\iff \begin{cases}
         h[n]=0& n<0\\
@@ -1158,7 +1158,7 @@ Si considera un generico schema di un circuito sommatore, un tipo di sistema con
         \draw[->,ultra thick](+.0)--(2.5,0)node[above]{$y[n]$};
     \end{tikzpicture}
 \end{center}
-Per ottenere l'uscita si somma il segnale originario per lo stesso segnale ritardato di un campione e moltiplicato per un fattore $a$:
+Per ottenere l'uscita si somma il segnale originario allo stesso segnale ritardato di un campione e moltiplicato per un fattore $a$:
 \begin{gather*}
     y[n]=x[n]+ax[n-1]\\
     h[n]=\delta[n]+a\delta[n-1]
@@ -1213,19 +1213,19 @@ $\displaystyle\frac{T_1}{2}-t$ e $-\displaystyle\frac{T_1}{2}-t$:
 \end{gather*}
 Per la seconda formula di prostaferesi si ottiene:
 \begin{gather*}
-    z(t)=\displaystyle\frac{T_2}{2\pi}\sin\left(\frac{2\pi}{T_2}t\right)\sin\left(\frac{2\pi}{T_2}\frac{T_1}{2}\right)=\left[\frac{T_2}{2\pi}\sin\left(\pi\frac{T_1}{T_2}\right)\right]\cos\left(\frac{2\pi t}{T_2}\right)
+    z(t)=\displaystyle\frac{T_2}{2\pi}\cos\left(\frac{2\pi}{T_2}t\right)\sin\left(\frac{2\pi}{T_2}\frac{T_1}{2}\right)=\left[\frac{T_2}{2\pi}\sin\left(\pi\frac{T_1}{T_2}\right)\right]\cos\left(\frac{2\pi t}{T_2}\right)
 \end{gather*}
 Se il periodo del coseno è uguale alla base della finestra, il seno è sempre nullo, quindi anche la convoluzione è nulla per ogni valore di $t$. I fattori invarianti nel 
 tempo si possono esprimere come una costante $A$, ampiezza del segnale ottenuto:
 \begin{equation*}
     \mbox{rect}\left(\displaystyle\frac{t}{T_1}\right)*\cos\left(\frac{2\pi t}{T_2}\right)=A\cos\left(\frac{2\pi t}{T_2}\right)
 \end{equation*}  
-Il risultato della convoluzione è il segnale periodico originario moltiplicato per un fattore costante, che dipende dal periodo $T_2$ e dalla base del segnale finestra $_1$. 
+Il risultato della convoluzione è il segnale periodico originario moltiplicato per un fattore costante, che dipende dal periodo $T_2$ e dalla base del segnale finestra $T_1$. 
 Il segnale di convoluzione quindi oscilla come la funzione periodica di partenza. In generale il risultato della convoluzione di una finestra con una funzione periodica è un fattore 
 $A$ moltiplicato per il segnale originario:
-\begin{equation*}
-    \mbox{rect}\left(\frac{t}{T_1}\right)*y(t)=Ay(t)
-\end{equation*}
+\begin{equation}
+    \mbox{rect}\left(\frac{t}{T_1}\right)*y(t)=A(T_1,T_2)y(t)
+\end{equation}
 
 Questa proprietà si indica come un'operazione a media mobile, che amplifica o riduce l'ampiezza di un segnale periodico, oppure lo rende nullo. 
 
@@ -1554,7 +1554,7 @@ Calcolare l'uscita di un filtro discreto $h[n]$, con un entrata parametrizzata $
     h[n]=\displaystyle\frac{1}{4}\delta[n+1]+\frac{1}{2}\delta[n]+\frac{1}{4}\delta[n-1]\\
     x[n]=\cos(2\pi\phi n)\\
     \phi_1=0\to x_1[n]=1\\
-    y[n]=h[n]*x[n]=\displaystyle\frac{1}{4}\left[\delta[n+1]+\frac{1}{2}\delta[n]+\frac{1}{4}\delta[n-1]\right]*x[n]\\
+    y[n]=h[n]*x[n]=\displaystyle\left[\frac{1}{4}\delta[n+1]+\frac{1}{2}\delta[n]+\frac{1}{4}\delta[n-1]\right]*x[n]\\
     \displaystyle\frac{1}{4}x[n+1]+\frac{1}{2}x[n]+\frac{1}{4}x[n-1]=\frac{1}{4}+\frac{1}{2}+\frac{1}{4}=1\\
     \phi_2=\displaystyle\frac{1}{4}\to x[n]=\cos\left(\displaystyle\frac{\pi n}{2}\right)\\
     y[n]=\left[\displaystyle\frac{1}{4}\delta[n+1]+\frac{1}{2}\delta[n]+\frac{1}{4}\delta[n-1]\right]*\cos\left(\frac{\pi n}{2}\right)\\
@@ -1569,8 +1569,8 @@ Calcolare l'uscita di un filtro discreto $h[n]$, con un entrata parametrizzata $
 
 \section{Serie di Fourier}
 
-Dati due segnali in frequenza doppia come il La$4$ a $\approx 440Hz$ ed il La$5$ a $\approx 880Hz$, non si nota la differenza poiché sono esattamente una il doppio dell'altra. 
-In genera segnali musicali affinché suonino bene devono avere frequenze tra di loro o multipli oppure relati da frazioni semplici, non possono essere scelte arbitrariamente. 
+Dati due segnali di frequenza doppia come il La$4$ a $\approx 440Hz$ ed il La$5$ a $\approx 880Hz$, non si nota la differenza poiché sono esattamente una il doppio dell'altra. 
+In generale segnali musicali affinché suonino bene devono avere frequenze tra di loro o multipli oppure relati da frazioni semplici, non possono essere scelte arbitrariamente. 
 Queste frequenze sono associate a varie note, inserendo una serie di queste note è possible scrivere un segnale musicale. Viene attuato un processo analogo tramite la serie di 
 Fuorier. Questo tipo di analisi venne introdatta da Fouriere nella sua teoria analitica del calore, dove oltre all'omonima serie e trasformata, introdusse molti concetti 
 matematici importanti. 
@@ -1581,21 +1581,21 @@ La serie di Fourier è uno strumento per esprimere solo i segnali periodici,
 se il segnale non è periodico si usa la trasformata di Fourier, se rispetta le condizioni di Dirichlet, ma per i nostri fini si considerano sempre verificate. 
 I segnali si esprimono rispetto alle sue armoniche. Dato un segnale $x(t)$ di periodo $T$, può essere rappresentato come una serie, ovvero una sommatoria, di alcuni 
 coefficienti di Fourier per un fattore esponenziale, chiamato armonica, di frequenza multiplo della frequenza del segnale originario:
-\begin{equation*}
+\begin{equation}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi  k t}{T}}
-\end{equation*}
+\end{equation}
 Il fattore $c_k$ indica se una data frequenza è presente nel segnale analizzato. Le armoniche sono note a priori, dal punto di vista fisico non esistono armoniche di frequenze 
 negative, ma in ambito matematico sono necessarie per esprimere il segnale. Considerando la rappresentazione di Eulero si può esprimere la serie di Fourier come:
-\begin{equation*}
+\begin{equation}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_k\left[\cos\left(\frac{2\pi k t}{T}\right)+i\sin\left(\frac{2\pi k t}{T}\right)\right]
-\end{equation*}
+\end{equation}
 Poiché le armoniche sono le stesse, l'unica differenza tra varie rappresentazioni di Fourier è il valore dei coefficienti $c_k$ assegnati. Lo spazio dei segnali periodici, 
 aventi lo stesso periodo $T$, può essere scritto come uno spazio vettoriale dotato di prodotto scalare, dove ogni segnale è espresso come un vettore. Questo spazio può essere 
 espresso data una base ortonormale.
 
 \subsection{Spazio Vettoriale}
 
-Dato uno spazio euclideo $\mathbb{R}^3$ descritto da tre vettori ortonormali $\hat x=(1,0,0)$, $\hat y=(0,1,0)$ e $\hat z=(0,0,1)$, chiamati base canonica dello spazio vettoriale. 
+Si considera uno spazio euclideo $\mathbb{R}^3$ descritto da tre vettori ortonormali $\hat x=(1,0,0)$, $\hat y=(0,1,0)$ e $\hat z=(0,0,1)$, chiamati base canonica dello spazio vettoriale. 
 Dei vettori di uno spazio vettoriale si dicono base, se sono ortonormali tra di loro, quindi il prodotto scalare tra di loro è nullo ovvero sono linearmente indipendenti, 
 mentre si dicono basi canoniche se il quadrato di un vettore, il prodotto scalare per sé stesso, equivale ad uno. 
 Il prodotto scalare è un'operazione binaria interna ad uno spazio vettoriale $V$ che resitituisce uno scalare:
@@ -1634,9 +1634,9 @@ Il prodotto scalare tra due segnali periodici viene definito come:
 \end{equation*}
 Per cui per ottenere i coefficienti di Fourier $c_k$ rispetto ad una determinata armonica $k$ di un segnale $x$ si considera il prodotto scalare tra quel segnale per l'
 armonica $k$:
-\begin{equation*}
+\begin{equation}
     c_k=\langle x(t),\,e^{i\frac{2\pi  k t}{T}}\rangle=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cdot e^{-i\frac{2\pi  k t}{T}}dt
-\end{equation*} 
+\end{equation} 
 
 Il prodotto tra due basi è nullo, tranne nel caso dove sono la stessa base, in quel caso il risultato è $1$. Per dimostrare che le armoniche rappresentano una base dello 
 spazio vettoriale si considera il prodotto scalare tra un'armonica $k$ ed una $l$:
@@ -1658,9 +1658,9 @@ Per $k=0$ l'armonica corrispondente è un segnale costante. In generale un'armon
 \end{equation*}
 Per cui la parte reale di un'armonica oscilla come un segnale coseno di frequenza dell'armonica. 
 
-\subsection{Serie Elementari}
+\subsection{Serie Notevoli}
 
-Si considera un segnale costante $x(t)=A$. Per determinare i coefficienti della sua serie di Taylor si considera il prodotto scalare tra il segnale ed una generica armonica $k$: 
+Si considera un segnale costante $x(t)=A$. Per determinare i coefficienti della sua serie di Fourier si considera il prodotto scalare tra il segnale ed una generica armonica $k$: 
 \begin{gather*}
     c_k=\langle x(t),e^{i\frac{2\pi kt}{T}}\rangle=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}Ae^{-i\frac{2\pi kt}{T}}dt=\left[A\frac{e^{-i\frac{2\pi kt}{T}}}{-2i\pi k}\right]_{-\frac{T}{2}}^{\frac{T}{2}}\\
     \displaystyle\frac{A(e^{-i\pi k}-e^{i\pi k})}{-2i\pi k}=A\frac{-\sin(\pi k)}{-\pi k}=A\,\mbox{sinc}[k]
@@ -1736,7 +1736,7 @@ Il seno cardinale non è discreto, poiché l'argomento non necessariamente assum
 \begin{equation*}
     x(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\mbox{rect}\left(\frac{t-nT}{\tau}\right)=\sum_{k=-\infty}^{+\infty}\frac{\tau}{T}\mbox{sinc}\left(\frac{k \tau}{T}\right)e^{i\frac{2\pi kt}{T}}
 \end{equation*}
-All'aumentare di $k$ e quindi della frequenza delle armoniche, il valore dei coefficienti diminuisce, quindi diminuiscono anche i contributi che le armoniche a frequenza 
+All'aumentare di $k$ e quindi della frequenza delle armoniche, il valore dei coefficienti diminuisce, quindi diminuiscono anche i contributi delle armoniche a frequenza 
 maggiore per la ricostruzione del segnale originale. I coefficienti rappresentano il peso di quanto le armoniche contribuiscono al segnale originario. La precisione 
 aumenta sempre di meno per ogni nuova armonica aggiunta, fino a ricostruire completamente il segnale originale se $k$ tende asintoticamente ad infinito. Da notare che se 
 $T=2\tau$, per $k$ pari i coefficienti della serie di Fourier dell'onda quadra che ha periodo esattamente il doppio della base sono nulli. In generale se $T=n\tau$, dove 
@@ -1747,15 +1747,17 @@ $n\in\mathbb{N}$, i contributi delle armoniche con frequenza multiplo di $n/T$ s
 In generale se $T/\tau\notin\mathbb{Z}$ e $\tau/T\notin\mathbb{Z}$, i coefficienti dell'espansione di Fourier non sono mai nulli, poiché non comprendono mai zeri triviali 
 della funione seno cardinale. 
 
-\subsection{Proprietà}
 
-Cercare il periodo del segnale in alcuni casi, non specificato dal testo del problema. Il contenuto informativo del segnale è descritto dai coefficienti della serie di Fourier 
-$c_k$. 
+
+Per cui in generale il contenuto informativo del segnale è descritto interamente dai coefficienti della serie di Fourier $c_k$. 
+A volte viene richiesto di individuare il periodo del segnale trattato per poi individuare i coefficienti della sua serie di Fourier.
+
+\subsection{Proprietà}
 
 \subsubsection{Linearità}
 
-Poiché segnali $x(t)$ e $y(t)$, periodici di periodo $T$, possono essere espresso come espansione di Fourier rispetto alle stesse armoniche, la loro combinazione lineare 
-può essere espressa come una combinazione lineare dei coefficienti delle due espansioni di Fourier:
+Poiché segnali $x(t)$ e $y(t)$, periodici di periodo $T$, possono essere espressi come espansione di Fourier rispetto alle stesse armoniche, la loro combinazione lineare 
+può essere espressa come una combinazione lineare dei coefficienti delle due serie di Fourier:
 \begin{gather*}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi  k t}{T}}\\    
     y(t)=\displaystyle\sum_{k=-\infty}^{+\infty}d_ke^{i\frac{2\pi  k t}{T}}\\
@@ -1829,7 +1831,7 @@ Per cui tutti i coefficienti equivalgono ai coefficienti non traslati $c_k$ molt
 Altrimenti si possono determinare i coefficienti tramite la definizione, attuando una sostituzione $t-t_0\to\tau$:
 \begin{gather*}
     d_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t-t_0)e^{-i\frac{2\pi kt}{T}}dT\to\int_{-\frac{T}{2}-t_0}^{\frac{T}{2}-t_0}x(\tau)e^{-i\frac{2\pi kt_0}{T}}e^{-i\frac{2\pi k\tau}{T}}d\tau\\
-    d_k=\displaystyle\frac{1}{T}e^{-i\frac{2\pi kt_0}{T}}\int_{-\frac{T}{2}-t_0}^{\frac{T}{2}-t_0}x(\tau)e^{-i\frac{2\pi k\tau}{T}}d\tau=\frac{1}{T}e^{-i\frac{2\pi kt_0}{T}}c_k
+    d_k=\displaystyle\frac{1}{T}e^{-i\frac{2\pi kt_0}{T}}\int_{-\frac{T}{2}-t_0}^{\frac{T}{2}-t_0}x(\tau)e^{-i\frac{2\pi k\tau}{T}}d\tau=e^{-i\frac{2\pi kt_0}{T}}c_k
 \end{gather*}
 Dove $c_k$ sono i coefficienti del segnale non traslato. 
 
@@ -1860,7 +1862,7 @@ Si considera la sotituzione $l=n+k$:
     y(t)=\displaystyle\sum_{l=-\infty}^{+\infty}c_{l-n}e^{i\frac{2\pi lt}{T}}
 \end{equation*}
 
-Per cui i coefficienti dell'espansione di Fourier di $y$, corrispondo agli stessi coefficienti del segnale originario $x$, ma ad un generico coefficienti $c_k$ viene 
+Per cui i coefficienti dell'espansione di Fourier di $y$, corrispondo agli stessi coefficienti del segnale originario $x$, ma ad un generico coefficiente $c_k$ viene 
 associata l'armonica di ordine $k+n$.   
 Tramite la definizione integrale dei coefficienti di Fourier, si arriva allo stesso risultato:
 \begin{gather*}
@@ -1885,7 +1887,7 @@ Espansione di Fourier della derivata di un segnale $x(t)$:
     y(t)=\displaystyle\frac{d}{dt}x(t)=\frac{d}{dt}\left(\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\right)=\sum_{k=-\infty}^{+\infty}c_k\frac{2i\pi k}{T}e^{i\frac{2\pi kt}{T}}\\
     d_k=c_k\displaystyle\frac{2i\pi k}{T}
 \end{gather*}
-Tramite la definizione, si risolve tramite integraazione per parti:
+Tramite la definizione, si risolve tramite integrazione per parti:
 \begin{gather*}
     d_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\frac{d}{dt}x(t)e^{-i\frac{2\pi kt}{T}}dt=
     \left[\frac{1}{T}x(t)e^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}+\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\frac{2i\pi k}{T}e^{-i\frac{2\pi kt}{T}}dt\\
@@ -1905,7 +1907,7 @@ Questo teorema permette di calcolare velocemente la potenza di un segnale period
 \end{gather*}
 L'integrale corrisponde all'impulso discreto di argomento $k-n$:
 \begin{equation*}
-    P_x=\displaystyle\sum_{k=-\infty}^{+\infty}\sum_{n=-\infty}^{\infty}\frac{1}{T}c_kc_n^*\delta[k-n]=\sum_{k=-\infty}^{+\infty}c_kc_k^*=\sum_{k=-\infty}^{+\infty}|c_k|^2
+    P_x=\displaystyle\sum_{k=-\infty}^{+\infty}\sum_{n=-\infty}^{\infty}\frac{1}{T}c_kc_n^*\delta[k-n]=\frac{1}{T}\sum_{k=-\infty}^{+\infty}c_kc_k^*=\frac{1}{T}\sum_{k=-\infty}^{+\infty}|c_k|^2
 \end{equation*}
 Si possono raggurppare le sommatorie, poiché l'impulso assume valori non nulli solo quando i coefficienti sono uguali. 
 
@@ -1994,8 +1996,8 @@ Permette di passare da un segnale analogico ad un segnale digitale, estraendo ca
 \end{center}
 
 
-Si calcolano i coefficienti dell'espansioen di Fourier del segnale pettine. Si considera l'unico impulso che cade all'interno dell'intervallo di integrazione, centrato 
-in $t=0$, per la priopiertà di campionamento della delta e per l'area della delta si ottiene:
+Si calcolano i coefficienti dell'espansione di Fourier del segnale pettine. Si considera l'unico impulso che cade all'interno dell'intervallo di integrazione, centrato 
+in $t=0$, per la proprietà di campionamento della delta e per l'area della delta si ottiene:
 \begin{gather*}
     c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\delta(t)e^{-i\frac{2\pi kt}{T}}dt=\frac{1}{T}\cancelto{1}{e^{-i{\frac{2\pi k0}{T}}}}\cancelto{1}{\int_{-\frac{T}{2}}^{\frac{T}{2}}\delta(t)dt}\\
     c_k=\displaystyle\frac{1}{T}
@@ -2040,13 +2042,13 @@ I due seni assumono sempre valori discordi e unitari, quindi si possono esprimer
 \end{gather*}
 
 \subsection{Segnali Reali}
-Se un segnale è reale, i suoi coefficienti possono essere espressi in un alltro modo. Considerando la forma integrale dei coefficienti, e la formula di Eulero per gli 
+Se un segnale è reale, i suoi coefficienti possono essere espressi in un altro modo. Considerando la forma integrale dei coefficienti, e la formula di Eulero per gli 
 esponenziali
 \begin{gather*}
     c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\left[\cos\left(\frac{2\pi kt}{T}\right)-i\sin\left(\frac{2\pi kt}{T}\right)\right]dt\\
     c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cos\left(\frac{2\pi kt}{T}\right)dt-\frac{i}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\sin\left(\frac{2\pi kt}{T}\right)dt
 \end{gather*}
-Si definoscono due coefficienti $a_k$ e $b_k$ pari alla parte reale ed immaginaria del coefficienti $c_k$:
+Si definiscono due coefficienti $a_k$ e $b_k$ pari alla parte reale ed immaginaria del coefficienti $c_k$:
 \begin{gather*}
     c_k=a_k+ib_k\\
     a_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cos\left(\frac{2\pi kt}{T}\right)dt\\
@@ -2071,7 +2073,7 @@ Un qualsiasi segnale reale può essere espresso come:
     x(t)=\displaystyle\sum_{k=1}^{+\infty}\rho_k \left(e^{i\left(\frac{2\pi kt}{T}+\phi_k\right)}+e^{-i\left(\frac{2\pi kt}{T}+\phi_k\right)}\right)+c_0=\displaystyle c_0+\sum_{k=1}^{+\infty}2\rho_k\cos\left(\frac{2\pi kt}{T}+\phi_k\right)
 \end{gather*}
 Questo rappresentazione è possibile solo per segnali $x$ reali. 
-Considerando le formule del coseno della somma si pul esprimere come:
+Considerando le formule del coseno della somma si può esprimere come:
 \begin{gather*}
     \displaystyle c_0+\sum_{k=1}^{+\infty}2\rho_k\cos\left(\frac{2\pi kt}{T}+\phi_k\right)=
     c_0+\sum_{k=1}^{+\infty}2\rho_k\cos(\phi_k)\cos\left(\frac{2\pi kt}{T}\right)-2\rho_k\sin(\phi_k)\sin\left(\frac{2\pi kt}{T}\right)\\
@@ -2079,7 +2081,7 @@ Considerando le formule del coseno della somma si pul esprimere come:
     a_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cos\left(\frac{2\pi kt}{T}\right)dt\\
     b_k=\displaystyle-\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\sin\left(\frac{2\pi kt}{T}\right)dt
 \end{gather*}
-Se il segnale $x$ è raele e pari, allora i coefficienti $b_k$ sono nulli, se il segnale è immaginario e dispari, i coefficienti $a_k$ sono nulli. 
+Se il segnale $x$ è reale e pari, allora i coefficienti $b_k$ sono nulli, se il segnale è immaginario e dispari, i coefficienti $a_k$ sono nulli. 
 Per cui i coefficienti $c_k$ di Fourier di un segnale reale e pari sono pari e raeli, i coefficienti $c_k$ di Fourier di un segnale immaginario e 
 dispari sono immaginari e dispari. 
 
@@ -2298,7 +2300,7 @@ Nello spazio di Fourier si può poi analizzare la banda di un segnale, ovvero il
 trasmettere un determinato segnale. I due domini del tempo e della frequenza sono due domini separati. 
 Il nucleo o kernel della trasformata di Fourier corrisponde all'armonica, ovvero il componente esponenziale complesso nell'integrale. 
 
-\subsection{Trasformate Elementari}
+\subsection{Trasformate Notevoli}
 
 Dato un segnale finestra:
 \begin{gather*}
@@ -2315,7 +2317,7 @@ La trasformata in $f=0$, corrisponde al valore medio del segnale finestra:
     X(0)=\displaystyle\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}dt=\tau
 \end{equation*}
 %% grafo
-Questa proprietà si chiama teormea del valor medio. Ovvero per ogni segnale $x$, la trasformata per la frequenza nulla $f=0$ corrisponde al valore medio del segnale. 
+Questa proprietà si chiama teorema del valor medio. Ovvero per ogni segnale $x$, la trasformata per la frequenza nulla $f=0$ corrisponde al valore medio del segnale. 
 
 
 
@@ -2337,7 +2339,7 @@ Dato un segnale costante:
     X(f)=\displaystyle\int_{-\infty}^{+\infty}e^{-2i\pi ft}dt=\delta (f)
 \end{gather*}
 Analogamente al prodotto scalare tra due armoniche. 
-Tanto più p esteso un segnale nel dominio del tempo, tanto più è limitato nel domino della frequenza. 
+Tanto più è esteso un segnale nel dominio del tempo, tanto più è limitato nel domino della frequenza. 
 
 
 Dato il segnale impulso traslato:
@@ -2436,7 +2438,7 @@ Per cui in generale dato un segnale scalato di un fattore $a$, la sua trasformat
     \mathscr{F}\{x(at)\}=\displaystyle\frac{1}{|a|}X\left(\frac{f}{a}\right)
 \end{gather*}
 
-\subsection{Altre Trasformate Elementari}
+\subsection{Altre Trasformate Notevoli}
 
 Si considera la trasformata del segnale gaussiano:
 \begin{gather*}
@@ -2456,7 +2458,7 @@ In forma normalizzata la gaussiana si esprime direttamente rispetto alla deviazi
     x(t)=e^{-\frac{t^2}{2\sigma^2}}\\
     X(f)=\sqrt{2\pi}\sigma e^{-2\pi^2\sigma^2f^2}
 \end{gather*}
-L'area sottesa dalla gaussiana risulta essere il valor medio, esprimibile tramite la 
+L'area sottesa dalla gaussiana risulta essere il valor medio, esprimibile tramite il valore della trasformata per $f=0$:
 \begin{equation*}
     X(0)=\sqrt{2\pi}\sigma
 \end{equation*}
@@ -2513,7 +2515,7 @@ Dato il segnale gradino, si può esprimere come il limite di un esponenziale uni
 \begin{equation*}
     x_3(t)=u(t)=\lim_{\alpha\to0}e^{-\alpha t}{u(t)}
 \end{equation*}
-Poiché non è un segnale impulsivo, questo risultato non rappresenta la trasformata su tutte le frequenza. 
+Poiché non è un segnale impulsivo, questo risultato non rappresenta la trasformata su tutte le frequenze. 
 \begin{gather*}
     X(f)=\displaystyle\lim_{\alpha\to0}\frac{1}{\alpha+2i\pi f}=\frac{1}{2i\pi f}
 \end{gather*}
@@ -2681,7 +2683,7 @@ Dato un segnale $x$ di trasformata $X$, si considera il suo integrale fino ad un
 \begin{gather*}
     x_1(t)=\displaystyle\int_{-\infty}^{+\tau}x(\tau)d\tau=\int_{-\infty}^{*\infty}u(t-\tau)x(\tau)d\tau=x(t)*u(t)
 \end{gather*}
-Nel domino della frequenza la trasformata del segnale $x_1$ è quindi il prodotto tra la trasformata do $x$ e del segnale gradino:
+Nel domino della frequenza la trasformata del segnale $x_1$ è quindi il prodotto tra la trasformata di $x$ e del segnale gradino:
 \begin{gather*}
     X_1(f)=X(f)\left[\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}\right]=\frac{1}{2}X(0)\delta(f)+\frac{X(f)}{2i\pi f}
 \end{gather*}
@@ -2863,7 +2865,7 @@ Si considera la formula del coefficiente di Fourier:
 Poiché considera un singolo componente nell'intervallo, si può ottenre lo stesso coefficiente, considerando il segnale $\dot x(t)$, replica del segnale $x(t)$ nel solo periodo 
 centrato in $t=0$, e nullo fuori dal periodo:
 \begin{gather*}
-    c_k=\frac{1}{T}\displaystyle\int_{-T/2}^{T/2}\dot x(t)e^{-2i\pi kt/T}dt=\frac{1}{T}\dot X\left(\frac{n}{T}\right)
+    c_k=\frac{1}{T}\displaystyle\int_{-T/2}^{T/2}\dot x(t)e^{-2i\pi kt/T}dt=\frac{1}{T}\dot X\left(\frac{k}{T}\right)
 \end{gather*}
 Assume il valore della trasformata del segnale $\dot x$, rispetto alla frequenza $f_k=k/T$. 
 %% \dot più spesso
@@ -3158,7 +3160,7 @@ Dato un filtro di risposta impulsiva $h(t)$, calcolare la sua funzione di trasfe
 
 \section{Trasformata di Fourier Tempo Discreto}
 
-Si considera un filtro descritto da una risposta impulsiva $h(t)$, definita come la risposta $y(t)=x(t)*h(t9)$ corrispodnente ad un impulso in entrata $x(t)=u(t)$. Se viene 
+Si considera un filtro descritto da una risposta impulsiva $h(t)$, definita come la risposta $y(t)=x(t)*h(t)$ corrispodnente ad un impulso in entrata $x(t)=u(t)$. Se viene 
 inserita un'armonica nel sistema:
 \begin{gather*}
     x(t)=e^{2i\pi f_0t}\\
@@ -3178,7 +3180,7 @@ Continuando le analogie con il tempo continuo, sarà quindi possibile riportare 
 \begin{gather*}
     x[n]=e^{2i\pi f_0nT}
 \end{gather*}
-Poiché spesso un segnale tempo discreto corrispodne ad un segnale tempo continuo $x(t)$ campionato ad intervalli regolari $T$, creando così una sequenza di valori equamente 
+Poiché spesso un segnale tempo discreto corrisponde ad un segnale tempo continuo $x(t)$ campionato ad intervalli regolari $T$, creando così una sequenza di valori equamente 
 distribuiti rispetto al tempo $x[n]$. Per cui questo segnale viene definito rispetto al tempo di campionamento, periodico, $T$. Si conisdera ora l'uscita del sistema 
 data quest'entrata:
 \begin{gather*}
@@ -3194,7 +3196,7 @@ Analogamente al tempo continuo, il sistema filtra l'armonica in entrata rispetto
 La prima informazione ricavabile da questo processo è che la trasformata di Fourier di una sequenza di valori, il segnale in discreto, è una funzione continua, nella 
 variabile $f_0$. Per cui dato un generico segnale $x[n]$, la sua trasformata si ottiene come:
 \begin{gather*}
-    \mathscr{F}\{x[n]\}=\displaystyle\sum_{k=-\infty}^{+\infty}x[n]e^{-2i\pi fkT}=X(f)
+    \mathscr{F}\{x[n]\}=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi fkT}=X(f)
 \end{gather*}
 Questo segnale risultante è periodico e di periodo $1/T$, si dimostra considerando la trasformata ritardata di un fattore $1/T$:
 \begin{gather*}
@@ -3209,18 +3211,19 @@ La funzione di trasferimento può essere espressa come:
     X(\Phi)=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi k\Phi}
 \end{gather*}
 La funzione misurata rispetto alla frequenza normalizzata ha periodo unitario. 
-Se la trasformata tempo discreta è un segnale periodico rispetto alla frequenza, allora per confronto diretto è la sua stessa rappresentazione di Fourier:
+Se la trasformata tempo discreta è un segnale periodico rispetto alla frequenza, allora per confronto diretto è la sua stessa rappresentazione di Fourier, nel dominio della 
+frequenza di periodo $1/T$:
 \begin{gather*}
     X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi kfT}=\sum_{k=-\infty}^{+\infty}c_ke^{-2i\pi kfT}\\
     c_k=x[k]
 \end{gather*}
-La sequenza stessa coincidono esattametne come i coefficienti della serie di Fourier del segnale trasformata. Si considera ora la definizione di un coefficiente di Fourier, 
-per ottenere la relazione opposta, ovvero l'antitrasformata dal dominio della frequenza al dominio tempo discreto:
+La sequenza stessa coincide esattametne con i coefficienti della serie di Fourier del segnale trasformata. Si considera ora la definizione di un coefficiente di Fourier, 
+per ottenere la relazione inversa, ovvero l'antitrasformata dal dominio della frequenza al dominio tempo discreto:
 \begin{gather*}
     c_k=\displaystyle T\int_{-1/2T}^{1/2T}X(f)e^{2i\pi kfT}df=x[k]
 \end{gather*}
 
-\subsection{Trasformate Elementari}
+\subsection{Trasformate Notevoli}
 
 Si considera un impulso discreto $\delta[n]$, e si vuole calcolare la sua trasformata di Fourier tramite la definizione:
 \begin{gather*}
@@ -3299,6 +3302,22 @@ tra due impulsi, la sua trasforamta corrisponde ad un filtro passa alto:
     \end{tikzpicture}
 \end{center}
 
+
+Data una trasformata di Fourier $X$:
+%% grafico
+\begin{gather*}
+    X(f)=\mbox{rect}\displaystyle\left(\frac{f}{2f_c}\right)
+\end{gather*}
+Non può essere la trasformata di una sequenza, poiché deve essere necessariamente periodica. Per cui deve essere espressa come un treno di finestre:
+\begin{gather*}
+    X(f)=\displaystyle\sum_{k=-\infty}^{\infty}\mbox{rect}\left(\frac{f-k/T}{2f_c}\right)
+\end{gather*}
+Per determinare la sequenza associata a questa trasformata si applica l'integrale di antitrasformazione:
+\begin{gather*}
+    x[n]=T\displaystyle\int_{-1/2T}^{1/2T}\mbox{rect}\left(\frac{f}{2f_0}\right)e^{2i\pi n fT}df=T\int_{-f_c}^{f_c}e^{2i\pi nfT}df\\
+    \displaystyle\left[T\frac{e^{2i\pi nfT}}{2i\pi fT}\right]^{f_c}_{-f_c}=\frac{2f_cT}{2f_cT}\frac{\sin(2\pi nf_cT)}{\pi n}=2f_cT\mbox{sinc}(2nf_cT)
+\end{gather*}
+
 \subsection{Proprietà del Valor Medio}
 
 Il valor della trasformata di Fourier calcolata in $f=0$ corrisponde al valor medio della sequenza di campioni:
@@ -3312,21 +3331,316 @@ Analogamente vale la proprietà duale; il valore del campione in $k=0$, corrispo
 
 \subsection{Traslazione nel Tempo Discreto ed in Frequenza}
 
-Dato un segnale tempo discreto $x[n]$ e la sua trasformata $X(f)$, si consdiera un ritardo di $n_0$ campioni e si calcola la sua trasformata rispetto alla trasformata del 
+Dato un segnale tempo discreto $x[n]$ e la sua trasformata $X(f)$, si considera un ritardo di $n_0$ campioni e si calcola la sua trasformata rispetto alla trasformata del 
 segnale non traslato:
 \begin{gather*}
     \mathscr{F}\{x[n-n_0]\}=\displaystyle\sum_{n=-\infty}^{+\infty}x[n-n_0]e^{-2i\pi fnT}=e^{-2i\pi fn_0T}\sum_{m=-\infty}^{+\infty}x[m]e^{-2i\pi mfT}=X(f)e^{-2i\pi fn_0T}
 \end{gather*}
 Si considera la proprietà duale della traslazione in frequenza, nota una sequenza di campioni $x[n]$ e la sua trasformata di Fourier $X(f)$:
 \begin{gather*}
-    \mathscr{F}\left\{x[n]e^{2i\pi f_0nT}\right\}=\displaystyle\sum_{k=-\infty}^{+\infty}x[n]e^{2i\pi f_0nT}e^{-2i\pi fkT}=\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi (f-f_0)kT}=X(f-f_0)
+    \mathscr{F}\left\{x[n]e^{2i\pi f_0nT}\right\}=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{2i\pi f_0kT}e^{-2i\pi fkT}=\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi (f-f_0)kT}=X(f-f_0)
 \end{gather*} 
 
+\subsection{Teorema della Convoluzione}
+
+Data un segnale $y$ convoluzione tra due segnali tempo discreti $x$ e $h$:
+\begin{gather*}
+    y[n]=x[n]*h[n]=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]h[n-k]
+\end{gather*}
+Applicando la definizione si ottiene:
+\begin{gather*}
+    Y(f)=\displaystyle\sum_{n=-\infty}^{+\infty}y[n]e^{-2i\pi nfT}=\displaystyle\sum_{n=-\infty}^{+\infty}\left(\sum_{k=-\infty}^{+\infty}x[k]h[n-k]\right)e^{-2i\pi nfT}
+\end{gather*}
+Si applica la sostituzione $m=n-k$:
+\begin{gather*}
+    Y(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\sum_{m=-\infty}^{+\infty}x[k]h[m]e^{-2i\pi kfT}e^{-2i\pi mfT}=\sum_{k=-\infty}^{+\infty}x[k]\left(\sum_{m=-\infty}^{+\infty}h[m]e^{-2i\pi mfT}\right)e^{-2i\pi kfT}\\
+    Y(f)=\displaystyle\left(\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi kfT}\right)H(f)=X(f)H(f)
+\end{gather*}
+
+Dato un segnale $y$ prodotto tra due segnali tempo discreti $x$ e $h$:
+\begin{gather*}
+    y[n]=x[n]\cdot h[n]
+\end{gather*}
+Si vuole calcolare la trasformata di Fourier di $Y$ nota $X$ e $H$. Si esprime $Y$ tramite la definizione:
+\begin{gather*}
+    Y(f)=\displaystyle\sum_{n=-\infty}^{+\infty}x[n]h[n]e^{-2i\pi nfT}
+\end{gather*}
+Si esprime il segnale $x$ come l'antitrasformata del suo spettro in frequenza: 
+\begin{gather*}
+    Y(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\left(T\int_{-1/2T}^{1/2T}X(\theta)e^{2i\pi n\theta T}d\theta\right)h[n]e^{-2i\pi nfT}\\
+    T\int_{-1/2T}^{1/2T}X(\theta)\left(\sum_{n=-\infty}^{+\infty}h[n]e^{-2i\pi n(f-\theta)T}\right)d\theta\\
+    Y(f)=\displaystyle T\int_{-1/2T}^{1/2T}X(\theta)H(f-\theta)d\theta
+\end{gather*}
+Si considera ora la convoluzione tra due segnali $\overline{X}$ e $\overline{H}$:
+\begin{gather*}
+    \overline{X}(f)*\overline{H}(f)=\displaystyle\int_{-\infty}^{+\infty}\overline{X}(\theta)\overline{H}(f-\theta)d\theta
+\end{gather*}
+Mentre si definisce la convoluzione circolare tra due segnali periodici di periodo uguale $1/T$, la convoluzione tra un loro periodo:
+\begin{gather*}
+    \displaystyle T\int_{-1/2T}^{1/2T}X(\theta)H(f-\theta)d\theta
+\end{gather*}
+
+Si considerano i segnali $X$ e $H$ di periodo $1/T$ una ripetizione di un segnale replicato $\overline{X}$ e $\overline{H}$:
+\begin{gather*}
+    X(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\overline{X}\left(f-\frac{n}{T}\right)\\
+    H(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\overline{H}\left(f-\frac{k}{T}\right)
+\end{gather*}
+La convoluzione $\overline{Y}$ tra queste repliche si ottiene come:
+\begin{gather*}
+    \overline{Y}(f)=\displaystyle\int_{-\infty}^{+\infty}\overline{X}(\theta)\overline{H}(f-\theta)d\theta
+\end{gather*}
+Da cui si ottiene il segnale convoluzione tra i due segnali $X$ e $H$:
+\begin{gather*}
+    Y(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\overline{Y}\left(f-\frac{n}{T}\right)
+\end{gather*}
+
+Si dimostra considerando la convoluzione circolare, esprimendo i segnali come treni di repliche:
+\begin{gather*}
+    Y(f)=\displaystyle T\int_{-1/2T}^{1/2T}X(\theta)H(f-\theta)d\theta=T\sum_{n=-\infty}^{+\infty}\sum_{k=-\infty}^{+\infty}\int_{-1/2T}^{1/2T}\overline{X}\left(\theta-\frac{n}{T}\right)\overline{H}\left(f-\theta-\frac{k}{T}\right)d\theta
+\end{gather*}
+Si applica la sostituzione $\theta'=\theta-n/T$:
+\begin{gather*}
+    Y(f)=T\displaystyle\sum_{n=-\infty}^{+\infty}\sum_{k=-\infty}^{+\infty}\int_{-1/2T-n/T}^{1/2T-n/T}\overline{X}(\theta')\overline{H}\left(f-\theta'-\frac{k+n}{T}\right)d\theta'
+\end{gather*}
+La sommatoria presenta sempre contributi nulli eccetto per $n=0$, poiché il segnale replicato è presente solo nel periodo centrato in $0$:
+\begin{gather*}
+    Y(f)=T\displaystyle\sum_{k=-\infty}^{+\infty}\int_{-1/2T}^{1/2T}\overline{X}(\theta')\overline{H}\left(f-\theta'-\frac{k}{T}\right)d\theta'
+\end{gather*}
+Per cui si ottiene esattamente la convoluzione circolare, poiché si integra all'interno di un periodo, e le repliche sono non nulle solo 
+all'interno del periodo base, si possono espandere gli intervalli di integrazione arbitrariamente, per cui si ottiene:
+\begin{gather*}
+    Y(f)=T\displaystyle\sum_{k=-\infty}^{+\infty}\overline{Y}\left(f-\frac{k}{T}\right)
+\end{gather*}
+
+\subsection{Teorema di Parceval}
+
+Prima di dimostrare il teorma di Parceval, si determina la trasformata del coniugato di un segnale noto $y$:
+\begin{gather*}
+    y[n]\to Y(f)
+\end{gather*}
+Si esprime tramite la definizione:
+\begin{gather*}
+    \displaystyle\sum_{n=-\infty}^{+\infty}y^*[n]e^{-2i\pi nfT}=\left[\sum_{n=-\infty}^{+\infty}y[n]e^{2i\pi nfT}\right]^*=Y^*(-f)
+\end{gather*}
+
+Si considera il duale del teorema della convoluzione:
+\begin{gather*}
+    \displaystyle\sum_{n=-\infty}^{+\infty}y[n]x[n]e^{-2i\pi nfT}=T\displaystyle\int_{-1/2T}^{1/2T}Y(\theta)X(f-\theta)d\theta
+\end{gather*}
+Si pone $f=0$:
+\begin{gather*}
+    \displaystyle\sum_{n=-\infty}^{+\infty}y[n]x[n]=T\displaystyle\int_{-1/2T}^{1/2T}Y(\theta)X(-\theta)d\theta
+\end{gather*}
+Si considera ora $y=y^*$:
+\begin{gather*}
+    \displaystyle\sum_{n=-\infty}^{+\infty}y^*[n]x[n]=T\displaystyle\int_{-1/2T}^{1/2T}Y^*(-\theta)X(-\theta)d\theta
+\end{gather*}
+Si sostituisce ora $x=y$:
+\begin{gather*}
+    \displaystyle\sum_{n=-\infty}^{+\infty}x^*[n]x[n]=T\displaystyle\int_{-1/2T}^{1/2T}X^*(-\theta)X(-\theta)d\theta\\
+    \displaystyle\sum_{n=-\infty}^{+\infty}|x[n]|^2=T\int_{-1/2T}^{1/2T}|X(\theta)|^2d\theta
+\end{gather*}
+Per cui l'energia di un segnale $x$ si può calcolare sia nel tempo discreto che nel dominio della frequenza:
+\begin{gather*}
+    E_x=\displaystyle\sum_{n=-\infty}^{+\infty}|x[n]|^2=T\int_{-1/2T}^{1/2T}|X(f)|^2df
+\end{gather*}
+
+\subsection{Teorema della Correlazione}
+
+Si considera la correlazione tra due segnali tempo discreti $x$ e $y$, e si esprime rispetto alla convoluzione:
+\begin{gather*}
+    R_{xy}[n]=x[n]\otimes y[n]=\displaystyle\sum_{k=-\infty}^{+\infty}x[n+k]y^*[k]
+\end{gather*}
+Si vuole calcolare la trasformata del segnale correlazione, tramite la definzione:
+\begin{gather*}
+    \displaystyle\sum_{n=-\infty}^{+\infty}\sum_{k=-\infty}^{+\infty}x[n+k]y^*[k]e^{-2i\pi nfT}
+\end{gather*}
+Si applica la sostituzione $m=n+k$:
+\begin{gather*}
+    \displaystyle\sum_{k=-\infty}^{+\infty}y^*[k]\left(\sum_{m=-\infty}^{+\infty}x[m]e^{-2i\pi mfT}\right)e^{2i\pi kfT}= X(f)\sum_{k=-\infty}^{+\infty}y^*[k]e^{2i\pi kfT}=X(f)Y^*(f)
+\end{gather*}
+Nel caso in cui $y=x$, allora l'autocorrelazione ha una trasformata di Fourier pari al modulo al quadrato della sua trasformata:
+\begin{gather*}
+    R_{xx}[n]\to X(f)X^*(f)=|X(f)|^2
+\end{gather*}
+
+\subsection{Campionamento}
+
+Un segnale introdotto precedentemente necessario per il campionamento di un segnale è il treno di delta, esprimbile tramite serie di Fourier, poiché periodico:
+\begin{gather*}
+    \pi(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta\left(f-nT\right)=\sum_{k=-\infty}^{+\infty}c_ke^{2i\pi nt/T}
+\end{gather*}
+I suoi coefficienti si esprimono come:
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-T/2}^{T/2}\pi(t)e^{-2i\pi nt/T}dt=\frac{1}{T}\int_{-T/2}^{T/2}\delta(t)e^{-2i\pi nt/T}dt=\frac{1}{T}\cancelto{1}{e^{-2i\pi n0/T}}
+\end{gather*}
+Un treno di delta rappresenta una serie armonica, di ragione $e^{2i\pi t/T}$. La sua trasformata si ottiene come:
+\begin{gather*}
+    \Pi(f)=\displaystyle\sum_{n=-\infty}^{+\infty}e^{-2i\pi nfT}=\sum_{k=-\infty}^{+\infty}\frac{1}{T}\delta\left(f-\frac{k}{T}\right)
+\end{gather*}
+La sua trasformata è quindi anch'essa un treno campionatore, con ogni impulso distanziato di un fattore $1/T$ in frequenza. 
+
+Per campionare un segnale si considere un DAC, "Digital to Analog Converter", un circuito composto da un interrutore che si chiude ad intervalli regolari per misurare il 
+valore in entrata: 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[block](c)at(0,0){DAC};
+        \draw[->] (-1,0)--(c.180)node[midway, above]{$x(t)$};
+        \draw[->] (c.0)--(1,0)node[midway, above]{$x_C(t)$};
+    \end{tikzpicture}
+\end{center}
+Si indica il segnale campionato con $x_C(t)$, mentre il segnale originario con $x(t)$:
+\begin{gather*}
+    x_C(t)=x(t)\pi(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(t)\delta\left(t-\frac{n}{T}\right)=\sum_{n=-\infty}^{+\infty}x(nT)\delta\left(t-\frac{n}{T}\right)
+\end{gather*}
+Il segnale campionato è un segnale tempo continuo, ma si comporta a tutti gli effetti come fosse una sequenza di valori $x[n]$ tempo discreto. 
+
+Si consdidera ora un campionatore nel dominio della frequenza:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[block](c)at(0,0){DAC};
+        \draw[->] (-1,0)--(c.180)node[midway, above]{$X(f)$};
+        \draw[->] (c.0)--(1,0)node[midway, above]{$X_C(f)$};
+    \end{tikzpicture}
+\end{center}
+
+Nel dominio della frequenza il segnale campionato si ottiene come:
+\begin{gather*}
+    x_C(t)=x(t)\pi(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta\left(t-nT\right)\\
+    X_C(f)=X(f)*\Pi(f)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)e^{-2i\pi nfT}\\
+    X(f)*\Pi(f)=\displaystyle X(f)*\frac{1}{T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{T}\right)=\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)
+\end{gather*}
+Per cui la trasformata del segnale campionato è un segnale periodico nella frequenza, di periodo $1/T$. 
+La trasformata di Fourier di una sequenza coincide con la trasformata di Fourier di un segnale campionato. 
+Quando le repliche del segnale si sovrappongono, avviene un fenomeno 
+noto come "aliasing", dove a frequenze alte si perdono delle informazioni, poiché si sovrappone con la replica del periodo successivo a basse frequenze. 
 
 
 
+Si considera una sequenza $x[n]$ e la sua trasformata:
+\begin{gather*}
+    x[n]\to X_C(f)=\displaystyle\sum_{n=-\infty}^{+\infty}x[n]e^{-2i\pi nfT}
+\end{gather*}
+Si può rappresentare la sequenza come un segnale tempo continuo $x$ ad intervalli regolari $T$, chiamato tempo di campionamento:
+\begin{gather*}
+    x[n]=x(nT)\\
+    t=nT\\
+    x(t)
+\end{gather*}
+Per evitare di calcolare la sommatoria si considera la trasformata di questo segnale da cui si è estratta la sequenza: 
+\begin{gather*}
+    x(t)\to X(f)
+\end{gather*}
+Per esprimrere la trasformata della sequenza si replica questa trasformata ad intervalli $1/T$ in frequenza:
+\begin{gather*}
+    X_C(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)
+\end{gather*}
+
+\subsection{Esercizi sulle Trasformate Discrete}
+
+Data una sequenza di valore costante:
+\begin{gather*}
+    x[n]=1
+\end{gather*}
+Si determina la trasformata della sequenza:
+\begin{gather*}
+    X_C(f)=\displaystyle\sum_{n=-\infty}^{+\infty}e^{-2i\pi nfT}
+\end{gather*}
+Altrimenti si considera il segnale da cui si è campionata la sequenza:
+\begin{gather*}
+    x(t)=1\\
+    X(f)=\delta(f)
+\end{gather*}
+Per cui la trasformata del segnale campionato si può esprimere come un treno di delta:
+\begin{gather*}
+    X_C(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{T}\right)
+\end{gather*}
+Poiché la sequenza considerata coincide con il treno campionatore $x[n]=\pi(t)$. 
+
+Calcolare la trasformata della sequenza $x[n]$:
+\begin{gather*}
+    x[n]=\left[\displaystyle\frac{\sin(2\pi f_CnT)}{\pi n}\right]^2=4f_C^2T^2\mbox{sinc}^2(2f_CnT)
+\end{gather*}
+Questa sequenza si può considerare estratta dal segnale tempo continuo $x$:
+\begin{gather*}
+    x(t)=4f_C^2T^2\mbox{sinc}(2f_Ct)\\
+    X(f)=\displaystyle 2f_CT^2\mbox{tri}\left(\frac{f}{2f_C}\right)
+\end{gather*}
+
+Per cui si esprime la trasformata della sequenza come:
+\begin{gather*}
+    X_C(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=2f_CT\sum_{n=-\infty}^{+\infty}\mbox{tri}\left(\frac{f-\frac{n}{T}}{2f_C}\right)
+\end{gather*}
+Se $T$ il passo di campionamento non è abbastanza grande, i triangoli si sovrappongono tra di loro. 
 
 
+
+Calcolare la convoluzione $y$ tempo discreta tra $x$ e $h$, esponenziali unilateri: 
+\begin{gather*}
+    y[n]=x[n]*h[n]\\
+    x[n]=a^nu[n]\\
+    h[n]=b^nu[n]\\
+    y[n]=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]h[n-k]=\sum_{k=-\infty}^{+\infty}a^ku[k]b^{n-k}u[n-k]=\sum_{k=0}^na^kb^{n-k}\\
+    \displaystyle b^n\sum_{k=0}^n\left(\frac{a}{b}\right)^k=b^n\frac{1-\left(\frac{a}{b}\right)^{n+1}}{1-\frac{a}{b}}\\
+    y[n]=\displaystyle\frac{b^{n+1}-a^{n+1}}{b-a}u[n]
+\end{gather*}
+Si può calcolare anlogamente nel dominio della frequenza, poi attuando un antitrasformata: 
+\begin{gather*}
+    Y_C(f)=X_C(f)H_C(f)\\
+    X_C(f)=\displaystyle\sum_{n=0}^{+\infty}a^ne^{-2i\pi nfT}=\sum_{n=0}^{+\infty}\left(ae^{-2i\pi fT}\right)^n=\frac{1}{1-ae^{-2i\pi fT}}\\
+    H_C(f)=\displaystyle\frac{1}{1-be^{-2i\pi fT}}
+\end{gather*}
+Poiché le due sommatorie diventano delle serie geometriche. Si considera ora il loro prodotto:
+\begin{gather*}
+    Y_C(f)=X_C(f)H_C(f)=\displaystyle\frac{1}{1-ae^{-2i\pi fT}}\frac{1}{1-be^{-2i\pi fT}}
+\end{gather*}
+Si può riscrivere mediante i fratti semplici in una somma di due frazione:
+\begin{gather*}
+    Y_C(f)=\displaystyle\frac{A}{1-ae^{-2i\pi fT}}+\frac{B}{1-be^{-2i\pi fT}}\\
+    \begin{cases}
+        A+B=1\\
+        Ab+Ba=0
+    \end{cases}\to
+    \begin{cases}
+        A=1-B\\
+        b-Bb+Ba=0
+    \end{cases}\to\begin{cases}
+        A=\displaystyle\frac{a}{a-b}\\
+        B=\displaystyle\frac{b}{b-a}
+    \end{cases}
+\end{gather*}
+Per cui il segnale convoluzione si esprime come:
+\begin{gather*}
+    Y_C(f)=\displaystyle\frac{a}{a-b}\frac{1}{1-ae^{-2i\pi fT}}+\frac{b}{b-a}\frac{1}{1-be^{-2i\pi fT}}\\
+    y[n]=\displaystyle\frac{a}{a-b}a^nu[n]+\displaystyle\frac{b}{b-a}b^nu[n]
+\end{gather*}
+
+
+Calcolare la trasforamta di Fourier della sequenza $x$:
+\begin{gather*}
+    x[n]=\displaystyle\frac{\sin(\pi n/3)}{\pi n}\cos\left(\frac{2\pi n}{6}\right)
+\end{gather*}
+Si considera $T=1$, e si esprime il segnale da cui è stata campionata la sequenza:
+\begin{gather*}
+    x(t)=\frac{1}{3}\mbox{sinc}\left(\frac{t}{3}\right)\cos\left(\frac{2\pi t}{6}\right)
+\end{gather*}
+Si determina la trasformata di questo segnale tempo continuo:
+\begin{gather*}
+    X(f)=\displaystyle\mbox{rect}(3f)*\frac{1}{2}\left[\delta\left(f-\frac{1}{6}\right)+delta\left(f+\frac{1}{6}\right)\right]\\
+    X(f)=\displaystyle\frac{1}{2}\mbox{rect}\left(3f-\frac{1}{2}\right)+\frac{1}{2}\mbox{rect}\left(3f+\frac{1}{2}\right)\\
+    X_C(f)=\displaystyle\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=\sum_{n=-\infty}^{+\infty}\frac{1}{2}\mbox{rect}\left(3f-\frac{1}{2}-3n\right)+\frac{1}{2}\mbox{rect}\left(3f+\frac{1}{2}-3n\right)
+\end{gather*}
+
+
+
+Calcolare la trasformata di Fourier della sequenza $x$:
+\begin{gather*}
+    x[n]=\left[\displaystyle\frac{\sin(\pi n/3)}{\pi n}\right]^2=\frac{1}{9}\mbox{sinc}^2\left(\frac{n}{3}\right)\\
+    T=1\\
+    x(t)=\displaystyle\frac{1}{9}\mbox{sinc}^2\left(\frac{t}{3}\right)\\
+    X(f)=\displaystyle \frac{1}{3}\mbox{tri}(3f)\\
+    X_C(f)=\displaystyle\frac{1}{3}\sum_{n=-\infty}^{+\infty}\mbox{tri}(3f-n)
+\end{gather*}
 
 
 
