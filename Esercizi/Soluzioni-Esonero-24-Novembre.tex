@@ -141,7 +141,7 @@ La trasformata di ottiene come:
 \end{gather}
 La potenza si calcola con il teorema di Parceval:
 \begin{gather}
-    P_x=\displaystyle\sum_{n=-\infty}^{+\infty}|c_n|^2=\frac{4}{9}+\frac{1}{4}+\frac{1}{4}
+    P_x=\displaystyle\sum_{n=-\infty}^{+\infty}|c_n|^2=\frac{4}{9}+\frac{1}{4}+\frac{1}{4}=\frac{17}{18}
 \end{gather}
 
 Calcolare i coefficienti e la trasformata di Fourier del segnale periodico $x$, di periodo $T$:
@@ -174,7 +174,7 @@ I coefficienti di Fourier sono allora:
 \end{gather}
 Per cui per $n=2k$ si annulla il coseno, mentre per $=2k-1$ si annulla il seno. Mentre la trasformata del segnale risulta essere:
 \begin{gather}
-    X(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\frac{iT}{4\pi n}\cos\left(\frac{\pi n}{2}\right)-\frac{iT^2}{2\pi^2n^2}\sin\left(\frac{\pi n}{2}\right)\delta\left(f-\frac{n}{T}\right)
+    X(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\left[\frac{iT}{4\pi n}\cos\left(\frac{\pi n}{2}\right)-\frac{iT^2}{2\pi^2n^2}\sin\left(\frac{\pi n}{2}\right)\right]\delta\left(f-\frac{n}{T}\right)
 \end{gather}
 
 \subsection{Convoluzioni}
@@ -186,7 +186,7 @@ Calcolare l'autoconvoluzione del segnale $x$:
     \delta[n]-\delta[n-2]+\delta[n+2]-\delta[n-2]+\delta[n-4]-\delta[n]+\delta[n+2]-\delta[n]+\delta[n+4]
 \end{gather*}
 \begin{equation}
-    x[n]*x[n]=3\delta[n]-2\delta[n-2]+2\delta[n+2]+\delta[n-4]+\delta[n+4]
+    x[n]*x[n]=-\delta[n]-2\delta[n-2]+2\delta[n+2]+\delta[n-4]+\delta[n+4]
 \end{equation}
 
 
