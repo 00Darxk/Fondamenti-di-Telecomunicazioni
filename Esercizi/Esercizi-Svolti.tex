@@ -3,21 +3,25 @@
 \usepackage{cancel}
 \usepackage{tikz}
 \usepackage{amsmath}
-\usepackage{geometry}
+\usepackage[includehead,nomarginpar]{geometry}
 \usepackage{graphicx}
 \usepackage{amsfonts} 
 \usepackage{verbatim}
 \usepackage{mathrsfs}  
 \usepackage{lmodern}
 \usepackage{braket}
-\usepackage{steinmetz}
 \usepackage{bookmark}
-\usepackage{pgfplots}
+\usepackage{steinmetz}
 \usepackage[italian]{babel}
+\usepackage{pgfplots}
+\usepackage{fancyhdr}
+\usepackage{romanbarpagenumber}
 \pgfplotsset{compat=1.16}
 
+\setlength{\headheight}{12.0pt}
+\addtolength{\topmargin}{-12.0pt}
 
-%% numerare equazioni nella versione finale
+%% inserire grafici
 
 \hypersetup{
     colorlinks=true,
@@ -38,6 +42,13 @@
 
 \begin{document}
 
+\pagenumbering{Roman}
+
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{Fondamenti di Telecomunicazioni - Giacomo Sturm}
+\fancyfoot[C]{\thepage}
+
 \maketitle
 
 \vspace{10mm}
@@ -51,6 +62,8 @@
 \tableofcontents
 
 \clearpage
+
+\pagenumbering{arabic}
 
 \section{Convoluzioni, Correlazioni e Sistemi Ingresso-Uscita}
 
@@ -1341,5 +1354,44 @@ Si svolge ora la medesima analisi in frequenza:
 \end{gather}
 Si ottiene lo stesso risultato della trasformata del segnale campionato nel tempo. 
 
+\clearpage
+
+\section{Fenomeni Aleatori}
+
+Si consideri una sorgente $S$ ed un destinatario $D$ che possono trasmettere e ricevere solamente $1$ o $0$. La probabilità che si ricevi uno $0$, 
+quando viene trasmesso uno $0$ è dell'$80\%$, mentre la probabilità che si ricevi un $1$ quando viene trasmesso uno $0$ è del $20\%$:
+\begin{gather*}
+    P(D=0|S=0)=0.8\\
+    P(D=1|S=1)=0.2
+\end{gather*}
+Mentre la probabilità di errore nella trasmissione di un $1$ è:
+\begin{gather*}
+    P(D=1|S=1)=0.7\\
+    P(D=0|S=1)=0.3
+\end{gather*}
+Per cui si conosco le probabilità di errore del canale di trasmissione.
+I simboli $0$ e $1$ non sono equiprobabili alla sorgente:
+\begin{gather*}
+    P(S=0)=0.6\\
+    P(S=1)=0.4
+\end{gather*}
+
+Si vuole calcolare la probabilità sia stato trasmesso un $1$ dalla sorgente quando viene misurato un $1$:
+\begin{gather*}
+    P(S=1|D=1)
+\end{gather*}
+Si esprime tramite il teorema di Bayes:
+\begin{gather*}
+    P(S=1|D=1)=\displaystyle\frac{P(D=1|S=1)P(S=1)}{P(D=1)}=\frac{0.7\cdot0.4}{P(D=1)}
+\end{gather*}
+
+Per determinare la probabilità che il ricevitore misuri $1$ si determina tramite il teorema delle proprietà totali:
+\begin{gather*}
+    P(D=1)=P(D=1|S=1)P(S=1)+P(D=1|S=0)P(S=0)=0.7\cdot0.4+0.3\cdot0.6
+\end{gather*}
+La probabilità che si misuri un $1$ quando viene effettivamente trasmesso un $1$ dalla sorgente risulta essere:
+\begin{gather}
+    P(S=1|D=1)=\displaystyle\frac{0.7\cdot0.4}{0.7\cdot0.4+0.2\cdot0.6}=0.7
+\end{gather}
 
 \end{document}

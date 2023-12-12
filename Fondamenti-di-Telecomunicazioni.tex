@@ -3,19 +3,23 @@
 \usepackage{cancel}
 \usepackage{tikz}
 \usepackage{amsmath}
-\usepackage{geometry}
+\usepackage[includehead,nomarginpar]{geometry}
 \usepackage{graphicx}
 \usepackage{amsfonts} 
 \usepackage{verbatim}
 \usepackage{mathrsfs}  
 \usepackage{lmodern}
 \usepackage{braket}
-\usepackage{steinmetz}
 \usepackage{bookmark}
-\usepackage{pgfplots}
+\usepackage{steinmetz}
 \usepackage[italian]{babel}
+\usepackage{pgfplots}
+\usepackage{fancyhdr}
+\usepackage{romanbarpagenumber}
 \pgfplotsset{compat=1.16}
 
+\setlength{\headheight}{12.0pt}
+\addtolength{\topmargin}{-12.0pt}
 
 %% numerare equazioni nella versione finale
 
@@ -40,6 +44,13 @@
 
 \begin{document}
 
+\pagenumbering{Roman}
+
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{Fondamenti di Telecomunicazioni - Giacomo Sturm}
+\fancyfoot[C]{\thepage}
+
 \maketitle
 
 \vspace{10mm}
@@ -53,6 +64,9 @@
 \tableofcontents
 
 \clearpage
+
+\pagenumbering{arabic}
+
 
 \section{Introduzione}
 
@@ -2930,8 +2944,130 @@ Il teorema di Bayes afferma che la probabilità ch avvenga $A$ dato $B$ e la pro
     P(A|B)P(B)=P(B|A)P(A)
 \end{gather*}
 
+Con questo teorema si può risolvere il problema di Monty Hall. Si considera la scelta di una delle tre porte $A_1$, $A_2$ e $A_3$, mentre la scelta a posteriori di una delle 
+due porte rimanenti $B$. Si considera come prima scelta la porta $A_1$, e si mostra che il premio non si trovi dietro la porta $A_3$. Si calcola la probabilità che il premio 
+si trovi dietro la porta $A_1$: 
+\begin{gather*}
+    P(A_1)=\displaystyle\frac{1}{3}=P(A_2)=P(A_3)\\
+    P(A_1|B)=\displaystyle\frac{P(B|A_1)P(A_1)}{P(B)}=\frac{\displaystyle\frac{1}{2}\cdot{\frac{1}{3}}}{P(B)}
+\end{gather*}
+Sapendo che non può scegliere la porta che contiene il premio, si esprime la probabilità $P(B)$ tramite il teorema delle probabilità totali:
+\begin{gather*}
+    P(B)=P(B|A_1)P(A_1)+P(B|A_2)P(A_2)+P(B|A_3)P(A_3)=\displaystyle\frac{1}{2}\cdot\frac{1}{3}+1\cdot\frac{1}{3}+0\cdot\frac{1}{3}=\frac{1}{2}\\
+    P(A_1|B)=\frac{\displaystyle\frac{1}{2}\cdot{\frac{1}{3}}}{\displaystyle\frac{1}{2}}=\frac{1}{3}
+\end{gather*}
+Invece la probabilità si trovi dietro alla porta $A_2$:
+\begin{gather*}
+    P(A_2|B)=\displaystyle\frac{1\cdot\displaystyle\frac{1}{3}}{\displaystyle\frac{1}{2}}=\frac{2}{3}
+\end{gather*}
+Mentre la probabilità si trovi dietro alla porta $A_3$ è nulla, poiché è stato mostrato non si trovi là:
+\begin{gather*}
+    P(A_3|B)=0
+\end{gather*}
+
+\subsection{Variabili Aleatorie}
+
+Si definisce la variabile aleatoria $X$ una rappresentazione matematica di un problema espresso tramite il linguaggio, mentre si considera una determinazione $x$, un possibile 
+valore assunto dalla variabile aleatoria $X$. Si vuole quindi calcolare la probabilità che la variabile aleatoria assuma un certo valore $x$:
+\begin{gather*}
+    P(X=x)
+\end{gather*}
+Lo spazio di valori che può assumere la variabile aleatoria può essere discreto o continuo, in base alla descrizione dell'evento. Dato uno spazio degli eventi $\Omega$ ed 
+un suo sottoinsieme evento $E$, la probabilità che avvenga l'evento appartiene al codominio $[0,1]$, mentre l'insieme delle determinazioni della variabile aleatoria 
+associata appartiene all'insieme $\mathbb{R}^n$:
+\begin{gather*}
+    P: E\to[0,1]\\
+    X:E\to\mathbb{R}^n
+\end{gather*}
+
+Si considera un resistore che può assumere tre valori di resistenza $R_1=40\,\Omega$, $R_2=50\,\Omega$ e $R_3=\,\Omega$. La probabilità assuma questi tre valori è:
+\begin{gather*}
+    P(R=40\,\Omega)=0.1\\
+    P(R=50\,\Omega)=0.6\\
+    P(R=60\,\Omega)=0.3
+\end{gather*}
+Si considera la probabilità che il resistore assuma un valore minore o uguale di un certo valore $x$, questa funzione viene definita funzione di distribuzione cumulativa $D(x)$:
+\begin{gather}
+    P(R\leq x)=D_R(x)
+\end{gather}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.25,0)--(1.25,0)node[above]{$x$};
+        \draw[->](0,-0.25)--(0,1.25)node[right]{$D_R(x)$};
+        \draw (0.4,0)node[below]{$40$}--(0.4,0.1)--(0.7,0.1)--(0.7,0.7)--(1,0.7)--(1,1)--(1.25,1);
+        \draw[dashed](0,0.1)node[left]{$0.1$}--(0.4,0.1);
+        \draw[dashed](0,0.7)node[left]{$0.7$}--(0.7,0.7);
+        \draw[dashed](0,1)node[left]{$1$}--(1,1);
+        \draw[dashed](0.7,0.1)--(0.7,0)node[below]{$50$};
+        \draw[dashed](1,0.7)--(1,0)node[below]{$60$};
+    \end{tikzpicture}
+\end{center}
+
+La funzione di distribuzione cumulativa deve essere monotona crescente, può essere formata da gradini, ma deve essere sempre crescente. In generale per una variabile 
+aleatoria $X$, all'aumentare della variabile $x$, le porbabilità si sommano, per cui il valore tende asintoticamente ad un valore $1$, mentre tende ad un valore nullo 
+per $x\to-\infty$:
+\begin{gather*}
+    \lim_{x\to-\infty}D_X(x)=0\\
+    \lim_{x\to+\infty}D_X(x)=1
+\end{gather*}
+Per una variabile aleatoria discreta si può espriemre come la somma delle probabilità che la variabile assuma il valore della realizzazione $x_i$, moltiplicate per un gradino 
+che parte dal valore $x_i$:
+\begin{gather}
+    D_X(x)=\displaystyle\sum_{i=-\infty}^{+\infty}P_iu(x-x_i)
+\end{gather}
+
+Si considera la variaible aleatoria tempo di attesa $t$, uniformemente distribuita. Assume valori compresi nell'intervallo $[0,T]$, rappresenta il tempo di attesa prima 
+che avvenga un evento. La sua funzione di distribuzione di probabilità assuma una forma:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.5,0)--(1.25,0)node[above]{$x$};
+        \draw[->](0,-0.25)--(0,1.25)node[right]{$D_t(x)$};
+        \draw (0,0)--(1,0.75)--(1.25,0.75);
+        \draw[dashed](0,0.75)node[left]{$1$}--(1,0.75)--(1,0)node[below]{$T$};
+    \end{tikzpicture}
+\end{center}
+
+La pendenza della curva si ottiene tramite $1/T$. 
 
 
 
+La funzione densità di probabilità $P_X$, della variabile aleatoria $X$ calcolata in $x$, si esprime come la derivata della funzione di distribuzione di probabilità:
+\begin{equation}
+    P_X(x)=\displaystyle\frac{dD_X(x)}{dx}
+\end{equation}
+La funzione di distribuzione cumulativa è quindi una primitiva della funzione densità di probabilità:
+\begin{equation}
+    D_X(x)=\displaystyle\int_{-\infty}^{x}P_X(\xi)d\xi
+\end{equation}
+Per una variabile aleatoria discreta, la funzione densità di probabilità rappresenta una serie di impulsi, centrati nel valore $x_i$, di ampiezza la probabilità $P_i$:
+\begin{equation}
+    P_X(x)=\displaystyle\sum_{i=-\infty}^{+\infty}P_i\delta(x-x_i)
+\end{equation}
+
+La funzione densità di probabilità della variabile aleatoria tempo di attesa rappresenta una finestra di ampiezza $1/T$ di base $T$ e centrata in $T/2$:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.25,0)--(1.25,0)node[above]{$x$};
+        \draw[->](0,-0.25)--(0,1.25)node[right]{$P_X(x)$};
+        \draw[-](0,0.75)node[left]{$\displaystyle\frac{1}{T}$}--(1,0.75)--(1,0)node[below]{$T$};
+    \end{tikzpicture}
+\end{center}
+
+Si può calcolare la probabilità la variabile aleatoria assumi un valore compreso in un intervallo $[a,b]$, si può esprimere come una differenza di distribuzioni di 
+probabilità, oppure come l'integrale della densità di probabilità sull'intervallo considerato:
+\begin{equation}
+    P(a\leq x\leq b)=D_X(b)-D_X(a)
+\end{equation}
+\begin{gather*}
+    D_X(b)-D_X(a)=\displaystyle\int_{-\infty}^bP_X(x)dx-\int_{-\infty}^aP_X(x)dx\\
+    \int_{-\infty}^bP_X(x)dx+\int^{-\infty}_aP_X(x)dx=\int_a^bP_X(x)dx
+\end{gather*}
+\begin{equation}
+    P(a\leq x\leq b)=\displaystyle\int_a^bP_X(x)dx
+\end{equation}
+La densità di probabilità deve essere normalizzata, per cui il suo integrale sull'intervallo dove è definita la variabile aleatoria deve tendere al valore $1$:
+\begin{equation}
+    \displaystyle\int_{\mathbb{R}^n}P_X(x)dx=1
+\end{equation}
 
 \end{document}

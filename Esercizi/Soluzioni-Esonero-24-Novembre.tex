@@ -3,19 +3,23 @@
 \usepackage{cancel}
 \usepackage{tikz}
 \usepackage{amsmath}
-\usepackage{geometry}
+\usepackage[includehead,nomarginpar]{geometry}
 \usepackage{graphicx}
 \usepackage{amsfonts} 
 \usepackage{verbatim}
 \usepackage{mathrsfs}  
 \usepackage{lmodern}
 \usepackage{braket}
-\usepackage{steinmetz}
 \usepackage{bookmark}
-\usepackage{pgfplots}
+\usepackage{steinmetz}
 \usepackage[italian]{babel}
+\usepackage{pgfplots}
+\usepackage{fancyhdr}
+\usepackage{romanbarpagenumber}
 \pgfplotsset{compat=1.16}
 
+\setlength{\headheight}{12.0pt}
+\addtolength{\topmargin}{-12.0pt}
 
 %% inserire grafici
 
@@ -38,6 +42,13 @@
 
 \begin{document}
 
+\pagenumbering{Roman}
+
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{Fondamenti di Telecomunicazioni - Giacomo Sturm}
+\fancyfoot[C]{\thepage}
+
 \maketitle
 
 \vspace{10mm}
@@ -51,6 +62,8 @@
 \tableofcontents
 
 \clearpage
+
+\pagenumbering{arabic}
 
 \section{Soluzioni Svolte}
 
