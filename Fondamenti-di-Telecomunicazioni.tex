@@ -3015,6 +3015,11 @@ che parte dal valore $x_i$:
 \begin{gather}
     D_X(x)=\displaystyle\sum_{i=-\infty}^{+\infty}P_iu(x-x_i)
 \end{gather}
+Dove:
+\begin{gather*}
+    x\in\{x_1,\cdots,x_n\}\\
+    P_i=P(x=x_i)
+\end{gather*}
 
 Si considera la variaible aleatoria tempo di attesa $t$, uniformemente distribuita. Assume valori compresi nell'intervallo $[0,T]$, rappresenta il tempo di attesa prima 
 che avvenga un evento. La sua funzione di distribuzione di probabilità assuma una forma:
@@ -3065,9 +3070,103 @@ probabilità, oppure come l'integrale della densità di probabilità sull'interv
 \begin{equation}
     P(a\leq x\leq b)=\displaystyle\int_a^bP_X(x)dx
 \end{equation}
+Per la variabile aleatoria tempo di attesa, la probabilità assuma un valore nell'intervallo $[a,b]$ si ottiene come:
+\begin{gather*}
+    P(a\leq t\leq b)=\displaystyle\int_a^b\frac{1}{T}dt=\frac{b-a}{T}
+\end{gather*}
 La densità di probabilità deve essere normalizzata, per cui il suo integrale sull'intervallo dove è definita la variabile aleatoria deve tendere al valore $1$:
 \begin{equation}
     \displaystyle\int_{\mathbb{R}^n}P_X(x)dx=1
 \end{equation}
+
+\subsection{Statistiche Notevoli}
+
+La statistica più nota è quella gaussiana, in questa statistica, la funzione densità di probabilità della variabile aleatoria $x$ assume la seguente forma:
+\begin{equation}
+    P_X(x)=\displaystyle e^{-\left(\frac{x-\mu_x}{\sqrt{2}\sigma_x}\right)^2}\frac{1}{\sqrt{2\pi}\sigma_x}
+\end{equation}
+%% grafico 
+Si chiama $\sigma_x$ deviazione standard, mentre il suo quadrato si definisce varianza. Il valore dove è centrata la gaussiana $\mu_x$ si chiama valor medio. 
+Questa funzione deve rispettare la condizione di chiusura. 
+L'integrale su tutti le possibili determinazioni della densità di probabilità di $x$ corrisponde all'integrale di Gauss:
+\begin{gather*}
+    \displaystyle\int_{-\infty}^{+\infty}P_x(x)dx=\int_{-\infty}^{+\infty}e^{-\frac{(x-\mu_x)^2}{2\sigma_x^2}}\frac{1}{\sqrt{2\pi}\sigma_x}dx\\
+    t=\displaystyle\frac{x-\mu_x}{\sqrt{2}\sigma_x}\\
+    \displaystyle\int_{_\infty}^{+\infty}e^{-t^2}\frac{\sqrt{2}{\sigma_x}}{\sqrt{2}\sigma_x}\frac{1}{\sqrt{pi}}{dx}=\frac{\sqrt{\pi}}{\sqrt{\pi}}=1
+\end{gather*}
+La sua distribuzione di probabilità si ottiene come:
+\begin{gather*}
+    D_X(x)=\displaystyle\int_{-\infty}^xP_X(\overline{x})d\overline{x}
+\end{gather*}
+%% grafico
+Un altra funzione molto utilizzata è la Laplaciana. La probabilità della variabile aleatoria $x$ è quindi della forma:
+\begin{equation}
+    P_X(x)=\lambda e^{-\lambda x}u(x)
+\end{equation}
+%% grafico 
+
+Si verifica la condizione di normalizzazione:
+\begin{gather*}
+    \displaystyle\int_{-\infty}^{+\infty}P_X(x)dx=\int_{-\infty}^{+\infty}\lambda e^{-\lambda x}u(x)dx=\int_0^{+\infty}xe^{-\lambda x}dx=-e^{-\lambda x}\Bigg|_0^{+\infty}=1
+\end{gather*}
+La sua distribuzione di probabilità si ottiene come:
+\begin{gather*}
+    D_X(x)=\displaystyle\int_{-\infty}^xP_X(\overline{x})d\overline{x}=u(x)\int_0^x\lambda e^{-\lambda\overline{x}}d\overline{x}=-e^{-\lambda\overline{x}}\Bigg|_0^xu(x)=\left(1-e^{-\lambda x}\right)u(x)
+\end{gather*}
+%% grafico
+
+\subsection{Variabili Aleatorie Dipendenti}
+
+Sia data una variabile aleatoria di cui sia nota la statistica $X$, e una varibile aleatoria $Y$, di cui non si conosce la statistica, espressa rispetto ad $X$ tramite la 
+seguente espressione:
+\begin{gather*}
+    Y=aX+b
+\end{gather*}
+%% grafico 
+
+Si calcola la funzione di distriubzione cumulativa di $Y$:
+\begin{gather*}
+    D_Y(y)=P(Y\leq y)
+\end{gather*}
+Poiché è una relazione lineare, questa relazione si può esprimere rispetto alla variabile $X$:
+\begin{gather*}
+    y=f(x)=ax+b\\
+    x=g(y)=\displaystyle\frac{y-b}{a}\\
+    P(Y\leq y)=P\left(X\leq\displaystyle\frac{y-b}{a}\right)\\
+    D_Y(y)=D_X\left(\displaystyle\frac{y-b}{a}\right)=D_X(g(y))
+\end{gather*}
+\begin{equation}
+    D_Y(y)=D_X(g(y))
+\end{equation}
+
+La denstà di probabilità si ottiene derivando la distribuzione cumulativa:
+\begin{gather*}
+    P_Y(y)=\displaystyle\frac{d}{dy}D_Y(y)\\
+    \frac{d}{dy}D_X(g(y))=\frac{d}{dx}D_X(g(y))\frac{dx}{dy}\\ % chain-rule
+    P_X(g(y))\frac{d}{dy}g(y)
+\end{gather*}
+Per cui si può esprimere la densità di probabilità della variabile $Y$ rispetto alla densità nota della variabile $X$:
+\begin{equation*}
+    P_Y(y)=P_X(g(y))g'(y)
+\end{equation*}
+
+Se la curva che lega le due variabli è decrescente allora la distribuzione della variabile $Y$ può essere espressa rispetto alla probabilità che la variabile $X$ sia 
+maggiore del valore per cui la determinazione di $Y$ sia minore del valore $y$: 
+%% grafico
+\begin{gather*}
+    D_Y(y)=P(Y\leq y)=P\left(\displaystyle X>\frac{y-b}{a}\right)\\
+    1-P\left(X\leq\frac{y-b}{a}\right)=1-D_X\left(\frac{y-b}{a}\right)
+\end{gather*}
+Derivando questa relazione si ottiene:
+\begin{gather*}
+    P_Y(y)=\displaystyle\frac{d}{dy}D_Y(y)\\
+    -\displaystyle\frac{d}{dx}D_X\left(\frac{y-b}{a}\right)=-P_X(g(y))g'(y)
+\end{gather*}
+Per cui bisogna tenere conto della pendenza della curva che lega le due variabili aleatorie:
+\begin{equation}
+    P_Y(y)=P_X(g(y))\left|g'(y)\right|
+\end{equation}
+
+
 
 \end{document}

@@ -1394,4 +1394,49 @@ La probabilità che si misuri un $1$ quando viene effettivamente trasmesso un $1
     P(S=1|D=1)=\displaystyle\frac{0.7\cdot0.4}{0.7\cdot0.4+0.2\cdot0.6}=0.7
 \end{gather}
 
+
+Sia data la probabilità di una variabile aleatoria $X$:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{e^{-\left(\frac{x}{\sqrt{2}{\sigma_x}}\right)^2}}{\sqrt{2\pi}\sigma_x}
+\end{gather*}
+
+Nota la sua relazione con un'altra variabile aleatoria $Y$:
+\begin{gather*}
+    y=ax+b
+\end{gather*}
+Si calcola la densità di probabilità della variabile aleatoria $Y$:
+\begin{gather}
+    P_Y(y)=\displaystyle\frac{e^{-\left(\frac{y-b}{a}\right)^2\frac{1}{2\sigma_x^2}}}{\sqrt{2\pi}\sigma_x}\left|\frac{1}{a}\right|
+\end{gather}
+Per cui se $X$ ha una statistica gaussiana, anche $Y$ ha una statistica gaussiana, ma non centrata nell'origine. 
+
+
+
+La densità di probabilità della variabile aleatoria $X$ è uniformemente distribuita sull'intervallo $[2,3]$. Sia data una variabile aleatoria $Y$ legata da una relazione 
+lineare:
+\begin{gather*}
+    Y=aX+b
+\end{gather*}
+Determinare la distribuzione di probabilità della variabile aleatoria $Y$:
+\begin{gather*}
+    P_X(x)=\mbox{rect}\left(x-\displaystyle\frac{5}{2}\right)
+\end{gather*}
+\begin{equation}
+    P_Y(y)=P_X(g(y))|g'(y)|=\displaystyle\frac{1}{|a|}\mbox{rect}\left(\frac{2y-2b-5a}{2a}\right)
+\end{equation}
+
+
+
+Data la densità di probabilità gaussiana di una variabile aleatoria $X$, calcolare la densità di probabilità di una variabile $Y$ legata dalla relazione:
+\begin{gather*}
+    y=x^3
+\end{gather*}
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{e^{-\left(\frac{x}{\sqrt{2}{\sigma_x}}\right)^2}}{\sqrt{2\pi}\sigma_x}
+\end{gather*}
+\begin{equation}
+    P_Y(y)=P_X(g(y))|g'(y)|=\displaystyle\frac{e^{-\left(\frac{\sqrt[3]{y}}{\sqrt{2}{\sigma_x}}\right)^2}}{\sqrt{2\pi}\sigma_x}\frac{1}{3\sqrt[3]{y^2}}
+\end{equation}
+
+
 \end{document}
