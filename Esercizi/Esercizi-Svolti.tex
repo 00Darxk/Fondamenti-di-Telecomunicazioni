@@ -35,6 +35,9 @@
 
 
 \renewcommand{\contentsname}{Indice}
+\newcommand{\rect}{\mbox{rect}}
+\newcommand{\sinc}{\mbox{sinc}}
+\newcommand{\df}{\mathrm{d}}
 
 \title{Esercizi Svolti di Fondamenti di Telecomunicazioni}
 \author{Giacomo Sturm}
@@ -70,21 +73,21 @@
 Calcolare la convoluzione tra un esponenziale unilatero ed un gradino, 
 Si considera $\alpha\in\mathbb{R}^+$. 
 \begin{equation*}
-    z(t)=e^{-\alpha t}u(t)*u(t)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\tau}u(\tau)u(t-\tau)d\tau
+    z(t)=e^{-\alpha t}u(t)*u(t)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\tau}u(\tau)u(t-\tau)\df\tau
 \end{equation*}
-Poiché è presente un gradino nell'integrale, la convoluzione assumerà valori nulli per $t<0$, ciò si può anche individure graficamente, poiché per gli stessi valori i due 
-graficie del gradino e delò'esponenziale unilatero non si sovrappongono. All'aumentare del valore di $t$, il valore del segnale $z(t)$ aumenta sempre più lentamente, poiché i 
+Poiché è presente un gradino nell'integrale, la convoluzione assumerà valori nulli per $t<0$, ciò si può anche individuare graficamente, poiché per gli stessi valori i due 
+grafici del gradino e dell'esponenziale unilatero non si sovrappongono. All'aumentare del valore di $t$, il valore del segnale $z(t)$ aumenta sempre più lentamente, poiché i 
 contributi dell'esponenziale vanno diminuendo. Poiché entrambi i gradini nell'integrale assumono valori unitari per $t>0$, il valore del segnale in questo intervallo 
 dipende dalla funzione integrale dell'esponenziale, da $0$ al valore di $t$ corrente:
 \begin{equation*}
     z(t)=\begin{cases}
         0&t<0\\
-        \displaystyle\int_0^te^{-\alpha \tau}d\tau&t\geq0
+        \displaystyle\int_0^te^{-\alpha \tau}\df\tau&t\geq0
     \end{cases}
 \end{equation*}
 Risolvendo l'integrale si ottiene:
 \begin{equation*}
-    \displaystyle\int_0^te^{-\alpha \tau}d\tau=\left|-\frac{e^{-\alpha\tau}}{\alpha}\right|^t_0=\frac{1-e^{-\alpha t}}{\alpha}
+    \displaystyle\int_0^te^{-\alpha \tau}\df\tau=\left|-\frac{e^{-\alpha\tau}}{\alpha}\right|^t_0=\frac{1-e^{-\alpha t}}{\alpha}
 \end{equation*}
 Per cui il segnale convoluzione in forma analitica risulta:
 \begin{equation}
@@ -124,16 +127,16 @@ Questo segnale tende asintoticamente a $1/\alpha$ per $t\to+\infty$.
 
 Calcolare l'autoconvoluzione di un esponenziale unilatero
 \begin{equation*}
-    z(t)=e^{-\alpha t}u(t)*e^{-\alpha t}u(t)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\tau}u(\tau)e^{-\alpha(t-\tau)}u(t-\tau)d\tau
+    z(t)=e^{-\alpha t}u(t)*e^{-\alpha t}u(t)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\tau}u(\tau)e^{-\alpha(t-\tau)}u(t-\tau)\df\tau
 \end{equation*}
-Poiché sono unilateri, non si sovrapporrano per $t<0$, quindi la convoluzione è nulla per quei valori di tempo. Può essere spiegato tramite la prorpietà del gradino di 
+Poiché sono unilateri, non si sovrapporranno per $t<0$, quindi la convoluzione è nulla per quei valori di tempo. Può essere spiegato tramite la proprietà del gradino di 
 cambiare i limiti di integrazione, per cui invece di integrare da $-\infty$ a $+\infty$, si integra nell'intervallo dove si trova il gradino $u(\tau)$, ovvero da $0$ a $+\infty$: 
 \begin{equation*}
-    z(t)=\displaystyle\int_0^{+\infty}e^{-\alpha t}u(t-\tau)d\tau=e^{-\alpha t}\int_0^{+\infty}u(t-\tau)d\tau
+    z(t)=\displaystyle\int_0^{+\infty}e^{-\alpha t}u(t-\tau)\df\tau=e^{-\alpha t}\int_0^{+\infty}u(t-\tau)\df\tau
 \end{equation*}
 L'area sottesa da un gradino ribaltato e traslato di un fattore $t>0$ da $0$ a $+\infty$ equivale all'area di un rettangolo di altezza $1$ e di base $t$:
 \begin{equation*}
-    z(t)=e^{-\alpha t}\displaystyle\int_0^td\tau=te^{-\alpha t}
+    z(t)=e^{-\alpha t}\displaystyle\int_0^t\df\tau=te^{-\alpha t}
 \end{equation*}
 
 In forma analitica risulta:
@@ -174,7 +177,7 @@ In forma analitica risulta:
 Calcolare la convoluzione tra due finestre. 
 Si considerano due casi, dove le due finestra hanno base uguale, ed un caso dove hanno base differente. Si considera il caso $T_1=T_2$:
 \begin{equation*}
-    z(t)=\mbox{rect}\left(\displaystyle\frac{t}{T}\right)*\mbox{rect}\left(\frac{t}{T}\right)
+    z(t)=\rect\left(\displaystyle\frac{t}{T}\right)*\rect\left(\frac{t}{T}\right)
 \end{equation*}
 
 La convoluzione assume valori nulli quando non si sovrappongono, ovvero per un valore $t+\displaystyle\frac{T}{2}<-\frac{T}{2}\to t<-T$. L'area sottesa dal prodotto 
@@ -184,8 +187,8 @@ che la convoluzione di due segnali pari genera un segnale pari.
 \begin{equation*}
     z(t)=\begin{cases}
         0&t<-T\\
-        \displaystyle\int_{-T}^td\tau&-T\leq t<0\\
-        \displaystyle\int_t^Td\tau&0\leq t<T\\
+        \displaystyle\int_{-T}^t\df\tau&-T\leq t<0\\
+        \displaystyle\int_t^T\df\tau&0\leq t<T\\
         0&t>T
     \end{cases}=\begin{cases}
         0&t<-T\land t>T\\
@@ -224,7 +227,7 @@ La convoluzione tra due finestre di base uguale risulta in un triangolo di base 
 
 Si considera ora il caso dove le due finestre hanno basi $T_1>T_2$:
 \begin{equation*}
-    z(t)=\mbox{rect}\left(\displaystyle\frac{t}{T_1}\right)*\mbox{rect}\left(\frac{t}{T_2}\right)
+    z(t)=\rect\left(\displaystyle\frac{t}{T_1}\right)*\rect\left(\frac{t}{T_2}\right)
 \end{equation*}
 
 Poiché le due finestre sono simmetriche, si analizzano solo i casi per $t<0$, per poi aggiungere per simmetria l'equazione analitica per $t\geq0$. Le due finestre non si 
@@ -236,9 +239,9 @@ si ottiene il segnale per valori $t\geq0$:
 \begin{gather*}
     z(t)=\begin{cases}
         0&t<-\displaystyle\frac{1}{2}(T_1+T_2)\\
-        \displaystyle\int_{-\frac{1}{2}(T_1+T_2)}^td\tau&-\frac{1}{2}(T_1+T_2)\leq t <-\frac{1}{2}(T_1-T_2)\\
+        \displaystyle\int_{-\frac{1}{2}(T_1+T_2)}^t\df\tau&-\frac{1}{2}(T_1+T_2)\leq t <-\frac{1}{2}(T_1-T_2)\\
         T_2&-\frac{1}{2}(T_1-T_2)\leq t<\frac{1}{2}(T_1-T_2)\\
-        -\displaystyle\int_{-\frac{1}{2}(T_1+T_2)}^td\tau&\frac{1}{2}(T_1-T_2)\leq t <\frac{1}{2}(T_1+T_2)\\
+        -\displaystyle\int_{-\frac{1}{2}(T_1+T_2)}^t\df\tau&\frac{1}{2}(T_1-T_2)\leq t <\frac{1}{2}(T_1+T_2)\\
         0&t\geq\displaystyle\frac{1}{2}(T_1+T_2)
     \end{cases}
 \end{gather*}
@@ -285,13 +288,13 @@ di altezza $T$ e base $2T$.
 
 Calcolare la convoluzione tra i segnali $x$ e $y$:
 \begin{gather*}
-    x(t)=\displaystyle t\,\mbox{rect}\left(\frac{t-T}{2T}\right)\\
-    y(t)=\displaystyle\mbox{rect}\left(\frac{t+T}{2T}\right)\\
-    z(t)=x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}\tau\,\mbox{rect}\left(\frac{\tau-T}{2T}\right)\mbox{rect}\left(\frac{t-\tau+T}{2T}\right)d\tau\\
+    x(t)=\displaystyle t\,\rect\left(\frac{t-T}{2T}\right)\\
+    y(t)=\displaystyle\rect\left(\frac{t+T}{2T}\right)\\
+    z(t)=x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}\tau\,\rect\left(\frac{\tau-T}{2T}\right)\rect\left(\frac{t-\tau+T}{2T}\right)\df\tau\\
     z(t)=\begin{cases}
         0&t<-2T\\
-        \displaystyle\int_{0}^{t+2T}\tau d\tau&-2T\leq t<0\\
-        \displaystyle\int_{t}^{2T}\tau d\tau&0\leq t<2T\\
+        \displaystyle\int_{0}^{t+2T}\tau \df\tau&-2T\leq t<0\\
+        \displaystyle\int_{t}^{2T}\tau \df\tau&0\leq t<2T\\
         0&t\geq2T
     \end{cases}
 \end{gather*}
@@ -307,13 +310,13 @@ Calcolare la convoluzione tra i segnali $x$ e $y$:
 Calcolare la convoluzione tra queste due finestre:
 \begin{gather*}
     z(t)=z(t)*y(t)\\
-    x(t)=\displaystyle\mbox{rect}\left(\frac{t-3T}{4T}\right)\\
-    y(t)=-\displaystyle\mbox{rect}\left(\frac{t+2T}{2T}\right)\\
+    x(t)=\displaystyle\rect\left(\frac{t-3T}{4T}\right)\\
+    y(t)=-\displaystyle\rect\left(\frac{t+2T}{2T}\right)\\
     z(t)=\begin{cases}
         0&t<-2T\\
-        -\displaystyle\int^{3T+t}-{T}d\tau&-2T\leq t<0\\
+        -\displaystyle\int^{3T+t}-{T}\df\tau&-2T\leq t<0\\
         -2T&0\geq t<2T\\
-        -\displaystyle\int_{T+t}^{5T}d\tau&2T\leq t<4T\\
+        -\displaystyle\int_{T+t}^{5T}\df\tau&2T\leq t<4T\\
         0&t\geq 4T
     \end{cases}
 \end{gather*}
@@ -329,7 +332,7 @@ Calcolare la convoluzione tra queste due finestre:
 
 Calcolare la correlazione tra due finestre:
 \begin{equation*}
-    \mbox{rect}\displaystyle\left(\frac{t-\frac{T_1}{2}}{T_1}\right)\otimes\mbox{rect}\left(\frac{t-\frac{T_2}{2}}{T_2}\right)
+    \rect\displaystyle\left(\frac{t-\frac{T_1}{2}}{T_1}\right)\otimes\rect\left(\frac{t-\frac{T_2}{2}}{T_2}\right)
 \end{equation*}
 
 Si considera la prima finestra di base maggiore $T_1>T_2$. Per facilitare il calcolo si esprime come una convoluzione. I due segnali non si sovrappongono per valori 
@@ -340,9 +343,9 @@ correlazione risulta nulla.
 \begin{equation*}
     R_{xy}(t)=\begin{cases}
         0&t\geq T_2\\
-        \displaystyle\int_t^{T_2}dt& 0\leq t<T_2\\
+        \displaystyle\int_t^{T_2}\df t& 0\leq t<T_2\\
         T_2& -(T_1+T_2)\leq t<0\\
-        \displaystyle\int_{-T_1}^tdt& -T_1\leq t<-(T_1-T_2)\\
+        \displaystyle\int_{-T_1}^t\df t& -T_1\leq t<-(T_1-T_2)\\
         0&t<-T_1
     \end{cases}
 \end{equation*}
@@ -437,21 +440,21 @@ Dato il segnale:
 
 Si determinano i coefficienti dell'espansione di Fourier tramite la definizione:
 \begin{gather*}
-    c_k=\displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\displaystyle\frac{2\pi t}{T}\right)e^{-i\frac{4\pi kt}{T}}dt\\
-    \displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\displaystyle\frac{2\pi t}{T}\right)\left[\cos\left(\frac{4\pi kt}{T}\right)-i\sin\left(\frac{4\pi kt}{T}\right)\right]dt\\
-    \displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)dt
-    {-i\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\sin\left(\frac{4\pi kt}{T}\right)dt}
+    c_k=\displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\displaystyle\frac{2\pi t}{T}\right)e^{-i\frac{4\pi kt}{T}}\df t\\
+    \displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\displaystyle\frac{2\pi t}{T}\right)\left[\cos\left(\frac{4\pi kt}{T}\right)-i\sin\left(\frac{4\pi kt}{T}\right)\right]\df t\\
+    \displaystyle\frac{2}{T}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)\df t
+    {-i\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\sin\left(\frac{4\pi kt}{T}\right)\df t}
 \end{gather*}
 Poiché è una funzione pari, il primo integrale corrisponde al doppio dell'integrale su solo una metà dell'intervallo, mentre il secondo integrale, essendo una funzione 
 dispari, assume valore nullo su un intervallo simmetrico:
 \begin{equation*}
-    \displaystyle\frac{4}{T}\int_{0}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)dt-i\cdot0
+    \displaystyle\frac{4}{T}\int_{0}^{\frac{T}{4}}\cos\left(\frac{2\pi t}{T}\right)\cos\left(\frac{4\pi kt}{T}\right)\df t-i\cdot0
 \end{equation*}
 
 
 Per le formule di prostaferesi si ottiene una somma di due coseni. Integrandoli separatamente si ottiene:
 \begin{gather*}
-    c_k=\displaystyle\frac{4}{T}\frac{1}{2}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2(2k+1)\pi t}{T}\right)+\cos\left(\frac{2(2k-1)\pi t}{T}\right)dt\\
+    c_k=\displaystyle\frac{4}{T}\frac{1}{2}\int_{-\frac{T}{4}}^{\frac{T}{4}}\cos\left(\frac{2(2k+1)\pi t}{T}\right)+\cos\left(\frac{2(2k-1)\pi t}{T}\right)\df t\\
     \displaystyle\left[\frac{2}{T}\frac{T}{2(2k+1)\pi}\sin\left(\frac{2(2k+1)\pi t}{T}\right)+
     \frac{2}{T}\frac{T}{2(2k-1)\pi}\sin\left(\frac{2(2k-1)\pi t}{T}\right)\right]_{0}^{\frac{T}{4}}\\
     \left[\displaystyle\frac{\sin(2(2k+1)\pi t/T)}{(2k+1)\pi}+\frac{\sin(2(2k-1)\pi t/T)}{(2k-1)\pi}\right]_0^{\frac{T}{4}}\\
@@ -469,7 +472,7 @@ Dato un segnale periodico:
 \begin{gather*}
     x(t)=2\cos\displaystyle\left(\frac{2\pi t}{T}+\frac{\pi}{4}\right)+6\sin\left(\frac{2\pi t}{3T}\right)
 \end{gather*}
-Il primo passaggio nella rappresentazione di Fourier corrisponde all'individuazione del periodo del segnale $x$. Il periodo della somma di due seganli periodici corrisponde 
+Il primo passaggio nella rappresentazione di Fourier corrisponde all'individuazione del periodo del segnale $x$. Il periodo della somma di due segnali periodici corrisponde 
 al minimo comune multiplo tra il periodo dei due segnali. In questo caso il periodo del segnale $x$ è $T'=3T$. Per cui si può riscrivere come:
 \begin{gather*}
     x(t)=\displaystyle2\cos\left(\frac{6\pi t}{T'}+\frac{\pi}{4}\right)+6\sin\left(\frac{2\pi t}{T'}\right)\\
@@ -538,8 +541,8 @@ Dato il segnale dente di sega:
 
 Si calcolano i coefficienti di Fourier tramite la definizione, e si calcola l'integrale per parti: 
 \begin{gather*}
-    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}te^{-i\frac{2\pi kt}{T}}dt=\displaystyle\left[-\frac{1}{T}\frac{T}{2i\pi k}te^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}-
-    \frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}-\frac{T}{2i\pi k}e^{-i\frac{2\pi kt}{T}dt}\\
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}te^{-i\frac{2\pi kt}{T}}\df t=\displaystyle\left[-\frac{1}{T}\frac{T}{2i\pi k}te^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}-
+    \frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}-\frac{T}{2i\pi k}e^{-i\frac{2\pi kt}{T}\df t}\\
     \displaystyle-\frac{T}{2i\pi k}\left(\frac{e^{-i\pi k}+e^{i\pi k}}{2}\right)+\frac{1}{2i\pi k}\left[\frac{T}{2i\pi k}e^{-i\frac{2\pi kt}{T}}\right]_{-\frac{T}{2}}^{\frac{T}{2}}\\
     \displaystyle-\frac{T}{2i\pi k}\left(\frac{e^{i(-\pi k)}+e^{-i(-\pi k)}}{2}\right)-\frac{2iT}{4\pi^2k^2}\left(\frac{e^{i(-\pi k)}-e^{-i(-\pi k)}}{2i}\right)\\
     \displaystyle-\frac{T}{2i\pi k}\cos\left(-\pi k\right)+\frac{2iT}{4\pi^2k^2}\sin(-\pi k)
@@ -550,7 +553,7 @@ La componente sinusoidale è nulla per ogni valore di $k$, per cui il coefficien
 \end{gather}
 Il coefficiente $c_0$ è nullo, poiché rappresenta il valor medio del periodo. In questo caso essendo un segnale dispari, il valor medio nel periodo è nullo:
 \begin{equation}
-    c_0=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}t\,dt=0
+    c_0=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}t\,\df t=0
 \end{equation}
 
 Dato il seguente segnale dente di sega:
@@ -591,35 +594,35 @@ Dato un segnale treno di triangoli:
         \draw[dashed](-2.5,1)--(2.5,1);
     \end{tikzpicture}
 \end{center}
-Si calcolano i coefficienti tramite la definizione. Poiché è presente un solo triangolo nell'intervallo di intergrazione, si può restringere l'intervallo: 
+Si calcolano i coefficienti tramite la definizione. Poiché è presente un solo triangolo nell'intervallo di integrazione, si può restringere l'intervallo: 
 \begin{gather*}
-    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\mbox{tri}\left(\frac{2t}{\tau}\right)e^{-i\frac{2\pi kt}{T}}dt=\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\left(1-\left|\frac{2t}{\tau}\right|\right)e^{-i\frac{2\pi kt}{T}}dt\\
-    \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi kt}{T}}dt+\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}-\left|\frac{2t}{\tau}\right|e^{-i\frac{2\pi kt}{T}}dt\\
-    \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi kt}{T}}dt-\frac{1}{T}\left(\int_{-\frac{\tau}{2}}^{0}-\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt\right)
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\mbox{tri}\left(\frac{2t}{\tau}\right)e^{-i\frac{2\pi kt}{T}}\df t=\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\left(1-\left|\frac{2t}{\tau}\right|\right)e^{-i\frac{2\pi kt}{T}}\df t\\
+    \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi kt}{T}}\df t+\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}-\left|\frac{2t}{\tau}\right|e^{-i\frac{2\pi kt}{T}}\df t\\
+    \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi kt}{T}}\df t-\frac{1}{T}\left(\int_{-\frac{\tau}{2}}^{0}-\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)
 \end{gather*}
 Il primo integrale corrisponde all'integrale ai coefficienti di una finestra, ed è stato già precedentemente calcolato, per cui si omette la risoluzione. Si considera la 
 sostituzione $t=-t'$ nel secondo integrale:
 \begin{gather*}
-    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int_{-\frac{-\tau}{2}}^{0}-\frac{2(-t)}{\tau}e^{-i\frac{2\pi k(-t)}{T}}d(-t)+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt\right)\\
-    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(-\int_{\frac{\tau}{2}}^{0}\frac{2t}{\tau}e^{i\frac{2\pi kt}{T}}dt+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt\right)\\
-    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int^{\frac{\tau}{2}}_{0}\frac{2t}{\tau}e^{i\frac{2\pi kt}{T}}dt+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}dt\right)\\
-    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{1}{T}\int^{\frac{\tau}{2}}_{0}\frac{4t}{\tau}\frac{e^{i\frac{2\pi kt}{T}}+e^{-i\frac{2\pi kt}{T}}}{2}dt\\
-    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{4}{\tau T}\int_{0}^{\frac{\tau}{2}}t\cos\left(\frac{2\pi kt}{T}\right)dt
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int_{-\frac{-\tau}{2}}^{0}-\frac{2(-t)}{\tau}e^{-i\frac{2\pi k(-t)}{T}}d(-t)+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)\\
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(-\int_{\frac{\tau}{2}}^{0}\frac{2t}{\tau}e^{i\frac{2\pi kt}{T}}\df t+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)\\
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int^{\frac{\tau}{2}}_{0}\frac{2t}{\tau}e^{i\frac{2\pi kt}{T}}\df t+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)\\
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\int^{\frac{\tau}{2}}_{0}\frac{4t}{\tau}\frac{e^{i\frac{2\pi kt}{T}}+e^{-i\frac{2\pi kt}{T}}}{2}\df t\\
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{4}{\tau T}\int_{0}^{\frac{\tau}{2}}t\cos\left(\frac{2\pi kt}{T}\right)\df t
 \end{gather*}
 Quest'ultimo integrale così ottenuto si risolve mediante integrazione per parti:
 \begin{gather*}
-    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{4}{\tau T}\left[\frac{T}{2\pi k}t\sin\left(\frac{2\pi kt}{T}\right)\right]^{\frac{\tau}{2}}_0
-    +\frac{4}{\tau T}\int_{0}^{\frac{\tau}{2}}\frac{T}{2\pi k}\sin\left(\frac{2\pi kt}{T}\right)dt\\
-    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\frac{\tau}{T}\frac{T}{\pi k\tau}\sin\left(\frac{\pi k\tau}{T}\right)+0+
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{4}{\tau T}\left[\frac{T}{2\pi k}t\sin\left(\frac{2\pi kt}{T}\right)\right]^{\frac{\tau}{2}}_0
+    +\frac{4}{\tau T}\int_{0}^{\frac{\tau}{2}}\frac{T}{2\pi k}\sin\left(\frac{2\pi kt}{T}\right)\df t\\
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{\tau}{T}\frac{T}{\pi k\tau}\sin\left(\frac{\pi k\tau}{T}\right)+0+
     \frac{4}{\tau T}\left[-\left(\frac{T}{2\pi k}\right)^2\cos\left(\frac{2\pi kt}{T}\right)\right]^{\frac{\tau}{2}}_0\\
-    \displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-\displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)-
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-
     \frac{T}{\pi^2k^2\tau}\left[\cos\left(\frac{\pi k\tau}{T}\right)-1\right]\\
     \displaystyle\frac{2T}{\pi^2k^2\tau}\sin^2\left(\frac{\pi kt}{2T}\right)=
     \frac{\tau}{2T}\left[\frac{2T}{\pi k\tau}\sin\left(\frac{\pi kt}{2T}\right)\right]\left[\frac{2T}{\pi k\tau}\sin\left(\frac{\pi kt}{2T}\right)\right]\\
-    \displaystyle\frac{\tau}{2T}\left[\mbox{sinc}\left(\frac{k\tau}{2T}\right)\right]\left[\mbox{sinc}\left(\frac{k\tau}{2T}\right)\right]
+    \displaystyle\frac{\tau}{2T}\left[\sinc\left(\frac{k\tau}{2T}\right)\right]\left[\sinc\left(\frac{k\tau}{2T}\right)\right]
 \end{gather*}
 \begin{gather}
-    c_k=\displaystyle\frac{\tau}{2T}\mbox{sinc}^2\left(\frac{k\tau }{2T}\right)
+    c_k=\displaystyle\frac{\tau}{2T}\sinc^2\left(\frac{k\tau }{2T}\right)
 \end{gather}
 I coefficienti di un treno di triangoli risultano essere dei seni cardinali quadrati. 
 
@@ -628,25 +631,25 @@ I coefficienti di un treno di triangoli risultano essere dei seni cardinali quad
 \section{Trasformata di Fourier}
 Calcolare l'energia del dato segnale:
 \begin{gather*}
-    x(t)=\displaystyle\frac{\sin(\pi t)}{\pi t}\cos(2\pi \alpha t)=\frac{1}{2}\mbox{sinc}(t)(e^{2i\pi\alpha t}+e^{-2i\pi\alpha t})\\
+    x(t)=\displaystyle\frac{\sin(\pi t)}{\pi t}\cos(2\pi \alpha t)=\frac{1}{2}\sinc(t)(e^{2i\pi\alpha t}+e^{-2i\pi\alpha t})\\
 \end{gather*}
-Per il teroema della traslazioen in frequenza, la trasformata del segnale $x$ risulta essere:
+Per il teorema della traslazione in frequenza, la trasformata del segnale $x$ risulta essere:
 \begin{gather*}
-    X(f)=\displaystyle\frac{1}{2}\mbox{rect}(f+\alpha)+\frac{1}{2}\mbox{rect}(f-\alpha)
+    X(f)=\displaystyle\frac{1}{2}\rect(f+\alpha)+\frac{1}{2}\rect(f-\alpha)
 \end{gather*}
 La sua energia si calcola come:
 \begin{gather*}
-    E_x=\displaystyle\int_{-\infty}^{+\infty}|X(f)|^2df\\
-    \displaystyle\frac{1}{4}\left(\int_{-\infty}^{+\infty}\left[\mbox{rect}(f+\alpha)+\mbox{rect}(f-\alpha)\right]^2df\right)\\
+    E_x=\displaystyle\int_{-\infty}^{+\infty}|X(f)|^2\df f\\
+    \displaystyle\frac{1}{4}\left(\int_{-\infty}^{+\infty}\left[\rect(f+\alpha)+\rect(f-\alpha)\right]^2\df f\right)\\
     E_x=\begin{cases}
-        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{-\alpha+1/2}df+\frac{1}{4}\int_{\alpha-1/2}^{\alpha+1/2}df& \alpha\geq1/2\\
-        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{\alpha-1/2}df+\frac{1}{2}\int_{\alpha-1/2}^{-\alpha+1/2}df+\frac{1}{4}\int_{-\alpha+1/2}^{\alpha+1/2}df&\alpha<1/2
+        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{-\alpha+1/2}\df f+\frac{1}{4}\int_{\alpha-1/2}^{\alpha+1/2}df& \alpha\geq1/2\\
+        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{\alpha-1/2}\df f+\frac{1}{2}\int_{\alpha-1/2}^{-\alpha+1/2}df+\frac{1}{4}\int_{-\alpha+1/2}^{\alpha+1/2}df&\alpha<1/2
     \end{cases}
 \end{gather*}
 \begin{gather}
     E_x=\begin{cases}
-        \displaystyle\frac{1}{2}&\alpha\geq1/2\\
-        \displaystyle\frac{2\alpha}{4}+\frac{2\alpha}{4}+1-2\alpha=1-\alpha&\alpha<1/2
+        \displaystyle\frac{\strut 1}{\strut 2}&\alpha\geq1/2\\
+        \displaystyle\frac{\strut 2\alpha}{\strut 4}+\frac{\strut 2\alpha}{\strut 4}+1-2\alpha=1-\alpha&\alpha<1/2
     \end{cases}
 \end{gather}
 
@@ -687,21 +690,21 @@ Calcolare la trasformata del segnale $x$, si applica la proprietà di modulazion
 
 Calcolare l'autoconvoluzione del segnale $x$, passando per la sua trasformata: 
 \begin{gather*}
-    x(t)=A\,\mbox{rect}\displaystyle\left(\frac{2(t-3T/4)}{T}\right)-A\,\mbox{rect}\displaystyle\left(\frac{2(t-T/4)}{T}\right)\\
-    X(f)=\displaystyle\frac{AT}{2}\,\mbox{sinc}\left(\frac{Tf}{2}\right)e^{-3i\pi fT/2}-\displaystyle\frac{AT}{2}\,\mbox{sinc}\left(\frac{T}{2}f\right)e^{-i\pi fT/2}\\
-    X(f)=\displaystyle\frac{AT}{2}\,\mbox{sinc}\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT/2}-e^{-i\pi fT/2}\right)\\
-    X^2(f)=\displaystyle\frac{A^2T^2}{4}\,\mbox{sinc}^2\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\right)\\
-    x(t)*x(t)=\displaystyle\int_{-\infty}^{+\infty}X^2(f)e^{2i\pi ft}df\\
-    \displaystyle\int_{-\infty}^{+\infty}\left[\frac{A^2T^2}{4}\,\mbox{sinc}^2\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\right)\right]e^{2i\pi ft}df
+    x(t)=A\,\rect\displaystyle\left(\frac{2(t-3T/4)}{T}\right)-A\,\rect\displaystyle\left(\frac{2(t-T/4)}{T}\right)\\
+    X(f)=\displaystyle\frac{AT}{2}\,\sinc\left(\frac{Tf}{2}\right)e^{-3i\pi fT/2}-\displaystyle\frac{AT}{2}\,\sinc\left(\frac{T}{2}f\right)e^{-i\pi fT/2}\\
+    X(f)=\displaystyle\frac{AT}{2}\,\sinc\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT/2}-e^{-i\pi fT/2}\right)\\
+    X^2(f)=\displaystyle\frac{A^2T^2}{4}\,\sinc^2\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\right)\\
+    x(t)*x(t)=\displaystyle\int_{-\infty}^{+\infty}X^2(f)e^{2i\pi ft}\df f\\
+    \displaystyle\int_{-\infty}^{+\infty}\left[\frac{A^2T^2}{4}\,\sinc^2\left(\frac{Tf}{2}\right)\left(e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\right)\right]e^{2i\pi ft}\df f
 \end{gather*}
 Un prodotto nel domino delle frequenze corrisponde ad una convoluzione nel domino del tempo, per cui si può esprimere l'autoconvoluzione come la convoluzione tra un segnale 
 triangolo e una combinazione lineare di impulsi:
 \begin{gather*}
-    X_1(f)=\displaystyle\frac{A^2T^2}{4}\,\mbox{sinc}^2\left(\frac{Tf}{2}\right)\\
+    X_1(f)=\displaystyle\frac{A^2T^2}{4}\,\sinc^2\left(\frac{Tf}{2}\right)\\
     x_1(t)=\displaystyle\frac{A^2T^2}{4}\frac{2}{T}\,\mbox{tri}\left(\frac{2t}{T}\right)\\
     X_2(f)=e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\\
     x_2(t)=\delta(t-3T/2)+\delta(t-T/2)-2\delta(t-T)\\
-    x(t)*x(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)^2e^{2i\pi ft}df=\int_{-\infty}^{+\infty}X_1(f)X_2(f)e^{2i\pi ft}df=x_1(t)*x_2(t)\\
+    x(t)*x(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)^2e^{2i\pi ft}\df f=\int_{-\infty}^{+\infty}X_1(f)X_2(f)e^{2i\pi ft}\df f=x_1(t)*x_2(t)\\
     \displaystyle\frac{A^2T^2}{4}\frac{2}{T}\,\mbox{tri}\left(\frac{2t}{T}\right)*\left[\delta(t-3T/2)+\delta(t-T/2)-2\delta(t-T)\right]
 \end{gather*}
 \begin{gather}
@@ -711,55 +714,55 @@ triangolo e una combinazione lineare di impulsi:
 
 Calcolare la trasformata del segnale $x$: 
 \begin{gather*}
-    x(t)=\mbox{rect}(3t-1/2)=\mbox{rect}(3(t-1/6))
+    x(t)=\rect(3t-1/2)=\rect(3(t-1/6))
 \end{gather*}
 Per la proprietà di scala e di traslazione nel tempo:
 \begin{gather}
-    X(f)=\displaystyle\frac{1}{3}\mbox{sinc}\left(\frac{f}{3}\right)e^{-i\pi f/3}
+    X(f)=\displaystyle\frac{1}{3}\sinc\left(\frac{f}{3}\right)e^{-i\pi f/3}
 \end{gather}
 
 
 Calcolare la trasformata del segnale $x$, esprimibile come un segnale triangolo moltiplicato per un gradino, oppure una retta moltiplicata per una finestra, si sceglie 
-quest'ulima rappresentazione per facilitare il calcolo:
+quest'ultima rappresentazione per facilitare il calcolo:
 \begin{gather*}
-    x(t)=A\,\displaystyle\mbox{tri}\left(\frac{t+T/2}{T}\right)u(t+T/2)\lor x(t)=A\left(\frac{1}{2}-\frac{t}{T}\right)\mbox{rect}\left(\frac{t}{T}\right)\\
-    \displaystyle\frac{A}{2}\mbox{rect}\left(\frac{t}{T}\right)-\frac{A}{T}t\,\mbox{rect}\left(\frac{t}{T}\right)
+    x(t)=A\,\displaystyle\mbox{tri}\left(\frac{t+T/2}{T}\right)u(t+T/2)\lor x(t)=A\left(\frac{1}{2}-\frac{t}{T}\right)\rect\left(\frac{t}{T}\right)\\
+    \displaystyle\frac{A}{2}\rect\left(\frac{t}{T}\right)-\frac{A}{T}t\,\rect\left(\frac{t}{T}\right)
 \end{gather*}
 %% grafo segnale
-Per la prorpietà duale alla derivazione, si calcola il secondo componente: 
+Per la proprietà duale alla derivazione, si calcola il secondo componente: 
 \begin{gather*}
     x_1(t)=-2i\pi tx_2(t)\\
-    X_1(f)=\displaystyle\frac{dX_2}{df}\\
-    x_1(t)=-\displaystyle\frac{A}{T}t\,\mbox{rect}\left(\frac{t}{T}\right)\\
-    x_2(t)=\displaystyle\frac{1}{2i\pi}\frac{A}{T}\mbox{rect}\left(\frac{t}{T}\right)\\
-    X_2(f)=\displaystyle\frac{1}{2i\pi}\frac{A}{T}T\,\mbox{sinc}(Tf)=\frac{A}{\pi T}\frac{\sin(\pi Tf)}{f}\\
-    X_1(f)=\displaystyle\frac{dX_2}{df}=\frac{1}{2i\pi}\frac{A}{\pi T}\frac{\cos(\pi Tf)\pi Tf-\sin(\pi Tf)}{f^2}\\
+    X_1(f)=\displaystyle\frac{\df X_2}{\df f}\\
+    x_1(t)=-\displaystyle\frac{A}{T}t\,\rect\left(\frac{t}{T}\right)\\
+    x_2(t)=\displaystyle\frac{1}{2i\pi}\frac{A}{T}\rect\left(\frac{t}{T}\right)\\
+    X_2(f)=\displaystyle\frac{1}{2i\pi}\frac{A}{T}T\,\sinc(Tf)=\frac{A}{\pi T}\frac{\sin(\pi Tf)}{f}\\
+    X_1(f)=\displaystyle\frac{\df X_2}{\df f}=\frac{1}{2i\pi}\frac{A}{\pi T}\frac{\cos(\pi Tf)\pi Tf-\sin(\pi Tf)}{f^2}\\
 \end{gather*}
 Per cui la trasformata complessiva è:
 \begin{gather*}
-    X(f)=\displaystyle\frac{AT}{2}\mbox{sinc}(Tf)+\frac{A}{\pi Tf^2(2\pi i)}\left[\cos(\pi Tf)\pi Tf-\sin (\pi Tf)\right]\\
+    X(f)=\displaystyle\frac{AT}{2}\sinc(Tf)+\frac{A}{\pi Tf^2(2\pi i)}\left[\cos(\pi Tf)\pi Tf-\sin (\pi Tf)\right]\\
     \displaystyle\frac{AT}{2\pi Tf}\frac{i}{i}\sin(\pi Tf)+\frac{A}{2i\pi f}\cos(\pi Tf)-\frac{A}{2i\pi f}\frac{\sin(\pi Tf)}{\pi Tf}\\
-    \displaystyle\frac{A}{2i\pi f}\frac{i}{i}\left[\cos(\pi Tf)+i\sin(\pi Tf)\right]-\frac{A}{2i\pi f}\frac{i}{i}\mbox{sinc}( Tf)
+    \displaystyle\frac{A}{2i\pi f}\frac{i}{i}\left[\cos(\pi Tf)+i\sin(\pi Tf)\right]-\frac{A}{2i\pi f}\frac{i}{i}\sinc( Tf)
 \end{gather*}
 \begin{gather}
-    X(f)=\displaystyle-\frac{Ai}{2\pi f}\left[e^{i\pi fT}-\mbox{sinc}(fT)\right]
+    X(f)=\displaystyle-\frac{Ai}{2\pi f}\left[e^{i\pi fT}-\sinc(fT)\right]
 \end{gather}
 
 
 Calcolare ora questa trasformata usando la proprietà alla derivazione:
 \begin{gather*}
-    x_1(t)=\displaystyle\frac{A}{2}\mbox{rect}\left(\frac{t}{T}\right)-\frac{A}{T}t\,\mbox{rect}\left(\frac{t}{T}\right)\\
-    \displaystyle\frac{dx_1}{dt}=x_2(t)
+    x_1(t)=\displaystyle\frac{A}{2}\rect\left(\frac{t}{T}\right)-\frac{A}{T}t\,\rect\left(\frac{t}{T}\right)\\
+    \displaystyle\frac{\df x_1}{\df t}=x_2(t)
 \end{gather*}
 Il segnale $x_1$ presente una discontinuità in $-T/2$, e rimane costante fino al valore $T/2$:
 \begin{gather*}
-    x_2(t)=A\delta(t+T/2)-\displaystyle\frac{A}{T}\mbox{rect}\left(\frac{t}{T}\right)\\
-    X_2(f)=Ae^{i\pi fT}-\displaystyle\frac{A}{T}T\mbox{sinc}(Tf)\\
+    x_2(t)=A\delta(t+T/2)-\displaystyle\frac{A}{T}\rect\left(\frac{t}{T}\right)\\
+    X_2(f)=Ae^{i\pi fT}-\displaystyle\frac{A}{T}T\sinc(Tf)\\
     X_2(f)=2i\pi fX_1(f)\\
-    X_1(f)=\displaystyle\frac{A}{2i\pi f}\frac{i}{i}\left[e^{i\pi fT}-\mbox{sinc}(Tf)\right]
+    X_1(f)=\displaystyle\frac{A}{2i\pi f}\frac{i}{i}\left[e^{i\pi fT}-\sinc(Tf)\right]
 \end{gather*}
 \begin{gather}
-    X_1(f)=\displaystyle-\frac{Ai}{2\pi f}\left[e^{i\pi fT}-\mbox{sinc}(Tf)\right]
+    X_1(f)=\displaystyle-\frac{Ai}{2\pi f}\left[e^{i\pi fT}-\sinc(Tf)\right]
 \end{gather}
 
 
@@ -780,21 +783,45 @@ Poiché il coseno è traslato di un periodo $1/f_0$:
 
 Calcolare la trasformata del segnale $x$:
 \begin{gather*}
-    x(t)=2\,\mbox{rect}(2t)-\mbox{rect}(t)=\mbox{rect}(2t)-\mbox{rect}\left[\displaystyle4\left(t-\frac{3}{2}\right)\right]-\mbox{rect}\left[\displaystyle4\left(t-\frac{3}{8}\right)\right]\\
-    X(f)=\displaystyle\frac{1}{2}\mbox{sinc}\left(\frac{f}{2}\right)-\frac{1}{4}\mbox{sinc}\left(\frac{f}{4}\right)e^{-3i\pi f/4}-\frac{1}{4}\mbox{sinc}\left(\frac{f}{4}\right)e^{-3i\pi f}
+    x(t)=2\,\rect(2t)-\rect(t)=\rect(2t)-\rect\left[\displaystyle4\left(t-\frac{3}{2}\right)\right]-\rect\left[\displaystyle4\left(t-\frac{3}{8}\right)\right]\\
+    X(f)=\displaystyle\frac{1}{2}\sinc\left(\frac{f}{2}\right)-\frac{1}{4}\sinc\left(\frac{f}{4}\right)e^{-3i\pi f/4}-\frac{1}{4}\sinc\left(\frac{f}{4}\right)e^{-3i\pi f}
 \end{gather*}
 \begin{gather}
-    X(f)=\displaystyle\frac{1}{2}\left[\mbox{sinc}\left(\frac{f}{2}\right)-\mbox{sinc}\left(\frac{f}{4}\right)\cos\left(\frac{3\pi f}{4}\right)\right]
+    X(f)=\displaystyle\frac{1}{2}\left[\sinc\left(\frac{f}{2}\right)-\sinc\left(\frac{f}{4}\right)\cos\left(\frac{3\pi f}{4}\right)\right]
 \end{gather}
+
+
+Si considera una finestra di base $T$ moltiplicata per un coseno di frequenza costante $f_0$, ovvero modulata di una frequenza $f_0$:
+\begin{gather*}
+    x(t)=\rect\displaystyle\left(\frac{t}{T}\right)\cos(2\pi f_0t)\\
+    \mathscr{F}\{x(t)\}=\frac{T}{2}\sinc((f-f_0)T)+\frac{T}{2}\sinc\left((f+f_0)T\right)
+\end{gather*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-1.5,0)--(1.5,0)node[above]{$t$};
+        \draw[->](0,-1)--(0,1)node[right]{$x(t)$};
+        \draw[-](-1,0)node[below]{$-T$}--(-1,0.5)--(0,0.5)node[right]{$T$}--(0,-0.5)node[left]{$-T$}--(1,-0.5)--(1,0)node[below right]{$T$};
+    \end{tikzpicture}
+\end{center}
+Calcolare la sua trasformata:
+\begin{gather*}
+    x(t)=\rect\left(\displaystyle\frac{t+T/2}{T}\right)-\rect\left(\displaystyle\frac{t-T/2}{T}\right)
+\end{gather*}
+Per la linearità della trasformata e per la proprietà di traslazione nel tempo la trasformata si ottiene come:
+\begin{gather*}
+    X(f)=T\left(e^{i\pi fT}-e^{-i\pi fT}\right)\sinc\left(T f\right)=2Ti\sin(\pi fT)\sinc(Tf)\\
+    2iT\displaystyle\frac{\sin(\pi fT)}{\pi fT}\sin(\pi fT)=2i\frac{\sin^2(\pi fT)}{\pi f}
+\end{gather*}
+
 
 
 Calcolare la trasformata del seguente segnale onda quadra di base $\tau$ e di periodo $T$:
 \begin{gather*}
-    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\mbox{rect}\left(\frac{t-kT}{\tau}\right)
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\rect\left(\frac{t-kT}{\tau}\right)
 \end{gather*}
 \begin{gather}
-    X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)\delta\left(f-\frac{k}{T}\right)\\
-    c_k=\displaystyle\frac{\tau}{T}\mbox{sinc}\left(\frac{\tau k}{T}\right)
+    X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)\delta\left(f-\frac{k}{T}\right)\\
+    c_k=\displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)
 \end{gather}
 
 Calcolare la trasformata del treno campionatore, o segnale pettine:
@@ -806,7 +833,7 @@ Calcolare la trasformata del treno campionatore, o segnale pettine:
 \begin{gather}
     \Pi(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}\delta\left(f-\frac{k}{T}\right)
 \end{gather}
-Questo è uno dei pochi segnali oltre alla gaussiana che si autotrasforma. 
+Questo è uno dei pochi segnali oltre alla gaussiana che si auto-trasforma. 
 
 
 Calcolare la trasformata di un treno di trapezi di base maggiore $2T$, di base minore $T$ e di altezza $T$, di periodo $\overline T=5T/2$:
@@ -814,33 +841,33 @@ Calcolare la trasformata di un treno di trapezi di base maggiore $2T$, di base m
 \begin{gather*}
     X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}c_k\delta\left(f-\frac{k}{\overline T}\right)
 \end{gather*}
-Per calcolare i coefficienti della serie, si può esprimere un singolo trapezio come l'autoconvoluzione di un segnale finestra. Inoltre è sufficiente calcoalre la 
+Per calcolare i coefficienti della serie, si può esprimere un singolo trapezio come l'autoconvoluzione di un segnale finestra. Inoltre è sufficiente calcolare la 
 trasformata di un singolo trapezio per ottenere i coefficienti:
 \begin{gather*}
-    x_1(t)=2\displaystyle\mbox{rect}\left(\frac{2t}{3T}\right)\\
-    x_2(t)=\displaystyle\mbox{rect}\left(\frac{2t}{T}\right)\\
-    c_k=\displaystyle\frac{1}{\overline T}\int_{-\overline T/2}^{\overline T/2}x_1(t)*x_2(t)e^{-2i\pi kt/\overline T}dt\\
+    x_1(t)=2\displaystyle\rect\left(\frac{2t}{3T}\right)\\
+    x_2(t)=\displaystyle\rect\left(\frac{2t}{T}\right)\\
+    c_k=\displaystyle\frac{1}{\overline T}\int_{-\overline T/2}^{\overline T/2}x_1(t)*x_2(t)e^{-2i\pi kt/\overline T}\df t\\
     c_k=\displaystyle\frac{1}{\overline T}X_1\left(\frac{k}{ T}\right)X_2\left(\frac{k}{ T}\right)\\
-    c_k=\displaystyle\frac{2}{\overline T}\left[\frac{3T}{2}\mbox{sinc}\left(\frac{3T}{2}\frac{k}{ T}\right)\frac{T}{2}\mbox{sinc}\left(\frac{T}{2}\frac{k}{ T}\right)\right]\\
-    c_k=\displaystyle\frac{6T^2}{4}\frac{2}{5T}\mbox{sinc}\left(\frac{3T}{2}\frac{k}{ T}\right)\mbox{sinc}\left(\frac{T}{2}\frac{k}{ T}\right)\\
-    c_k=\displaystyle\frac{3T}{5}\mbox{sinc}\left(\frac{3k}{2}\right)\mbox{sinc}\left(\frac{k}{2}\right)
+    c_k=\displaystyle\frac{2}{\overline T}\left[\frac{3T}{2}\sinc\left(\frac{3T}{2}\frac{k}{ T}\right)\frac{T}{2}\sinc\left(\frac{T}{2}\frac{k}{ T}\right)\right]\\
+    c_k=\displaystyle\frac{6T^2}{4}\frac{2}{5T}\sinc\left(\frac{3T}{2}\frac{k}{ T}\right)\sinc\left(\frac{T}{2}\frac{k}{ T}\right)\\
+    c_k=\displaystyle\frac{3T}{5}\sinc\left(\frac{3k}{2}\right)\sinc\left(\frac{k}{2}\right)
 \end{gather*}
 \begin{gather}
-    X(f)=\displaystyle\frac{2}{5T}\sum_{n=-\infty}^{+\infty}\left[\frac{3T}{5}\mbox{sinc}\left(\frac{3k}{2}\right)\mbox{sinc}\left(\frac{k}{2}\right)\right]\delta\left(f-\frac{2k}{5T}\right)
+    X(f)=\displaystyle\frac{2}{5T}\sum_{n=-\infty}^{+\infty}\left[\frac{3T}{5}\sinc\left(\frac{3k}{2}\right)\sinc\left(\frac{k}{2}\right)\right]\delta\left(f-\frac{2k}{5T}\right)
 \end{gather}
 
 Calcolare la seguente convoluzione:
 \begin{gather*}
     x(t)=\left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*\displaystyle\frac{\sin(3\pi f_0t)}{\pi t}\\
     \left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*\displaystyle3f_0\frac{\sin(3\pi f_0t)}{3\pi f_0t}\\
-    \left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*3f_0\mbox{sinc}(3f_0 t)
+    \left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*3f_0\sinc(3f_0 t)
 \end{gather*}
 Si applica la formula di duplicazione del seno, e si passa per il dominio della frequenza:
 \begin{gather*}
-    x(t)=\displaystyle\frac{3f_0}{2}\sin(4\pi f_0t)*\mbox{sinc}(3f_0t)\\
-    X(f)=\displaystyle\frac{1}{4i}\left[\delta(f-2f_0)-\delta(f+2f_0)\right]\frac{3f_0}{3f_0}\mbox{rect}\left(\frac{f}{3f_0}\right)\\
-    \displaystyle\frac{1}{4i}\left[\mbox{rect}\left(-\frac{2f_0}{3f_0}\right)\delta(f-2f_0)-\mbox{rect}\left(\frac{2f_0}{3f_0}\right)\delta(f+2f_0)\right]\\
-    \displaystyle\frac{1}{4i}\mbox{rect}\left(\frac{2}{3}\right)\left[\delta(f-2f_0)-\delta(f+2f_0)\right]
+    x(t)=\displaystyle\frac{3f_0}{2}\sin(4\pi f_0t)*\sinc(3f_0t)\\
+    X(f)=\displaystyle\frac{1}{4i}\left[\delta(f-2f_0)-\delta(f+2f_0)\right]\frac{3f_0}{3f_0}\rect\left(\frac{f}{3f_0}\right)\\
+    \displaystyle\frac{1}{4i}\left[\rect\left(-\frac{2f_0}{3f_0}\right)\delta(f-2f_0)-\rect\left(\frac{2f_0}{3f_0}\right)\delta(f+2f_0)\right]\\
+    \displaystyle\frac{1}{4i}\rect\left(\frac{2}{3}\right)\left[\delta(f-2f_0)-\delta(f+2f_0)\right]
 \end{gather*}
 Poiché il valore $2/3$ è esterno all'intervallo di valori non nulli del segnale finestra $[-1/2,1/2]$, la trasformata assume valore nullo. 
 \begin{gather}
@@ -848,13 +875,13 @@ Poiché il valore $2/3$ è esterno all'intervallo di valori non nulli del segnal
 \end{gather}
 
 
-Calcolare il seganle $x$, passando per il dominio della frequenza:
+Calcolare il segnale $x$, passando per il dominio della frequenza:
 \begin{gather*}
     x(t)=\cos(2\pi f_0t)\left[\sin(2\pi f_0t)*\displaystyle\frac{\sin(3\pi f_0t)}{\pi t}\right]\\
     x_1(t)=\sin(2\pi f_0t)*\displaystyle\frac{\sin(3\pi f_0t)}{\pi t}\\
-    X_1(f)=\displaystyle\frac{1}{2i}\left[\delta(f-f_0)-\delta(f+f_0)\right]\cdot \frac{3f_0}{3f_0}\mbox{rect}\left(\frac{f}{3f_0}\right)\\
-    \displaystyle\frac{1}{2i}\delta(f-f_0)\mbox{rect}\left(-\frac{f_0}{3f_0}\right)-\frac{1}{2i}\delta(f+f_0)\mbox{rect}\left(\frac{f_0}{3f_0}\right)\\
-    \displaystyle\frac{1}{2i}\mbox{rect}\left(\frac{1}{3}\right)\left[\delta(f-f_0)-\delta(f+f_0)\right]\\
+    X_1(f)=\displaystyle\frac{1}{2i}\left[\delta(f-f_0)-\delta(f+f_0)\right]\cdot \frac{3f_0}{3f_0}\rect\left(\frac{f}{3f_0}\right)\\
+    \displaystyle\frac{1}{2i}\delta(f-f_0)\rect\left(-\frac{f_0}{3f_0}\right)-\frac{1}{2i}\delta(f+f_0)\rect\left(\frac{f_0}{3f_0}\right)\\
+    \displaystyle\frac{1}{2i}\rect\left(\frac{1}{3}\right)\left[\delta(f-f_0)-\delta(f+f_0)\right]\\
     X_1(f)=\displaystyle\frac{1}{2i}\left[\delta(f-f_0)-\delta(f+f_0)\right]\\
     x_1(t)=\sin(2\pi f_0t)
 \end{gather*}
@@ -873,8 +900,8 @@ Il periodo di un segnale combinazione lineare di altri segnali è il minimo comu
 \end{gather}
 Si calcola la potenza del segnale:
 \begin{gather*}
-    P_x=\displaystyle\frac{1}{4T_0}\int_{-2T_0}^{2T_0}\left|2e^{2i\pi t/T_0}-e^{-2i\pi t/4T_0}\right|^2dt\\
-    \displaystyle\frac{1}{4T_0}\int_{-2T_0}^{2T_0}\left(4+1+4\cos\left[\frac{2\pi t}{T_0}\left(1+\frac{1}{4}\right)\right]\right)\\
+    P_x=\displaystyle\frac{1}{4T_0}\int_{-2T_0}^{2T_0}\left|2e^{2i\pi t/T_0}-e^{-2i\pi t/4T_0}\right|^2\df t\\
+    \displaystyle\frac{1}{4T_0}\int_{-2T_0}^{2T_0}\left(4+1+4\cos\left[\frac{2\pi t}{T_0}\left(1+\frac{1}{4}\right)\right]\right)\df t\\
     \displaystyle\frac{20T_0}{4T_0}+\frac{2T_0}{5\pi }\cancelto{0}{\left[\sin\left(\frac{5\pi t}{2T_0}\right)\right]_{-2T_0}^{2T_0}}
 \end{gather*}
 \begin{gather}
@@ -882,17 +909,17 @@ Si calcola la potenza del segnale:
 \end{gather}
 Si determinano i coefficienti di Fourier:
 \begin{gather*}
-    c_k=\displaystyle\frac{1}{4T_0}\int_{-2T_0}^{2T_0}\left(2e^{2i\pi t/T_0}-e^{-2i\pi t/4T_0}\right)e^{-2i\pi kt/4T_0}dt\\
-    c_k=\displaystyle\frac{2}{4T_0}\int_{-2T_0}^{2T_0}e^{2i\pi t(1-k/4)/T_0}dt+\frac{1}{4T_0}\int_{-2T_0}^{2T_0}2e^{-2i\pi t(1+k)/4T_0}dt
+    c_k=\displaystyle\frac{1}{4T_0}\int_{-2T_0}^{2T_0}\left(2e^{2i\pi t/T_0}-e^{-2i\pi t/4T_0}\right)e^{-2i\pi kt/4T_0}\df t\\
+    c_k=\displaystyle\frac{2}{4T_0}\int_{-2T_0}^{2T_0}e^{2i\pi t(1-k/4)/T_0}\df t+\frac{1}{4T_0}\int_{-2T_0}^{2T_0}2e^{-2i\pi t(1+k)/4T_0}\df t
 \end{gather*}
 \begin{gather}
     c_k=\begin{cases}
         0 &\forall k\neq4\lor-1\\
-        \displaystyle\frac{1}{4T_0}& k=-1\\
-        \displaystyle\frac{1}{2T_0}&k=4
+        \displaystyle\frac{\strut 1}{\strut 4T_0}& k=-1\\
+        \displaystyle\frac{\strut 1}{\strut 2T_0}&k=4
     \end{cases}
 \end{gather}
-Si ottiene lo stesso risultato, più velocemente, per confronto diretto. La sua trasformata si ottiente, sia trasformando la sua serie di Fourier, sia attuando l'integrale 
+Si ottiene lo stesso risultato, più velocemente, per confronto diretto. La sua trasformata si ottiene sia trasformando la sua serie di Fourier, sia attuando l'integrale 
 di trasformazione:
 \begin{gather}
     X(f)=\displaystyle\frac{1}{4T_0}\delta\left(f+\frac{1}{4T_0}\right)+\frac{1}{2T_0}\delta\left(f-\frac{1}{T_0}\right)
@@ -900,7 +927,7 @@ di trasformazione:
 
 
 
-Caclolare la trasformata del segnale $x$:
+Calcolare la trasformata del segnale $x$:
 \begin{gather*}
     x(t)=\cos\left[\displaystyle\frac{\pi(t-T)}{2T}\right]\cos\left(\frac{2\pi t}{T}\right)=\cos\left[\displaystyle\frac{2\pi(t-T)}{4T}\right]\cos\left(\frac{2\pi t}{T}\right)
 \end{gather*}
@@ -919,7 +946,7 @@ Si rappresenta il segnale in forma esponenziale:
 \begin{gather}
     X(f)=\displaystyle\frac{1}{4i}\left[\delta\left(f+\frac{5}{4T}\right)-\delta\left(f-\frac{5}{4T}\right)\right]-\frac{1}{4i}\left[\delta\left(f+\frac{3}{4T}\right)-\delta\left(f-\frac{3}{4T}\right)\right]
 \end{gather}
-Per cui il segnale orginale corrisponde ad una differenza di due seni, considerando operazioni trigonometriche del segnale originario. Alternametivamente, per la 
+Per cui il segnale originale corrisponde ad una differenza di due seni, considerando operazioni trigonometriche del segnale originario. Alternativamente, per la 
 proprietà della convoluzione, si può calcolare come convoluzione tra le due trasformate dei segnali moltiplicati:
 \begin{gather*}
     x(t)=\cos\left[\displaystyle\frac{\pi(t-T)}{2T}\right]\cos\left(\frac{2\pi t}{T}\right)=x_1(t)\cdot x_2(t)\\
@@ -929,7 +956,7 @@ proprietà della convoluzione, si può calcolare come convoluzione tra le due tr
     \displaystyle-\frac{i}{2}\delta\left(f+\frac{1}{4T}\right)+\frac{i}{2}\delta\left(f-\frac{1}{4T}\right)\\
     X_2(f)=\displaystyle\frac{1}{2}\left[\delta\left(f+\frac{1}{T}\right)+\delta\left(f-\frac{1}{T}\right)\right]
 \end{gather*}
-Si attua quindi una convoluzione nel dominio della frequenza per ottenere la trasformata del segnale orginale:
+Si attua quindi una convoluzione nel dominio della frequenza per ottenere la trasformata del segnale originale:
 \begin{gather*}
     X(f)=\displaystyle\frac{i}{2}\left[\delta\left(f-\frac{1}{4T}\right)-\delta\left(f+\frac{1}{4T}\right)\right]*\frac{1}{2}\left[\delta\left(f+\frac{1}{T}\right)+\delta\left(f-\frac{1}{T}\right)\right]
 \end{gather*}
@@ -962,7 +989,7 @@ Data una sequenza di valore costante:
 \end{gather*}
 Si determina la trasformata della sequenza tramite la definizione:
 \begin{gather}
-    X_C(f)=\displaystyle\sum_{n=-\infty}^{+\infty}e^{-2i\pi nfT}
+    X_c(f)=\displaystyle\sum_{n=-\infty}^{+\infty}e^{-2i\pi nfT}
 \end{gather}
 Altrimenti si considera il segnale da cui si è campionata la sequenza:
 \begin{gather*}
@@ -971,23 +998,23 @@ Altrimenti si considera il segnale da cui si è campionata la sequenza:
 \end{gather*}
 Per cui la trasformata del segnale campionato si può esprimere come un treno di delta:
 \begin{gather}
-    X_C(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{T}\right)
+    X_c(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{T}\right)
 \end{gather}
 Poiché la sequenza considerata coincide con il treno campionatore $x[n]=\pi(t)$. 
 
 Calcolare la trasformata della sequenza $x[n]$:
 \begin{gather*}
-    x[n]=\left[\displaystyle\frac{\sin(2\pi f_CnT)}{\pi n}\right]^2=4f_C^2T^2\mbox{sinc}^2(2f_CnT)
+    x[n]=\left[\displaystyle\frac{\sin(2\pi f_cnT)}{\pi n}\right]^2=4f_c^2T^2\sinc^2(2f_cnT)
 \end{gather*}
 Questa sequenza si può considerare estratta dal segnale tempo continuo $x$:
 \begin{gather*}
-    x(t)=4f_C^2T^2\mbox{sinc}(2f_Ct)\\
-    X(f)=\displaystyle 2f_CT^2\mbox{tri}\left(\frac{f}{2f_C}\right)
+    x(t)=4f_c^2T^2\sinc(2f_ct)\\
+    X(f)=\displaystyle 2f_cT^2\mbox{tri}\left(\frac{f}{2f_c}\right)
 \end{gather*}
 
 Per cui si esprime la trasformata della sequenza come:
 \begin{gather}
-    X_C(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=2f_CT\sum_{n=-\infty}^{+\infty}\mbox{tri}\left(\frac{f-\frac{n}{T}}{2f_C}\right)
+    X_c(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=2f_cT\sum_{n=-\infty}^{+\infty}\mbox{tri}\left(\frac{f-\frac{n}{T}}{2f_c}\right)
 \end{gather}
 Se $T$ il passo di campionamento non è abbastanza grande, i triangoli si sovrappongono tra di loro. 
 
@@ -1004,19 +1031,19 @@ Calcolare la convoluzione $y$ tempo discreta tra $x$ e $h$, esponenziali unilate
 \begin{gather}
     y[n]=\displaystyle\frac{b^{n+1}-a^{n+1}}{b-a}u[n]
 \end{gather}
-Si può calcolare anlogamente nel dominio della frequenza, poi attuando un antitrasformata: 
+Si può calcolare analogamente nel dominio della frequenza, poi attuando un antitrasformata: 
 \begin{gather*}
-    Y_C(f)=X_C(f)H_C(f)\\
-    X_C(f)=\displaystyle\sum_{n=0}^{+\infty}a^ne^{-2i\pi nfT}=\sum_{n=0}^{+\infty}\left(ae^{-2i\pi fT}\right)^n=\frac{1}{1-ae^{-2i\pi fT}}\\
-    H_C(f)=\displaystyle\frac{1}{1-be^{-2i\pi fT}}
+    Y_c(f)=X_c(f)H_c(f)\\
+    X_c(f)=\displaystyle\sum_{n=0}^{+\infty}a^ne^{-2i\pi nfT}=\sum_{n=0}^{+\infty}\left(ae^{-2i\pi fT}\right)^n=\frac{1}{1-ae^{-2i\pi fT}}\\
+    H_c(f)=\displaystyle\frac{1}{1-be^{-2i\pi fT}}
 \end{gather*}
 Poiché le due sommatorie diventano delle serie geometriche. Si considera ora il loro prodotto:
 \begin{gather*}
-    Y_C(f)=X_C(f)H_C(f)=\displaystyle\frac{1}{1-ae^{-2i\pi fT}}\frac{1}{1-be^{-2i\pi fT}}
+    Y_c(f)=X_c(f)H_c(f)=\displaystyle\frac{1}{1-ae^{-2i\pi fT}}\frac{1}{1-be^{-2i\pi fT}}
 \end{gather*}
 Si può decomporre in fratti semplici come:
 \begin{gather*}
-    Y_C(f)=\displaystyle\frac{A}{1-ae^{-2i\pi fT}}+\frac{B}{1-be^{-2i\pi fT}}\\
+    Y_c(f)=\displaystyle\frac{A}{1-ae^{-2i\pi fT}}+\frac{B}{1-be^{-2i\pi fT}}\\
     \begin{cases}
         A+B=1\\
         Ab+Ba=0
@@ -1025,47 +1052,47 @@ Si può decomporre in fratti semplici come:
         A=1-B\\
         b-Bb+Ba=0
     \end{cases}\to\begin{cases}
-        A=\displaystyle\frac{a}{a-b}\\
-        B=\displaystyle\frac{b}{b-a}
+        A=\displaystyle\frac{\strut a}{\strut a-b}\\
+        B=\displaystyle\frac{\strut b}{\strut b-a}
     \end{cases}
 \end{gather*}
 Per cui il segnale convoluzione si esprime come:
 \begin{gather*}
-    Y_C(f)=\displaystyle\frac{a}{a-b}\frac{1}{1-ae^{-2i\pi fT}}+\frac{b}{b-a}\frac{1}{1-be^{-2i\pi fT}}
+    Y_c(f)=\displaystyle\frac{a}{a-b}\frac{1}{1-ae^{-2i\pi fT}}+\frac{b}{b-a}\frac{1}{1-be^{-2i\pi fT}}
 \end{gather*}
 \begin{gather}
     y[n]=\displaystyle\frac{a}{a-b}a^nu[n]+\displaystyle\frac{b}{b-a}b^nu[n]
 \end{gather}
 
 
-Calcolare la trasforamta di Fourier della sequenza $x$:
+Calcolare la trasformata di Fourier della sequenza $x$:
 \begin{gather*}
     x[n]=\displaystyle\frac{\sin(\pi n/3)}{\pi n}\cos\left(\frac{2\pi n}{6}\right)
 \end{gather*}
 Si considera $T=1$, e si esprime il segnale da cui è stata campionata la sequenza:
 \begin{gather*}
-    x(t)=\frac{1}{3}\mbox{sinc}\left(\frac{t}{3}\right)\cos\left(\frac{2\pi t}{6}\right)
+    x(t)=\frac{1}{3}\sinc\left(\frac{t}{3}\right)\cos\left(\frac{2\pi t}{6}\right)
 \end{gather*}
 Si determina la trasformata di questo segnale tempo continuo:
 \begin{gather*}
-    X(f)=\displaystyle\mbox{rect}(3f)*\frac{1}{2}\left[\delta\left(f-\frac{1}{6}\right)+delta\left(f+\frac{1}{6}\right)\right]\\
-    X(f)=\displaystyle\frac{1}{2}\mbox{rect}\left(3f-\frac{1}{2}\right)+\frac{1}{2}\mbox{rect}\left(3f+\frac{1}{2}\right)
+    X(f)=\displaystyle\rect(3f)*\frac{1}{2}\left[\delta\left(f-\frac{1}{6}\right)+delta\left(f+\frac{1}{6}\right)\right]\\
+    X(f)=\displaystyle\frac{1}{2}\rect\left(3f-\frac{1}{2}\right)+\frac{1}{2}\rect\left(3f+\frac{1}{2}\right)
 \end{gather*}
 \begin{gather}
-    X_C(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=\frac{1}{T}\sum_{n=-\infty}^{+\infty}\left[\frac{1}{2}\mbox{rect}\left(3f-\frac{1}{2}-3n\right)+\frac{1}{2}\mbox{rect}\left(3f+\frac{1}{2}-3n\right)\right]
+    X_c(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=\frac{1}{T}\sum_{n=-\infty}^{+\infty}\left[\frac{1}{2}\rect\left(3f-\frac{1}{2}-3n\right)+\frac{1}{2}\rect\left(3f+\frac{1}{2}-3n\right)\right]
 \end{gather}
 
 
 
 Calcolare la trasformata di Fourier della sequenza $x$:
 \begin{gather*}
-    x[n]=\left[\displaystyle\frac{\sin(\pi n/3)}{\pi n}\right]^2=\frac{1}{9}\mbox{sinc}^2\left(\frac{n}{3}\right)\\
+    x[n]=\left[\displaystyle\frac{\sin(\pi n/3)}{\pi n}\right]^2=\frac{1}{9}\sinc^2\left(\frac{n}{3}\right)\\
     T=1\\
-    x(t)=\displaystyle\frac{1}{9}\mbox{sinc}^2\left(\frac{t}{3}\right)\\
+    x(t)=\displaystyle\frac{1}{9}\sinc^2\left(\frac{t}{3}\right)\\
     X(f)=\displaystyle \frac{1}{3}\mbox{tri}(3f)
 \end{gather*}
 \begin{gather}
-    X_C(f)=\displaystyle\frac{1}{3}\sum_{n=-\infty}^{+\infty}\mbox{tri}(3f-n)
+    X_c(f)=\displaystyle\frac{1}{3}\sum_{n=-\infty}^{+\infty}\mbox{tri}(3f-n)
 \end{gather}
 
 \clearpage
@@ -1079,23 +1106,23 @@ Dato un segnale coseno di frequenza $f_0$ si determina la frequenza di Nyquist:
 \end{gather*}
 Per cui la frequenza massima corrisponde a $f_0$, per cui la frequenza di Nyquist si ottiene come:
 \begin{gather}
-    f_C=2f_0
+    f_c=2f_0
 \end{gather}
 Il segnale campionato corrisponde a:
 \begin{gather*}
-    x_C(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)=\sum_{n=-\infty}^{+\infty}\cos(\pi n)\delta\left(t-\frac{n}{2f_0}\right)
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)=\sum_{n=-\infty}^{+\infty}\cos(\pi n)\delta\left(t-\frac{n}{2f_0}\right)
 \end{gather*}
 Ma utilizzando la frequenza di Nyquist come la frequenza di campionamento gli impulsi coincidono per $f=2f_0$, per cui questa sequenza non individua univocamente il segnale 
 coseno, per cui è necessaria una frequenza di campionamento maggiore. Si considera allora:
 \begin{gather*}
-    f_C=4f_0
+    f_c=4f_0
 \end{gather*}
-Si suppone sia presente aliasing nel segnale campionato in frequenza. Per cui si ha una frequenza $f_C<2f_0$, e sono presenti degli impulsi in più nell'intervallo $[-f_0,f_0]$, 
-corrispondenti alle repliche antecedenti e posteriori alla replica centrata in $f=0$. Lo spettro si sovrappone, quindi ricomponendo il segnale non si ricostruice il 
-segnale coseno originiario. 
+Si suppone sia presente aliasing nel segnale campionato in frequenza. Per cui si ha una frequenza $f_c<2f_0$, e sono presenti degli impulsi in più nell'intervallo $[-f_0,f_0]$, 
+corrispondenti alle repliche antecedenti e posteriori alla replica centrata in $f=0$. Lo spettro si sovrappone, quindi ricomponendo il segnale non si ricostruisce il 
+segnale coseno originario. 
 Il segnale ricostruito si ottiene antitrasformando il segnale ottenuto in frequenza:
 \begin{gather*}
-    Y(f)=X_C(f)H(f)=\displaystyle\frac{1}{2}\left(f-\frac{1}{T}-f_0\right)+\frac{1}{2}\left(f-\frac{1}{T}+f_0\right)\\
+    Y(f)=X_c(f)H(f)=\displaystyle\frac{1}{2}\left(f-\frac{1}{T}-f_0\right)+\frac{1}{2}\left(f-\frac{1}{T}+f_0\right)\\
     y(t)=\cos\left[2\pi \left(f_0-\frac{1}{T}\right)t\right]
 \end{gather*}
 
@@ -1105,13 +1132,13 @@ Il segnale ricostruito si ottiene antitrasformando il segnale ottenuto in freque
 
 Dato il segnale campionato $x(t)$, determinare la frequenza di Nyquist: 
 \begin{gather*}
-    x(t)=1+\left[\displaystyle\frac{\sin(20\pi t)}{\pi t}\right]^2=1+400\,\mbox{sinc}^2\left(20\pi t\right)
+    x(t)=1+\left[\displaystyle\frac{\sin(20\pi t)}{\pi t}\right]^2=1+400\,\sinc^2\left(20\pi t\right)
 \end{gather*}
 Lo spettro del segnale corrisponde a:
 \begin{gather*}
     X(f)=\displaystyle \delta(f)+20\,\mbox{tri}\left(\frac{f}{20}\right)
 \end{gather*}
-Per cui la frequenza minima di campiomaneto corrisponde a $f_C>40\,Hz$, mentre il tempo di campionamento massimo corrisponde a:
+Per cui la frequenza minima di campionamento corrisponde a $f_c>40\,Hz$, mentre il tempo di campionamento massimo corrisponde a:
 Non è presente aliasing quando la frequenza assume valori maggiori di:
 \begin{gather*}
     f>\displaystyle\frac{2}{\frac{1}{20}}=40\,Hz
@@ -1120,25 +1147,25 @@ Il tempo di campionamento deve essere:
 \begin{gather}
     T>\displaystyle\frac{2}{f_{max}}=\frac{2}{40\,Hz}=25\,ms
 \end{gather}
-Si suppone si stia campionando con un passo di campionamento doppio al valore massio $\overline{T}=2T=50\,ms$. Lo spettro del segnale campionato corrisponde a:
+Si suppone si stia campionando con un passo di campionamento doppio al valore massimo $\overline{T}=2T=50\,ms$. Lo spettro del segnale campionato corrisponde a:
 \begin{gather*}
-    X_C(f)=\displaystyle \frac{1}{\overline{T}}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{\overline{T}}\right)=20\sum_{n=-\infty}^{+\infty}\delta(f-20n)+20\,\mbox{tri}\left(\frac{f-20n}{20}\right)
+    X_c(f)=\displaystyle \frac{1}{\overline{T}}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{\overline{T}}\right)=20\sum_{n=-\infty}^{+\infty}\delta(f-20n)+20\,\mbox{tri}\left(\frac{f-20n}{20}\right)
 \end{gather*}
 Se il tempo di campionamento fosse pari a $T=50\times10^{-3}s$, i triangoli in frequenza sarebbero sfasati tra di loro di esattamente metà della loro base, per cui la 
 somma di tutti i triangoli assume valore costante in frequenza. 
 Lo spettro del segnale campionato diventa una costante sommata ad un treno di delta:
 \begin{gather}
-    X_C(f)=400+20\displaystyle\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{20}\right)
+    X_c(f)=400+20\displaystyle\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{20}\right)
 \end{gather}
 Si effettua ora quest'analisi nel dominio del tempo:
 \begin{gather*}
-    x_C(t)=x(t)\pi(t)=x(t)\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)=\sum_{n=-\infty}^{+\infty}\left[1+400\,\mbox{sinc}^2\left(20t\right)\right]\delta(t-50\times10^{-3}n)\\
-    x_C(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta(t-50\times10^{-3}n)+400\sum_{n=-\infty}^{+\infty}\mbox{sinc}^2(20t)\delta(t-50\times10^{-3}n)\\
-    x_C(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta(t-50\times10^{-3}n)+400\delta(t)
+    x_c(t)=x(t)\pi(t)=x(t)\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)=\sum_{n=-\infty}^{+\infty}\left[1+400\,\sinc^2\left(20t\right)\right]\delta(t-50\times10^{-3}n)\\
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta(t-50\times10^{-3}n)+400\sum_{n=-\infty}^{+\infty}\sinc^2(20t)\delta(t-50\times10^{-3}n)\\
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta(t-50\times10^{-3}n)+400\delta(t)
 \end{gather*}
 La sua trasformata corrisponde a:
 \begin{gather*}
-    X_C(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{50\times10^{-3}}\right)\frac{1}{50\times10^{-3}}+400
+    X_c(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{50\times10^{-3}}\right)\frac{1}{50\times10^{-3}}+400
 \end{gather*}
 
 
@@ -1157,7 +1184,7 @@ Quindi la frequenza di Nyquist corrisponde a:
 \end{gather*}
 Per cui il passo di campionamento del segnale è:
 \begin{gather}
-    T>\displaystyle\frac{1}{f_C}=\frac{T_0}{4}
+    T>\displaystyle\frac{1}{f_c}=\frac{T_0}{4}
 \end{gather}
 
 Si considera un passo di campionamento minore rispetto al valore necessario per non avere aliasing: 
@@ -1166,17 +1193,17 @@ Si considera un passo di campionamento minore rispetto al valore necessario per 
 \end{gather*}
 Si vuole calcolare lo spettro del segnale considerando questo tempo di campionamento:
 \begin{gather*}
-    X_C(f)=\displaystyle\frac{9}{4T_0}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{9n}{4T_0}\right)\\
-    X_C(f)=\sum_{n=-\infty}^{+\infty}\left[\frac{9}{8T_0}\delta\left(f-\frac{9n}{4T_0}\right)+\frac{9}{16T_0}\delta\left(f+\frac{2}{T_0}-\frac{9n}{4T_0}\right)+\frac{9}{16T_0}\delta\left(f-\frac{2}{T_0}-\frac{9n}{4T_0}\right)\right]
+    X_c(f)=\displaystyle\frac{9}{4T_0}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{9n}{4T_0}\right)\\
+    X_c(f)=\sum_{n=-\infty}^{+\infty}\left[\frac{9}{8T_0}\delta\left(f-\frac{9n}{4T_0}\right)+\frac{9}{16T_0}\delta\left(f+\frac{2}{T_0}-\frac{9n}{4T_0}\right)+\frac{9}{16T_0}\delta\left(f-\frac{2}{T_0}-\frac{9n}{4T_0}\right)\right]
 \end{gather*}
 \begin{gather}
-    X_C(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\left[\frac{9}{8T_0}\delta\left(f-\frac{9n}{4T_0}\right)+\frac{9}{16T_0}\delta\left(f+\frac{8-9n}{4T_0}\right)+\frac{9}{16T_0}\delta\left(f-\frac{8+9n}{4T_0}\right)\right]
+    X_c(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\left[\frac{9}{8T_0}\delta\left(f-\frac{9n}{4T_0}\right)+\frac{9}{16T_0}\delta\left(f+\frac{8-9n}{4T_0}\right)+\frac{9}{16T_0}\delta\left(f-\frac{8+9n}{4T_0}\right)\right]
 \end{gather}
 %% grafico 
 
 Dato il segnale $x$ calcolare il periodo di campionamento:
 \begin{gather*}
-    x(t)=2f_0\mbox{sinc}(2f_0t)\cos(6\pi f_0t)\\
+    x(t)=2f_0\sinc(2f_0t)\cos(6\pi f_0t)\\
     X(f)=\displaystyle2\,\mbox{tri}\left(\frac{f}{f_0}\right)*\left[\frac{1}{2}\delta\left(f-3f_0\right)+\frac{1}{2}\delta(f+3f_0)\right]\\
     X(f)=\displaystyle\mbox{tri}\left(\frac{f-3f_0}{f_0}\right)+\mbox{tri}\left(\frac{f+3f_0}{f_0}\right)
 \end{gather*}
@@ -1188,18 +1215,18 @@ passo di campionamento:
 
 Per cui la trasformata del segnale campionato corrisponde a:
 \begin{gather*}
-    X_C(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\mbox{tri}\left(\frac{f-(4n+3)f_0}{f_0}\right)+\mbox{tri}\left(\frac{f-(4n-3)f_0}{f_0}\right)
+    X_c(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\mbox{tri}\left(\frac{f-(4n+3)f_0}{f_0}\right)+\mbox{tri}\left(\frac{f-(4n-3)f_0}{f_0}\right)
 \end{gather*}
 %% grafico 
 
 Si ricostruisce il segnale inserendolo in un filtro ricostruttore DAC di funzione di trasferimento $H(f)$, filtro passa basso ideale, che si estende tra le 
 frequenze $[-2f_0,+2f_0]$, si considera un tempo di campionamento pari ad $1$:
 \begin{gather*}
-    H(f)=\displaystyle\mbox{rect}\left(\frac{f}{2f_0}\right)\\
-    X(f)=X_C(f)H(f)=\displaystyle\mbox{tri}\left(\frac{f-f_0}{f_0}\right)+\mbox{tri}\left(\frac{f+f_0}{f_0}\right)
+    H(f)=\displaystyle\rect\left(\frac{f}{2f_0}\right)\\
+    X(f)=X_c(f)H(f)=\displaystyle\mbox{tri}\left(\frac{f-f_0}{f_0}\right)+\mbox{tri}\left(\frac{f+f_0}{f_0}\right)
 \end{gather*}
 \begin{gather}
-    x(t)=2f_0\mbox{sinc}^2(f_0t)\cos(2\pi f_0t)
+    x(t)=2f_0\sinc^2(f_0t)\cos(2\pi f_0t)
 \end{gather} 
 
 
@@ -1214,13 +1241,13 @@ la cui funzione di trasferimento assume una forma trapezoidale in frequenza:
     \end{cases}
 \end{gather*}
 Calcolare il valore massimo di $T$, $K_f$ e $A$ affinché il segnale ricostruito coincida con il segnale di partenza. 
-Il parametro $A$ affinché si ritorni al segnale orginiario deve essere necessariamente: 
+Il parametro $A$ affinché si ritorni al segnale originario deve essere necessariamente: 
 \begin{gather}
     A=\displaystyle\frac{1}{T}
 \end{gather}
 Il massimo passo di campionamento se fosse presente un filtro ideale sarebbe $T=1/12\times10^{-3}\,s$, ma per ricostruire il segnale originale con un filtro trapezoidale, bisognerebbe 
 assegnare al valore $K_f=6\,kHz$. Ma in questo modo il filtro del DAC considera altre repliche, poiché la sua banda arriva fino ad un valore di $2K_f=12\,kHz$. La frequenza di 
-campionameto deve essere quindi:
+campionamento deve essere quindi:
 \begin{gather*}
     f\geq\displaystyle\frac{1}{T}+K_f=12+6=18\,kHz
 \end{gather*}
@@ -1231,10 +1258,10 @@ Il passo di campionamento è quindi:
 
 
 
-Un segnale viene campionato con frequenza di campionamento (di Nyquist) $f_C=100\,Hz$, dando origine ai seguenti campioni:
+Un segnale viene campionato con frequenza di campionamento (di Nyquist) $f_c=100\,Hz$, dando origine ai seguenti campioni:
 \begin{gather*}
-    T_C=\displaystyle\frac{1}{100}\,s=10\,ms\\
-    f_{max}=\frac{f_C}{2}=50\,Hz\\
+    T_c=\displaystyle\frac{1}{100}\,s=10\,ms\\
+    f_{max}=\frac{f_c}{2}=50\,Hz\\
     x(nT)=\begin{cases}
         -1&n=-2,-1\\
         1&n=1,2\\
@@ -1243,53 +1270,53 @@ Un segnale viene campionato con frequenza di campionamento (di Nyquist) $f_C=100
 \end{gather*}
 Il segnale viene ricostruito con un filtro ideale di funzione di trasferimento $H$:
 \begin{gather*}
-    H(f)=T\,\mbox{rect}(Tf)\to  h(t)=\mbox{sinc}\left(\frac{t}{T}\right)
+    H(f)=T\,\rect(Tf)\to  h(t)=\sinc\left(\frac{t}{T}\right)
 \end{gather*} 
 Calcolare il valore del segnale ricostruito al tempo $t=5\,ms$. Il segnale campionato si esprime come:
 \begin{gather*}
-    x_C(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)\\
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)\\
     x(2T)\delta(t-2T)+x(T)\delta(t-T)+x(-T)\delta(t+T)+x(-2T)\delta(t+2T)\\
-    x_C(t)=\delta(t-2T)+\delta(t-T)-\delta(t+T)-\delta(t+2T)
+    x_c(t)=\delta(t-2T)+\delta(t-T)-\delta(t+T)-\delta(t+2T)
 \end{gather*}
 Si calcola l'uscita del filtro DAC:
 \begin{gather*}
-    y(t)=x_C(t)*h(t)=\left[\delta(t-2T)+\delta(t-T)-\delta(t+T)-\delta(t+2T)\right]*\mbox{sinc}\left(\displaystyle\frac{t}{T}\right)\\
-    \displaystyle\mbox{sinc}\left(\frac{t-2T}{T}\right)+\mbox{sinc}\left(\frac{t-T}{T}\right)-\mbox{sinc}\left(\frac{t+T}{T}\right)-\mbox{sinc}\left(\frac{t+2T}{T}\right)\\
-    y(5\,ms)=\displaystyle\mbox{sinc}\left(\frac{5-20}{10}\right)+\mbox{sinc}\left(\frac{5-10}{10}\right)-\mbox{sinc}\left(\frac{5+10}{10}\right)-\mbox{sinc}\left(\frac{5+20}{10}\right)\\
-    \displaystyle\mbox{sinc}\left(\frac{15}{10}\right)+\mbox{sinc}\left(\frac{5}{10}\right)-\mbox{sinc}\left(\frac{15}{10}\right)-\mbox{sinc}\left(\frac{25}{10}\right)\\
-    \displaystyle\mbox{sinc}\left(\frac{1}{2}\right)-\mbox{sinc}\left(\frac{5}{2}\right)=\frac{\sin\left(\frac{\pi}{2}\right)}{\frac{\pi}{2}}-\frac{\sin\left(\frac{5\pi}{2}\right)}{\frac{5\pi}{2}}=\frac{2}{\pi}-\frac{2}{5\pi}
+    y(t)=x_c(t)*h(t)=\left[\delta(t-2T)+\delta(t-T)-\delta(t+T)-\delta(t+2T)\right]*\sinc\left(\displaystyle\frac{t}{T}\right)\\
+    \displaystyle\sinc\left(\frac{t-2T}{T}\right)+\sinc\left(\frac{t-T}{T}\right)-\sinc\left(\frac{t+T}{T}\right)-\sinc\left(\frac{t+2T}{T}\right)\\
+    y(5\,ms)=\displaystyle\sinc\left(\frac{5-20}{10}\right)+\sinc\left(\frac{5-10}{10}\right)-\sinc\left(\frac{5+10}{10}\right)-\sinc\left(\frac{5+20}{10}\right)\\
+    \displaystyle\sinc\left(\frac{15}{10}\right)+\sinc\left(\frac{5}{10}\right)-\sinc\left(\frac{15}{10}\right)-\sinc\left(\frac{25}{10}\right)\\
+    \displaystyle\sinc\left(\frac{1}{2}\right)-\sinc\left(\frac{5}{2}\right)=\frac{\sin\left(\frac{\pi}{2}\right)}{\frac{\pi}{2}}-\frac{\sin\left(\frac{5\pi}{2}\right)}{\frac{5\pi}{2}}=\frac{2}{\pi}-\frac{2}{5\pi}
 \end{gather*}
 \begin{gather}
     y(5\,ms)=\displaystyle\frac{8}{5\pi}
 \end{gather}
 
 
-Dato un segnale $x$ di banda $[-\omega,\omega]$, campionato con un passo $T_C=\displaystyle\frac{1}{2\omega}$. Si considerano tre filtri, di risposta impulsiva:
+Dato un segnale $x$ di banda $[-\omega,\omega]$, campionato con un passo $T_c=\displaystyle\frac{1}{2\omega}$. Si considerano tre filtri, di risposta impulsiva:
 \begin{gather*}
-    h_1(t)=\mbox{sinc}\left(\displaystyle\frac{t}{T}\right)\to H_1(f)=T\mbox{sinc}(Tf)\\
+    h_1(t)=\sinc\left(\displaystyle\frac{t}{T}\right)\to H_1(f)=T\sinc(Tf)\\
     h_2(t)=\mbox{tri}\left(\displaystyle\frac{t}{T}\right)\\
     h_3(t)=\mbox{tri}\left(\displaystyle\frac{t}{2T}\right)
 \end{gather*}
 Il segnale campionato si ottiene come:
 \begin{gather*}
-    x_C(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)\\
-    y_1(t)=x_C(t)*h_1(t)=\left[\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)\right]*\mbox{sinc}\left(\frac{t}{T}\right)
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)\\
+    y_1(t)=x_c(t)*h_1(t)=\left[\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)\right]*\sinc\left(\frac{t}{T}\right)
 \end{gather*}
 Questo caso corrisponde al teorema del campionamento, poiché il passo di campionamento corrisponde esattamente al reciproco del doppio della frequenza massima del segnale:
 \begin{gather}
-    y_1(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\mbox{sinc}\left(\frac{t-nT}{T}\right)=x(t)
+    y_1(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\sinc\left(\frac{t-nT}{T}\right)=x(t)
 \end{gather}
-Per cui il segnale ricostruito corrisponde esattamente al segnale orginiario. 
+Per cui il segnale ricostruito corrisponde esattamente al segnale originario. 
 
 Considerando il secondo filtro:
 \begin{gather}
-    y_2(t)=x_C(t)*h_2(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\mbox{tri}\left(\frac{t-nT}{T}\right)
+    y_2(t)=x_c(t)*h_2(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\mbox{tri}\left(\frac{t-nT}{T}\right)
 \end{gather}
 Questo filtro ricostruisce il segnale, ma presenta degli errori alle alte frequenze. 
 
 Considerando il terzo filtro:
 \begin{gather}
-    y_3(t)=x_C(t)*h_3(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\mbox{tri}\left(\frac{t-nT}{2T}\right)
+    y_3(t)=x_c(t)*h_3(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\mbox{tri}\left(\frac{t-nT}{2T}\right)
 \end{gather}
 Questo filtro non ricostruisce a pieno il segnale. 
 
@@ -1298,59 +1325,59 @@ Dato il segnale $x$:
 \begin{gather*}
     x(t)=\mbox{tri}\left(\displaystyle\frac{t}{T}\right)-\mbox{tri}\left(\frac{t+T}{T}\right)\\
     x(t)=\begin{cases}
-        \displaystyle\frac{t}{T} -2T\leq t<-T\\
-        1+\displaystyle\frac{3t}{T} -T\leq t<0\\
-        1-\displaystyle\frac{t}{T} 0\leq t<2T
+        \displaystyle\frac{\strut t}{\strut T} -2T\leq t<-T\\
+        1+\displaystyle\frac{\strut 3t}{\strut T} -T\leq t<0\\
+        1-\displaystyle\frac{\strut t}{\strut T} 0\leq t<2T
     \end{cases}
 \end{gather*}
-Viene campionato con intervallo di campionamento $T_C=T$. Il segnale campionato viene ricostruito con un filtro passa basso ideale di ampiezza $1$ di banda $[-1/2T_C,1/2T_C]$. 
+Viene campionato con intervallo di campionamento $T_c=T$. Il segnale campionato viene ricostruito con un filtro passa basso ideale di ampiezza $1$ di banda $[-1/2T_c,1/2T_c]$. 
 Calcolare il segnale ricostruito nel tempo continuo $y(t)$ e la sua trasformata $Y(f)$. 
 
 Sicuramente lo spettro del segnale originario non è limitato in banda, per cui la sua ricostruzione non potrà coincidere con il segnale originale. Il segnale è invece limitato 
 nel tempo, per cui il suo campionamento produce una sequenza limitata, ovvero non nulla solo per un numero limitato di campioni:
 \begin{gather*}
-    x_C(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)=x(-T)\delta(t+T)+x(0)\delta(t)=\delta(t)-\delta(t+T)
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)=x(-T)\delta(t+T)+x(0)\delta(t)=\delta(t)-\delta(t+T)
 \end{gather*}
 Il segnale ricostruito è quindi:
 \begin{gather}
-    y(t)=x_C(t)*h(t)=\left[\delta(t)-\delta(t+T)\right]*\frac{1}{T}\mbox{sinc}\left(\frac{t}{T}\right)=\frac{1}{T}\mbox{sinc}\left(\frac{t}{T}\right)-\frac{1}{T}\mbox{sinc}\left(\frac{t+T}{T}\right)\\
-    Y(f)=\mbox{rect}(Tf)-\mbox{rect}(Tf)e^{2i\pi fT}
+    y(t)=x_c(t)*h(t)=\left[\delta(t)-\delta(t+T)\right]*\frac{1}{T}\sinc\left(\frac{t}{T}\right)=\frac{1}{T}\sinc\left(\frac{t}{T}\right)-\frac{1}{T}\sinc\left(\frac{t+T}{T}\right)\\
+    Y(f)=\rect(Tf)-\rect(Tf)e^{2i\pi fT}
 \end{gather}
 
 
 Dato il segnale $x$:
 \begin{gather*}
-    x(t)=\mbox{sinc}\left(\displaystyle\frac{t}{2T}\right)+\cos\left(\frac{2\pi t}{T}\right)
+    x(t)=\sinc\left(\displaystyle\frac{t}{2T}\right)+\cos\left(\frac{2\pi t}{T}\right)
 \end{gather*}
-Il segnale viene campionato con un passo $\overline{T}$ pari a quattro volte il periodo di Nyquist $T_C$:
+Il segnale viene campionato con un passo $\overline{T}$ pari a quattro volte il periodo di Nyquist $T_c$:
 \begin{gather*}
-    \overline{T}=4T_C
+    \overline{T}=4T_c
 \end{gather*}
 Si considera la trasformata di Fourier del segnale $x$ per determinare la sua frequenza massima:
 \begin{gather*}
-    X(f)=2T\,\mbox{rect}(2Tf)+\displaystyle\frac{1}{2}\delta\left(f-\frac{1}{T}\right)+\frac{1}{2}\delta\left(f+\frac{1}{T}\right)
+    X(f)=2T\,\rect(2Tf)+\displaystyle\frac{1}{2}\delta\left(f-\frac{1}{T}\right)+\frac{1}{2}\delta\left(f+\frac{1}{T}\right)
 \end{gather*}
 La banda del segnale è limitata nell'intervallo $[-1/T, 1/T]$, per cui la frequenza di Nyquist corrisponde a $2/T$:
 \begin{gather*}
-    T_C=\displaystyle\frac{T}{2}\\
+    T_c=\displaystyle\frac{T}{2}\\
     \overline{T}=2T
 \end{gather*}
 
-Determinare il segnale campionato $x_C$ e la sua trasformata di Fourier $X_C$:
+Determinare il segnale campionato $x_c$ e la sua trasformata di Fourier $X_c$:
 \begin{gather*}
-    x_C(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(n\overline{T})\delta(t-n\overline{T})=\sum_{n=-\infty}^{+\infty}\left[\mbox{sinc}\left(\frac{2nT}{2T}\right)+\cos\left(\frac{4\pi nT}{T}\right)\right]\delta(t-2nT)\\
-    x_C(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\left[\mbox{sinc}(n)+\cancelto{1}{\cos(4\pi n)}\right]\delta(t-2nT)
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(n\overline{T})\delta(t-n\overline{T})=\sum_{n=-\infty}^{+\infty}\left[\sinc\left(\frac{2nT}{2T}\right)+\cos\left(\frac{4\pi nT}{T}\right)\right]\delta(t-2nT)\\
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\left[\sinc(n)+\cancelto{1}{\cos(4\pi n)}\right]\delta(t-2nT)
 \end{gather*}
 \begin{equation}
     x(t)=\displaystyle\delta(t)+\sum_{n=-\infty}^{+\infty}\delta(t-2nT)
 \end{equation}
 Si svolge ora la medesima analisi in frequenza:
 \begin{gather*}
-    X_C(f)=\displaystyle\frac{1}{2T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{2T}\right)\\
-    \displaystyle\frac{1}{2T}\sum_{n=-\infty}^{+\infty}2T\,\mbox{rect}\left[2T\left(f-\frac{n}{2T}\right)\right]+\frac{1}{4T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{1}{T}-\frac{n}{T}\right)+\frac{1}{4T}\sum_{n=-\infty}^{+\infty}\delta\left(f+\frac{1}{T}-\frac{n}{T}\right)
+    X_c(f)=\displaystyle\frac{1}{2T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{2T}\right)\\
+    \displaystyle\frac{1}{2T}\sum_{n=-\infty}^{+\infty}2T\,\rect\left[2T\left(f-\frac{n}{2T}\right)\right]+\frac{1}{4T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{1}{T}-\frac{n}{T}\right)+\frac{1}{4T}\sum_{n=-\infty}^{+\infty}\delta\left(f+\frac{1}{T}-\frac{n}{T}\right)
 \end{gather*}
 \begin{gather}
-    X_C(t)1+\displaystyle\frac{1}{2T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{2T}\right)
+    X_c(t)1+\displaystyle\frac{1}{2T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{2T}\right)
 \end{gather}
 Si ottiene lo stesso risultato della trasformata del segnale campionato nel tempo. 
 
@@ -1419,10 +1446,10 @@ lineare:
 \end{gather*}
 Determinare la distribuzione di probabilità della variabile aleatoria $Y$:
 \begin{gather*}
-    P_X(x)=\mbox{rect}\left(x-\displaystyle\frac{5}{2}\right)
+    P_X(x)=\rect\left(x-\displaystyle\frac{5}{2}\right)
 \end{gather*}
 \begin{equation}
-    P_Y(y)=P_X(g(y))|g'(y)|=\displaystyle\frac{1}{|a|}\mbox{rect}\left(\frac{2y-2b-5a}{2a}\right)
+    P_Y(y)=P_X(g(y))|g'(y)|=\displaystyle\frac{1}{|a|}\rect\left(\frac{2y-2b-5a}{2a}\right)
 \end{equation}
 
 
@@ -1438,5 +1465,310 @@ Data la densità di probabilità gaussiana di una variabile aleatoria $X$, calco
     P_Y(y)=P_X(g(y))|g'(y)|=\displaystyle\frac{e^{-\left(\frac{\sqrt[3]{y}}{\sqrt{2}{\sigma_x}}\right)^2}}{\sqrt{2\pi}\sigma_x}\frac{1}{3\sqrt[3]{y^2}}
 \end{equation}
 
+
+
+Sia data una variabile aleatoria $X$ uniformemente distribuita sull'intervallo $[0,\pi]$ ed una variabile $Y$ dipendente dalla prima, tramite la seguente relazione:
+\begin{gather*}
+    y=\cos(x)\\
+    P_X(x)=\displaystyle\frac{1}{\pi}\rect\left(\frac{x-\pi/2}{\pi}\right)
+\end{gather*}
+Determinare la densità di probabilità della variabile $Y$ $P_Y(y)$. Noto l'andamento della funzione coseno, la densità di probabilità di $y$ è una funzione 
+compresa nell'intervallo $[-1,+1]$. Si applica quindi la formula su questo intervallo:
+\begin{gather*}
+    P_Y(y)=P_X(\arccos(y))\displaystyle\frac{\df}{\df y}\arccos(y)\\
+    P_Y(y)=\displaystyle\frac{1}{\pi}\rect\left(\frac{\arccos(y)-\pi/2}{\pi}\right)\frac{1}{\sqrt{1-y^2}}
+\end{gather*}
+\begin{equation}
+    P_Y(y)=\displaystyle\rect\left(\frac{y}{2}\right)\frac{1}{\sqrt{1-y^2}}
+\end{equation}
+
+
+Date due variabili aleatori legate dalla relazione $y=f(x)=\cos(x)$, con $X$ uniformemente distribuita sull'intervallo $[0,2\pi]$, calcolare la densità di probabilità 
+della variabile $y$:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{2\pi}\rect\left(\frac{x-\pi}{2\pi}\right)
+\end{gather*}
+Poiché il coseno non è invertibile sull'intero intervallo dove è definita la variabile $X$, si divide in $[0,\pi]$ e $[\pi,2\pi]$, e si definiscono due funzioni 
+aggiuntive che legano le variabili aleatorie nei due intervalli:
+\begin{gather*}
+    f_1(x)=\cos(x)\\
+    g_1(y)=\arccos(y)\\
+    g_2(y)=-g_1(y)
+\end{gather*}
+La densità di probabilità sull'intervallo $[0,\pi]$, è già stata calcolata nell'esercizio precedente, in questo caso la variabile $X$ è distribuita uniformemente su un 
+intervallo di ampiezza doppia, per cui si divide in un due funzioni centrate nei due intervalli:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{2\pi}\left[\rect\left(\frac{x-\pi/2}{\pi}\right)+\rect\left(\frac{x-3\pi/2}{\pi}\right)\right]\\
+    P_{Y,1}(y)=\displaystyle\frac{1}{2\pi}\rect\left(\frac{\arccos(y)-\pi/2}{\pi}\right)\frac{1}{\sqrt{1-y^2}}\\
+    P_{Y,2}(y)=\displaystyle\frac{1}{2\pi}\rect\left(\frac{-\arccos(y)-3\pi/2}{\pi}\right)\frac{1}{\sqrt{1-y^2}}
+\end{gather*}
+\begin{equation}
+    P_{Y,1}(y)+P_{Y,2}(y)=\displaystyle\frac{1}{2\pi}\frac{1}{\sqrt{1-y^2}}\left[\rect\left(\frac{y}{2}\right)+\rect\left(\frac{y}{2}\right)\right]=\frac{1}{\pi}\rect\left(\displaystyle\frac{y}{2}\right)\frac{1}{\sqrt{1-y^2}}=P_Y(y)
+\end{equation}
+Si vuole calcolare il valore atteso, può essere calcolato sul dominio $y$ o $x$:
+\begin{gather*}
+    E[\cos (x)]=\displaystyle\int_{-\infty}^{+\infty}\cos (x)P_X(x)\df x =\int_0^{2\pi}\frac{1}{2\pi}\cos(x)\df x=0\\
+    E[\cos(x)]=E[y]=\displaystyle\int_{-\infty}^{+\infty}yP_Y(y)\df y=\int_{-\infty}^{+\infty}y\,\rect\left(\frac{y}{2}\right)\frac{1}{\pi}\frac{1}{\sqrt{1-y^2}}\df y\\
+    \displaystyle\int_{-1}^1\frac{y}{\sqrt{1-y^2}}\df y=0
+\end{gather*}
+\begin{equation}
+    \mu_x=0
+\end{equation}
+
+Calcolare la densità di probabilità della variabile aleatoria $Y$, nota la densità di una variabile indipendente $X$ e la loro relazione:
+\begin{gather*}
+    y=f(x)=\begin{cases}
+        x+2&-4\leq x<-1\\
+        -x&-1\leq x<+1\\
+        x-2&x\geq +1
+    \end{cases}\\
+    P_X(x)=\displaystyle\frac{1}{8}\rect\left(\frac{x}{8}\right)
+\end{gather*}
+Si studiano i tre casi separatamente, per cui si scompone la densità di probabilità della variabile $X$:
+\begin{gather*}
+    P_{X,1}(x)=\displaystyle\frac{1}{8}\rect\left(\frac{x+5/2}{3}\right)\\
+    P_{X,2}(x)=\displaystyle\frac{1}{8}\rect\left(\frac{x}{2}\right)\\
+    P_{X,3}(x)=\displaystyle\frac{1}{8}\rect\left(\frac{x-5/2}{3}\right)
+\end{gather*}
+Si ottengono quindi le seguenti densità di probabilità per la variabile $Y$:
+\begin{gather*}
+    P_{Y,1}(y)=\displaystyle\frac{1}{8}\rect\left(\frac{y-2+5/2}{3}\right)\\
+    P_{Y,2}(y)=\displaystyle\frac{1}{8}\rect\left(\frac{-y}{3}\right)\\
+    P_{Y,3}(y)=\displaystyle\frac{1}{8}\rect\left(\frac{y+2+5/2}{3}\right)
+\end{gather*}
+Per cui la densità della variabile $Y$ si ottiene dalla somma di quest'ultime:
+\begin{equation}
+    P_Y(y)=\displaystyle\frac{1}{8}\left(\rect\left(\frac{y-1/2}{3}\right)+\rect\left(\frac{y}{2}\right)+\rect\left(\frac{y+1/2}{3}\right)\right)
+\end{equation}
+
+
+
+Sia data la densità di probabilità $P_X(x)$ e la relazione con la variabile aleatoria $Y$, determinare la densità di probabilità di $Y$:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{2}\rect\left(\frac{x}{2}\right)\\
+    y=f(x)=\begin{cases}
+        -x&x<0\\
+        x^2&x\geq 0
+    \end{cases}
+\end{gather*}
+Si divide l'intervallo in $[-1/2,0]$ e $[0,1/2]$:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{2}\rect\left(x+\frac{1}{2}\right)+\frac{1}{2}\rect\left(x-\frac{1}{2}\right)\\
+    P_{Y,1}(y)=\displaystyle\frac{1}{2}\rect\left(-y+\frac{1}{2}\right)\\
+    P_{Y,2}(y)=\displaystyle\frac{1}{2}\rect\left(\sqrt{y}-\frac{1}{2}\right)\frac{1}{2\sqrt{y}}
+\end{gather*}
+\begin{equation}
+    P_Y(y)=\displaystyle\frac{1}{2}\rect\left(y+\frac{1}{2}\right)+\frac{1}{4}\rect\left(y-\frac{1}{2}\right)\frac{1}{\sqrt{y}}
+\end{equation}
+Si considera la seguente densità di probabilità per la variabile $X$:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_x}e^{-\left(\frac{x}{\sqrt2\sigma_x}\right)^2}\\
+    P_Y(y)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_x}e^{-\left(\frac{y}{\sqrt2\sigma_x}\right)^2}u(y)+\frac{1}{2\sqrt{2\pi y} \sigma_x}e^{-\frac{y}{2\sigma_x^2}}u(y)
+\end{gather*}
+\begin{equation}
+    P_Y(y)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_x}\left(e^{-\left(\frac{y}{\sqrt2\sigma_x}\right)^2}+\frac{1}{2\sqrt{y}}e^{-\frac{y}{2\sigma_x^2}}\right)u(y)
+\end{equation}
+
+
+
+Sia data una variabile aleatoria discreta $X$, la sua densità di probabilità e la relazione con la variabile aleatoria $Y$. Determinare la densità di probabilità di $Y$:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{4}\delta(x+1)+\frac{1}{2}\delta(x)+\frac{1}{4}\delta(x-1)\\
+    y=x^2
+\end{gather*}
+\begin{equation}
+    P_Y(y)=\displaystyle\frac{1}{4}\delta(y-1)+\frac{1}{2}\delta(y)+\frac{1}{4}\delta(y-1)=\frac{1}{2}\left[\delta(y)+\delta(y-1)\right]
+\end{equation}
+
+
+Sia data la variabile aleatoria $X$ di statistica gaussiana centrata in $x=1$, e la relazione con la variabile aleatoria $Y$, tramite un rettificatore:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_x}e^{-\left(\frac{x-1}{\sigma_x}\right)^2}\\
+    y=\begin{cases}
+        -1&x< 1\\
+        2&x\geq 1
+    \end{cases}
+\end{gather*}
+Poiché la statistica di $X$ è centrata in $1$, la probabilità che sia maggiore o minore di $1$ è pari a $1/2$, per cui la densità di probabilità di 
+$Y$ corrisponde a due impulsi:
+\begin{gather*}
+    \displaystyle\int_{-\infty}^1P_X(x<1)\df x=\int_{1}^{+\infty}P(x>1)\df x=\frac{1}{2}
+\end{gather*}
+\begin{equation}
+    P_Y(y)=\displaystyle\frac{1}{2}\delta(y-2)+\frac{1}{2}\delta(y+1)
+\end{equation}
+
+
+Sia data la distribuzione di probabilità della variabile $X$, e la funzione che la associa alla variabile aleatoria $Y$. Determinare la densità della probabilità $Y$:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{2\pi}\rect\left(\frac{x-\pi}{2\pi}\right)
+    y=\begin{cases}
+        \pi &x<\pi\\
+        x &x\geq\pi
+    \end{cases}
+\end{gather*}
+La variabile aleatoria $Y$ è una variabile mista:
+\begin{gather*}
+    P_Y(y)=\displaystyle\int_0^{\pi}P_X(x\leq\pi)\df x\delta(y-\pi)+\int_{\pi}^{2\pi}P_X(x\geq\pi)\df x \frac{1}{2\pi}\rect\left(\frac{y-\pi-\pi/2}{\pi}\right)
+\end{gather*}
+\begin{equation}
+    P_Y(y)=\displaystyle\frac{1}{2}\delta(y-\pi)+\frac{1}{4\pi}\rect\left(\frac{y-3\pi/2}{\pi}\right)
+\end{equation}
+
+
+
+Sia data la variabile aleatoria $X$ e la sua relazione con la variabile aleatoria $Y$, determinare la densità di probabilità di quest'ultima:
+\begin{gather*}
+    P_X(x)=\frac{1}{4a}\rect\left(\frac{x}{4a}\right)
+    y=\begin{cases}
+        -a&x<-a\\
+        x&-a\geq x<a\\
+        a&x\geq a
+    \end{cases}\\
+    P_Y(y)=\displaystyle\int_{-2a}^{-a}\frac{1}{4a}\df x\,\delta(y+a)+\int_{-a}^a\frac{1}{4a}\df x\frac{1}{2a}\,\rect\left(\frac{y}{2a}\right)+\int_{a}^{2a}\frac{1}{4a}\df x\,\delta(y-a)
+\end{gather*}
+\begin{equation}
+    P_Y(y)=\displaystyle\frac{1}{4}\left[\delta(y+a)+\delta(y-a)+\frac{1}{a}\rect\left(\frac{y}{2a}\right)\right]
+\end{equation}
+
+Determinare il valore medio e deviazione standard della seguente densità di probabilità:
+\begin{gather*}
+    P_x(x)=\displaystyle\frac{1}{2}\rect\left({t+\frac{3}{2}}\right)+\frac{1}{2}\left({t-\frac{3}{2}}\right)\\
+    \mu_x=\displaystyle\int_{-\infty}^{+\infty}x\left[\frac{1}{2}\rect\left({t+\frac{3}{2}}\right)+\frac{1}{2}\left({t-\frac{3}{2}}\right)\right]\df x\\
+    \displaystyle\frac{1}{2}\int_{-2}^{-1}x\df x+\frac{1}{2}\int_{1}^2x\df x=-\frac{1}{2}\int_1^2x\df x+\frac{1}{2}\int_1^2x\df x=0
+\end{gather*}
+\begin{equation}
+    \mu_x=0
+\end{equation}
+\begin{gather*}
+    \sigma_x^2=\displaystyle\int_{-\infty}^{+\infty}x^2\left[\frac{1}{2}\rect\left({t+\frac{3}{2}}\right)+\frac{1}{2}\left({t-\frac{3}{2}}\right)\right]\df x\\
+    \displaystyle\frac{1}{2}\int_{-2}^{-1}x^2\df x+\frac{1}{2}\int_1^2x^2\df x=\int_1^2x^2\df x\\
+    \displaystyle\left[\frac{x^3}{3}\right]_1^2=\frac{8}{3}-\frac{1}{3}=\frac{7}{3}
+\end{gather*}
+\begin{equation}
+    \sigma_x^2=\displaystyle\frac{7}{3}
+\end{equation}
+
+
+
+Date due variabili aleatorie indipendenti $X$ e $Y$ di statistica gaussiana, determinare la densità di probabilità della variabile dipendente $Z=X+Y$. 
+Si può risolvere sia nel dominio di $z$ oppure in frequenza tramite la funzione caratteristica:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_x}e^{-\frac{(x-\mu_x)^2}{2\sigma_x^2}}\\
+    P_Y(y)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_y}e^{-\frac{(y-\mu_y)^2}{2\sigma_y^2}}\\
+    P_Z(z)=P_X(x)*P_Y(y)=\displaystyle\frac{1}{\sqrt{2\pi(\sigma_x^2+\sigma_y^2)}}e^{-\frac{z-\mu_x-\mu_y}{2(\sigma_x^2+\sigma_y^2)}}\\
+    P_Z(z)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_y}e^{-\frac{z-\mu_z}{2\sigma_z^2}}\\
+\end{gather*} 
+
+
+Data la variabile aleatoria $Z$ data dalla combinazione lineare di due variabili aleatorie uniformemente distribuite sull'intervallo $[-1/2,1/2]$:
+\begin{gather*}
+    z=ax+by+c
+\end{gather*}
+Per ritornare ad un caso noto si applicano le seguenti sostituzioni:
+\begin{gather*}
+    x'=ax\\
+    y'=by+c\\
+    z=x'+y'
+\end{gather*}
+Si calcolano le densità di probabilità di queste nuove variabili aleatorie:
+\begin{gather*}
+    P_{X'}(x')=\rect\displaystyle\left(\frac{x'}{a}\right)\left|\frac{1}{a}\right|\\
+    P_{Y'}(y')=\rect\displaystyle\left(\frac{y'-c}{b}\right)\left|\frac{1}{b}\right|\\
+    P_Z(z)=P_{X'}(x')*P_{Y'}(y')=\displaystyle\left|\frac{1}{ab}\right|\rect\left(\frac{x'}{a}\right)*\rect\left(\frac{y'-c}{b}\right)
+\end{gather*}
+\begin{equation}
+    P_Z(z)=\begin{cases}
+        0 &z<c-\displaystyle\frac{\strut a+b}{\strut 2} \land z\geq c-\frac{\strut a+b}{\strut 2}\\
+        \displaystyle \left|\frac{\strut 1}{\strut ab}\right|\frac{\strut 1}{\strut a}\left(\frac{\strut a+b}{\strut 2}-|z-c|\right)&\displaystyle c-\frac{\strut a+b}{2}\leq z< c-\frac{\strut b-a}{\strut 2}\land c+\frac{\strut b-a}{\strut 2}\leq z<c+\frac{\strut a+b}{\strut 2}\\
+        \displaystyle\left|\frac{\strut 1}{\strut ab}\right|&c-\displaystyle\frac{\strut b-a}{\strut 2}\leq z<c+\frac{\strut b-a}{\strut 2}
+    \end{cases}
+\end{equation}
+
+
+
+Data la variabile aleatoria dipendente $Y$, combinazione lineare di due variabili aleatorie $X_1$ e $X_2$. Determinare date le densità di probabilità 
+di queste ultime la densità di probabilità di $Y$:
+\begin{gather*}
+    y=7x_1+x_2-3\\
+    P_{X_1}(x_1=-2)=0.6\\
+    P_{X_1}(x_1=2)=0.4\\
+    P_{X_2}(x_2=-1)=0.5\\
+    P_{X_2}(X_2=1)=0.5
+\end{gather*}
+Poiché sono possibili solo $4$ realizzazioni della variabile $Y$, è possibile creare una tabella caratterizzata dai quattro possibili valori:
+\begin{center}
+    \begin{tabular}{c|c|c|}
+        &$x_1=-2$,$P=0.6$&$x_1=2$,$P=0.4$\\
+        \hline\\
+        $x_2=-1$,$P=0.5$&$-18$,$P=0.3$&$10$,$P=0.2$\\
+        \hline\\
+        $x_2=1$,$P=0.5$ &$-16$,$P=0.3$ &$12$,$P=0.2$\\
+        \hline\\
+    \end{tabular}
+\end{center}
+Si esprime quindi la densità di probabilità della variabile discreta $Y$:
+\begin{equation}
+    P_Y(y)=\displaystyle\frac{3}{10}\delta(y+18)+\frac{1}{5}\delta(y-10)+\frac{3}{10}\delta(y+16)+\frac{1}{5}\delta(y-12)
+\end{equation}
+
+Si può ottenere lo stesso risultato lavorando con le densità discrete delle due variabili $X_1$ e $X_2$:
+\begin{gather*}
+    P_{X_1}(x_1)=\displaystyle\frac{3}{5}\delta(x_1+2)+\frac{2}{5}\delta(x_1-2)\\
+    P_{X_2}(x_2)=\displaystyle\frac{1}{2}\delta(x_2+1)+\frac{1}{2}\delta(x_2-1)
+\end{gather*}
+Si sostituiscono due variabili di appoggio:
+\begin{gather*}
+    x_1'=7x_1\\
+    x_2'=x_2-3\\
+    P_{X_1'}(x_1')=\displaystyle\frac{1}{7}\left[\frac{3}{5}\delta(x_1'/7+2)+\frac{2}{5}\delta(x_1'/7-2)\right]=\frac{3}{5}\delta(x_1'+14)+\frac{2}{5}\delta(x_1'-14)\\
+    P_{X_2'}(x_2')=\displaystyle\frac{1}{2}\delta(x_2'+4)+\frac{1}{2}\delta(x_2'+2)\\
+    P_Y(y)=P_{X_1'}(x_1')*P_{X_2'}(x_2')=\left[\displaystyle\frac{3}{5}\delta(x_1'+14)+\frac{2}{5}\delta(x_1'-14)\right]*\left[\frac{1}{2}\delta(x_2'+4)+\frac{1}{2}\delta(x_2'+2)\right]\\
+    P_Y(y)=\displaystyle\frac{3}{10}\delta(y+18)+\frac{1}{5}\delta(y-10)+\frac{3}{10}\delta(y+16)+\frac{1}{5}\delta(y-12)
+\end{gather*}
+
+
+
+Dato il processo aleatorio $x(t)$ stazionario, avente densità di probabilità uniforme sull'intervallo $[-2,10]$, ed  
+ha una covarianza:
+\begin{gather*}
+    C_X(\tau)=A\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)
+\end{gather*}
+Calcolare il valor medio e $A$:
+\begin{gather*}
+    \mu_x=\displaystyle\int_{-\infty}^{+\infty}xP_X(x)\df x=\int_{-2}^{10}\frac{x}{12}\df x=4\\
+    C_X(\tau)=E[(x(t+\tau)-\mu_x)(x(t)-\mu_x)]\\
+    C_X(0)=E[(x(t)-\mu_x)^2]=\sigma_x^2\\
+    \mu_x^{(2)}=\displaystyle\int_{-\infty}^{+\infty}xP_X(x)\df x=\int_{-2}^{10}\frac{x^2}{12}\df x=28\\
+    \sigma_x^2=\mu_x^{(2)}-\mu_x^2=28-16=12
+\end{gather*}
+\begin{equation}
+    C_X(0)=A=12
+\end{equation}
+Calcolare la funzione di autocorrelazione do $X$:
+\begin{gather}
+    R_X(\tau)=C_X(\tau)+\mu_x^2=12\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+16
+\end{gather}
+Sia: 
+\begin{gather*}
+    y(t)=x(t)+x(t-1)
+\end{gather*}
+Determinare il valore medio e la funzione di autocorrelazione di $y(t)$:
+\begin{equation}
+    \mu_y=E[y(t)]=E[x(t)]+E[x(t-1)]=2\mu_x=8
+\end{equation}
+\begin{gather*}
+    R_Y(\tau)=E[t(t+\tau)y(t)]=E[(x(t+\tau)+x(t+\tau-1))(x(t)+x(t-1))]\\
+    E[x(t+\tau)x(t)]+E[x(t+\tau)x(t-1)]+E[x(t+\tau-1)x(t)]+E[x(t+\tau-1)x(t-1)]\\
+    R_X(\tau)+R_X(\tau-1)+R_X(\tau+1)+R_X(\tau)=2R_X(\tau)+2R_X(\tau+1)\\
+    R_Y(\tau)=24\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+32+24\mathrm{tri}\left(\frac{\tau+1}{2}\right)+32
+\end{gather*}
+\begin{equation}
+    R_Y(\tau)=24\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+24\mathrm{tri}\left(\frac{\tau+1}{2}\right)+64
+\end{equation}
+Determinare la potenza di $Y$:
+\begin{equation}
+    P_Y=R_Y(0)=24+24\displaystyle\frac{1}{2}+64=100    
+\end{equation}
 
 \end{document}

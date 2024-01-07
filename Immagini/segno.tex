@@ -1,0 +1,14 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[scale=1.5]
+    \draw[->,very thick](-1.5,0)--(1.5,0)node[above]{$t$};
+    \draw[->,very thick](0,-1.5)--(0,1.5)node[right]{$x(t)$};
+    \node[below right]at(0,0){$0$};
+    \node[above right]at(0,1){$1$};
+    \node[below left]at(0,-1){$-1$};
+
+    \draw[-,very thick](0,1)--(1.5,1);
+    \draw[-,very thick](0,-1)--(-1.5,-1);
+\end{tikzpicture}
+\end{document}

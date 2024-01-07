@@ -1,0 +1,28 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\tikzset{cross/.pic = {  \draw[rotate = 45] (-#1,0) -- (#1,0);
+\draw[rotate = 45] (0,-#1) -- (0, #1);}}
+\begin{document}
+\begin{tikzpicture}[scale=1.5]
+    \draw[->,very thick](-0.5,0)--(2.2,0)node[above]{$t$};
+    \draw[->,very thick](0,-0.5)--(0,2)node[right]{$x[n]$};        
+
+    \draw(0,0)pic[black]{cross=3pt};
+    \draw(0.4,1.279)pic[black]{cross=3pt};
+    \draw(0.8,1.294)pic[black]{cross=3pt};
+    \draw(1.2,0.718)pic[black]{cross=3pt};
+    \draw(1.6,1.0294)pic[black]{cross=3pt};
+    \draw(2,1.1136)pic[black]{cross=3pt};
+
+    \draw[dashed,very thick](0.4,0)node[below]{$T$}--(0.4,1.279);
+    \draw[dashed,very thick](0.8,0)node[below]{$2T$}--(0.8,1.294);
+    \draw[dashed,very thick](1.2,0)node[below]{$3T$}--(1.2,0.718);
+    \draw[dashed,very thick](1.6,0)node[below]{$4T$}--(1.6,1.0294);
+    \draw[dashed,very thick](2,0)node[below]{$5T$}--(2,1.1136);
+    \filldraw[black](0.4,0)circle(0.5pt);
+    \filldraw[black](0.8,0)circle(0.5pt);
+    \filldraw[black](1.2,0)circle(0.5pt);
+    \filldraw[black](1.6,0)circle(0.5pt);
+    \filldraw[black](2,0)circle(0.5pt);
+\end{tikzpicture}
+\end{document}

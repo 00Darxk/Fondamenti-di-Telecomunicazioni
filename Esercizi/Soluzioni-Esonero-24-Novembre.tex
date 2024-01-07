@@ -35,6 +35,9 @@
 
 
 \renewcommand{\contentsname}{Indice}
+\newcommand{\rect}{\mbox{rect}}
+\newcommand{\sinc}{\mbox{sinc}}
+\newcommand{\df}{\mathrm{d}}
 
 \title{Soluzioni Esonero del 24 Novembre}
 \author{Giacomo Sturm}
@@ -72,7 +75,7 @@ Calcolare i coefficienti di Fourier del segnale $x$, la sua potenza e la sua tra
 \begin{gather*}
     x(t)=\displaystyle\frac{1}{2}-\cos^2\left[\frac{\pi(t-2T_0)}{4T_0}\right]
 \end{gather*}
-Per la proprietà di bisezione del coseno e per il coseno della differenza si ottiene la seguente espresisone equivalente:
+Per la proprietà di bisezione del coseno e per il coseno della differenza si ottiene la seguente espressione equivalente:
 \begin{gather*}
     x(t)=\displaystyle\frac{1}{2}-\frac{1}{2}-\cos\left[\frac{\pi(t-2T_0)}{2T_0}\right]=-\frac{1}{2}\cos\left(\frac{\pi t}{2T_0}\right)\cos\left(\frac{-2T_0\pi}{2T_0}\right)=\frac{1}{2}\cos\left(\frac{\pi t}{2T_0}\right)\\
     T=4T_0
@@ -85,7 +88,7 @@ Si esprime il coseno in forma esponenziale per determinare i coefficienti per co
     c_1=c_{-1}=\displaystyle\frac{1}{4}\\
     c_n=0\,\forall n\neq\pm1
 \end{gather}
-Si calcola la potenza tramite Parceval:
+Si calcola la potenza tramite Parseval:
 \begin{gather}
     P_x=\displaystyle\sum_{n=-\infty}^{+\infty}|c_k|^2=\frac{1}{8}
 \end{gather}
@@ -98,18 +101,18 @@ Dato un segnale periodico la sua trasformata si può esprimere come:
 Calcolare la trasformata del segnale $x$:
 \begin{gather*}
     x(t)=\begin{cases}
-        \cos\displaystyle\left(\frac{\pi t}{T}\right) &-\displaystyle\frac{T}{4}\leq t<\frac{T}{4}\\
-        0&n\notin\left[\right.\displaystyle-\frac{T}{4},\frac{T}{4}\left.\right)
+        \cos\displaystyle\left(\frac{\strut \pi t}{\strut T}\right) &-\displaystyle\frac{\strut T}{\strut 4}\leq t<\frac{\strut T}{\strut 4}\\
+        0&n\notin\bigg[\displaystyle-\frac{\strut T}{\strut 4},\frac{\strut T}{\strut 4}\bigg)
     \end{cases}
 \end{gather*}
 Si può esprimere il segnale replicato come un coseno moltiplicato per una finestra:
 \begin{gather*}
-    \dot x(t)=\cos\displaystyle\left(\frac{\pi t}{T}\right)\mbox{rect}\left(\frac{2t}{T}\right)
+    \dot x(t)=\cos\displaystyle\left(\frac{\pi t}{T}\right)\rect\left(\frac{2t}{T}\right)
 \end{gather*}
 Si individua il periodo $\overline{T}$, e si determinano i coefficienti tramite la definizione:
 \begin{gather*}
     \overline{T}=2T\\
-    c_n=\displaystyle\frac{1}{T}\int_{-\frac{\overline{T}}{2}}^{\frac{\overline{T}}{2}}x(t)e^{-2i\pi nt/\overline{T}}dt
+    c_n=\displaystyle\frac{1}{T}\int_{-\frac{\overline{T}}{2}}^{\frac{\overline{T}}{2}}x(t)e^{-2i\pi nt/\overline{T}}\df t
 \end{gather*}
 Altrimenti si determinano rispetto alla trasformata di Fourier del segnale replicato $\dot x(t)$:
 \begin{gather*}
@@ -118,24 +121,24 @@ Altrimenti si determinano rispetto alla trasformata di Fourier del segnale repli
 
 Si considera la trasformata di $\dot x$:
 \begin{gather*}
-    \dot X(f)=\displaystyle\frac{T}{2}\mbox{sinc}\left(\frac{T}{2}f\right)*\left[\frac{1}{2}\left(f-\frac{1}{2T}\right)+\frac{1}{2}\left(f+\frac{1}{2T}\right)\right]\\
-    \dot X(f)=\displaystyle\frac{T}{4}\mbox{sinc}\left[\frac{T}{2}\left(f-\frac{1}{2T}\right)\right]+\frac{T}{4}\mbox{sinc}\left[\frac{T}{2}\left(f+\frac{1}{2T}\right)\right]
+    \dot X(f)=\displaystyle\frac{T}{2}\sinc\left(\frac{T}{2}f\right)*\left[\frac{1}{2}\left(f-\frac{1}{2T}\right)+\frac{1}{2}\left(f+\frac{1}{2T}\right)\right]\\
+    \dot X(f)=\displaystyle\frac{T}{4}\sinc\left[\frac{T}{2}\left(f-\frac{1}{2T}\right)\right]+\frac{T}{4}\sinc\left[\frac{T}{2}\left(f+\frac{1}{2T}\right)\right]
 \end{gather*}
 I coefficienti sono quindi:
 \begin{gather*}
-    c_n=\frac{1}{\overline{T}}\dot X\left(\frac{n}{\overline{T}}\right)\frac{T}{4}\mbox{sinc}\left[\frac{T}{2}\left(\frac{n}{\overline{T}}-\frac{1}{2T}\right)\right]+\frac{T}{4}\mbox{sinc}\left[\frac{T}{2}\left(\frac{n}{\overline{T}}+\frac{1}{2T}\right)\right]\\
+    c_n=\frac{1}{\overline{T}}\dot X\left(\frac{n}{\overline{T}}\right)\frac{T}{4}\sinc\left[\frac{T}{2}\left(\frac{n}{\overline{T}}-\frac{1}{2T}\right)\right]+\frac{T}{4}\sinc\left[\frac{T}{2}\left(\frac{n}{\overline{T}}+\frac{1}{2T}\right)\right]\\
     \overline{T}=2T
 \end{gather*}
 \begin{gather}
-    c_n=\displaystyle\frac{1}{8}\mbox{sinc}\left(\frac{n-1}{4}\right)+\frac{1}{8}\mbox{sinc}\left(\frac{n+1}{4}\right)
+    c_n=\displaystyle\frac{1}{8}\sinc\left(\frac{n-1}{4}\right)+\frac{1}{8}\sinc\left(\frac{n+1}{4}\right)
 \end{gather}
 La trasformata del segnale completo $x$ si esprime come:
 \begin{gather}
-    X(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\left[\frac{1}{8}\mbox{sinc}\left(\frac{n-1}{4}\right)+\frac{1}{8}\mbox{sinc}\left(\frac{n+1}{4}\right)\right]\delta\left(f-\frac{n}{\overline{T}}\right)
+    X(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\left[\frac{1}{8}\sinc\left(\frac{n-1}{4}\right)+\frac{1}{8}\sinc\left(\frac{n+1}{4}\right)\right]\delta\left(f-\frac{n}{\overline{T}}\right)
 \end{gather}
 
 
-Calcolare i coefficienti del segnale $x$, la trasofrmata e la potenza:
+Calcolare i coefficienti del segnale $x$, la trasformata e la potenza:
 \begin{gather*}
     x(t)=\displaystyle\frac{2}{3}-i\cos\left(\frac{\pi t}{3T_0}\right)\\
     T=6T_0
@@ -152,7 +155,7 @@ La trasformata di ottiene come:
 \begin{gather}
     X(f)=\displaystyle\sum_{n=-\infty}^{+\infty}c_n\delta\left(f-\frac{n}{T}\right)=\frac{2}{3}\delta(f)-\frac{i}{2}\delta\left(f-\frac{1}{6T_0}\right)-\frac{i}{2}\delta\left(f+\frac{1}{6T_0}\right)
 \end{gather}
-La potenza si calcola con il teorema di Parceval:
+La potenza si calcola con il teorema di Parseval:
 \begin{gather}
     P_x=\displaystyle\sum_{n=-\infty}^{+\infty}|c_n|^2=\frac{4}{9}+\frac{1}{4}+\frac{1}{4}=\frac{17}{18}
 \end{gather}
@@ -160,22 +163,22 @@ La potenza si calcola con il teorema di Parceval:
 Calcolare i coefficienti e la trasformata di Fourier del segnale periodico $x$, di periodo $T$:
 \begin{gather*}
     x(t)=\begin{cases}
-        t&\displaystyle-\frac{T}{4}\leq t<\frac{T}{4}\\
-        0&t\notin\left[\displaystyle-\frac{T}{4},\frac{T}{4}\right]
+        t&\displaystyle-\frac{\strut T}{\strut 4}\leq t<\frac{\strut T}{\strut 4}\\
+        0&t\notin\left[\displaystyle-\frac{\strut T}{\strut 4},\frac{\strut T}{\strut 4}\right]
     \end{cases}
 \end{gather*}
 I coefficienti si possono calcolare con la definizione, altrimenti si calcola rispetto al segnale replicato $\dot x$:
 \begin{gather*}
     c_n=\displaystyle\frac{1}{\overline{T}}\dot X\left(\frac{n}{\overline{T}}\right)\\
-    \dot x(t)=t\,\mbox{rect}\left(\displaystyle\frac{2t}{T}\right)
+    \dot x(t)=t\,\rect\left(\displaystyle\frac{2t}{T}\right)
 \end{gather*}
 Questa trasformata si può calcolare mediante la proprietà della derivazione della trasformata:
 \begin{gather*}
-    \dot x(t)=t\,\mbox{rect}\displaystyle\left(\frac{2t}{T}\right)\\
+    \dot x(t)=t\,\rect\displaystyle\left(\frac{2t}{T}\right)\\
     \dot X(f)=\displaystyle-\frac{1}{2\pi i}X_1(f)\\
-    x_1(t)=\mbox{rect}\displaystyle\left(\frac{2t}{T}\right)
-    X_1(f)=\displaystyle\frac{T}{2}\mbox{sinc}\left(\frac{T}{2}f\right)\\
-    \dot X(f)=-\displaystyle\frac{1}{2i\pi} \frac{d}{df}\left[\frac{T}{2}\mbox{sinc}\left(\frac{T}{2}f\right)\right]=-\frac{1}{2i\pi}\frac{d}{df}\left[\frac{T}{2}\frac{\sin\left(\frac{T}{2}\pi f\right)}{\frac{T}{2}\pi f}\right]\\
+    x_1(t)=\rect\displaystyle\left(\frac{2t}{T}\right)
+    X_1(f)=\displaystyle\frac{T}{2}\sinc\left(\frac{T}{2}f\right)\\
+    \dot X(f)=-\displaystyle\frac{1}{2i\pi} \frac{\df}{\df f}\left[\frac{T}{2}\sinc\left(\frac{T}{2}f\right)\right]=-\frac{1}{2i\pi}\frac{\df}{\df f}\left[\frac{T}{2}\frac{\sin\left(\frac{T}{2}\pi f\right)}{\frac{T}{2}\pi f}\right]\\
     \dot X(f)=\displaystyle\frac{i}{2\pi^2}\frac{\cos\left(\frac{T}{2}\pi f\right)\frac{T}{2}\pi f-\sin\left(\frac{T}{2}\pi f\right)}{f^2}=\frac{iT}{4\pi f}\cos\left(\frac{\pi fT}{2}\right)-\frac{i}{2\pi^2f^2}\sin\left(\frac{\pi fT}{2}\right)
 \end{gather*}
 I coefficienti di Fourier sono allora:
@@ -220,10 +223,10 @@ Calcolare l'autoconvoluzione di $x$:
 Calcolare la convoluzione tra i segnali $x$ e $y$:
 \begin{gather*}
     x(t)=u(t)\\
-    y(t)=t\,\mbox{rect}\displaystyle\left(\frac{t}{2T}\right)\\
-    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}u(\tau)y(t-\tau)d\tau=\begin{cases}
+    y(t)=t\,\rect\displaystyle\left(\frac{t}{2T}\right)\\
+    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}u(\tau)y(t-\tau)\df\tau=\begin{cases}
         0&t<-T\\
-        \displaystyle\int_{-T}^{t}\tau d\tau=\frac{t^2-T^2}{2}&-T\leq t<T\\
+        \displaystyle\int_{-T}^{t}\tau \df\tau=\frac{t^2-T^2}{2}&-T\leq t<T\\
         0& t\geq T
     \end{cases}
 \end{gather*}
@@ -239,10 +242,10 @@ Calcolare la convoluzione tra i segnali $x$ e $y$:
 Calcolare la convoluzione tra i segnali $x$ e $y$:
 \begin{gather*}
     x(t)=u(t)-u(-t)\\
-    y(t)=\mbox{rect}\displaystyle\left(\frac{t}{2T}\right)\\
+    y(t)=\rect\displaystyle\left(\frac{t}{2T}\right)\\
     x(t)*y(t)=\begin{cases}
         -2T&t<-T\\
-        \displaystyle-\int_{t-T}^{0}d\tau+\int_{0}^{t+T}d\tau &-T\leq t<T\\
+        \displaystyle-\int_{t-T}^{0}\df\tau+\int_{0}^{t+T}\df\tau &-T\leq t<T\\
         2T &t\geq T
     \end{cases}
 \end{gather*}
@@ -281,22 +284,22 @@ Non lineare, invariante nel tempo, causale
 
 Data la funzione di trasferimento $H$ calcolare la risposta impulsiva del sistema:
 \begin{gather*}
-    H(f)=\left[\mbox{sinc}\displaystyle(2Tf)-2\mbox{sinc}(4Tf)\right]e^{-2i\pi ft}
+    H(f)=\left[\sinc\displaystyle(2Tf)-2\sinc(4Tf)\right]e^{-2i\pi ft}
 \end{gather*}
 \begin{equation}
-    h(t)=\displaystyle\frac{1}{2T}\mbox{rect}\left(\frac{t-T}{2T}\right)-\frac{1}{2T}\mbox{rect}\left(\frac{t-T}{4T}\right)
+    h(t)=\displaystyle\frac{1}{2T}\rect\left(\frac{t-T}{2T}\right)-\frac{1}{2T}\rect\left(\frac{t-T}{4T}\right)
 \end{equation}
 
 %% grafico
 
 L'uscita del sistema con un gradino in entrata risulta:
 \begin{gather*}
-    y(t)=h(t)*u(t)=\left[\displaystyle\frac{1}{2T}\mbox{rect}\left(\frac{t-T}{2T}\right)-\frac{1}{2T}\mbox{rect}\left(\frac{t-T}{4T}\right)\right]*u(t)\\
+    y(t)=h(t)*u(t)=\left[\displaystyle\frac{1}{2T}\rect\left(\frac{t-T}{2T}\right)-\frac{1}{2T}\rect\left(\frac{t-T}{4T}\right)\right]*u(t)\\
     y(t)=\begin{cases}
         0&t<-T\\
-        \displaystyle\int_{-T}^t-\frac{1}{2T}d\tau&-T\leq t<0\\
+        \displaystyle\int_{-T}^t-\frac{1}{2T}\df\tau&-T\leq t<0\\
         -\displaystyle\frac{1}{2}&0\leq t<2T\\
-        \displaystyle-\frac{1}{2}-\int_{2T}^t\frac{1}{2T}d\tau =\displaystyle-\frac{1}{2}-\frac{t-2T}{2T}&2T\leq t<3T\\
+        \displaystyle-\frac{1}{2}-\int_{2T}^t\frac{1}{2T}\df\tau =\displaystyle-\frac{1}{2}-\frac{t-2T}{2T}&2T\leq t<3T\\
         -1&t\geq 3T
     \end{cases}
 \end{gather*}
@@ -336,11 +339,11 @@ Calcolare l'uscita del sistema con una delta centrata in $1/f_0$ in entrata:
 
 Data la risposta impulsiva $h$, determinare la funzione di trasferimento del sistema:
 \begin{gather*}
-    h(t)=\displaystyle\frac{\sin^2(2\pi f_0t)}{\pi t}=\sin(2\pi f_0t)2T_0\mbox{sinc}(2f_0t)\\
-    H(f)=\mbox{rect}\left(\displaystyle\frac{f}{2f_0}\right)*\left[\frac{1}{2i}\delta\left(f-f_0\right)-\frac{1}{2i}\delta(f+f_0)\right]
+    h(t)=\displaystyle\frac{\sin^2(2\pi f_0t)}{\pi t}=\sin(2\pi f_0t)2T_0\sinc(2f_0t)\\
+    H(f)=\rect\left(\displaystyle\frac{f}{2f_0}\right)*\left[\frac{1}{2i}\delta\left(f-f_0\right)-\frac{1}{2i}\delta(f+f_0)\right]
 \end{gather*}
 \begin{equation}
-    H(f)=\displaystyle\frac{1}{2i}\mbox{rect}\left(\frac{f-f_0}{2f_0}\right)-\frac{1}{2i}\mbox{rect}\left(\frac{f+f_0}{2f_0}\right)
+    H(f)=\displaystyle\frac{1}{2i}\rect\left(\frac{f-f_0}{2f_0}\right)-\frac{1}{2i}\rect\left(\frac{f+f_0}{2f_0}\right)
 \end{equation}
 
 %% grafico 
@@ -356,23 +359,23 @@ Calcolare l'uscita del sistema con una delta centrata in $1/f_0$ in entrata:
 
 Data la risposta impulsiva $h$, calcolare la funzione di trasferimento del sistema:
 \begin{gather*}
-    h(t)=\mbox{rect}\left(\displaystyle\frac{t-2T}{2T}\right)-\mbox{rect}\left(\frac{t+2T}{2T}\right)\\
-    H(f)=2T\mbox{sinc}(2fT)e^{-4i\pi fT}-2T\mbox{sinc}(2fT)e^{4i\pi fT}
+    h(t)=\rect\left(\displaystyle\frac{t-2T}{2T}\right)-\rect\left(\frac{t+2T}{2T}\right)\\
+    H(f)=2T\sinc(2fT)e^{-4i\pi fT}-2T\sinc(2fT)e^{4i\pi fT}
 \end{gather*}
 \begin{equation}
-    H(f)=-4iT\mbox{sinc}(2fT)\sin(4\pi fT)
+    H(f)=-4iT\sinc(2fT)\sin(4\pi fT)
 \end{equation}
 
 %% grafico
 
-Calcolare l'uscita del ssitema quando è presente un gradino in entrata:
+Calcolare l'uscita del sistema quando è presente un gradino in entrata:
 \begin{gather*}
-    y(t)=h(t)*u(t)=\left[\mbox{rect}\left(\displaystyle\frac{t-2T}{2T}\right)-\mbox{rect}\left(\frac{t+2T}{2T}\right)\right]*u(t)\\
+    y(t)=h(t)*u(t)=\left[\rect\left(\displaystyle\frac{t-2T}{2T}\right)-\rect\left(\frac{t+2T}{2T}\right)\right]*u(t)\\
     y(t)=\begin{cases}
         0 &t<-3T\\
-        \displaystyle-\int_{-3T}^td\tau &-3T\leq t<-T\\
+        \displaystyle-\int_{-3T}^t\df\tau &-3T\leq t<-T\\
         -2T &-T\leq t<T\\
-        -2T+\displaystyle\int_{T}^{t}d\tau &T\leq t<3T\\
+        -2T+\displaystyle\int_{T}^{t}\df\tau &T\leq t<3T\\
         0& t\geq 3T
     \end{cases}
 \end{gather*}

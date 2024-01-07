@@ -1,0 +1,10 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm}}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \node[block](c)at(0,0){ADC};
+    \draw[->] (-1,0)--(c.180)node[midway, above]{$x(t)$};
+    \draw[->] (c.0)--(1,0)node[midway, above]{$x_c(t)$};
+\end{tikzpicture}
+\end{document}

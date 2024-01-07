@@ -1,0 +1,11 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->](-1.5,0)--(1.5,0)node[above]{$f$};
+    \draw[->](0,-0.5)--(0,1.5)node[right]{$X(f)$};
+
+    \draw[-]plot[smooth, domain=0:1.5](\x,{e^(-2*(\x))});
+    \draw[-]plot[smooth, domain=-1.5:0](\x,{e^(2*(\x))});
+\end{tikzpicture}
+\end{document}

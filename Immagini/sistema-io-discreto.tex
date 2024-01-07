@@ -1,0 +1,10 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm}}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \node[block](s){$h[n]$};
+        \draw[->,ultra thick](-1,0)--(s.180)node[above left]{$x[n]$};
+        \draw[->,ultra thick](s.0)node[above right]{$y[n]$}--(1,0);
+\end{tikzpicture}
+\end{document}

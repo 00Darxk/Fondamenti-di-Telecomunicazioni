@@ -1,0 +1,10 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm}}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \node[block](s){$\sum$};
+        \draw[->,ultra thick](-1,0)--(s.180)node[midway, above]{$x(t)$};
+        \draw[->,ultra thick](s.0)--(1,0)node[midway, above]{$y(t)$};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\tikzset{cross/.pic = {  \draw[rotate = 45] (-#1,0) -- (#1,0);
+                         \draw[rotate = 45] (0,-#1) -- (0, #1);}}
+\begin{document}
+\begin{tikzpicture}[scale=1.5]
+    \draw[->,very thick](0,-1.5)--(0,1.5)node[right]{$x[n]$};
+        \draw[->,very thick](-2,0)--(2,0)node[right]{$n$};   
+     
+        \draw (0,1)pic[black]{cross=3pt};
+        \draw (0.5,-1)pic[black]{cross=3pt};
+        \draw (-0.5,-1)pic[black]{cross=3pt};
+        \draw (1,1)pic[black]{cross=3pt};
+        \draw (-1,1)pic[black]{cross=3pt};
+        \draw (1.5,-1)pic[black]{cross=3pt};
+        \draw (-1.5,-1)pic[black]{cross=3pt};
+        \draw (2,1)pic[black]{cross=3pt};
+        \draw (-2,1)pic[black]{cross=3pt};
+
+
+        \node[above right]at(0,1){$1$};
+        \node[below left]at(0,-1){$-1$};
+        \node[below right]at(0,0){$0$};
+\end{tikzpicture}
+\end{document}

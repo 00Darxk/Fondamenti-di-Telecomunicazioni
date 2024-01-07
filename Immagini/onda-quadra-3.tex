@@ -1,0 +1,11 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
+    \draw[->](0,-1)--(0,1)node[right]{$x(t)$};
+    \draw[-](-2.5,0.5)--(-2,0.5)--(-2,0)node[below]{$ \displaystyle -T+\frac{\tau}{2}$}--(-0.5,0)node[below]{$ \displaystyle-\frac{\tau}{2}$}--(-0.5,0.5)--(0.5,0.5)--(0.5,0)node[below]{$ \displaystyle\frac{\tau}{2}$}--(2,0)node[below]{$ \displaystyle T+\frac{\tau}{2}$}--(2,0.5)--(2.5,0.5);
+    \node[above right]at(0,0.5){$1$};
+    \node[below right]at(0,-0.5){$-1$};
+\end{tikzpicture}
+\end{document}

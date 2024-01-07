@@ -1,0 +1,46 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    
+\end{tikzpicture}
+\end{document}
+
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},  
+         square/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}  
+\tikzset{cross/.pic = {  \draw[rotate = 45] (-#1,0) -- (#1,0);
+                         \draw[rotate = 45] (0,-#1) -- (0, #1);}}
+
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics{}%
+    \caption{}%
+    \label{fig:}
+\end{figure}
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics{}%
+\end{figure}
+
+\begin{figure}[H]%
+    \centering
+    \subfloat[\centering ]{\includegraphics{}}%
+    \qquad
+    \subfloat[\centering ]{\includegraphics{}}%
+    \caption{}
+    \label{fig:}
+\end{figure}
+
+\begin{figure}[H]%
+    \centering
+    \subfloat[\centering ]{\includegraphics{}}%
+    \qquad
+    \subfloat[\centering ]{\includegraphics{}}%
+\end{figure}
