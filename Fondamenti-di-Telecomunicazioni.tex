@@ -32,6 +32,7 @@
 \renewcommand{\contentsname}{Indice}
 \newcommand{\rect}{\mathrm{rect}}
 \newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\tri}{\mathrm{tri}}
 \newcommand{\df}{\mathrm{d}}
 
 \numberwithin{equation}{subsection}
@@ -223,7 +224,7 @@ vuole analizzare solo una parte di un segnale, poiché il restante sarà pari a 
 \subsubsection{Triangolo}
 
 \begin{equation}
-    x(t)=\mbox{tri}\left(\displaystyle\frac{t}{T}\right):=\begin{cases}
+    x(t)=\tri \left(\displaystyle\frac{t}{T}\right):=\begin{cases}
         1-|t| & -T\leq t < T\\
         0 & t<-T \land t\geq T
     \end{cases}
@@ -1944,7 +1945,7 @@ La trasformata della derivata risulta essere:
 Si considera ora un segnale triangolo di base $T$, e si attua un processo analogo. La sua derivata è quindi la differenza tra due finestre, poiché aumenta costantemente da 
 $-T$ a $0$ e decresce costantemente da $0$ a $T$. 
 \begin{gather*}
-    x(t)=\mbox{tri}\displaystyle\left(\frac{t}{T}\right)\\
+    x(t)=\tri \displaystyle\left(\frac{t}{T}\right)\\
     \displaystyle\frac{\df}{\df t}x(t)=\frac{1}{T}\rect\left(\frac{t+T/2}{T}\right)-\frac{1}{T}\rect\left(\frac{t-T/2}{T}\right)\\
     X'(f)=2i\pi f\displaystyle\left(\frac{1}{T}T\sinc(Tf)e^{i\pi Tf}-\frac{1}{T}T\sinc(Tf)e^{-i\pi Tf}\right)\\
     2i\,\sinc(Tf)\sin(Tf)=\displaystyle2i\frac{\sin^2(Tf)}{\pi Tf}
@@ -2922,7 +2923,7 @@ Si è dimostrato che il fattore di traslazione di una gaussiana $\mu_x$ corrispo
 Si calcola il valore medio di una statistica esponenziale:
 \begin{gather*}
     P_X(x)=\lambda e^{-\lambda x}u(x)\\
-    \mu-x=\displaystyle\int_{-\infty}^{+\infty}xP(x)\df x=\lambda\int_{0}^{+\infty}xe^{-\lambda x}\df x=\cancelto{0}{\left[xe^{-\lambda x}\right]_0^{+\infty}}+\int_0^{+\infty}e^{-\lambda x}\df x\\
+    \mu_x=\displaystyle\int_{-\infty}^{+\infty}xP(x)\df x=\lambda\int_{0}^{+\infty}xe^{-\lambda x}\df x=\cancelto{0}{\left[xe^{-\lambda x}\right]_0^{+\infty}}+\int_0^{+\infty}e^{-\lambda x}\df x\\
     \mu_x=\displaystyle\cancelto{0}{\left[-xe^{-\lambda x}\right]_0^{+\infty}}+\left[-\frac{e^{-\lambda x}}{\lambda}\right]_0^{+\infty}=\frac{1}{\lambda}
 \end{gather*}
 
@@ -2957,10 +2958,10 @@ integrale corrisponde al valore medio:
     \sigma_x^2=\mu_x^{(2)}+\mu_x^2-2\mu_x\mu_x=\mu_x^{(2)}-\mu_x^2
 \end{gather*}
 
-Data una statistica esponenziale, si calcola la sua deviazione standard tramite la definizione:
+Data una statistica esponenziale, si calcola il valore quadratico medio, tramite la sua definizione::
 \begin{gather*}
     \mu_x^{(2)}=\displaystyle\int_{-\infty}^{+\infty}x^2\lambda e^{-\lambda x}u(x)\df x=\cancelto{0}{\left[-x^2e^{-\lambda x}\right]_0^{+\infty}}+2\int_{0}^{+\infty}xe^{-\lambda x}\df x\\
-    \cancelto{0}{\left[-2\displaystyle\frac{e^{-\lambda x}}{\lambda}\right]_0^{+\infty}}+2\int_{0}^{+\infty}\frac{e^{-\lambda x}}{\lambda}\df x=\left[-\frac{2}{\lambda^2}\right]^{+\infty}_0=\frac{2}{\lambda^2}
+    \cancelto{0}{\left[-2\displaystyle\frac{e^{-\lambda x}}{\lambda}\right]_0^{+\infty}}+2\int_{0}^{+\infty}\frac{e^{-\lambda x}}{\lambda}\df x=\left[-\frac{2e^{-\lambda x}}{\lambda^2}\right]^{+\infty}_0=\frac{2}{\lambda^2}
 \end{gather*}
 Mentre la sua varianza si ottiene come:
 \begin{gather*}
@@ -2968,7 +2969,7 @@ Mentre la sua varianza si ottiene come:
 \end{gather*}
 
 
-Data una statistica gaussiana, si calcola la sua varianza:
+Data una statistica gaussiana, si calcola la sua varianza tramite la definizione:
 \begin{gather*}
     E[(x-\mu_x)^2]=\displaystyle\int_{-\infty}^{+\infty}(x-\mu_x)^2e^{-\frac{(x-\mu_x)^2}{2\sigma_x^2}}\frac{\df x}{\sqrt{2\pi}\sigma_x}\\
     t=\displaystyle\frac{x-\mu_x}{\sqrt{2}\sigma_x}\\
@@ -3222,17 +3223,17 @@ Si vuole calcolare il valore medio di questo processo aleatorio, definito dalla 
 \end{gather*}
 Poiché l'ampiezza rende il processo stocastico, si integra rispetto a quest'ultima:
 \begin{gather*}
-    \displaystyle\int_{-\infty}^{+\infty}A\cos\left(\frac{2\pi t}{T}\right)P_A(A)dA=\cos\left(\frac{2\pi t}{T}\right)\int_0^1AdA=\frac{1}{2}\cos\left(\frac{2\pi t}{T}\right)
+    \displaystyle\int_{-\infty}^{+\infty}A\cos\left(\frac{2\pi t}{T}\right)P_A(A)\df A=\cos\left(\frac{2\pi t}{T}\right)\int_0^1AdA=\frac{1}{2}\cos\left(\frac{2\pi t}{T}\right)
 \end{gather*}
 Si calcola ora il valore quadratico medio:
 \begin{gather*}
-    \mu_x^{(2)}=E[x(t)^2]\displaystyle\int_{-\infty}^{+\infty}A^2\cos^2\left(\frac{2\pi t}{T}\right)P_A(A)dA=\cos\left(\frac{2\pi t}{T}\right)\int_0^1A^2dA=\frac{1}{3}\cos^2\left(\frac{2\pi t}{T}\right)
+    \mu_x^{(2)}=E[x^2(t)]\displaystyle\int_{-\infty}^{+\infty}A^2\cos^2\left(\frac{2\pi t}{T}\right)P_A(A)\df A=\cos\left(\frac{2\pi t}{T}\right)\int_0^1A^2dA=\frac{1}{3}\cos^2\left(\frac{2\pi t}{T}\right)
 \end{gather*}
 
 
 Noto il valore medio ed il valore quadratico medio, si può calcolare la varianza del processo aleatorio:
 \begin{gather*}
-    \sigma_x^2=E[(x(t)-\mu_x)^2]=\mu_x^{(2)}-\mu_x^2=\displaystyle\frac{1}{3}\cos^2\left(\frac{2\pi t}{T}\right)-\frac{1}{4}\cos^2\left(\frac{2\pi t}{T}\right)=frac{1}{12}\cos^2\left(\frac{2\pi t}{T}\right)
+    \sigma_x^2=E[(x(t)-\mu_x)^2]=\mu_x^{(2)}-\mu_x^2=\displaystyle\frac{1}{3}\cos^2\left(\frac{2\pi t}{T}\right)-\frac{1}{4}\cos^2\left(\frac{2\pi t}{T}\right)=\frac{1}{12}\cos^2\left(\frac{2\pi t}{T}\right)
 \end{gather*}
 
 Si calcolano le gerarchie del secondo ordine tra due variabile aleatorie estratte negli istanti di tempo $t_1$ e $t_2$. Partendo dalla correlazione si ottiene:
@@ -3264,7 +3265,7 @@ Si calcolano le statistiche di questo processo aleatorio:
 \end{gather*}
 Si calcola il valore quadratico medio, utilizzando le formula di duplicazione del coseno inversa, per esprimere il coseno quadro:
 \begin{gather*}
-    \mu_{x}^{(2)}=E[x(t)^2]=\displaystyle\int_{-\infty}^{+\infty}\cos^2\left(\frac{2\pi t}{T}+\varphi\right)\frac{1}{2\pi}\rect\left(\frac{\varphi-\pi}{2\pi}\right)\df\varphi\\
+    \mu_{x}^{(2)}=E[x^2(t)]=\displaystyle\int_{-\infty}^{+\infty}\cos^2\left(\frac{2\pi t}{T}+\varphi\right)\frac{1}{2\pi}\rect\left(\frac{\varphi-\pi}{2\pi}\right)\df\varphi\\
     \frac{1}{2\pi}\int_0^{2\pi}\left[\frac{1}{2}+\frac{1}{2}\cos\left(\frac{4\pi t}{T}+2\varphi\right)\right]\df\varphi\\
     \frac{1}{4\pi}\int_0^{2\pi}\df\varphi+\frac{1}{4\pi}\cancelto{0}{\int_0^{2\pi}\cos\left(\frac{4\pi t}{T}+2\varphi\right)\df\varphi}=\frac{2\pi}{4}-0=\frac{1}{2}
 \end{gather*}
@@ -3318,14 +3319,14 @@ Valgono le proprietà trattate precedentemente sull'operazione di correlazione \
 \end{gather*} 
 La correlazione è massima per $\tau=0$:
 \begin{gather*}
-    R_X(0)=E[x(t)x(t)]=E[x(t)^2]=P_X
+    R_X(0)=E[x(t)x(t)]=E[x^2(t)]=P_X
 \end{gather*}
 La correlazione nell'origine coincide con la potenza del segnale. 
 
 
 Le stesse proprietà che valgono per le variabili aleatorie generiche, valgono per variabili aleatorie estratte da due processi aleatori stazionari e indipendenti:
 \begin{gather*}
-    z(t)=x(t)+y(t)
+    z(t)=x(t)+y(t)\\
     \mu_z=E[z(t)]=E[x(t)+y(t)]=\mu_x+\mu_y
 \end{gather*}
 Si calcola la correlazione tra queste due:
@@ -3334,11 +3335,11 @@ Si calcola la correlazione tra queste due:
     E[z(t+\tau)z(t)]=E[(x(t+\tau)+y(t+\tau))(x(t)+y(t))]\\
     E[x(t+\tau)x(t)]+E[x(t+\tau)y(t)]+E[y(t+\tau)x(t)]+E[y(t+\tau)y(t)]\\
     R_X(\tau)+E[x(t+\tau)]E[y(t)]+E[x(t)]E[y(t+\tau)]+R_Y(\tau)\\
-    R_Z(\tau)==R_X(\tau)+R_Y(\tau)+2\mu_x\mu_y
+    R_Z(\tau)=R_X(\tau)+R_Y(\tau)+2\mu_x\mu_y
 \end{gather*}
 La densità spettrale di potenza si ottiene del processo aleatorio dipendente $z$ si ottiene come:
 \begin{gather*}
-    G_Z(f)=\int{-\infty}^{+\infty}\left(R_X(\tau)+R_Y(\tau)+2\mu_x\mu_y\right)e^{-2i\pi f\tau}\df \tau=G_X(f)+G_Y(f)+2\mu_x\mu_y\delta(f)
+    G_Z(f)=\int_{-\infty}^{+\infty}\left(R_X(\tau)+R_Y(\tau)+2\mu_x\mu_y\right)e^{-2i\pi f\tau}\df \tau=G_X(f)+G_Y(f)+2\mu_x\mu_y\delta(f)
 \end{gather*}
 
 \subsubsection{Processo Ergotico}
@@ -3430,6 +3431,9 @@ Poiché il valore medio è nullo, la varianza coincide con il momento del second
 \begin{gather*}
     \sigma_x^2=\mu_x^{(2)}-\mu_x^2=\mu_x^{(2)}=E[x^2(t)]=P_X
 \end{gather*}
+
+Quando vengono trasmessi segnali in canali dove sono presenti rumori, bisogna analizzare il rapporto potenza segnale rumore, ovvero il rapporto tra la potenza utile e la 
+potenza del rumore, per verificare se il rumore è tale da causare la perdita di informazioni del segnale, oscurando o modificando il segnale quando viene sommato ad esso. 
 
 \subsubsection{Transito Attraverso un Sistema}
 

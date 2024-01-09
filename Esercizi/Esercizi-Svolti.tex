@@ -35,8 +35,9 @@
 
 
 \renewcommand{\contentsname}{Indice}
-\newcommand{\rect}{\mbox{rect}}
-\newcommand{\sinc}{\mbox{sinc}}
+\newcommand{\rect}{\mathrm{rect}}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\tri}{\mathrm{tri}}
 \newcommand{\df}{\mathrm{d}}
 
 \title{Esercizi Svolti di Fondamenti di Telecomunicazioni}
@@ -196,7 +197,7 @@ che la convoluzione di due segnali pari genera un segnale pari.
     \end{cases}
 \end{equation*}
 \begin{equation}
-    z(t)=T\,\mbox{tri}\left(\displaystyle\frac{t}{T}\right)
+    z(t)=T\,\tri \left(\displaystyle\frac{t}{T}\right)
 \end{equation}
 La convoluzione tra due finestre di base uguale risulta in un triangolo di base doppia $2T$, e scalata di un fattore pari alla base $T$. 
 
@@ -583,7 +584,7 @@ del segnale $y$:
 
 Dato un segnale treno di triangoli:
 \begin{equation*}
-    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\mbox{tri}\left(\frac{2(t-kT)}{\tau}\right)
+    x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\tri \left(\frac{2(t-kT)}{\tau}\right)
 \end{equation*}
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -596,7 +597,7 @@ Dato un segnale treno di triangoli:
 \end{center}
 Si calcolano i coefficienti tramite la definizione. Poiché è presente un solo triangolo nell'intervallo di integrazione, si può restringere l'intervallo: 
 \begin{gather*}
-    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\mbox{tri}\left(\frac{2t}{\tau}\right)e^{-i\frac{2\pi kt}{T}}\df t=\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\left(1-\left|\frac{2t}{\tau}\right|\right)e^{-i\frac{2\pi kt}{T}}\df t\\
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\tri \left(\frac{2t}{\tau}\right)e^{-i\frac{2\pi kt}{T}}\df t=\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\left(1-\left|\frac{2t}{\tau}\right|\right)e^{-i\frac{2\pi kt}{T}}\df t\\
     \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi kt}{T}}\df t+\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}-\left|\frac{2t}{\tau}\right|e^{-i\frac{2\pi kt}{T}}\df t\\
     \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}e^{-i\frac{2\pi kt}{T}}\df t-\frac{1}{T}\left(\int_{-\frac{\tau}{2}}^{0}-\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)
 \end{gather*}
@@ -701,14 +702,14 @@ Un prodotto nel domino delle frequenze corrisponde ad una convoluzione nel domin
 triangolo e una combinazione lineare di impulsi:
 \begin{gather*}
     X_1(f)=\displaystyle\frac{A^2T^2}{4}\,\sinc^2\left(\frac{Tf}{2}\right)\\
-    x_1(t)=\displaystyle\frac{A^2T^2}{4}\frac{2}{T}\,\mbox{tri}\left(\frac{2t}{T}\right)\\
+    x_1(t)=\displaystyle\frac{A^2T^2}{4}\frac{2}{T}\,\tri \left(\frac{2t}{T}\right)\\
     X_2(f)=e^{-3i\pi fT}+e^{-i\pi fT}-2e^{-2i\pi fT}\\
     x_2(t)=\delta(t-3T/2)+\delta(t-T/2)-2\delta(t-T)\\
     x(t)*x(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)^2e^{2i\pi ft}\df f=\int_{-\infty}^{+\infty}X_1(f)X_2(f)e^{2i\pi ft}\df f=x_1(t)*x_2(t)\\
-    \displaystyle\frac{A^2T^2}{4}\frac{2}{T}\,\mbox{tri}\left(\frac{2t}{T}\right)*\left[\delta(t-3T/2)+\delta(t-T/2)-2\delta(t-T)\right]
+    \displaystyle\frac{A^2T^2}{4}\frac{2}{T}\,\tri \left(\frac{2t}{T}\right)*\left[\delta(t-3T/2)+\delta(t-T/2)-2\delta(t-T)\right]
 \end{gather*}
 \begin{gather}
-    x(t)*x(t)=\displaystyle\frac{A^2T^2}{4}\left(\mbox{tri}\left(\frac{2}{T}(t-3T/2)\right)+\mbox{tri}\left(\frac{2}{T}(t-T/2)\right)-2\,\mbox{tri}\left(\frac{2}{T}(t-T)\right)\right)
+    x(t)*x(t)=\displaystyle\frac{A^2T^2}{4}\left(\tri \left(\frac{2}{T}(t-3T/2)\right)+\tri \left(\frac{2}{T}(t-T/2)\right)-2\,\tri \left(\frac{2}{T}(t-T)\right)\right)
 \end{gather}
 %% grafo segnale convoluzione 
 
@@ -725,7 +726,7 @@ Per la proprietà di scala e di traslazione nel tempo:
 Calcolare la trasformata del segnale $x$, esprimibile come un segnale triangolo moltiplicato per un gradino, oppure una retta moltiplicata per una finestra, si sceglie 
 quest'ultima rappresentazione per facilitare il calcolo:
 \begin{gather*}
-    x(t)=A\,\displaystyle\mbox{tri}\left(\frac{t+T/2}{T}\right)u(t+T/2)\lor x(t)=A\left(\frac{1}{2}-\frac{t}{T}\right)\rect\left(\frac{t}{T}\right)\\
+    x(t)=A\,\displaystyle\tri \left(\frac{t+T/2}{T}\right)u(t+T/2)\lor x(t)=A\left(\frac{1}{2}-\frac{t}{T}\right)\rect\left(\frac{t}{T}\right)\\
     \displaystyle\frac{A}{2}\rect\left(\frac{t}{T}\right)-\frac{A}{T}t\,\rect\left(\frac{t}{T}\right)
 \end{gather*}
 %% grafo segnale
@@ -1009,12 +1010,12 @@ Calcolare la trasformata della sequenza $x[n]$:
 Questa sequenza si può considerare estratta dal segnale tempo continuo $x$:
 \begin{gather*}
     x(t)=4f_c^2T^2\sinc(2f_ct)\\
-    X(f)=\displaystyle 2f_cT^2\mbox{tri}\left(\frac{f}{2f_c}\right)
+    X(f)=\displaystyle 2f_cT^2\tri \left(\frac{f}{2f_c}\right)
 \end{gather*}
 
 Per cui si esprime la trasformata della sequenza come:
 \begin{gather}
-    X_c(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=2f_cT\sum_{n=-\infty}^{+\infty}\mbox{tri}\left(\frac{f-\frac{n}{T}}{2f_c}\right)
+    X_c(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=2f_cT\sum_{n=-\infty}^{+\infty}\tri \left(\frac{f-\frac{n}{T}}{2f_c}\right)
 \end{gather}
 Se $T$ il passo di campionamento non è abbastanza grande, i triangoli si sovrappongono tra di loro. 
 
@@ -1089,10 +1090,10 @@ Calcolare la trasformata di Fourier della sequenza $x$:
     x[n]=\left[\displaystyle\frac{\sin(\pi n/3)}{\pi n}\right]^2=\frac{1}{9}\sinc^2\left(\frac{n}{3}\right)\\
     T=1\\
     x(t)=\displaystyle\frac{1}{9}\sinc^2\left(\frac{t}{3}\right)\\
-    X(f)=\displaystyle \frac{1}{3}\mbox{tri}(3f)
+    X(f)=\displaystyle \frac{1}{3}\tri (3f)
 \end{gather*}
 \begin{gather}
-    X_c(f)=\displaystyle\frac{1}{3}\sum_{n=-\infty}^{+\infty}\mbox{tri}(3f-n)
+    X_c(f)=\displaystyle\frac{1}{3}\sum_{n=-\infty}^{+\infty}\tri (3f-n)
 \end{gather}
 
 \clearpage
@@ -1136,7 +1137,7 @@ Dato il segnale campionato $x(t)$, determinare la frequenza di Nyquist:
 \end{gather*}
 Lo spettro del segnale corrisponde a:
 \begin{gather*}
-    X(f)=\displaystyle \delta(f)+20\,\mbox{tri}\left(\frac{f}{20}\right)
+    X(f)=\displaystyle \delta(f)+20\,\tri \left(\frac{f}{20}\right)
 \end{gather*}
 Per cui la frequenza minima di campionamento corrisponde a $f_c>40\,Hz$, mentre il tempo di campionamento massimo corrisponde a:
 Non è presente aliasing quando la frequenza assume valori maggiori di:
@@ -1149,7 +1150,7 @@ Il tempo di campionamento deve essere:
 \end{gather}
 Si suppone si stia campionando con un passo di campionamento doppio al valore massimo $\overline{T}=2T=50\,ms$. Lo spettro del segnale campionato corrisponde a:
 \begin{gather*}
-    X_c(f)=\displaystyle \frac{1}{\overline{T}}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{\overline{T}}\right)=20\sum_{n=-\infty}^{+\infty}\delta(f-20n)+20\,\mbox{tri}\left(\frac{f-20n}{20}\right)
+    X_c(f)=\displaystyle \frac{1}{\overline{T}}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{\overline{T}}\right)=20\sum_{n=-\infty}^{+\infty}\delta(f-20n)+20\,\tri \left(\frac{f-20n}{20}\right)
 \end{gather*}
 Se il tempo di campionamento fosse pari a $T=50\times10^{-3}s$, i triangoli in frequenza sarebbero sfasati tra di loro di esattamente metà della loro base, per cui la 
 somma di tutti i triangoli assume valore costante in frequenza. 
@@ -1204,8 +1205,8 @@ Si vuole calcolare lo spettro del segnale considerando questo tempo di campionam
 Dato il segnale $x$ calcolare il periodo di campionamento:
 \begin{gather*}
     x(t)=2f_0\sinc(2f_0t)\cos(6\pi f_0t)\\
-    X(f)=\displaystyle2\,\mbox{tri}\left(\frac{f}{f_0}\right)*\left[\frac{1}{2}\delta\left(f-3f_0\right)+\frac{1}{2}\delta(f+3f_0)\right]\\
-    X(f)=\displaystyle\mbox{tri}\left(\frac{f-3f_0}{f_0}\right)+\mbox{tri}\left(\frac{f+3f_0}{f_0}\right)
+    X(f)=\displaystyle2\,\tri \left(\frac{f}{f_0}\right)*\left[\frac{1}{2}\delta\left(f-3f_0\right)+\frac{1}{2}\delta(f+3f_0)\right]\\
+    X(f)=\displaystyle\tri \left(\frac{f-3f_0}{f_0}\right)+\tri \left(\frac{f+3f_0}{f_0}\right)
 \end{gather*}
 La frequenza di Nyquist corrisponde a $6f_0$, per cui il tempo di campionamento corrisponde a $T=\displaystyle\frac{1}{6f_0}$. Si considera il segnale campionato con un 
 passo di campionamento:
@@ -1215,7 +1216,7 @@ passo di campionamento:
 
 Per cui la trasformata del segnale campionato corrisponde a:
 \begin{gather*}
-    X_c(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\mbox{tri}\left(\frac{f-(4n+3)f_0}{f_0}\right)+\mbox{tri}\left(\frac{f-(4n-3)f_0}{f_0}\right)
+    X_c(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\tri \left(\frac{f-(4n+3)f_0}{f_0}\right)+\tri \left(\frac{f-(4n-3)f_0}{f_0}\right)
 \end{gather*}
 %% grafico 
 
@@ -1223,7 +1224,7 @@ Si ricostruisce il segnale inserendolo in un filtro ricostruttore DAC di funzion
 frequenze $[-2f_0,+2f_0]$, si considera un tempo di campionamento pari ad $1$:
 \begin{gather*}
     H(f)=\displaystyle\rect\left(\frac{f}{2f_0}\right)\\
-    X(f)=X_c(f)H(f)=\displaystyle\mbox{tri}\left(\frac{f-f_0}{f_0}\right)+\mbox{tri}\left(\frac{f+f_0}{f_0}\right)
+    X(f)=X_c(f)H(f)=\displaystyle\tri \left(\frac{f-f_0}{f_0}\right)+\tri \left(\frac{f+f_0}{f_0}\right)
 \end{gather*}
 \begin{gather}
     x(t)=2f_0\sinc^2(f_0t)\cos(2\pi f_0t)
@@ -1294,8 +1295,8 @@ Si calcola l'uscita del filtro DAC:
 Dato un segnale $x$ di banda $[-\omega,\omega]$, campionato con un passo $T_c=\displaystyle\frac{1}{2\omega}$. Si considerano tre filtri, di risposta impulsiva:
 \begin{gather*}
     h_1(t)=\sinc\left(\displaystyle\frac{t}{T}\right)\to H_1(f)=T\sinc(Tf)\\
-    h_2(t)=\mbox{tri}\left(\displaystyle\frac{t}{T}\right)\\
-    h_3(t)=\mbox{tri}\left(\displaystyle\frac{t}{2T}\right)
+    h_2(t)=\tri \left(\displaystyle\frac{t}{T}\right)\\
+    h_3(t)=\tri \left(\displaystyle\frac{t}{2T}\right)
 \end{gather*}
 Il segnale campionato si ottiene come:
 \begin{gather*}
@@ -1310,20 +1311,20 @@ Per cui il segnale ricostruito corrisponde esattamente al segnale originario.
 
 Considerando il secondo filtro:
 \begin{gather}
-    y_2(t)=x_c(t)*h_2(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\mbox{tri}\left(\frac{t-nT}{T}\right)
+    y_2(t)=x_c(t)*h_2(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\tri \left(\frac{t-nT}{T}\right)
 \end{gather}
 Questo filtro ricostruisce il segnale, ma presenta degli errori alle alte frequenze. 
 
 Considerando il terzo filtro:
 \begin{gather}
-    y_3(t)=x_c(t)*h_3(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\mbox{tri}\left(\frac{t-nT}{2T}\right)
+    y_3(t)=x_c(t)*h_3(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\tri \left(\frac{t-nT}{2T}\right)
 \end{gather}
 Questo filtro non ricostruisce a pieno il segnale. 
 
 
 Dato il segnale $x$:
 \begin{gather*}
-    x(t)=\mbox{tri}\left(\displaystyle\frac{t}{T}\right)-\mbox{tri}\left(\frac{t+T}{T}\right)\\
+    x(t)=\tri \left(\displaystyle\frac{t}{T}\right)-\tri \left(\frac{t+T}{T}\right)\\
     x(t)=\begin{cases}
         \displaystyle\frac{\strut t}{\strut T} -2T\leq t<-T\\
         1+\displaystyle\frac{\strut 3t}{\strut T} -T\leq t<0\\
@@ -1770,5 +1771,211 @@ Determinare la potenza di $Y$:
 \begin{equation}
     P_Y=R_Y(0)=24+24\displaystyle\frac{1}{2}+64=100    
 \end{equation}
+
+
+Date tre variabili aleatorie indipendenti tra di loro $A$, $B$ e $\theta$, determinare il valore medio e la densità spettrale di potenza del processo $x(t)$:
+\begin{gather*}
+    x(t)=(A+2B)\cos(300\pi t+\theta)+n(t)
+\end{gather*}
+Le tre variabili aleatorie hanno distribuzione uniforme rispettivamente in $[-1,+1]$, $[-2,+2]$ e $[0,4\pi]$:
+\begin{gather*}
+    P_A(a)=\displaystyle\frac{1}{2}\rect\left(\frac{a}{2}\right)\\
+    P_B(b)=\displaystyle\frac{1}{4}\rect\left(\frac{b}{4}\right)\\
+    P_\theta(\theta)=\displaystyle\frac{1}{4\pi}\rect\left(\frac{\theta-2\pi}{4\pi}\right)
+\end{gather*}
+Il rumore è un rumore bianco a valor medio nullo, è anch'esso indipendente dalle variabili aleatorie $A$, $B$ e $\theta$, ed ha una funzione di autocorrelazione:
+\begin{gather*}
+    R_n(\tau)=10\delta(\tau)
+\end{gather*}
+Il rumore ha quindi potenza:
+\begin{gather*}
+    P_n=R_n(0)=10
+\end{gather*}
+
+Si calcola il valore attesto tramite la definizione:
+\begin{gather*}
+    \mu_x=E[x(t)]=E[(A+2B)\cos(300\pi t+\theta)+n(t)]
+\end{gather*}
+Poiché sono variabili indipendenti, si può usufruire della proprietà di linearità della funzione ``expectation'':
+\begin{gather*}
+    (E[A]+2E[B])E[\cos(300\pi t+\theta)]+\cancelto{0}{E[n(t)]}
+\end{gather*}
+Poiché le variabili $A$ e $B$ sono distribuite uniformemente su un intervallo centrato nell'origine, i loro valori attesi sono nulli, per cui:
+\begin{gather*}
+    \mu_x=0\cdot E[\cos(300\pi t+\theta)]=0
+\end{gather*}
+Per calcolare la densità spettrale di potenza si calcola la funzione di autocorrelazione e si pone $\tau=0$:
+\begin{gather*}
+    R_X(\tau)=E[x(t+\tau)x^*(t)]\\
+    E\left[\left\{(A+2B)\cos[300\pi (t+\tau)+\theta]+n(t+\tau)\right\}\left\{(A+2B)\cos[300\pi t+\theta]+n(t)\right\}\right]\\
+    E[(A+2B)^2\cos\{300\pi(t+\tau)+\theta\}\cos(300\pi t+\theta)]+E[(A+2B)\cos\{300\pi (t+\tau)+\theta\}n(t)]\\
+    +E[(A+2B)\cos(300\pi t+\theta)n(t+\tau)]+E[n(t+\tau)n(t)]
+\end{gather*}
+Poiché sono indipendenti tra di loro, si possono calcolare i contributi di ciascuna variabile indipendentemente:
+\begin{gather*}
+    E[(A+2B)^2]=E[A^2]+4E[B^2]+\cancelto{0}{2E[A]E[B]}=\displaystyle\int_{-1}^1\frac{a^2}{2}\df a+4\int_{-2}^{2}\frac{b^2}{4}\df b=\frac{1}{3}+4\frac{4}{3}=\frac{17}{3}\\
+    E[\cos\{300\pi(t+\tau)+\theta\}\cos(300\pi t+\theta)]=\displaystyle\int_{0}^{4\pi}\frac{1}{4\pi}\cos[300\pi(t+\tau)+\theta]\cos(300\pi t+\theta)\df\theta\\
+    \displaystyle\frac{1}{8\pi}\cancelto{0}{\int_{0}^{4\pi}\cos[300\pi(2t+\tau)-2\theta]\df\theta}+\frac{1}{8\pi}\int_0^{4\pi}\cos(300\pi \tau)\df\theta=\frac{1}{2}\cos(300\pi\tau)\\
+    E[(A+2B)^2\cos[300\pi(t+\tau)+\theta]\cos(300\pi t+\theta)]=\displaystyle\frac{17}{3}\frac{1}{2}\cos(300\pi\tau)=\frac{17}{6}\cos(300\pi\tau)\\
+    E[n(t)]=E[n(t+\tau)]=0\\
+    E[(A+2B)\cos\{300\pi (t+\tau)+\theta\}n(t)]=E[(A+2B)\cos(300\pi t+\theta)n(t+\tau)]=0\\
+    E[n(t+\tau)n(t)]=R_n(\tau)=10\delta(\tau)\\
+\end{gather*}
+Per cui la funzione di autocorrelazione del processo $x(t)$ risulta essere:
+\begin{equation*}
+    R_X(\tau)=\displaystyle\frac{17}{6}\cos(300\pi\tau)+10\delta(\tau)
+\end{equation*}
+Si applica quindi la trasformata di Fourier per ottenere la densità spettrale di potenza:
+\begin{equation}
+    G_X(f)=\displaystyle\frac{17}{12}\left[\delta(f-150)+\delta(f+150)\right]+10
+\end{equation}
+
+
+Dato il segnale stocastico $x(t)$, sia $y(t)$ il segnale definito dalla seguente espressione:
+\begin{gather*}
+    y(t)=\displaystyle\int_{t-T}^{t+T}x(t')\df t'
+\end{gather*}
+Calcolare la densità spettrale di potenza di $y(t)$ in funzione di $x(t)$, e la potenza di $y(t)$. 
+Il segnale $y(t)$ può essere espresso come un integrale su $[-\infty,+\infty]$, moltiplicato per una finestra:
+\begin{gather*}
+    y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t')\rect\left(\frac{t'-t}{2T}\right)\df t'=x(t)*\rect\left(\frac{t}{2T}\right)
+\end{gather*}
+Per cui la finestra rappresenta la risposta impulsiva $h(t)$ di un filtro, per cui la densità spettrale di potenza dell'uscita di un filtro si ottiene come:
+\begin{gather}
+    G_Y(f)=|H(f)|^2G_X(f)=4T^2\sinc^2(2Tf)G_X(f)
+\end{gather}
+Calcolare la potenza del segnale $y(t)$, nel caso in cui $x(t)$ sia un segnale bianco e densità spettrale di potenza:
+\begin{gather*}
+    G_X(f)=\displaystyle\frac{N_0}{2}
+\end{gather*}
+Si calcola la potenza integrando la densità spettrale di $y$, oppure si calcola la funzione di autocorrelazione di $y$ in $\tau=0$:
+\begin{gather*}
+    R_Y(\tau)=\mathscr{F}^{-1}\left\{4T^2\sinc^2(2Tf)\displaystyle\frac{N_0}{2}\right\}=2T\mathrm{tri}\left(\frac{\tau}{2T}\right)\frac{N_0}{2}
+\end{gather*}
+La potenza è quindi:
+\begin{equation}
+    P_Y(0)=N_0T
+\end{equation}
+
+
+Dato un processo $y(t)$:
+\begin{gather*}
+    y(t)=4x(t-3)+4x(t+3)
+\end{gather*}
+Dove $x(t)$ è un processo stazionario a valor medio nullo, e di funzione di autocorrelazione:
+\begin{gather*}
+    R_X(\tau)=3e^{-|\tau|}
+\end{gather*}
+Calcolare la densità spettrale di potenza di $y(t)$, il suo valore atteso, la sua funzione di autocorrelazione e la sua potenza. 
+Si calcola il valore atteso:
+\begin{gather}
+    \mu_y=E[y(t)]=E[4x(t-3)+4x(t+3)]=4E[x(t-3)]+4E[x(t+3)]=0
+\end{gather}
+Si calcola ora la funzione di autocorrelazione:
+\begin{gather*}
+    R_Y(\tau)=E[y(t+\tau)y^*(t)]=E[\{4x(t+\tau-3)+4x(t+\tau+3)\}\{4x(t-3)+4x(+3)\}]\\
+    16E[x(t+\tau-3)x(t-3)]+16E[x(t+\tau-3)x(t+3)]\\
+    +16E[x(t+\tau+3)x(t-3)]+16E[x(t+\tau+3)x(t+3)]\\
+    16R_X(\tau-6)+16R_X(\tau)+16R_X(\tau)+16R_X(\tau+6)\\
+    R_Y(\tau)=16R_X(\tau-6)+32R_X(\tau)+16R_X(\tau+6)
+\end{gather*}
+\begin{equation}
+    R_Y(\tau)=16\left(3e^{-|\tau-6|}+6e^{-|\tau|}+3e^{-|\tau+6|}\right)
+\end{equation}
+Si calcola ora la potenza:
+\begin{equation}
+    P_Y=R_Y(0)=16(3e^{-6}+6+3e^{-6})=96+96e^{-6}
+\end{equation}
+Si calcola la densità spettrale di potenza come il transito attraverso un filtro, poiché il segnale $y(t)$ può essere espresso come:
+\begin{gather*}
+    y(t)=x(t)*[4\delta(t-3)+4\delta(t+3)]\\
+    h(t)=4\delta(t-3)+4\delta(t+3)\\
+    H(f)=\displaystyle8\cos(6\pi f)\\
+    G_X(f)=\mathscr{F}\left\{3e^{-|\tau|}\right\}=\displaystyle\frac{3}{1+2i\pi f}+\frac{3}{1-2i\pi f}=\frac{6}{1+4\pi f}
+\end{gather*}
+\begin{equation}
+    G_Y(f)=64\cos^2(6\pi f)\displaystyle\frac{6}{1+4\pi f}
+\end{equation}
+
+
+
+Dato un processo $x(t)$ stazionario, avente potenza $P_X=19$ e covarianza $C_X(\tau)=3\tri(\tau)$, determinare il valor medio e la varianza: 
+\begin{gather}
+    C_X(0)=E[(x(t)-\mu_x)^2]=\sigma_x^2=3
+\end{gather}
+\begin{gather*}
+    R_X(0)=E[x^2(t)]=P_X=\mu_x^{(2)}=19
+\end{gather*}
+\begin{gather}
+    \mu_x=\sqrt{\sigma_x^2-\mu_x^{(2)}}=\sqrt{16}=4
+\end{gather}
+Si suppone il segnale attraversa un filtro di risposta impulsiva $h(t)=\rect(t/3)$, calcola il valore medio dell'uscita $y(t)$:
+\begin{gather}
+    \mu_y=E[y(t)]=E[x(t)*h(t)]=E[x(t)]*h(t)=\displaystyle\int_{-\infty}^{+\infty}\mu_x\rect\left(\frac{t}{3}\right)\df t=4\int_{-3}^3\df t=24
+\end{gather}
+
+
+Dato un processo $x(t)$ stazionario, di valore medio $\mu_x=-3$, potenza $P_X=12$ e coefficiente di correlazione $\rho_X(\tau)=\sinc(\tau/4)$, calcolare la densità spettrale 
+di potenza:
+\begin{gather*}
+    \sigma_x^2=P_X-\mu_X^2=12-9=3\\
+    C_X(\tau)=\rho_X(\tau)\sigma_x^2=3\sinc\displaystyle\left(\frac{\tau}{4}\right)\\
+    R_X(\tau)=C_X(\tau)+\mu_x^2=3\sinc\displaystyle\left(\frac{\tau}{4}\right)+9
+\end{gather*}
+\begin{equation}
+    G_X(f)=\mathscr{F}\{R_X(\tau)\}=12\rect(4f)+9\delta(f)
+\end{equation}
+Questo processo viene filtrato con un filtro avente una funzione di trasferimento $H(f)=\cos(4\pi f)$, calcolare la potenza 
+di $y(t)$:
+\begin{gather*}
+    G_Y(f)=|H(f)|^2G_X(f)=\cos^2(4\pi f)\left[12\rect(4f)+9\delta(f)\right]\\
+    P_Y=\displaystyle\int_{-\infty}^{+\infty}G_Y(f)\df f=12\int_{-1/8}^{1/8}\cos^2(4\pi f)\df f+9=6\cancelto{0}{\int_{-1/8}^{1/8}\cos(8\pi f)\df f}+6\int_{-1/8}^{1/8}\df f+9\\
+    \displaystyle6\frac{2}{8}+9
+\end{gather*}
+\begin{equation}
+    P_Y=\displaystyle\frac{21}{2}
+\end{equation}
+Sia il processo $z(t)$:
+\begin{gather*}
+    z(t)=x(t)+x(t-6)
+\end{gather*}
+Determinare il valore medio, la varianza e la funzione di autocorrelazione di $z(t)$:
+\begin{equation}
+    \mu_z=E[z(t)]=E[x(t)+x(t-6)]=2\mu_x=-6
+\end{equation}
+\begin{gather*}
+    R_Z(\tau)=E[z(t+\tau)z(t)]=E[x(t+\tau)x(t)]+E[x(t+\tau-6)x(t)]+E[x(t+\tau)x(t-6)]\\
+    +E[x(t+\tau-6)x(t-6)]=R_X(\tau)+R_X(\tau-6)+R_X(\tau+6)+R_X(\tau)\\
+    2R_X(\tau)+2R_X(\tau-6)+R_X(\tau-6)\\
+    6\sinc\displaystyle\left(\frac{\tau}{4}\right)+18+3\sinc\left(\frac{\tau-6}{4}\right)+9+3\sinc\left(\frac{\tau+6}{4}\right)+9
+\end{gather*}
+\begin{equation}
+    R_Z(\tau)=6\sinc\left(\displaystyle\frac{\tau}{4}\right)+6\sin\left(\frac{\tau+6}{4}\right)+36
+\end{equation}
+\begin{equation}
+    \sigma_z^2=P_Z-\mu_z^2=R_Z(0)-36=42+6\sinc\displaystyle\left(\frac{3}{2}\right)-36=6\left[1+\sinc\left(\frac{3}{2}\right)\right]
+\end{equation}  
+
+
+
+Dato un processo $x(t)=A+n(t)$, il rumore è bianco, ha varianza $\sigma_n^2$ nota e valor medio nullo $\mu_n=0$, calcolare la potenza del processo $x$:
+\begin{gather}
+    P_X=E[x^2(t)]=E[A^2]+2A\cancelto{0}{E[n(t)]}+E[n^2(t)]=A^2+\sigma_n^2
+\end{gather}
+Il segnale viene filtrato in un filtro istantaneo:
+\begin{gather*}
+    y(t)=x(t)+x(t-1)
+\end{gather*}
+Calcolare la potenza del segnale in uscita dal filtro:
+\begin{gather*}
+    P_Y=E[y^2(t)]=E[(x(t)+x(t-1))^2]=E[x^2(t)]+2E[x(t)x(t-1)]+E[x^2(t-1)]\\
+    P_X+2R_X(1)+P_X=2A^2+2\sigma_n^2+2R_X(1)\\
+    R_X(\tau)=E[(A+n(t+\tau))(A+n(t))]=A^2+A\cancelto{0}{E[n(t)]}+A\cancelto{0}{E[n(t+\tau)]}+R_n(\tau)=A^2+\sigma_n^2\delta(\tau)\\
+    P_Y=2A^2+\sigma_n^2+2A^2+2\sigma_n^2\cancelto{0}{\delta(1)}
+\end{gather*}
+\begin{equation}
+    P_Y=4A^2+2\sigma_n^2
+\end{equation}
+
 
 \end{document}
