@@ -2479,6 +2479,7 @@ Per cui si definisce la densità spettrale di energia l'argomento dell'integrale
 ad ogni sua frequenza. 
 
 \subsection{Teorema del Campionamento}
+\label{sec:teorema-campionamento}
 
 Si considera un sistema di campionamento ADC che prende in ingresso un segnale $x(t)$ tempo continuo, ed ha in uscita un segnale $x_c(t)$, pari ad una 
 sommatoria di impulsi estratti dal segnale tempo continuo, ad intervalli regolari del periodo di campionamento $T_c$:
@@ -2904,7 +2905,7 @@ Inserendo nell'integrale per una variabile aleatoria continua la densità di pro
 
 Il valore atteso di una variabile aleatoria uniforme, distribuita sull'intervallo $[a,b]$, si ottiene come:
 \begin{gather*}
-    \mu_x=\displaystyle\int_{-\infty}^{+\infty}xP_X(x)\df x=\int_{a}^b\frac{1}{b-a}\df x=\frac{b^2-a^2}{2(b-a)}=\frac{b-a}{2}
+    \mu_x=\displaystyle\int_{-\infty}^{+\infty}xP_X(x)\df x=\int_{a}^b\frac{1}{b-a}\df x=\frac{b^2-a^2}{2(b-a)}=\frac{b+a}{2}
 \end{gather*}
 
 
@@ -2958,7 +2959,7 @@ integrale corrisponde al valore medio:
     \sigma_x^2=\mu_x^{(2)}+\mu_x^2-2\mu_x\mu_x=\mu_x^{(2)}-\mu_x^2
 \end{gather*}
 
-Data una statistica esponenziale, si calcola il valore quadratico medio, tramite la sua definizione::
+Data una statistica esponenziale, si calcola il valore quadratico medio, tramite la sua definizione:
 \begin{gather*}
     \mu_x^{(2)}=\displaystyle\int_{-\infty}^{+\infty}x^2\lambda e^{-\lambda x}u(x)\df x=\cancelto{0}{\left[-x^2e^{-\lambda x}\right]_0^{+\infty}}+2\int_{0}^{+\infty}xe^{-\lambda x}\df x\\
     \cancelto{0}{\left[-2\displaystyle\frac{e^{-\lambda x}}{\lambda}\right]_0^{+\infty}}+2\int_{0}^{+\infty}\frac{e^{-\lambda x}}{\lambda}\df x=\left[-\frac{2e^{-\lambda x}}{\lambda^2}\right]^{+\infty}_0=\frac{2}{\lambda^2}
@@ -3446,7 +3447,9 @@ Dato un sistema senza memoria $y(t)=ax(t)+b$, e la statistica dell'entrata $X$, 
 \begin{gather*}
     \mu_y=E[y(t)]=E[ax(t)+b]=a[x(t)]+b=a\mu_x+b\\
     \mu_y^{(2)}=E[y^2(t)]=a^2E[x^2(t)]+2abE[x(t)]+b^2=a^2\mu_x^{(2)}+2ab\mu_x+b^2\\
-    P_Y=a^2P_X+2ab\mu_x+b\\
+    P_Y=a^2P_X+2ab\mu_x+b
+\end{gather*}
+\begin{gather*}
     \sigma_y^2=\mu_y^{(2)}-\mu_y^2=a^2\mu_x^{(2)}+2ab\mu_x+b^2-(a\mu_x+b)^2=a^2\mu_x^{(2)}-a^2\mu_x^2=a^2\sigma_x^2\\
     R_Y(\tau)=E[y(t+\tau)y(\tau)]=E[(ax(t+\tau)+b)(ax(t)+b)]\\
     a^2E[x(t+\tau)x(t)]+abE[x(t+\tau)]+abE[x(t)]+b^2=a^2R_X(\tau)+2ab\mu_x+b^2\\
@@ -3479,6 +3482,166 @@ La densità spettrale dell'uscita si ottiene trasformando quest'ultima relazione
 \begin{gather*}
     G_Y(f)=H^*(f)H(f)G_X(f)=|H(f)|^2G_X(f)
 \end{gather*}
+
+\clearpage
+
+\section{Sistemi di Telecomunicazioni}
+
+Un sistema di telecomunicazioni in generale è formato da una sorgente, un canale ed un destinatario. 
+
+Per inviare un segnale bisogna codificarlo all'origine. Poiché la maggior parte dei segnali trattati sono digitali bisogna convertire il segnale 
+originale, se è analogico, in un segnale di tipo digitale, tramite un filtro ADC, con un dato passo di campionamento. 
+Per il teorema del campionamento \ref{sec:teorema-campionamento} se il segnale è limitato in banda, e la frequenza di campionamento è il doppio della banda del segnale, 
+allora non è presente aliasing nel segnale campionato, ed è possibili ricostruire esattamente il segnale originale al destinatario. 
+
+\subsection{Processo di Quantizzazione}
+
+La sequenza di campioni ottenuti dal segnale analogici deve essere convertita in una serie di bit, tramite un processo chiamato quantizzazione. Questo segnale viene inserito 
+in un filtro a gradinata, che assegna ad ogni campione una sequenza di bit. Poiché il numero di gradini è discreto, due campioni vicini possono essere convertiti nella 
+stessa sequenza di bit. 
+%% quantizzatore.pdf
+Si suppone esistano $M$ livelli distinti, o gradini, allora sono necessari un numero $k=\log_{2}M$ di bit per ogni campione per poter codificare tutti i possibili livelli. 
+Il numero di bit viene scelto arbitrariamente, e dipende dalle necessità del sistema; nell'ambito della telefonia, si considera $k=8$, mentre per tutti i sistemi audio si 
+considera $k=16$. 
+% grafico del quantizzatore (gradinata), grafico x[n] e x_q[n] \sim(organo di tenuta .pdf di FdA)
+%% campione-continuo.pdf
+%% campione-discreto.pdf
+Il segnale di ingresso, generalmente un segnale in tensione, compreso in un intervallo $[-V,V]$, transita in questo dispositivo quantizzatore, trasformando la sequenza di va
+lori in una sequenza di bit. Il primo parametro da analizzare è l'errore di quantizzazione, basato sulla precisione, quindi sul numero di livelli disponibili in cui 
+codificare i valori della sequenza. Per ogni campione l'errore della quantizzazione si ottiene sottraendo dal valore campione continuo $x[n]$ il valore del campione discreto o quantizzato $x_q[n]$. Il 
+valore del campione continuo si riferisce al campione originale, poiché può assumere tutti i possibili valori nel dato intervallo di tensione, mentre il campione quantizzato 
+può assumere solo un numero discreto di valori nello stesso intervallo:
+\begin{equation}
+    e_q[n]=x[n]-x_q[n]
+\end{equation}
+Se i campioni sono uniformemente distribuiti sull'intervallo $[-V,V]$, allora l'errore di quantizzazione è una variabile aleatoria ed assume come valore massimo 
+il valore del passo di quantizzazione $\Delta$:
+\begin{equation}
+    \Delta=\displaystyle\frac{2V}{M}
+\end{equation}
+Per cui l'errore di quantizzazione ha una densità di probabilità anch'essa uniformemente distribuita su un intervallo di larghezza $\Delta$:
+\begin{equation}
+    {P}_E(e)=\displaystyle\frac{1}{\Delta}\rect\left(\frac{e}{\Delta}\right)
+\end{equation}
+
+La potenza della variabile aleatoria errore $E$ si calcola come:
+\begin{gather*}
+    {P}_e=\displaystyle\frac{1}{\Delta}\int_{-\Delta /2}^{\Delta/2}e^2\df e=\frac{e^3}{3\Delta}\Bigg|_{-\Delta /2}^{\Delta/2}=\frac{\Delta^2}{12}
+\end{gather*}
+Poiché è uniformemente distribuita su un intervallo centrato nell'origine, ha valore medio nullo $\mu_e=0$, per cui la potenza coincide con la 
+varianza del segnale. 
+\begin{equation}
+    P_e=\displaystyle\frac{\Delta^2}{12}=\frac{V^2}{3M^2}=\sigma_e^2
+\end{equation}
+Spesso invece di lavorare in una scala lineare, si lavora in scala logaritmica $\log_{10}$ o decibel $\df B$:
+\begin{gather*}
+    \left(P_e\right)_{\df B}=10\log_{10}P_e=10\log_{10}\displaystyle\frac{V^2}{3}-10\log_{10}M^2=10\log_{10}\displaystyle\frac{V}{3}-10\log_{10}2^{2k}\\
+    (P_e)_{\df B}=10\log_{10}\displaystyle\frac{V^2}{3}-2k\cancelto{3}{10}\log_{10}2=10\log_{10}\displaystyle\frac{V^2}{3}-6k
+\end{gather*}
+Per cui aumentando il numero di bit, ad ogni bit l'errore diminuisce di $6\,\df B$. Così come l'errore, anche il 
+segnale originario si è supposto essere uniformemente distribuito sull'intervallo $[-V,V]$, per si calcola la sua potenza:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{2V}\rect\left(\frac{x}{2V}\right)\\
+    P_x=\displaystyle\frac{1}{2V}\int_{-V}^{V}x^2\df x=\frac{x^3}{6V}\Bigg|_{-V}^V=\frac{V^2}{3}
+\end{gather*}
+Per cui la potenza dell'errore si esprime in decibel come:
+\begin{equation}
+    (P_e)_{\df B}=(P_x)_{\df B}-6k
+\end{equation}
+
+
+In caso i livelli del quantizzatore non siano distribuiti uniformemente, ovvero ogni intervallo $\Delta_i$ presenta una probabilità diversa $P_i$, la potenza si ottiene 
+come il valore medio della potenza su tutti gli intervalli:
+\begin{gather*}
+    P_e=\displaystyle\sum_{i=1}^N\frac{\Delta_i^2}{12}P_i
+\end{gather*}
+In questa situazione si può utilizzare una codifica alla sorgente per diminuire il bitrate necessario per trasmettere il canale. 
+
+\subsection{Segnale Telefonico e Codifica di Sorgente}
+
+Il segnale telefonico si assume abbia una frequenza massima di $3.4\,\mathrm{kHz}$, ma per evitare problemi di aliasing si assume una banda di $4\,\mathrm{kHz}$, 
+per cui la frequenza di campionamento è $f_C=8\,\mathrm{kHz}$, 
+per cui il tempo di campionamento è $T_C=125\,\mathrm{\mu s}$. Per tutti i segnali audio, telefonici, si considera $k=8$. 
+
+Quindi per trasmettere un unico canale telefonico, bisogna trasmettere un simbolo ogni $T_C$, composto da $k$ bit:
+\begin{equation}
+    M\cdot f_C=64\,\mathrm{kb/s}
+\end{equation}
+
+Questa tecnica si chiama PCM ``Parse Coded Modulation'', e forma il canale base su cui si sono impostano le gerarchie numeriche, poiché si inviano più 
+canali insieme su una stessa linea. 
+
+
+Tipicamente si effettua una codifica di sorgente, poiché se venisse permesso a più utenti di trasmettere simultaneamente sulla la stessa banda, 
+si satura immediatamente. 
+
+Una codifica naturale associa ad ogni valore possibili di ingresso al quantizzatore una sequenza di $k$ bit, ma alcuni simboli non vengono trasmessi con la stessa frequenza, 
+per cui la densità di probabilità dei valori dei campioni in entrata al quantizzatore non è uniformemente distribuita. Se è nota a priori è possibile 
+creare una codifica alla sorgente associando i simboli più probabili a meno bit ed i simboli più probabili a più bit. Per cui ad ogni simbolo viene associato un numero 
+diverso di bit. 
+
+Quindi le parole di codice hanno un numero di bit massimo pari a $k$, e minimo definito dalla codifica a sorgente, in questo modo si diminuisce il bitrate richiesto da un 
+singolo canale. 
+
+
+Una delle codifiche più famose è la codifica di Hoffman, e riduce il bitrate dato un insieme di $M$ simboli, ognuno associato ad una probabilità $P_i$, nota a priori. 
+Per effettuare questa riduzione si genera un albero, o grafo, partendo dai simboli a probabilità minore, posizionandoli 
+come foglie dell'albero. L'organizzazione dell'albero è arbitraria, come la scelta delle foglie, e la scelta se due probabilità sono simili tra di loro. 
+Una volta scelte le foglie, si accoppiano e si sommano le loro probabilità per creare il loro genitore. In seguito si inserisce allo stesso livello di questi genitore 
+i simboli aventi una probabilità simile. Si effettua lo stesso processo su questo livello, sommando le probabilità di due nodi per creare il genitore, inserendo 
+ad ogni nuovo livello creato in questo modo i simboli che presentano una probabilità simile, fino ad arrivare alla radice dell'albero, avente probabilità $1$. 
+
+Si differenziano i nodi generati dall'inserimento di simboli, ed i nodi generati dalla somma di due probabilità. Scorrendo l'albero dalla radice, si assegna un $1$ andando 
+verso sinistra, ed uno $0$ andando verso destra. Ogni volta che si raggiunge un nodo associato ad un simbolo in questo modo, la sua sequenza di bit sono quindi i bit 
+associati al cammino da quel nodo alla radice dell'albero messi in successione. 
+Tutti i nodi associati a simboli sono delle foglie, per come è stato costruito l'albero, posti a diversi livelli di profondità in base alla loro probabilità. 
+
+In questo modo i simboli più probabili sono associati ad una sequenza di bit di lunghezza minore. Si crea un albero per associare univocamente una sequenza di bit ad un 
+dato simbolo, poiché avendo lunghezza diversa possono essere confusi come preambolo di un'altra sequenza. 
+
+
+Per ottenere il bitrate di questa codifica bisogna moltiplicare la frequenza in cui vengono trasmessi i simboli $f_C$ per il numero medio di bit:
+\begin{gather*}
+    f_C\cdot\displaystyle\sum_{i=1}^MP_ik_i
+\end{gather*}
+In questo tipo di codifica non vengono perse informazioni e viene diminuita la banda necessaria per trasmettere un unico segnale. 
+
+
+Un altro algoritmo senza perdita di informazioni è l'algoritmo PKZip, che rimuove da un file le correlazioni, ovvero corrispondenze o ridondanze da un file. 
+
+Invece codifiche che comportano una perdita di informazioni sono tutte le codifiche JPG, MPG, GIF, MP3. 
+Nei sistemi audio si assume che si campiona ad una frequenza di $44.1\,$kHz, con due canali, e $16$ bit, per cui si trasmette con un bitrate:
+\begin{gather*}
+    1.4\mathrm{Mb/s}
+\end{gather*}
+Invece se viene codificato nel formato MP3, il bitrate, approssimativamente, viene diviso per $11$ poiché la codifica rimuove le frequenze più alte. 
+
+
+Questi algoritmi cercano di rimuovere il maggior numero di bit superflui da un dato segnale, ma è presente un limite inferiore oltre al quale si perdono informazioni 
+relative al segnale. 
+Si chiama entropia della sorgente e si indica con $H$, si ottiene come:
+\begin{gather*}
+    H=\displaystyle\sum_{i=1}^MP_i\log_2\frac{1}{P_i}
+\end{gather*}
+Dove $P_i$ sono le probabilità dei vari simboli. Rappresenta il numero minimo di bit per codificare una sorgente. 
+Si definisce informazione o auto-informazione di un simbolo $i$ $I_i$:
+\begin{equation}
+    I_i=\log_2\displaystyle\frac{1}{P_i}
+\end{equation}
+Quindi minore è la probabilità, maggiore è la sua informazione. Se due simboli sono indipendenti tra di loro, allora l'informazione si somma:
+\begin{gather*}
+    I_{ij}=\log_2\displaystyle\frac{1}{P_iP_j}=\log_2\displaystyle\frac{1}{P_i}+\log_2\displaystyle\frac{1}{P_j}=I_i+I_j
+\end{gather*}
+Quindi l'entropia può essere espressa come la somma della probabilità di un simbolo, per la sua informazione:
+\begin{equation}
+    H=\displaystyle\sum_{i=1}^MP_iI_i
+\end{equation}
+Se sono presenti solo due simboli, allora l'entropia del segnale si ottiene come:
+\begin{gather*}
+    H=P\log_2\displaystyle\frac{1}{P}+(1-P)\log_2\frac{1}{1-P}
+\end{gather*}
+Questa descrizione dell'informazione è dovuta a John Tukey, inventore della ``Fast Fourier Transform'', ha inventato la parola bit, acronimo di ``Binary Digit'', 
+mentre il concetto di entropia è legato a Claude Shannon, padre della teoria dell'informazione. 
 
 
 \end{document}
