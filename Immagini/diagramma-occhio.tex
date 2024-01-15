@@ -1,0 +1,10 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw(-0.5,0)--(0.5,0);
+    \draw[smooth, domain=-0.25:0.25]plot(\x,{sin(4*pi*\x r)/(4*pi*\x)});
+    \draw[smooth, domain=-0.25:0.25]plot(\x,{0.8*sin(4*pi*\x r)/(4*pi*\x)});
+    \draw[smooth, domain=-0.25:0.25]plot(\x,{0.6*sin(4*pi*\x r)/(4*pi*\x)});
+\end{tikzpicture}
+\end{document}

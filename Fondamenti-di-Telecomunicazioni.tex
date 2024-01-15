@@ -2886,11 +2886,11 @@ il valore della realizzazione, per ognuna delle $N$ realizzazioni, diviso per il
     \mu_x=\displaystyle\frac{\displaystyle\sum_{i=1}^Nn_ix_i}{M}=\sum_{i=1}^Nx_iP_i
 \end{equation}
 
-Per una variabile aleatoria continua, il valore medio è definito come:
+Per una variabile aleatoria continua il valore medio si ottiene tramite un integrale:
 \begin{equation}
     \mu_x=\displaystyle\int_{-\infty}^{+\infty}xP_X(x)\df x
 \end{equation}
-Viene chiamato anche come ``expectation'', e può essere espresso come:
+Questo integrale può essere espresso rispetto alla funzione valore atteso o ``expectation' $E[]$':
 \begin{equation}
     \mu_x=E[x]
 \end{equation}
@@ -3029,8 +3029,13 @@ Si considerano i parametri precedentemente definiti:
 Tramite la funzione ``expectation", e questi altri parametri appena definiti, è possibile esprimere le variabili aleatorie. Date due variabili aleatorie legate dalla 
 relazione $f(x)=y$, si può calcolare il valore atteso della variabile $y$ come:
 \begin{gather*}
-    E[y]=\displaystyle\int_{-\infty}^{*\infty}yP_Y(y)\df y=\int_{-\infty}^{+\infty}f(x)P_X(x)\df x=E[f(x)]
+    E[y]=\displaystyle\int_{-\infty}^{*\infty}yP_Y(y)\df y=\int_{-\infty}^{+\infty}f(x)P_Y(f(x))f'(x)\df x\\
+    P_Y(f(x))f'(x)=P_X(x)\\
+    \int_{-\infty}^{+\infty}f(x)P_X(x)\df x=E[f(x)]
 \end{gather*}
+\begin{equation}
+    E[y]=E[f(x)]
+\end{equation}
 
 Gode della proprietà di linearità:
 \begin{gather*}
@@ -3050,7 +3055,7 @@ Si definisce la densità di probabilità congiunta, la derivata seconda di quest
 \end{gather*}
 Se la variabile aleatoria è discreta si esprime questa densità congiunta come una doppia sommatoria:
 \begin{gather*}
-    P_{X,Y}(x,y)=\displaystyle\sum_{i=1}^N\sum_{j=1}^M\delta(x-x_i)\delta(y-y_j)
+    P_{X,Y}(x,y)=\displaystyle\sum_{i=1}^N\sum_{j=1}^MP_{i,j}\delta(x-x_i)\delta(y-y_j)
 \end{gather*}
 Deve soddisfare la condizione di normalizzazione sull'intero piano:
 \begin{gather*}
@@ -3080,9 +3085,9 @@ Si definisce il momento misto di ordine $1,1$ o correlazione:
 \end{gather*}
 Questo parametro quantifica se i due segnali aleatori sono correlati tra di loro. Se i due segnali sono indipendenti tra di loro, allora il momento misto di ordine $1,1$ si 
 può calcolare come:
-\begin{gather*}
+\begin{gather}
     E[xy]=\displaystyle\iint_{\mathbb{R}^2}xyP_{X,Y}(x,y)\df x\df y=\iint_{\mathbb{R}^2}(xP_X(x))(yP_Y(y))\df x\df y
-\end{gather*}
+\end{gather}
 Poiché le variabili di integrazione sono indipendenti è possibile separare gli integrali:
 \begin{gather*}
     \displaystyle\int_{-\infty}^{+\infty}xP_X(x)\df x\cdot\int_{-\infty}^{+\infty}yP_Y(y)\df y=\mu_x\mu_y
@@ -3210,7 +3215,7 @@ Invece scegliendo un tempo $t_2=T/2$:
 \begin{gather*}
     x(t_2=T/2)=-A\\
     X_2=-A=-X_1\\
-    P_{X_2}(x_2)=-\displaystyle\rect\left(x_1-\frac{1}{2}\right)=-P_{X_1}(x_2)
+    P_{X_2}(x_2)=\displaystyle\rect\left(-x_2-\frac{1}{2}\right)=P_{X_1}(-x_2)
 \end{gather*}
 Per $t_3=T/4$ si ha:
 \begin{gather*}
@@ -3224,11 +3229,11 @@ Si vuole calcolare il valore medio di questo processo aleatorio, definito dalla 
 \end{gather*}
 Poiché l'ampiezza rende il processo stocastico, si integra rispetto a quest'ultima:
 \begin{gather*}
-    \displaystyle\int_{-\infty}^{+\infty}A\cos\left(\frac{2\pi t}{T}\right)P_A(A)\df A=\cos\left(\frac{2\pi t}{T}\right)\int_0^1AdA=\frac{1}{2}\cos\left(\frac{2\pi t}{T}\right)
+    \displaystyle\int_{-\infty}^{+\infty}A\cos\left(\frac{2\pi t}{T}\right)P_A(A)\df A=\cos\left(\frac{2\pi t}{T}\right)\int_0^1A\df A=\frac{1}{2}\cos\left(\frac{2\pi t}{T}\right)
 \end{gather*}
 Si calcola ora il valore quadratico medio:
 \begin{gather*}
-    \mu_x^{(2)}=E[x^2(t)]\displaystyle\int_{-\infty}^{+\infty}A^2\cos^2\left(\frac{2\pi t}{T}\right)P_A(A)\df A=\cos\left(\frac{2\pi t}{T}\right)\int_0^1A^2dA=\frac{1}{3}\cos^2\left(\frac{2\pi t}{T}\right)
+    \mu_x^{(2)}=E[x^2(t)]\displaystyle\int_{-\infty}^{+\infty}A^2\cos^2\left(\frac{2\pi t}{T}\right)P_A(A)\df A=\cos^2\left(\frac{2\pi t}{T}\right)\int_0^1A^2\df A=\frac{1}{3}\cos^2\left(\frac{2\pi t}{T}\right)
 \end{gather*}
 
 
@@ -3268,7 +3273,7 @@ Si calcola il valore quadratico medio, utilizzando le formula di duplicazione de
 \begin{gather*}
     \mu_{x}^{(2)}=E[x^2(t)]=\displaystyle\int_{-\infty}^{+\infty}\cos^2\left(\frac{2\pi t}{T}+\varphi\right)\frac{1}{2\pi}\rect\left(\frac{\varphi-\pi}{2\pi}\right)\df\varphi\\
     \frac{1}{2\pi}\int_0^{2\pi}\left[\frac{1}{2}+\frac{1}{2}\cos\left(\frac{4\pi t}{T}+2\varphi\right)\right]\df\varphi\\
-    \frac{1}{4\pi}\int_0^{2\pi}\df\varphi+\frac{1}{4\pi}\cancelto{0}{\int_0^{2\pi}\cos\left(\frac{4\pi t}{T}+2\varphi\right)\df\varphi}=\frac{2\pi}{4}-0=\frac{1}{2}
+    \frac{1}{4\pi}\int_0^{2\pi}\df\varphi+\frac{1}{4\pi}\cancelto{0}{\int_0^{2\pi}\cos\left(\frac{4\pi t}{T}+2\varphi\right)\df\varphi}=\frac{2\pi}{4\pi}-0=\frac{1}{2}
 \end{gather*}
 La sua varianza è quindi:
 \begin{gather*}
@@ -3316,11 +3321,11 @@ un processo stazionario dipende solo dalla differenza $\tau$ tra due istanti di 
 \end{gather*}
 Valgono le proprietà trattate precedentemente sull'operazione di correlazione \ref{sec:correlazione}, senza considerare il coniugato:
 \begin{gather*}
-    R_X(\tau)=R_x(-\tau)
+    R_X(\tau)=R_X(-\tau)
 \end{gather*} 
 La correlazione è massima per $\tau=0$:
 \begin{gather*}
-    R_X(0)=E[x(t)x(t)]=E[x^2(t)]=P_X
+    R_X(0)=E[x(t)x(t)]=E[x^2(t)]=P_x
 \end{gather*}
 La correlazione nell'origine coincide con la potenza del segnale. 
 
@@ -3354,10 +3359,10 @@ calcolate sull'integrale rispetto al tempo del segnale:
     E[x(t)]=\displaystyle\int_{-\infty}^{+\infty}x(t)P_X(x)\df x=\int_{-\infty}^{+\infty}x(t)\df t\\
     \widetilde{x(t)}=\overline{x(t)}^t
 \end{gather*}
-formalmente l'integrale rispetto al tempo si esprime tramite un limite, come per il calcolo della potenza di un segnale:
+Formalmente l'integrale rispetto al tempo si esprime tramite un limite, come per il calcolo della potenza di un segnale:
 \begin{gather*}
     E[x(t)]=\lim_{\Delta T\to+\infty}\displaystyle\frac{1}{\Delta T}\int_{-\Delta T/2}^{\Delta T/2}x(t)\df t\\
-    P_X=E[x^2(t)]=\lim_{\Delta T\to+\infty}\displaystyle\frac{1}{\Delta T}\int_{-\Delta T/2}^{\Delta T/2}x^2(t)\df t
+    P_x=E[x^2(t)]=\lim_{\Delta T\to+\infty}\displaystyle\frac{1}{\Delta T}\int_{-\Delta T/2}^{\Delta T/2}x^2(t)\df t
 \end{gather*}
 
 
@@ -3374,7 +3379,7 @@ Nota la funzione di correlazione $R_X(\tau)$, la sua trasformata si indica come 
 \end{gather*}
 Si chiama densità di potenza, poiché se viene integrata su tutte le frequenze restituisce la potenza $P_X$ del segnale:
 \begin{gather*}
-    R_X(0)=\displaystyle\int_{-\infty}^{+\infty}G_X(f)df=P_X
+    R_X(0)=\displaystyle\int_{-\infty}^{+\infty}G_X(f)df=P_x
 \end{gather*}
 
 Per un processo armonico, il suo spettro densità di potenza si ottiene come:
@@ -3398,7 +3403,7 @@ costante.
 Se fosse veramente costante, allora la potenza di questo processo sarebbe infinita:
 \begin{gather*}
     G_X(f)=k\\
-    P_X=\displaystyle\int_{-\infty}^{+\infty}kdf=+\infty
+    P_x=\displaystyle\int_{-\infty}^{+\infty}k\df f=+\infty
 \end{gather*}
 
 Per cui si dice che è costante in banda, ovvero nell'intervallo di frequenze $[-\omega,\omega]$ dove si sta lavorando:
@@ -3407,7 +3412,7 @@ Per cui si dice che è costante in banda, ovvero nell'intervallo di frequenze $[
 \end{gather*}
 La potenza di questa densità spettrale in banda è quindi:
 \begin{gather*}
-    P_X=\displaystyle\int_{-\infty}^{+\infty}G_X(f)\df f=\int_{-\omega}^{+\omega}K\df f=2\omega K
+    P_x=\displaystyle\int_{-\infty}^{+\infty}G_X(f)\df f=\int_{-\omega}^{+\omega}K\df f=2\omega K
 \end{gather*}
 
 
@@ -3430,7 +3435,7 @@ Il rumore più studiato è il rumore termico, o di Johnson-Nyquist. Questo rumor
 Quando viene misurata la tensione di un circuito, si misura questo rumore che aumenta la sua varianza intorno al valor medio all'aumento della temperatura. 
 Poiché il valore medio è nullo, la varianza coincide con il momento del secondo ordine, e quindi, al valore della potenza del segnale:
 \begin{gather*}
-    \sigma_x^2=\mu_x^{(2)}-\mu_x^2=\mu_x^{(2)}=E[x^2(t)]=P_X
+    \sigma_x^2=\mu_x^{(2)}-\mu_x^2=\mu_x^{(2)}=E[x^2(t)]=P_x
 \end{gather*}
 
 Quando vengono trasmessi segnali in canali dove sono presenti rumori, bisogna analizzare il rapporto potenza segnale rumore, ovvero il rapporto tra la potenza utile e la 
@@ -3443,18 +3448,31 @@ tempo $t$ dipende interamente dall'entrata in quell'istante di tempo, mentre si 
 
 I filtri sono sistemi con memoria, poiché l'uscita corrisponde alla convoluzione tra l'ingresso e la risposta impulsi del sistema. 
 
-Dato un sistema senza memoria $y(t)=ax(t)+b$, e la statistica dell'entrata $X$, si determinano la statistiche dell'uscita $Y$:
+Dato un sistema senza memoria $y(t)=ax(t)+b$, e la statistica dell'entrata $X$, si determinano la statistiche dell'uscita $Y$. Valore medio:
 \begin{gather*}
-    \mu_y=E[y(t)]=E[ax(t)+b]=a[x(t)]+b=a\mu_x+b\\
-    \mu_y^{(2)}=E[y^2(t)]=a^2E[x^2(t)]+2abE[x(t)]+b^2=a^2\mu_x^{(2)}+2ab\mu_x+b^2\\
-    P_Y=a^2P_X+2ab\mu_x+b
+    \mu_y=E[y(t)]=E[ax(t)+b]=a[x(t)]+b=a\mu_x+b\
 \end{gather*}
+Valore quadratico medio e potenza:
 \begin{gather*}
-    \sigma_y^2=\mu_y^{(2)}-\mu_y^2=a^2\mu_x^{(2)}+2ab\mu_x+b^2-(a\mu_x+b)^2=a^2\mu_x^{(2)}-a^2\mu_x^2=a^2\sigma_x^2\\
+    \mu_y^{(2)}=E[y^2(t)]=a^2E[x^2(t)]+2abE[x(t)]+b^2=a^2\mu_x^{(2)}+2ab\mu_x+b^2\\
+    P_y=a^2P_x+2ab\mu_x+b
+\end{gather*}
+Varianza:
+\begin{gather*}
+    \sigma_y^2=\mu_y^{(2)}-\mu_y^2=a^2\mu_x^{(2)}+2ab\mu_x+b^2-(a\mu_x+b)^2=a^2\mu_x^{(2)}-a^2\mu_x^2=a^2\sigma_x^2
+\end{gather*}
+Funzione di autocorrelazione:
+\begin{gather*}
     R_Y(\tau)=E[y(t+\tau)y(\tau)]=E[(ax(t+\tau)+b)(ax(t)+b)]\\
     a^2E[x(t+\tau)x(t)]+abE[x(t+\tau)]+abE[x(t)]+b^2=a^2R_X(\tau)+2ab\mu_x+b^2\\
-    P_Y=R_Y(0)=a^2R_X(0)+2ab\mu_x+b^2=a^2P_X+2ab\mu_x+b^2\\
-    C_Y(\tau)=R_Y(\tau)-\mu_y^2=a^2R_X(\tau)+2ab\mu_x+b^2-a^2\mu_x^2-2ab\mu_x-b^2=a^2R_X(\tau)-a^2\mu_x^2=a^2C_Y(\tau)\\
+    P_y=R_Y(0)=a^2R_x(0)+2ab\mu_x+b^2=a^2P_X+2ab\mu_x+b^2
+\end{gather*}
+Funzione di covarianza:
+\begin{gather*}
+    C_Y(\tau)=R_Y(\tau)-\mu_y^2=a^2R_X(\tau)+2ab\mu_x+b^2-a^2\mu_x^2-2ab\mu_x-b^2=a^2R_X(\tau)-a^2\mu_x^2=a^2C_X(\tau)
+\end{gather*}
+Indice di correlazione:
+\begin{gather*}
     \rho_Y(\tau)=\displaystyle\frac{C_Y(\tau)}{\sqrt{\sigma_y^2}}=\frac{a^2C_X(\tau)}{\sqrt{a^2\sigma_x^2}}=\frac{C_X(\tau)}{\sqrt{\sigma_x^2}}
 \end{gather*}
 
@@ -3643,5 +3661,205 @@ Se sono presenti solo due simboli, allora l'entropia del segnale si ottiene come
 Questa descrizione dell'informazione è dovuta a John Tukey, inventore della ``Fast Fourier Transform'', ha inventato la parola bit, acronimo di ``Binary Digit'', 
 mentre il concetto di entropia è legato a Claude Shannon, padre della teoria dell'informazione. 
 
+\subsection{Sistemi di Trasmissione}
+
+Un sistema di trasmissione è composto da una sorgente di informazione, e generalmente il sistema è in grado di trasmettere qualsiasi tipo di segnale, per cui si costruisce 
+indipendentemente dal tipo di sorgente del sistema. Se il segnale generato dalla sorgente è analogico, allora viene convertito in una sequenza di bit che rappresentano una 
+sequenza di campioni del segnale originale. 
+Questa codifica viene effettuata alla sorgente ovvero a monte del sistema. 
+In seguito si introduce una codifica di canale, che applica una procedura opposta rispetto alla codifica di sorgente, poiché introduce nuovi bit nel segnale trasmesso 
+per cercare di minimizzare l'errore di trasmissione. Questa codifica si chiama il ``Forward Error Correction'' o FAC, una delle più famose è il Reed Solomon. 
+Questi bit ridondanti permettono di correggere il segnale in caso sia corrotto da rumori presenti nel canale di trasmissione.  
+
+Per mandare fisicamente il segnale in trasmissione si applica una codifica di linea chiamata anche modulazione. 
+Il segnale fisico trasmesso è analogico, per cui è presente un supporto fisico su cui viene trasmessa la sequenza di bit, tramite un trasmettitore fisico, che opera come un 
+trasduttore, trasformando il segnale in entrata in corrente in un segnale fisico e viceversa. 
+Il canale di trasmissione può essere l'aria in caso di sistemi wireless, la fibra ottica nei sistemi in fibra, cavi ethernet per sistemi LAN, 
+etc. In generale il canale viene definito da due oggetti, la sua funzione di trasferimento $H(f)$, poiché quasi tutti i canali attenuano le alte frequenza, ovvero presentano 
+una limitazione in banda. Si indica la frequenza massima del canale, la banda $B$. Questo sistema si chiama banda base. 
+
+Tutti i sistemi wireless utilizzano una portante $f_0$, poiché essendo modulato da un coseno nel tempo, in frequenza viene 
+traslato di un fattore $\pm f_0$, la sua funzione di trasferimento è quindi formata da due filtri passa bassi centrati in $\pm f_0$, di larghezza $B$. 
+
+Mentre i sistemi di telecomunicazione a fibra ottica possono essere considerati a banda base, i sistemi wireless lavorano sulle frequenze ISM ``Industrial Scientific and Medical'' 
+le bande non licenziate, che nessuno paga, oppure in caso di telefonia mobile si lavora su bande licenziate che variano da paese a paese. 
+
+Su questo canale si aggiunge il rumore AVGN $n(t)$. 
+
+Questo segnale raggiunge poi il ricevitore che deve demodulare il segnale ricevuto. Prima di attuare quest'operazione filtra il segnale sulla stessa banda del canale per 
+eliminare i contributi fuori banda del rumore. La sua potenza, e quindi varianza, diventa quindi:
+\begin{gather*}
+    P_n=\sigma_n^2=\displaystyle\int_{-\infty}^{+\infty}G(f)\cdot H(f)\df f=\int_{-B}^B\frac{N_0}{2}\df f=BN_0
+\end{gather*}
+Per cui maggiore è la banda del rumore, maggiore è la varianza del rumore
+
+Dopo che viene filtrato si applica una demodulazione del segnale, per ottenere una sequenza di bit. Questo viene ottenuto campionando il segnale ricevuto utilizzando 
+come frequenza di campionamento il bitrate del sistema, noto. In seguito i campioni vengono confrontati con una soglia, per verificare se rappresentano uno zero o un uno 
+logico. 
+Dopo aver ottenuto una sequenza di bit, si rimuovono i bit aggiungi nella codifica di canale. Infine si applica una decodifica di sorgente ed il segnale così ricavato 
+viene inviato al destinatario. 
+
+
+Tutti i sistemi di trasmissione vengono rappresentati dalla figura ad occhio, ottenuta sovrapponendo sullo stesso intervallo, bit trasmessi a frequenze diverse sullo 
+stesso canale. In questo modo si può verificare se il canale attenua l'``occhio'' comincia a chiudersi. Se questa attenuazione può provocare errori nel caso porti il 
+segnale ad assumere valori minori della soglia, cambiando il valore del bit associato. 
+Nella codifica return to zero, ogni volta che viene trasmesso un uno, il valore del segnale ritorna basso, indipendentemente se viene seguito da un altro uno. Altrimenti 
+il segnale può rimanere alto in caso siano presenti più uni di fila. Questo dipende da sistema a sistema, ed in entrambi i casi si possono verificare dal diagramma ad occhio 
+le stesse caratteristiche del sistema. Poiché se l'occhio si chiude il segnale non viene trasmesso correttamente attraverso il canale:
+\begin{figure}[H]%
+    \centering
+    \includegraphics{diagramma-occhio.pdf}%
+\end{figure}    
+Quando vengono trasmessi segnali su sistemi in fibra ottica, è più efficiente inviare impulsi di luce accesa o spenta, ma in caso si parli di impulsi di corrente, 
+bisogna diminuire la potenza media utilizzata dal trasmettitore. Ciò viene effettuato utilizzando come zero logico, invece di un segnale nullo, un impulso di corrente nel 
+verso opposto, in modo che il valor medio sia pari a zero, consumando meno corrente:
+\begin{figure}[H]%
+    \centering
+    \includegraphics{modulazione-corrente.pdf}%
+\end{figure}
+Un segnale associato a zero ed uno, rappresenta il modello più semplice per trasmettere un segnale, ma anche questo non è efficiente, poiché è anche il metodo più lento per 
+trasmettere informazione. Quindi i bit vengono raggruppati in codici formati da un certo numero di bit consecutivi, chiamati simboli. Si genera così un alfabeto con un 
+certo numero di simboli possibili. In questo modo è possibile aumentare notevolmente la 
+capacità di trasmissione del sistema, mantenendo invariata la velocità di trasmissione di un singolo simbolo.  
+Per trasmettere questo tipo di alfabeto sorgente sono necessari lo stesso numero di livelli possibili per il segnale trasmesso sul canale, inoltre bisogna poterli distinguere 
+in ricezione. 
+Invece di effettuare una codifica binaria, si applica una codifica M-aria, utilizzando $M$ simboli diversi per aumentare la banda del canale. 
+
+\subsubsection{Trasmissione M-aria}
+
+Si suppone si disponga di un alfabeto di simboli $c_m$:
+\begin{gather*}
+    c_m:=\biggl\{c_1,\cdots,c_M\biggr\}
+\end{gather*}
+Inoltre sia dato il tempo di simbolo $T_s$, il tempo necessario per trasmettere un singolo simbolo, il suo inverso si indica con $R_s$ e si chiama frequenza di simbolo o 
+baud. Se $M=2$, il baud è il bitrate $R_b$. Altrimenti il bitrate si calcola moltiplicando il baud per il numero di bit associati ad ogni simbolo:
+\begin{gather*}
+    R_b=R_s\log_{2}M
+\end{gather*}
+
+Il modulatore dato una sequenza di questi simboli, deve poterlo trasformare in un segnale $x(t)$ in grado di essere trasmesso dal sistema. 
+Questo segnale può essere espresso come:
+\begin{gather}
+    x(t)=\displaystyle\sum_{n=-\infty}^{+\infty}s[n]g(t-nT_s)
+\end{gather}
+Dove $s[n]$ è uno dei possibili simboli, mentre $g(t)$ è una funzione chiamata forma d'onda. 
+Nella codifica return to zero, la funzione $g(t)$ è un impulso base, ed in generale deve avere una durata inferiore al tempo di simbolo, altrimenti sarebbe presente un'interferenza 
+intersimbolica. Assume valore $1$ per $t=0$, mentre per tutti i tempi multipli del tempo di simbolo assume valori nulli:
+\begin{equation}
+    g(t)=\begin{cases}
+        1&t=0\\
+        0&t=kT_s
+    \end{cases}
+\end{equation}
+Deve essere massimo nel tempo in cui viene campionato, mentre deve valere zero per non sovrapporsi su ogni altro campione. Date queste restrizioni è possibili utilizzare 
+diverse funzioni come impulso base, anche un finestra di base $T_s$ soddisferebbe queste condizioni. Ma la trasformata di una finestra è un seno cardinale, 
+segnale non limitato in banda per cui è un sistema troppo costoso in banda. 
+
+Quindi come impulso base si usa un seno cardinale:
+\begin{gather*}
+    g(t)=\sinc\displaystyle\left(\frac{t}{T_s}\right)
+\end{gather*}
+Poiché quando viene trasformato si ottiene una finestra, occupando la minor banda possibile:
+\begin{gather*}
+    G(f)=\rect(T_sf)
+\end{gather*}
+Data la banda del canale $B$, per non perdere informazioni sul segnale originario bisogna imporre semplicemente $1/2T_s=B$. 
+\begin{figure}[H]%
+    \centering
+    \includegraphics{impulso-sinc.pdf}%
+\end{figure}
+Esistono una serie di funzioni standardizzate chiamate impulsi di Nyquist, a coseno rialzato, per non dover generare un segnale sull'intero intervallo $[-\infty,+\infty]$ come 
+per il seno cardinale. Diminuendo l'intervallo nel tempo viene aumentate però la banda. Questi tipo di funzioni trovano un compromesso tra l'intervallo richiesto per 
+essere generati nel tempo, e la dimensione della banda in frequenza. Il seno cardinale può essere chiamato anche impulso di Nyquist a roll off zero. 
+L'impulso di Nyquist in frequenza segue una finestra, ma invece di cambiare istantaneamente da uno a zero, diminuisce gradualmente, smussando gli angoli. In questo 
+modo si aumenta la banda in frequenza, ma nel tempo il segnale associato si attenua più velocemente, rispetto ad un seno cardinale. 
+Fino ad un impulso di Nyquist a roll off uno, dove la banda in frequenza è di $1/T_s$. %https://ntrs.nasa.gov/api/citations/20120008631/downloads/20120008631.pdf
+\begin{figure}[H]%
+    \centering
+    \includegraphics{impulso-nyquist.pdf}
+\end{figure}
+Questo parametro roll off, quindi determinare l'occupazione in banda e la durata dell'impulso nel tempo. Vengono usate quindi solo funzioni di Nyquist come impulsi base 
+in telecomunicazioni. 
+
+\subsubsection{Rumore}
+
+Si vuole determinare l'effetto del rumore sul segnale trasmesso, per semplicità si analizza un caso di un alfabeto binario, composto quindi da due soli simboli:
+\begin{gather*}
+    c_m:=\biggl\{c_1,c_2\biggr\}
+\end{gather*}
+\begin{figure}[H]%
+    \centering
+    \includegraphics{modulatore.pdf}
+\end{figure}   
+Si considera un segnale $x(t)$ in entrata al canale, e si misura in uscita un segnale $y(t)$, dopo essere stato filtrato dalla funzione di trasferimento del canale $H(f)$ 
+e dopo essere stato aggiunto il rumore $n(t)$:
+\begin{gather*}
+    x(t)=\displaystyle\sum_{n=-\infty}^{+\infty}s[n]g(t-nT_s)\\
+    y(t)=x(t)*h(t)+n(t)
+\end{gather*}
+Si suppone per semplicità $x(t)*h(t)=x(t)$:
+\begin{gather*}
+    y(t)=x(t)+n(t)
+\end{gather*}
+L'errore considerato è presente solo in banda, ovvero ha una varianza $BN_0$. Si vuole calcolare ora la probabilità di errore di trasmissione dovuto al rumore $n(t)$. 
+Da questo processo si estrae la variabile aleatoria $Y$, dato un istante di tempo $t_0$:
+\begin{gather*}
+    y=y(t_0)=x+n=\begin{cases}
+        c_1+n\\
+        c_2+n
+    \end{cases}
+\end{gather*}
+Poiché sono presenti solo due simboli nell'alfabeto. 
+Il rumore ha statistica gaussiana, di densità di probabilità:
+\begin{gather*}
+    P_N(n)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_n}e^{-\frac{n^2}{2\sigma_n^2}}
+\end{gather*}
+Per cui la densità della variabile aleatoria $Y$, legata linearmente al rumore $N$ si ottiene come:
+\begin{gather*}
+    P_N(n)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_n}e^{-\frac{(y-c_{1/2})^2}{2\sigma_n^2}}    
+\end{gather*}
+Il valor medio della variabile $Y$ assume il valore del simbolo campionato $c_1$ o $c_2$. 
+Sia dato un valore di soglia $\overline{c}$, allora la probabilità di errore nei due casi è data dall'area sottesa dalla curva della densità di probabilità di $y$ che 
+supera il valore $\overline{y}=\overline{c}+n$. Si associa a $c_2$ il livello alto, mentre a $c_1$ il livello basso. Si calcola quindi la probabilità che il rumore sia 
+tale da rendere il segnale alto $c_2$ sotto soglia:
+\begin{gather*}
+    P_e(y<\overline{c}|c_2)=\displaystyle\int_{-\infty}^{\overline{c}}P_Y(y)\df y=\int_{-\infty}^{\overline{c}}\frac{1}{\sqrt{2\pi}\sigma_n}e^{-\frac{(y-c_{2})^2}{2\sigma_n^2}}\df y
+\end{gather*}
+Si applica la sostituzione $t=\displaystyle\frac{c_2-y}{\sqrt{2}\sigma_n}$, l'integrale diventa quindi:
+\begin{gather*}
+    \displaystyle\int_{-\infty}^{\frac{c_2-\overline{c}}{\sqrt2\sigma_n}}\frac{1}{\sqrt{2\pi}\sigma_n}e^{-t^2}\left(-\sqrt2\sigma_n\df t\right)=\int_{\frac{c_2-\overline{c}}{\sqrt2\sigma_n}}^{+\infty}\frac{1}{\sqrt\pi}e^{-t^2}\df t
+\end{gather*}
+Questo integrale si può esprimere rispetto alla funzione di errore complementare $\mathrm{erfc}(x)$:
+\begin{gather}
+    \mathrm{erfc}(x)=\displaystyle\int_{x}^{+\infty}\frac{2}{\sqrt\pi}e^{-t^2}{\df t}\\
+    P_e(y<\overline{c}|c_2)=\displaystyle\frac{1}{2}\mathrm{erfc}\left(\frac{c_2-\overline{c}}{\sqrt{2}\sigma_n}\right)
+\end{gather}
+Alternativamente si può esprimere rispetto alla funzione $Q(x)$:
+\begin{gather}
+    Q(x)=\displaystyle\frac{1}{2}\mathrm{erfc}\left(\frac{x}{\sqrt2}\right)\\
+    P_e(y<\overline{c}|c_2)=Q\left(\frac{c_2-\overline{c}}{\sigma_n}\right)
+\end{gather}
+Attuando un processo analogo si ottiene la probabilità di misurare un valore sopra la soglia, avendo trasmesso $c_1$:
+\begin{gather}
+    P_e(y>\overline{c}|c_1)=\int_{\overline{c}}^{+\infty}\frac{1}{\sqrt{2\pi}\sigma_n}e^{-\frac{(y-c_1)^2}{2\sigma_n^2}}\df y=\frac{1}{2}\mathrm{erfc}\left(\frac{\overline{c}-c_1}{\sqrt{2}\sigma_n}\right)=Q\left(\frac{\overline{c}-c_1}{\sigma_n}\right)
+\end{gather}
+
+In telecomunicazioni si misura il BER ``Bit Error Rate'', quantifica quanto spesso vengono scambiati dei bit durante una trasmissione. Se la probabilità di entrambi 
+i simboli $c_1$ e $c_2$ è uguale, il BER si ottiene sommando le probabilità dei due simboli, moltiplicate per i loro errori di trasmissione dovuti al rumore:
+\begin{equation*}
+    \mathrm{BER}=\displaystyle\frac{1}{2}Q\left(\frac{c_2-\overline{c}}{\sigma_n}\right)+\frac{1}{2}Q\left(\frac{\overline{c}-c_1}{\sigma_n}\right)
+\end{equation*}
+
+Il valore di soglia, può essere semplicemente scelto come il valore intermedio tra il livello alto $c_2$ ed il livello basso $c_1$, ma nella realtà il rumore è presente 
+solamente sull'uno logico, per cui il livello di soglia tende ad essere molto più vicino al valore basso $c_1$. Per semplicità si considera la soglia a metà tra i due 
+valori $c_1$ e $c_2$:
+\begin{equation}
+    \overline{c}=\displaystyle\frac{c_1+c_2}{2}
+\end{equation}
+Si indica con $d$ la distanza tra i due livelli, per cui sostituendo la precedentemente relazione, il BER si ottiene come:
+\begin{equation}
+    \mathrm{BER}=Q\left(\frac{c_2-c_1}{\sigma_n}\right)=Q\left(\frac{d}{\sigma_n}\right)=Q\left(\frac{d}{BN_0}\right)
+\end{equation}
+Generalmente con un BER nell'ordine di grandezza di $10^{-9}$ si considera un errore nullo, ciò viene ottenuto quando l'argomento della funzione $Q$ deve essere $6$. 
 
 \end{document}
