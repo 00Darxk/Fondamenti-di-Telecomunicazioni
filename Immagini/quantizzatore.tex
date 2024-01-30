@@ -1,0 +1,10 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm}}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \node[block](q)at(0,0){};
+    \draw[->,very thick](-1.5,0)--(q.180)node[midway, above]{$x[n]$};
+    \draw[->,very thick](q.0)--(1.5,0)node[midway, above]{$x_q[n]$};
+\end{tikzpicture}
+\end{document}

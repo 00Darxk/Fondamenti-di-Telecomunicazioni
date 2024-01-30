@@ -1,0 +1,39 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->](-1.75,0)--(1.75,0)node[above]{$x[n]$};
+    \draw[->](0,-1.5)--(0,1.5)node[right]{$x_q[n]$};
+
+    \filldraw[black](-1.5,0)circle(0.5pt);
+    \draw[dashed](-1.5,-1.375)--(-1.5,0)node[above]{$-V$};
+    \draw[very thick] (-1.5,-1.375)--(-1.25,-1.375);
+    \draw[dashed](-1.25,-1.375)--(-1.25,0);
+    \draw[very thick] (-1.25,-1.125)--(-1,-1.125);
+    \draw[dashed](-1,-1.125)--(-1,0);
+    \draw[very thick] (-1,-0.875)--(-0.75,-0.875);
+    \draw[dashed](-0.75,-0.875)--(-0.75,0);
+    \draw[very thick] (-0.75,-0.625)--(-0.5,-0.625);
+    \draw[dashed](-0.5,-0.625)--(-0.5,0);
+    \draw[very thick] (-0.5,-0.375)--(-0.25,-0.375);
+    \draw[dashed](-0.25,-0.375)--(-0.25,0);
+    \draw[very thick] (-0.25,-0.125)--(0,-0.125);
+    \draw[very thick] (0,0.125)--(0.25,0.125);
+    \draw[dashed](0.25,0)--(0.25,0.375);
+    \draw[very thick] (0.25,0.375)--(0.5,0.375);
+    \draw[dashed](0.5,0.625)--(0.5,0);
+    \draw[very thick] (0.5,0.625)--(0.75,0.625);
+    \draw[dashed](0.75,0)--(0.75,0.875);
+    \draw[very thick] (0.75,0.875)--(1,0.875);
+    \draw[dashed](1,0)--(1,1.125);
+    \draw[very thick] (1,1.125)--(1.25,1.125);
+    \draw[dashed](1.25,0)--(1.25,1.375);
+    \draw[very thick] (1.25,1.375)--(1.5,1.375);
+    \draw[dashed](1.5,1.375)--(1.5,0)node[below]{$V$};
+    \filldraw[black](1.5,0)circle(0.5pt);
+
+    \node[below right]at(0,0){$0$};
+    \draw[dashed](0.25,0.375)--(0,0.375);
+    \draw[|-|](-0.1,0.125)--(-0.1,0.375)node[midway, left]{$\Delta_q$};
+\end{tikzpicture}
+\end{document}

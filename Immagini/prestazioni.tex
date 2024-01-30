@@ -1,0 +1,14 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->](-0.25,0)--(1.75,0)node[below]{$(E_b/N_0)_{\mathrm{d}B}$};
+    \draw[->](0,-0.25)--(0,1.5)node[left]{BER};
+
+    \draw[very thick]plot[smooth, domain=0:1.513](\x,{1-0.25*e^(2.7*(\x-1))});
+    \node[below right]at(0,0.9){$M=2$};
+    \draw[very thick]plot[smooth, domain=0:1.513](\x,{1.1-0.25*e^(2.2*(\x-1))});
+    \draw[very thick]plot[smooth, domain=0:1.513](\x,{1.2-0.25*e^(1.7*(\x-1))});
+    \draw[very thick]plot[smooth, domain=0:1.513](\x,{1.3-0.25*e^(1.2*(\x-1))});
+\end{tikzpicture}
+\end{document}

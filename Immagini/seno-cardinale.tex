@@ -1,7 +1,7 @@
 \documentclass{standalone}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[scale=1.75]
     \draw[->,very thick](0,-0.5)--(0,1.5)node[right]{$x(t)$};
     \draw[->,very thick](-2,0)--(2,0)node[right]{$t$};
     \draw[-,very thick]plot[smooth, domain=-1.9:1.9](\x,{1/(2*pi*\x)*sin(2*pi*\x r)});

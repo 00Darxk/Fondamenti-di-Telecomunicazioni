@@ -1,0 +1,556 @@
+\documentclass{article}
+\usepackage[nomarginpar]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, mathrsfs,fancyhdr}
+\usepackage[italian]{babel}
+\newcommand{\rect}{\mathrm{rect}}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\tri}{\mathrm{tri}}
+\newcommand{\df}{\mathrm{d}}
+\newcommand{\intinf}{\displaystyle\int_{-\infty}^{+\infty}}
+\newcommand{\suminf}{\displaystyle\sum_{n=-\infty}^{+\infty}}
+\newcommand{\suminfk}{\displaystyle\sum_{k=-\infty}^{+\infty}}
+\newcommand{\suminfi}{\displaystyle\sum_{i=-\infty}^{+\infty}}
+\newcommand{\intp}{\displaystyle\frac{1}{T}\int_{-T/2}^{T/2}}
+\author{}
+\date{}
+\begin{document}
+\title{%
+    \textbf{Fondamenti di Telecomunicazioni}  \\ 
+    \large Formulario di Fondamenti di Telecomunicazioni\\
+    \textit{Anno Accademico: 2023/24}}
+\author{\textit{Giacomo Sturm}}
+\date{\textit{Dipartimento di Ingegneria Civile, Informatica e delle Tecnologie Aeronautiche \\
+Università degli Studi ``Roma Tre"}}
+
+\maketitle
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{\textit{Fondamenti di Telecomunicazioni - Università degli Studi ``Roma Tre"}}
+\fancyfoot[C]{\thepage}
+\section{Analisi nel Tempo}
+
+\subsection*{Energia e Potenza}
+Dato un segnale tempo continuo $x(t)$, o una sequenza $x[n]$, la sua energia e potenza si ottengono come:
+\begin{align*}
+    &E_x=\intinf|x(t)|^2\df t=\intinf |X(f)|^2\df f=R_{xx}(0)&E_x=\suminf|x[n]|^2=T\int_{-1/2T}^{1/2T}|X(f)|^2\df f=R_{xx}[0]\\
+    &P_x=\lim_{T\to+\infty}\intp|x(t)|^2\df t&P_x=\displaystyle\lim_{N\to+\infty}\frac{1}{2N+1}\sum_{n=-N}^N|x[n]|^2
+\end{align*}
+Se il segnale $x(t)$ è periodico di periodo $T$ o la sequenza $x[n]$ è periodica di periodo $M$, la loro potenza si calcola come:
+\begin{align*}
+    &P_x=\displaystyle\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2\df t=\frac{1}{T}\suminf |c_n|^2&P_x=\displaystyle\frac{1}{M}\sum_{n=0}^{M-1}|x[n]|^2
+\end{align*}
+
+\subsection*{Proprietà della Delta di Dirac}
+La delta ha area unitaria:
+\begin{align*}
+    &\intinf\delta(t)\df t=1&\suminf\delta[n]=1
+\end{align*}
+Proprietà del Campionamento:
+\begin{align*}
+    &x(t)\cdot\delta(t-\tau)=x(\tau)\cdot\delta(t-\tau)&x[n]\cdot\delta[n-m]=x[m]\cdot\delta[n-m]\\
+    &\intinf x(t)\cdot\delta(t-\tau)\df t=x(\tau)&\suminf x[n]\cdot\delta[n-m]=x[m]
+\end{align*}
+Convoluzione per una Delta:
+\begin{align*}
+    &x(t)*\delta(t)=x(t)
+    &x[n]*\delta[n]=x[n]\\
+    &u(t-t')=\displaystyle\int_{-\infty}^{t-t'}\delta(\tau)\df\tau
+    &u[n-m]=\displaystyle\sum_{k=-\infty}^{n-m}\delta[k+1]\\
+    &\delta(t)=\delta(-t)
+    &\delta[n]=\delta[-n]
+\end{align*}
+Proprietà di Scala:
+\begin{align*}
+    &\delta(at)=\displaystyle\frac{1}{a}\delta(t)
+    &\delta[an]=\displaystyle\frac{1}{a}\delta[n]
+\end{align*}
+
+\subsection*{Convoluzione}
+Definizione:
+\begin{align*}
+    &x(t)*y(t)=\intinf x(\tau)y(t-\tau)\df\tau
+    &x[n]*y[n]=\suminfk x[n]y[n-k]
+\end{align*}
+Proprietà Distributiva:
+\begin{align*}
+    &(x(t)+y(t))*z(t)=x(t)*z(t)+y(y)*z(t)
+    &(x[n]+y[n])*z[n]=x[n]*z[n]+y[n]*z[n]
+\end{align*}
+Traslazione:
+\begin{align*}
+    &x(t-t_1)*y(t-t_2)=z(t-t_1-t_2)
+    &x[n-n_1]*y[n-n_2]=z[n-n_1-n_2]
+\end{align*}
+
+\subsection*{Correlazione}
+Definizione:
+\begin{align*}
+    &x(t)\otimes y(t)=\intinf x(t+\tau)y^*(\tau)\df\tau=R_{xy}(t)
+    &x[n]\otimes y[n]=\suminfk x[n+k]y[k]=R_{xy}[n]\\
+    &x(t)\otimes y(t)=x(t)*y^*(-t)
+    &x[n]\otimes y[n]=x[n]*y^*[-n]
+\end{align*}
+Proprietà:
+\begin{align*}
+    &R_{xy}(t)=R_{yx}^*(-t)
+    &R_{xy}[n]=R_{yx}^*[-n]\\
+    &R_{xx}(0)=E_x
+    &R_{xx}[0]=E_x
+\end{align*}
+
+\section{Analisi in Frequenza}
+
+\subsection*{Serie di Fourier}
+Definizione per un segnale $x(t)$ periodico di periodo $T$:
+\begin{align*}
+    &x(t)=\suminf c_ne^{i\frac{2\pi nt}{T}}
+    &c_n=\intp x(t)e^{-i\frac{2\pi nt}{T}}\df t
+\end{align*}
+Proprietà di Linearità: 
+\begin{gather*}
+    ax(t)+by(t)=\suminf \left(ac_{n}^{(x)}+bc_{n}^{(y)}\right)e^{i\frac{2\pi nt}{T}}
+\end{gather*}
+Traslazione nel Tempo e di Armonica:
+\begin{align*}
+    &x(t-\tau)=\suminf \left(c_n^{(x(t))}e^{-i\frac{2\pi nt_0}{T}}\right)e^{i\frac{2\pi nt}{T}}
+    &x(t)\cdot e^{i\frac{2\pi kt}{T}}=\suminf c_{n-k}e^{i\frac{2\pi nt}{T}}
+\end{align*}
+Proprietà della Modulazione:
+\begin{gather*}
+    x(t)\cdot\cos\left(\displaystyle\frac{2\pi t}{T}\right)=\suminf \left(\frac{1}{2}c_{k-1}+\frac{1}{2}c_{k+1}\right)e^{i\frac{2\pi nt}{T}}
+\end{gather*}
+Proprietà della Derivazione:
+\begin{gather*}
+    \displaystyle\frac{\df x(t)}{\df t}=\suminf \left(c_n\frac{2i\pi n}{T}\right)e^{i\frac{2\pi nt}{T}}
+\end{gather*}
+Potenza di una Serie:
+\begin{gather*}
+    P_x=\frac{1}{T}\suminf |c_n|^2
+\end{gather*}
+Serie di Segnali Reali:
+\begin{gather*}
+    x(t)=c_0+\suminf a_n\cos\left(\frac{2\pi nt}{T}\right)-\suminf b_n\sin\left(\frac{2\pi nt}{T}\right)\\
+    \begin{cases}
+        a_n=\intp x(t)\cos\left(\frac{2\pi nt}{T}\right)\df t\\
+        b_n=\intp x(t)\sin\left(\frac{2\pi nt}{T}\right)\df t
+    \end{cases}
+\end{gather*}
+Serie Notevoli:
+\begin{gather*}
+    e^{\frac{2i\pi kt}{T}}\to c_n=\sinc(n-k)=\delta(n-k)\\
+    \cos\left(\displaystyle\frac{2\pi t}{T}\right)\to c_1=c_{-1}=\frac{1}{2}\\
+    \sin\left(\displaystyle\frac{2\pi t}{T}\right)\to c_1=c_{-1}^*=\frac{1}{2i}\\
+    \pi(t)\to c_n=\displaystyle\frac{1}{T}
+\end{gather*}
+
+\subsection*{Trasformata di Fourier}
+Definizione:
+\begin{align*}
+    &x(t)=\intinf X(f)e^{2i\pi tf}\df f
+    &X(f)=\intinf x(t)e^{-2i\pi tf}\df t
+\end{align*}
+Proprietà di Linearità:
+\begin{gather*}
+    ax(t)+by(t)=aX(f)+bY(f)
+\end{gather*}
+Proprietà di Dualità:
+\begin{gather*}
+    x(t)\to X(f)\iff X(t)\to x(-f)
+\end{gather*}
+Proprietà di Scala:
+\begin{gather*}
+    x(at)\to\displaystyle\frac{1}{|a|}X\left(\frac{1}{a}\right)
+\end{gather*}
+Traslazione nel Tempo ed in Frequenza:
+\begin{align*}
+    &x(t-t_0)\to e^{-2i\pi ft_0}X(f)
+    &e^{2i\pi f_0t}x(t)\to X(f-f_0)
+\end{align*}
+Proprietà della Modulazione:
+\begin{gather*}
+    x(t)\cos(2\pi f_0t)\to\displaystyle\frac{1}{2}X(f-f_0)+\frac{1}{2}X(f+f_0)
+\end{gather*}
+Proprietà della Derivazione e dell'Integrazione:
+\begin{align*}
+    &\displaystyle\frac{\df x(t)}{\df t}\to 2i\pi fX(f)
+    &2i\pi tx(t)\to\displaystyle\frac{\df X(f)}{\df f}
+\end{align*}
+\begin{gather*}
+    \displaystyle\int_{-\infty}^{t}x(\tau)\df \tau\to\frac{1}{2}X(0)\delta(f)+\frac{X(f)}{2i\pi f}\\
+\end{gather*}
+Proprietà della Convoluzione e della Correlazione:
+\begin{gather*}
+    x^*(t)\to X^*(-f)\\
+    x(t)\otimes y(t)\to X(f)\cdot Y^*(f)\\
+    x(t)*y(t)\to X(f)\cdot Y(f)\\
+    x(t)\cdot y(t)\to X(f)*Y(f)
+\end{gather*}
+Energia in Frequenza:
+\begin{gather*}
+    \intinf |X(f)|^2\df f=E_x
+\end{gather*}
+Trasformata di Segnali Reali:
+\begin{gather*}
+    X(f)=\intinf x(t)\cos(2\pi ft)\df t-i\intinf x(t)\sin(2\pi ft)\df t\\
+    X(-f)=X^*(f)
+\end{gather*}
+Trasformata di segnali periodici, di periodo $T$, dove $\overline{X}$ è la trasformata di una replica $\overline{x}(t)$ del segnale $x(t)$ in un unico periodo:
+\begin{gather*}
+    \suminf c_ne^{2i\pi nt/T}\to\suminf \frac{1}{T}\overline{X}\left(\frac{n}{T}\right)\delta\left(f-\frac{n}{T}\right)
+\end{gather*}
+Trasformate Notevoli:
+\begin{align*}
+    &e^{2i\pi f_0 t}\to\delta(f-f_0)&\delta(t-t_0)\to e^{-2i\pi ft_0}\\
+    &\displaystyle\frac{1}{T}\rect\left(\frac{t}{T}\right)\to\sinc(fT)
+    &T\sin(Tt)\to\displaystyle\rect\left(\frac{f}{T}\right)\\
+    &\tri\displaystyle\left(\frac{t}{T}\right)\to T\,\sinc^2(Tf)
+    &T\sinc^2(Tt)\to\tri\left(\displaystyle\frac{f}{T}\right)\\
+    &\cos\left(\displaystyle2\pi f_0t+\phi\right)=\frac{1}{2}\left[\delta(f-f_0)e^{i\phi}+\delta(f+f_0)e^{-i\phi}\right]
+    &\sin\left(\displaystyle2\pi f_0t+\phi\right)=\frac{1}{2}\left[\delta(f-f_0)e^{i\phi}-\delta(f+f_0)e^{-i\phi}\right]
+\end{align*}
+\begin{gather*}
+    e^{-\frac{t^2}{2\sigma^2}}\to\sqrt{2\pi}\sigma e^{-2\pi^2\sigma^2f^2}\\
+    e^{-\alpha t}u(t)\to\displaystyle\frac{1}{\alpha+2i\pi f}\\
+    e^{-\alpha|t|}\to\displaystyle\frac{2\alpha}{\alpha^2+4\pi^2 f^2}\\
+    u(t)\to\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}\\
+\end{gather*}
+
+\subsection*{Trasformata di Fourier Tempo Discreta}
+Definizione:
+\begin{align*}
+    &X(f)=\suminfk x[n]e^{-2i\pi fnT}
+    &x[n]=T\displaystyle\int_{-1/2T}^{1/2T}X(f)e^{2i\pi nfT}\df f\\
+\end{align*}
+Proprietà del Valor Medio:
+\begin{align*}
+    &X(0)=\suminf x[n]
+    &x[0]=T\displaystyle\int_{-1/2T}^{1/2T} X(f)\df f
+\end{align*}
+Traslazione in Frequenza, e Ritardo di Campioni:
+\begin{align*}
+    &x[n-n_0]\to X(f)e^{-2i\pi n_0fT}
+    &x[n]e^{2i\pi n_0fT}\to X(f-f_0)
+\end{align*}
+Proprietà della Convoluzione e della Correlazione: 
+\begin{gather*}
+    x[n]*y[n]\to X(f)\cdot Y(f)\\
+    x[n]\cdot y[n]\to X(f)\circledast Y(f)\\
+    X(f)\circledast Y(f)=T\displaystyle\int_{-1/2T}^{1/2T}X(\theta)Y(f-\theta)\df\theta\\
+    X(f)*Y(f)=\suminf X(f)\circledast Y(f-n/T)\\
+    R_{xy}[n]\to X(f)Y^*(f)\\
+    R_{xx}[n]\to|X(f)|^2
+\end{gather*}
+Energia in Frequenza:
+\begin{gather*}
+    E_x=T\displaystyle\int_{-1/2T}^{1/2T}|X(f)|^2\df f
+\end{gather*}
+Trasformate Notevoli:
+\begin{gather*}
+    \delta[n]\to 1\\
+    \displaystyle\sum_{n=0}^{N-1}\delta[n]\to e^{-i\pi(N-1)fT}\frac{\sin(\pi fNT)}{\sin(\pi fT)}\\
+    \delta[n]+\delta[n-1]\to2ie^{-i\pi fT}\cos(\pi fT)\\
+    \delta[n]-\delta[n-1]\to2ie^{-i\pi fT}\sin(\pi fT)\\
+\end{gather*}
+Campionamento di un Segnale $x(t)$ con Passo $T_c$:
+\begin{gather*}
+    x[n]=x(t)\cdot\pi(t)=x_c(t)=\suminf x(nT_c)\delta(t-nT_c)\\
+    X_c(f)=\displaystyle\frac{1}{T_c}\suminf X\left(f-\frac{n}{T_c}\right)
+\end{gather*}
+Frequenza Minima di Campionamento senza Aliasing:
+\begin{gather*}
+    f_{c\min}=2f_{X\max}\\
+    T_{c\max}=\displaystyle\frac{1}{2f_{X\max}}
+\end{gather*}
+Ricostruzione di un Segnale Campionato:
+\begin{gather*}
+    x'(t)=x_c(t)*h(t)\\
+    X'(f)=X_c(f)\cdot H(f)
+\end{gather*}
+
+\section{Fenomeni Aleatori}
+Distribuzione Cumulativa di Probabilità:
+\begin{gather*}
+    D_X(x)=\Pr(X\leq x)\\
+    D_X(x)=\suminfi \Pr(x=x_i)u(x-x_i)
+\end{gather*}
+Densità di Probabilità:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{\df D_X(x)}{\df x}\\
+    D_X(x)=\displaystyle\int_{-\infty}^xP_X(\overline{x})\df\overline{x}\\
+    P_X(x)=\suminfi \Pr(x=x_i)\delta(x-x_i)\\
+    \intinf P_X(x)\df x=1
+\end{gather*}
+Variabile Aleatoria Dipendente:
+\begin{gather*}
+    Y=f(X):\,D_Y(y)=D_X(f^{-1}(y))\\
+    Y=f(X):\,P_Y(y)=P_X(f^{-1}(y))\left|\displaystyle\frac{\df f^{-1}(y)}{\df y}\right|\\
+    P_Y(y)=\displaystyle\sum_{i=0}^NP_X(f_i^{-1}(y))\left|\frac{\df f_i^{-1}(y)}{\df y}\right|
+\end{gather*}
+Valore Medio:
+\begin{gather*}
+    \mu_x=E[x]=\intinf xP_X(x)\df x=\sum_{i=0}^Nx_iP_i
+\end{gather*}
+Valore Quadratico Medio:
+\begin{gather*}
+    \mu_x^{(2)}=E[n^2]
+\end{gather*}
+Varianza:
+\begin{gather*}
+    \sigma_x^2=E[(x-\mu_x)^2]=\mu_x^{(2)}-\mu_x^2
+\end{gather*}
+Deviazione Standard:
+\begin{gather*}
+    \sigma_x=E[x-\mu_x]
+\end{gather*}
+Funzione Caratteristica:
+\begin{gather*}
+    \mathbf{P}_x(f)=E[e^{-2i\pi fx}]\\
+    \left[-\displaystyle\frac{\df\mathbf{P}_x(f)}{\df f}\right]_{f=0}=\mu_x
+\end{gather*}
+Proprietà Funzione Valore Atteso:
+\begin{gather*}
+    E[y]=E[f(x)]\\
+    E[af(x)+bg(x)]=aE[f(x)]+bE[g(x)]
+\end{gather*}
+\subsection*{Statistica Uniforme su $[a,b]$}
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{|b-a|}\rect\left(\frac{x-\mu_x}{|b-a|}\right)\\ 
+    \mu_x=\displaystyle\frac{b+a}{2}\\
+    \mu_x^{(2)}=\displaystyle\frac{b^2+ab+a^2}{3}\\
+    \sigma_x^2=\displaystyle\frac{(b-a)^2}{12}\\
+    \mathbf{P}_x(f)=\sinc[(b-a)f]e^{-i\pi f(b-a)}
+\end{gather*}
+\subsection*{Statistica Esponenziale}
+\begin{gather*}
+    P_X(x)=\lambda e^{-\lambda t}u(t)\\
+    \mu_x=\displaystyle\frac{1}{\lambda}\\
+    \mu_x^{(2)}=\displaystyle\frac{2}{\lambda^2}\\
+    \sigma_x^2=\displaystyle\frac{1}{\lambda^2}\\
+    \mathbf{P}_x(f)=\displaystyle\frac{\lambda}{\lambda+2i\pi f}
+\end{gather*}
+\subsection*{Statistica Gaussiana}
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_x}e^{-\frac{(x-\mu_x)^2}{2\sigma_x^2}}\\
+    \mu_x=\mu_x\\
+    \sigma_x^2=\sigma_x^2\\
+    \mu_x^{(2)}=\sigma_x^2+\mu_x^2\\
+    \mathbf{P}_x(f)=e^{-\pi^2\sigma^2_xf^2}e^{-2i\pi f\mu_x}
+\end{gather*}
+\subsection*{Fenomeni Aleatori Bidimensionali}
+Distribuzione Cumulativa di Probabilità:
+\begin{gather*}
+    D_{X,Y}(x,y)=\Pr(X\leq x,Y\leq y)\\
+    \displaystyle\frac{\df^2}{\df x\df y}D_{X,Y}(x,y)=P_{X,Y}(x,y)
+\end{gather*}
+Densità di Probabilità Congiunta:
+\begin{gather*}
+    P_{X,Y}(x,y)=\displaystyle\sum_{i=0}^N\sum_{j=0}^MP_{i,j}\delta(x-x_i)\delta(y-y_j)\\
+    \iint_{\mathbb{R}^2}P_{X,Y}(x,y)\df x\df y=1
+\end{gather*}
+Densità di Probabilità Marginali:
+\begin{gather*}
+    \intinf P_{X,Y}(x,y)\df y=P_X(x)\\
+    \intinf P_{X,Y}(x,y)\df y=P_Y(y)
+\end{gather*}
+Valore Atteso Bidimensionale:
+\begin{gather*}
+    E[f(x,y)]=\iint_{\mathbb{R}^2}f(x,y)P_{X,Y}(x,y)\df x\df y
+\end{gather*}
+Momento Misto di Ordine $1,1$:
+\begin{gather*}
+    \mu_{xy}^{1,1}=E[xy]
+\end{gather*}
+Se le due variabili aleatorie $X$ e $Y$ sono indipendenti, la probabilità congiunta fattorizza:
+\begin{gather*}
+    P_{X,Y}(x,y)=P_X(x)\cdot P_Y(y)\\
+    E[xy]=\mu_x\mu_y
+\end{gather*}
+Covarianza:
+\begin{gather*}
+    \sigma_{x,y}=E[(x-\mu_x)\cdot(y-\mu_y)]=\mu_{x,y}^{1,1}-\mu_x\mu_y\
+\end{gather*}
+Fattore di Correlazione:
+\begin{gather*}
+    \rho_{x,y}=\displaystyle\frac{\sigma_{x,y}}{\sqrt{\sigma_x^2\sigma_y^2}}
+\end{gather*}
+\subsection*{Variabile Dipendente Bidimensionale}
+Data la variabile aleatoria dipendente $Z$:
+\begin{gather*}
+    Z=X+Y
+\end{gather*}
+Funzione Caratteristica:
+\begin{gather*}
+    \mathbf{P}_z(f)=\mathbf{P}_x(f)\cdot\mathbf{P}_y(f)
+\end{gather*}
+Densità di Probabilità:
+\begin{gather*}
+    P_Z(z)=P_X(x)*P_Y(y)
+\end{gather*}
+Valore Medio:
+\begin{gather*}
+    \mu_z=\mu_x+\mu_y
+\end{gather*}
+Valore Quadratico Medio:
+\begin{gather*}
+    \mu_z^{(2)}=\mu_x^{(2)}+2\mu_{x,y}^{1,1}+\mu_y^{(2)}
+\end{gather*}
+Varianza:
+\begin{gather*}
+    \sigma_z^2=\sigma_x^2+\sigma_y^2
+\end{gather*}
+
+\section{Processi Aleatori}
+Definizione di una variabile aleatoria $X$ discreta, dato un processo aleatorio, composto da $N$ possibili realizzazioni se discreto:
+\begin{gather*}
+    X_i:\left\{x_1(t_i),\cdots,x_N(t_i)\right\}
+\end{gather*}
+Oppure una variabile aleatoria continua, se sono possibili infinite realizzazioni di $x(t_i)$:
+\begin{gather*}
+    X_i:x(t_i)
+\end{gather*}
+\subsection*{Gerarchie del Primo Ordine}
+Valore Medio:
+\begin{gather*}
+    \mu_x=E[x(t)]
+\end{gather*}
+Valore Quadratico Medio:
+\begin{gather*}
+    \mu_x^{(2)}=E[x^2(t)]
+\end{gather*}
+Varianza:
+\begin{gather*}
+    \sigma_x^2=E[(x(t)-\mu_x)^2]
+\end{gather*}
+\subsection*{Gerarchie del Secondo Ordine}
+Funzione di (Auto)-Correlazione:
+\begin{gather*}
+    R_x(t_1,t_2)=E[x(t_1)x(t_2)]\\
+    R_x(t_1,t_1)=P_x
+\end{gather*}
+Funzione di Covarianza:
+\begin{gather*}
+    C_x(t_1,t_2)=E[(x(t_1)-\mu_x(t_1))\cdot(x(t_2)-\mu_x(t_2))]=R_x(t_1,t_2)-\mu_{x}(t_1)\mu_{x}(t_2)\\
+\end{gather*}
+Fattore di Correlazione:
+\begin{gather*}
+    \rho_x(t_1,t_2)=\displaystyle\frac{C_x(t_1,t_2)}{\sqrt{\sigma_x^2(t_1)\sigma_x^2(t_2)}}\\
+\end{gather*}
+\subsection*{Processo Stazionario}
+Le gerarchie del primo ordine sono indipendenti dal tempo: 
+\begin{gather*}
+    \mu_x(t)=\mu_x\\
+    \mu_x(t)^{(2)}=\mu_x^{(2)}\\
+    \sigma_x^2(t)=\sigma_x^2
+\end{gather*}
+Le gerarchie del secondo ordine dipendono dalla differenza tra i due istanti di tempo $t_1$ e $t_2$:
+\begin{gather*}
+    \tau=t_1-t_2\\
+    R_x(\tau)=E[x(t+\tau)x(t)]\\
+    R_x(\tau)=R_x(-\tau)\\
+    R_x(0)=P_x\\
+    C_x(\tau)=E[(x(t+\tau)-\mu_x(t+\tau))(x(t)-\mu_x(t))]=R_x(\tau)-\mu_x(t+\tau)\mu_x(t)\\
+    \rho_x(\tau)=\displaystyle\frac{C_x(\tau)}{\sqrt{\sigma_x^2(t+\tau)\sigma_x^2(t)}}
+\end{gather*}
+Densità Spettrale di Energia:
+\begin{gather*}
+    G_x(f)=\mathscr{F}\{R_x(\tau)\}\\
+    P_x=\intinf G_x(f)\df f
+\end{gather*}
+\subsection*{Processo Armonico}
+Definizione:
+\begin{gather*}
+    x(t)=\cos\left(\displaystyle\frac{2\pi t}{T}+\varphi\right)\\
+    P_{\Phi}(\varphi)=\displaystyle\frac{1}{2\varphi}\rect\left(\frac{\varphi-\pi}{2\pi}\right)
+\end{gather*}
+Valore Medio:
+\begin{gather*}
+    \mu_x=0
+\end{gather*}
+Valore Quadratico Medio:
+\begin{gather*}
+    \mu_x^{(2)}=\displaystyle\frac{1}{2}
+\end{gather*}
+Varianza:
+\begin{gather*}
+    \sigma_x^2=\displaystyle\frac{1}{2}
+\end{gather*}
+Correlazione:
+\begin{gather*}
+    R_x(\tau)=\displaystyle\frac{1}{2}\cos\left(\frac{2\pi\tau}{T}\right)
+\end{gather*}
+Covarianza:
+\begin{gather*}
+    C_x(\tau)=\displaystyle\frac{1}{2}\cos\left(\frac{2\pi\tau}{T}\right)
+\end{gather*}
+Densità Spettrale di Potenza:
+\begin{gather*}
+    G_x(f)=\displaystyle\frac{1}{4}\delta\left(f-\frac{1}{T}\right)+\frac{1}{4}\delta\left(f+\frac{1}{T}\right)
+\end{gather*}
+\subsection*{Processo Ergotico}
+Processo descritto da un'unica realizzazione, le caratteristiche del processo dipendono dalla stessa realizzazione traslata nel tempo:
+\begin{gather*}
+    E[f(x(t))]=\intinf f(x(t))P_X(x)\df x=\lim_{T\to+\infty}\intp x(t)\df t\\
+    E[x(t)]=\displaystyle\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}x(t)\df t=\mu_x\\
+    E[x^2(t)]=\displaystyle\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}x^2(t)\df t=P_x
+\end{gather*}
+\subsection*{Processi Dipendenti}
+I parametri si calcolano analogamente ai fenomeni aleatori bidimensionali, considerando i processi $x(t)$ e $y(t)$ indipendenti tra di loro:
+\begin{gather*}
+    z(t)=ax(t)+by(t)
+\end{gather*}
+Gerarchie del Primo Ordine:
+\begin{gather*}
+    \mu_z=a\mu_x+b\mu_y\\
+    \mu_z^{(2)}=a^2\mu_x^{(2)}+2ab\mu_x\mu_y+b^2\mu_y^{(2)}\\   
+    P_z=a^2P_x+2ab\mu_x\mu_y+b^2P_y\\
+    \sigma_z^2=a^2\sigma_x^2+b^2\sigma_y^2
+\end{gather*}
+Gerarchie del Secondo Ordine:
+\begin{gather*}
+    R_z(\tau)=a^2R_x(\tau)+2ab\mu_x\mu_y+b^2R_y(\tau)\\
+    C_z(\tau)=a^2C_x(\tau)+b^2C_y(\tau)\\
+    G_z(f)=a^2G_x(f)+2ab\mu_x\mu_y\delta(f)+b^2G_y(f)\\
+    \rho_x(\tau)=\displaystyle\frac{a^2C_x(\tau)+b^2C_y(\tau)}{\sqrt{a^2\sigma_x^2+b^2\sigma_y^2}}
+\end{gather*}
+\subsection*{Rumore}
+Definito come rumore additivo gaussiano bianco. Ha una statistica gaussiana e valor medio nullo:
+\begin{gather*}
+    P_N(n)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_n}e^{-\frac{n^2}{2\sigma_n^2}}\\
+    \mu_n=0\\
+    \sigma_n^2=P_n
+\end{gather*}
+Poiché è un segnale bianco, ha densità spettrale di energia costante, su banda illimitata:
+\begin{gather*}
+    G_n(f)=k\\
+    P_n=+\infty\\
+    R_n(\tau)=k\delta(\tau)
+\end{gather*}
+Oppure limitata in banda:
+\begin{gather*}
+    G_n(f)=\frac{k}{2B}\rect\left(\displaystyle\frac{f}{2B}\right)=\frac{P_n}{2B}\rect\left(\displaystyle\frac{f}{2B}\right)\\
+    P_n=k\\
+    R_n(\tau)=k\sinc\left(2B\tau\right)=P_n\sinc(2B\tau)
+\end{gather*}
+\subsection*{Transito Attraverso un Sistema}
+Dato un filtro di risposta impulsiva $h(t)$, si considera l'uscita $y(t)$, con un processo aleatorio $x(t)$ in entrata:
+\begin{gather*}
+    y(t)=h(t)*x(t)
+\end{gather*}
+Valore Medio:
+\begin{gather*}
+    \mu_y=\mu_xH(0)
+\end{gather*}
+Correlazione:
+\begin{gather*}
+    R_y(\tau)=h(-t)*h(t)*R_X(\tau)
+\end{gather*}
+Densità Spettrale di Energia:
+\begin{gather*}
+    G_y(f)=|H(f)|^2G_X(f)
+\end{gather*}
+Potenza:
+\begin{gather*}
+    P_y=R_y(0)=\intinf G_y(f)\df f
+\end{gather*}
+
+\end{document}

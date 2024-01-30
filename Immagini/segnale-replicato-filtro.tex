@@ -14,14 +14,14 @@
     \draw[ultra thick]plot[smooth, domain=3.5:5.013](\x,{1-0.25*e^(2.7*(\x-4.5))});
     \draw[ultra thick]plot[smooth, domain=1.987:3.5](\x,{1-0.25*e^(-2.7*(\x-2.5))});
 
-    \draw[-,ultra thick, blue](1.75,0)--(1.75,1)--(-1.75,1)node[above, black]{$H(f)$}--(-1.75,0);
+    \draw[-,ultra thick, blue](1.55,0)--(1.55,1.01)--(-1.55,1.01)node[above, black]{$H(f)$}--(-1.55,0);
 
-    \filldraw[black](1.75,0)node[below]{$\displaystyle\frac{1}{2T}$}circle(0.5pt);
-    \filldraw[black](-1.75,0)node[below]{$\displaystyle-\frac{1}{2T}$}circle(0.5pt);
-    \filldraw[black](3.5,0)node[below]{$\displaystyle\frac{1}{T}$}circle(0.5pt);
-    \filldraw[black](-3.5,0)node[below]{$-\displaystyle\frac{1}{T}$}circle(0.5pt);
-    \filldraw[black](5.25,0)node[below]{$\displaystyle\frac{3}{2T}$}circle(0.5pt);
-    \filldraw[black](-5.25,0)node[below]{$\displaystyle-\frac{3}{2T}$}circle(0.5pt);
+    \filldraw[black](1.75,0)node[below]{$\displaystyle\frac{1}{2T_c}$}circle(0.5pt);
+    \filldraw[black](-1.75,0)node[below]{$\displaystyle-\frac{1}{2T_c}$}circle(0.5pt);
+    \filldraw[black](3.5,0)node[below]{$\displaystyle\frac{1}{T_c}$}circle(0.5pt);
+    \filldraw[black](-3.5,0)node[below]{$-\displaystyle\frac{1}{T_c}$}circle(0.5pt);
+    \filldraw[black](5.25,0)node[below]{$\displaystyle\frac{3}{2T_c}$}circle(0.5pt);
+    \filldraw[black](-5.25,0)node[below]{$\displaystyle-\frac{3}{2T_c}$}circle(0.5pt);
     \filldraw[black](0,0)node[below right]{$0$}circle(0.5pt);
 \end{tikzpicture}
 \end{document}

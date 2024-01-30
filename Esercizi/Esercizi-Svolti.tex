@@ -16,6 +16,7 @@
 \usepackage{pgfplots}
 \usepackage{fancyhdr}
 \usepackage{romanbarpagenumber}
+\usepackage{circuitikz}
 \pgfplotsset{compat=1.16}
 
 \setlength{\headheight}{12.0pt}
@@ -35,41 +36,119 @@
 
 
 \renewcommand{\contentsname}{Indice}
+\newcommand{\intinf}{\displaystyle\int_{-\infty}^{+\infty}}
 \newcommand{\rect}{\mathrm{rect}}
 \newcommand{\sinc}{\mathrm{sinc}}
 \newcommand{\tri}{\mathrm{tri}}
 \newcommand{\df}{\mathrm{d}}
 
-\title{Esercizi Svolti di Fondamenti di Telecomunicazioni}
-\author{Giacomo Sturm}
-\date{AA: 2023/2024 - Ing. Informatica}
+\fancypagestyle{link}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{Sorgente del file LaTeX disponibile al seguente link: \url{https://github.com/00Darxk/Fondamenti-di-Telecomunicazioni}}}
 
 \begin{document}
 
-\pagenumbering{Roman}
-
-\pagestyle{fancy}
-\fancyhead{}\fancyfoot{}
-\fancyhead[C]{Fondamenti di Telecomunicazioni - Giacomo Sturm}
-\fancyfoot[C]{\thepage}
+\title{%
+    \textbf{Fondamenti di Telecomunicazioni}  \\ 
+    \large Esercizi Svolti di Fondamenti di Telecomunicazioni\\
+    \textit{Anno Accademico: 2023/24}}
+\author{\textit{Giacomo Sturm}}
+\date{\textit{Dipartimento di Ingegneria Civile, Informatica e delle Tecnologie Aeronautiche \\
+Università degli Studi ``Roma Tre"}}
 
 \maketitle
+\thispagestyle{link}
 
-\vspace{10mm}
-
-\begin{center}
-    Sorgente del file LaTeX disponibile su \url{https://github.com/00Darxk/Fondamenti-di-Telecomunicazioni}
-\end{center}
 
 \clearpage
 
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{\textit{Fondamenti di Telecomunicazioni - Università degli Studi ``Roma Tre"}}
+\fancyfoot[C]{\thepage}
+
+\pagenumbering{Roman}
 \tableofcontents
 
 \clearpage
 
 \pagenumbering{arabic}
 
-\section{Convoluzioni, Correlazioni e Sistemi Ingresso-Uscita}
+\section{Analisi nel Tempo}
+
+\subsection{Energia e Potenza}
+
+\subsubsection*{Esercizio 1}
+
+Si determina l'energia di una gaussiana di ampiezza $A$:
+\begin{gather*}
+    E_x=\lim_{\Delta t\to\infty}\displaystyle\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}A^2e^{-2\alpha t^2}\df t=A^2\lim_{\Delta t\to\infty}\displaystyle\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}e^{-2\alpha t^2}\df t
+\end{gather*}
+Si considera il cambio di variabile $\tau=\sqrt{2\alpha}t$:
+\begin{equation*}
+    E_x=A^2\lim_{\Delta t\to\infty}\displaystyle\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}\frac{e^{-\tau^2}}{\sqrt{2\alpha}}\df\tau=\frac{A^2}{\sqrt{2\alpha}}\int_{-\infty}^{+\infty}e^{-\tau^2}\df\tau
+\end{equation*}
+L'integrale ottenuto è l'integrale di Gauss, il suo valore risulta quindi essere: 
+\begin{equation*}
+    \displaystyle\int_{\mathbb{R}}e^{-t^2}\df t=\sqrt\pi
+\end{equation*}
+Per cui l'energia di una gaussiana è:
+\begin{equation}
+    E_x=A^2\displaystyle\sqrt{\frac{\pi}{2\alpha}}
+\end{equation}
+
+\subsubsection*{Esercizio 2}
+
+Si determina l'energia e la potenza di un esponenziale complesso. Il segnale ha un modulo unitario $|x(t)|=1$, per cui la sua energia risultante è:
+\begin{equation}
+    E_x=\lim_{\Delta t\to\infty}\displaystyle\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}\df t=\lim_{\Delta t\to\infty}\left(\frac{\Delta t}{2}+\frac{\Delta t}{2}\right)=\infty
+\end{equation}
+Per cui l'esponenziale complesso non è un segnale di energia. La potenza risulta essere:
+\begin{equation}
+    P_x=\lim_{\Delta t\to\infty}\displaystyle\left(\frac{1}{\Delta t}\int_{-\frac{\Delta t}{2}}^{\frac{\Delta t}{2}}\df t\right)=\lim_{\Delta t\to\infty}\left(\frac{1}{\Delta t}\cdot\Delta t\right)=1
+\end{equation}
+L'esponenziale complesso è quindi un segnale di potenza. 
+
+\subsubsection*{Esercizio 3}
+
+Si determina l'energia di un esponenziale unilatero:
+\begin{equation}
+    E_x=\displaystyle\int_{-\infty}^{+\infty}\left[e^{-\alpha t}u(t)\right]^2\df t=\int_0^{+\infty}e^{-2\alpha t}\df t=-\frac{1}{2\alpha}\left(\cancelto{0}{e^{-\infty}}-\cancelto{1}{e^{0}}\right)=\frac{1}{2\alpha}
+\end{equation}
+Per cui questo segnale non è né di energia né di potenza. 
+
+\subsubsection*{Esercizio 4}
+
+Si determina la potenza del segnale coseno, di ampiezza $A$ e frequenza naturale $f_0$:
+\begin{gather*}
+    x(t)=A\cos\left(2\pi f_0t\right)\\
+    P_x=\displaystyle A^2f_0\int_{-\frac{1}{2f_0}}^{\frac{1}{2f_0}}\cos^2(2\pi f_0 t)\df t
+\end{gather*}
+Per esprimere il quadrato del coseno, si considera la formula di bisezione del coseno:
+\begin{gather*}
+    \cos(2x)=2\cos^2(x)-1\\
+    \cos^2(x)=\displaystyle\frac{\cos(2x)+1}{2}\\
+    A^2\cos^2(2\pi f_0t)=\displaystyle\frac{A^2}{2}(\cos(4\pi f_0t)+1)
+\end{gather*}
+Si può esprimere inoltre mediante la notazione complessa delle funzioni trigonometriche:
+\begin{gather*}
+    A\cos(2\pi f_0t)=\displaystyle\frac{A}{2}(e^{2i\pi f_0t}+e^{-2i\pi f_0t})\\
+    |x+y|^2\,\,x,y\in\mathbb{C}\\
+    (x+y)\cdot(x+y)^*=(x+y)\cdot(x^*+y^*)\\
+    xx^*+xy^*+yx^*+yy^*=|x|^2+|y|^2+xy^*+yx^*\\
+    xy^*+yx^*=(a_x+ib_x)\cdot(a_y-ib_y)+(a_x-ib_x)\cdot(a_y+ib_y)=2(a_xa_y+b_xb_y)=2\Re\{x^*y\}\\
+    |x|^2+|y|^2+2\Re\{|x|e^{-i\varphi_x}+|y|e^{i\varphi_y}\}\\
+    |x|^2+|y|^2+2|x||y|\cos(|\varphi_y-\varphi_x|)\\
+    \Bigg|\displaystyle\frac{A}{2}\left(e^{2i\pi f_0t}+e^{-2i\pi f_0t}\right)\Bigg|^2=\frac{A^2}{4}\left(1+1+2\Re\Bigl\{e^{2i\pi f_0t}\cdot\left(e^{-2i\pi f_0t}\right)^*\Bigr\}\right)\\
+    A^2\cos^2(2\pi f_0t)=\displaystyle\frac{A^2}{2}(1+\cos(4\pi f_0t))
+\end{gather*}
+Considerando questa sostituzione, l'integrale diventa:
+\begin{equation*}
+    P_x=\displaystyle\frac{A^2f_0}{2}\int_{-\frac{1}{2f_0}}^{\frac{1}{2f_0}}(\cancelto{0}{\cos(4\pi f_0 t)}+1)\df t=\frac{A^2f_0}{2}\left(\frac{1}{2f_0}+\frac{1}{2f_0}\right)=\frac{A^2}{2}
+\end{equation*}
+L'integrale su un periodo del coseno è nullo, poiché è una funzione pari, per cui la componente $\cos(4\pi f_0 t)$ fornisce un contributo nullo. 
+
+\subsection{Convoluzioni, Correlazioni e Sistemi Ingresso-Uscita}
+
+\subsubsection*{Esercizio 5}
 
 Calcolare la convoluzione tra un esponenziale unilatero ed un gradino, 
 Si considera $\alpha\in\mathbb{R}^+$. 
@@ -126,6 +205,8 @@ Questo segnale tende asintoticamente a $1/\alpha$ per $t\to+\infty$.
     \end{tikzpicture}
 \end{center}
 
+\subsubsection*{Esercizio 6}
+
 Calcolare l'autoconvoluzione di un esponenziale unilatero
 \begin{equation*}
     z(t)=e^{-\alpha t}u(t)*e^{-\alpha t}u(t)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha\tau}u(\tau)e^{-\alpha(t-\tau)}u(t-\tau)\df\tau
@@ -174,6 +255,8 @@ In forma analitica risulta:
         \draw[-,very thick]plot[smooth, domain=2.5:4](\x,{2*(\x-2.5)*e^(-2*(\x-2.5))-1});
     \end{tikzpicture}
 \end{center}
+
+\subsubsection*{Esercizio 7}
 
 Calcolare la convoluzione tra due finestre. 
 Si considerano due casi, dove le due finestra hanno base uguale, ed un caso dove hanno base differente. Si considera il caso $T_1=T_2$:
@@ -285,7 +368,7 @@ Il grafico di questa convoluzione rappresenta un trapezio di altezza $T_2$, base
 di base uguali rappresenta un caso speciale di questo trapezio, avente base minore nulla $T-T=0$ e base doppia rispetto alla finestra $T+T=2T$, ciò equivale ad un triangolo 
 di altezza $T$ e base $2T$. 
 
-
+\subsubsection*{Esercizio 8}
 
 Calcolare la convoluzione tra i segnali $x$ e $y$:
 \begin{gather*}
@@ -307,6 +390,7 @@ Calcolare la convoluzione tra i segnali $x$ e $y$:
     \end{cases}
 \end{gather}
 
+\subsubsection*{Esercizio 9}
 
 Calcolare la convoluzione tra queste due finestre:
 \begin{gather*}
@@ -330,6 +414,7 @@ Calcolare la convoluzione tra queste due finestre:
     \end{cases}
 \end{gather}
 
+\subsubsection*{Esercizio 10}
 
 Calcolare la correlazione tra due finestre:
 \begin{equation*}
@@ -359,7 +444,6 @@ correlazione risulta nulla.
     \end{cases}
 \end{equation}
 
-
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[->,very thick](-1,0)--(1.5,0)node[above]{$\tau$};
@@ -386,6 +470,8 @@ correlazione risulta nulla.
     \end{tikzpicture}
 \end{center}
 
+\subsubsection*{Esercizio 11}
+
 Dato il sistema definito dall'equazione $y$:
 \begin{gather*}
     y(t)=x(t)+3u(t-1)
@@ -402,6 +488,7 @@ Si dimostra che non è tempo invariante:
 \end{gather*}
 Sicuramente non è un filtro. Mentre è causale, poiché il gradino è ritardato, e quindi l'uscita non dipende da valori futuri.
 
+\subsubsection*{Esercizio 12}
 
 Calcolare l'uscita di un filtro discreto di risposta impulsiva $h[n]$, con un entrata parametrizzata $x[n]$:
 \begin{gather*}
@@ -430,11 +517,48 @@ Calcolare l'uscita di un filtro discreto di risposta impulsiva $h[n]$, con un en
     y[n]=\displaystyle\frac{1}{4}\cos(\pi (n+1))+\frac{1}{2}\cos(\pi n)+\frac{1}{4}\cos(\pi(n-1))=0
 \end{equation}
 
+\subsubsection*{Esercizio 13}
+
+Si considera un generico schema di un circuito sommatore, un tipo di sistema controllore a feedforward. Calcolarne l'uscita:
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    \node[sum](+)at(2,0){$+$};
+        \draw[->,ultra thick](0,0)node[above]{$x[n]$}--(+.180);
+        \filldraw[black](0.5,0)circle(1pt);
+
+        \node[square](t)at(1,-0.5){$T$};
+        \draw[->,ultra thick](0.5,0)--(0.5,-0.5)--(t.180);
+
+        \node[sum](x)at(1.5,-0.5){$\times$};
+        \draw[->,ultra thick](t.0)--(x.180);
+        \draw[->,ultra thick](1.5,-1)node[right]{$a$}--(x.270);
+
+        \draw[->,ultra thick](x.0)--(2,-0.5)--(+.270);
+        \draw[->,ultra thick](+.0)--(2.5,0)node[above]{$y[n]$};
+\end{tikzpicture}
+\end{center}
+Per ottenere l'uscita si somma il segnale originario allo stesso segnale ritardato di un campione e moltiplicato per un fattore $a$:
+\begin{gather}
+    y[n]=x[n]+ax[n-1]\\
+    h[n]=\delta[n]+a\delta[n-1]
+\end{gather}
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    \node[block](s){$h[n]$};
+        \draw[->,ultra thick](-1,0)--(s.180)node[above left]{$x[n]$};
+        \draw[->,ultra thick](s.0)node[above right]{$y[n]$}--(1,0);
+\end{tikzpicture}
+\end{center}
+
 \clearpage
 
-\section{Serie di Fourier}
+\section{Analisi in Frequenza}
 
-Dato il segnale:
+\subsection{Serie di Fourier}
+
+\subsubsection*{Esercizio 14}
+
+Dato il segnale $x(t)$, calcolare i suoi coefficienti di Fourier:
 \begin{equation*}
     x(t)=\left|\cos\left(\displaystyle\frac{2\pi t}{T}\right)\right|
 \end{equation*}
@@ -469,7 +593,9 @@ I due seni assumono sempre valori discordi e unitari, quindi si possono esprimer
     c_k=\displaystyle\frac{1}{\pi}\frac{(-1)^k}{2k+1}-\frac{1}{\pi}\frac{(-1)^k}{2k-1}=-\frac{2}{\pi}\frac{1}{4k^2-1}(-1)^k
 \end{gather}
 
-Dato un segnale periodico:
+\subsubsection*{Esercizio 15}
+
+Dato un segnale periodico $x(t)$ calcolare i suoi coefficienti di Fourier:
 \begin{gather*}
     x(t)=2\cos\displaystyle\left(\frac{2\pi t}{T}+\frac{\pi}{4}\right)+6\sin\left(\frac{2\pi t}{3T}\right)
 \end{gather*}
@@ -491,8 +617,9 @@ Per confronto diretto si ottengono i seguenti coefficienti:
     \end{cases}
 \end{gather}
 
+\subsubsection*{Esercizio 16}
 
-Dato un segnale:
+Dato un segnale $x(t)$, calcolare i suoi coefficienti di Fourier:
 \begin{gather*}
     x(t)=\sin\displaystyle(2\pi t)+\cos(4\pi t+\phi)
 \end{gather*}
@@ -511,7 +638,9 @@ Questo segnale ha un periodo $T=1$. Per confronto diretto si ottengono dei coeff
     \end{cases}
 \end{gather}
 
-Dato il segnale:
+\subsubsection*{Esercizio 17}
+
+Dato il segnale $x(t)$, calcolare i suoi coefficienti di Fourier:
 \begin{gather*}
     x(t)=\sin^2\displaystyle\left(\frac{2\pi t}{T}+\phi\right)=\frac{1}{2}\left(1-\cos\left(\frac{4\pi t}{T}+2\phi\right)\right)
 \end{gather*}
@@ -528,8 +657,74 @@ Questo segnale ha periodo $T/2$. Per confronto diretto si ottengono i coefficien
     \end{cases}
 \end{gather}
 
+\subsubsection*{Esercizio 18}
 
-Dato il segnale dente di sega:
+Data un'onda quadra $z(t)$, che assume valori di $1$ e $-1$ periodicamente, con periodo $T$, calcolare i suoi coefficienti di Fourier. 
+Può essere espressa come una differenza tra due onde quadre $x(t)$ e $y(t)$ in 
+opposizione di fase che assumono valori di $1$ e $0$ con periodo $T$. Una delle quali ha una base di lunghezza $\tau$, mentre l'altra lunghezza di $T-\tau$ e traslata di un 
+semi-periodo $T/2$:
+\begin{equation*}
+    z(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\left[\rect\left(\frac{t-kT}{\tau}\right)-\rect\left(\frac{t-nT-\frac{T}{2}}{T-\tau}\right)\right]
+\end{equation*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
+            \draw[->](0,-1)--(0,1)node[right]{$z(t)$};
+            \draw[-](-2.5,0.5)--(-2,0.5)--(-2,-0.5)--(-0.5,-0.5)--(-0.5,0.5)--(0.5,0.5)--(0.5,-0.5)--(2,-0.5)--(2,0.5)--(2.5,0.5);
+            \node[above right]at(0,0.5){$1$};
+            \node[below right]at(0,-0.5){$-1$};
+    \end{tikzpicture}
+\end{center}
+Si calcolano ora i coefficienti dell'espansione di Fourier:
+\begin{gather*}
+    c_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\left[\rect\left(\frac{t-kT}{\tau}\right)-\rect\left(\frac{t-kT-\frac{T}{2}}{T-\tau}\right)\right]\df t\\
+    \displaystyle\frac{1}{T}\int_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\rect\left(\frac{t-kT}{\tau}\right)\df t-\frac{1}{T}\int_{-\frac{T-\tau}{2}}^{\frac{T-\tau}{2}}\rect\left(\frac{t-kT-\frac{T}{2}}{T-\tau}\right)\df t\\
+    \displaystyle\frac{e^{-i\pi k\frac{\tau}{T}}-e^{i\pi k\frac{\tau}{T}}}{-2i}\frac{1}{\pi k}\frac{\tau}{T}-\frac{e^{-i2\pi k\frac{T-\tau/2}{T}}-e^{i2\pi k\frac{T-\tau/2}{T}}}{-2i}\frac{1}{\pi k}\frac{\tau}{T}
+\end{gather*}
+Per $k=0$ si ottiene una forma indeterminata, per cui bisogna risolvere l'integrale considerando il valor medio assunto dal segnale nell'intervallo $\left[-T/2,T/2\right]$. 
+\begin{gather*}
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{k\tau}{T}\right)-\frac{e^{i\pi k\frac{\tau}{T}}-e^{-i\pi k\frac{\tau}{T}}}{-2i}\frac{1}{\pi k}\\
+    c_k=\displaystyle\frac{2\tau}{T}\sinc\left(\frac{k\tau}{T}\right)
+\end{gather*}
+
+
+Il segnale originale può essere espresso come un'onda quadra doppia, di stesso periodo $T$ e base $\tau$, e traslata verso il basso:
+\begin{equation*}
+    z(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\left[2\,\rect\left(\frac{t-kT}{\tau}\right)\right]-1=2x(t)-1
+\end{equation*}
+In questo modo si effettuano meno calcoli per determinare i coefficienti di Fourier, usufruendo della proprietà di linearità bisogna tenere conto che il fattore costante $-1$, 
+assume un valore non nullo solo per $k=0$. Si considerano i coefficienti del segnale $x$ come $c_k$, mentre del segnale costante $d_k$, per cui in questo caso i coefficienti 
+del segnale $z$ si esprimono come: 
+\begin{equation}
+    a_k=\begin{cases}
+        2c_k+d_k &k=0\\
+        2c_k&k\neq0
+    \end{cases}=\begin{cases}
+        \displaystyle\frac{\strut 2\tau}{\strut T}-1&k=0\\
+        \displaystyle\frac{\strut 2\tau}{\strut T}\sinc\left(\frac{ k\tau}{ T}\right)&k\neq0
+    \end{cases}
+\end{equation}
+
+\subsubsection*{Esercizio 19}
+
+Si considera un'onda quadra di periodo $T$ traslata di un fattore $\tau$, corrispondente alla lunghezza della sua base. Dati i coefficienti di un onda quadra non traslata 
+$c_k$, calcolare i suoi coefficienti di Fourier. 
+
+I coefficienti $d_k$ del segnale traslato si possono esprimere direttamente come:
+\begin{equation}
+    d_k=\displaystyle\frac{\tau}{T}\sinc\left(\frac{k\tau}{T}\right)e^{-i\frac{2\pi k\tau}{T}}
+\end{equation}
+
+In caso il periodo sia esattamente il doppio della base $T=2\tau$:
+\begin{equation}
+    d_k=\displaystyle\frac{1}{2}\sinc\left(\frac{k}{2}\right)e^{-i\pi k}=\frac{1}{2}\frac{e^{i\frac{\pi k}{2}}-e^{-i\frac{\pi k}{2}}}{i\pi k}e^{-i\pi k}=
+    \frac{e^{-i\frac{\pi k}{2}}-e^{-i\frac{3\pi k}{2}}}{2i\pi k}
+\end{equation}
+Per cui i coefficienti dell'onda quadra di armoniche di ordine pari risultano nulli. 
+
+\subsubsection*{Esercizio 20}
+
+Dato il segnale dente di sega, calcolare i suoi coefficienti di Fourier:
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[->](-2.5,0)--(2.5,0)node[above]{$t$};
@@ -557,7 +752,9 @@ Il coefficiente $c_0$ è nullo, poiché rappresenta il valor medio del periodo. 
     c_0=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}t\,\df t=0
 \end{equation}
 
-Dato il seguente segnale dente di sega:
+\subsubsection*{Esercizio 21}
+
+Dato il seguente segnale dente di sega, calcolare i suoi coefficienti di Fourier:
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[->](-3,-0.5)--(2,-0.5)node[above]{$t$};
@@ -580,9 +777,9 @@ del segnale $y$:
     \end{cases}
 \end{gather}
 
+\subsubsection*{Esercizio 22}
 
-
-Dato un segnale treno di triangoli:
+Dato un segnale treno di triangoli $x(t)$, calcolare i suoi coefficienti di Fourier:
 \begin{equation*}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\tri \left(\frac{2(t-kT)}{\tau}\right)
 \end{equation*}
@@ -604,7 +801,7 @@ Si calcolano i coefficienti tramite la definizione. Poiché è presente un solo 
 Il primo integrale corrisponde all'integrale ai coefficienti di una finestra, ed è stato già precedentemente calcolato, per cui si omette la risoluzione. Si considera la 
 sostituzione $t=-t'$ nel secondo integrale:
 \begin{gather*}
-    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int_{-\frac{-\tau}{2}}^{0}-\frac{2(-t)}{\tau}e^{-i\frac{2\pi k(-t)}{T}}d(-t)+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)\\
+    \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int_{-\frac{-\tau}{2}}^{0}-\frac{2(-t)}{\tau}e^{-i\frac{2\pi k(-t)}{T}}\df(-t)+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)\\
     \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(-\int_{\frac{\tau}{2}}^{0}\frac{2t}{\tau}e^{i\frac{2\pi kt}{T}}\df t+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)\\
     \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\left(\int^{\frac{\tau}{2}}_{0}\frac{2t}{\tau}e^{i\frac{2\pi kt}{T}}\df t+\int_{0}^{\frac{\tau}{2}}\frac{2t}{\tau}e^{-i\frac{2\pi kt}{T}}\df t\right)\\
     \displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)-\frac{1}{T}\int^{\frac{\tau}{2}}_{0}\frac{4t}{\tau}\frac{e^{i\frac{2\pi kt}{T}}+e^{-i\frac{2\pi kt}{T}}}{2}\df t\\
@@ -627,10 +824,39 @@ Quest'ultimo integrale così ottenuto si risolve mediante integrazione per parti
 \end{gather}
 I coefficienti di un treno di triangoli risultano essere dei seni cardinali quadrati. 
 
-\clearpage
+\subsection{Trasformata di Fourier}
 
-\section{Trasformata di Fourier}
-Calcolare l'energia del dato segnale:
+\subsubsection*{Esercizio 23}
+
+Data una gaussiana traslata nel tempo, calcolare la sua trasformata: 
+\begin{gather*}
+    x(t)=e^{-\alpha(t-t_0)^2}
+\end{gather*}
+\begin{equation}
+    X(f)=\displaystyle\sqrt{\frac{\pi}{\alpha}}e^{-\left(\frac{\pi^2f^2}{\alpha}+2i\pi ft_0\right)}
+\end{equation}
+
+\subsubsection*{Esercizio 24}
+
+Calcolare l'antitrasformata del segnale $X_1(f)$: 
+\begin{gather*}
+    X_1(f)=\displaystyle\frac{1}{(\alpha+2i\pi f)^2}
+\end{gather*}
+Per ottenere la trasformata del segnale, si considera il duale della proprietà della derivazione della trasformata. Si considera il segnale esponenziale unilatero e la sua 
+trasformata:
+\begin{gather*}
+    x(t)=e^{-\alpha t}u(t)\\
+    X(f)=\displaystyle\frac{1}{\alpha+2i\pi f}\\
+    \displaystyle\frac{\df}{\df f}X(f)=\frac{-2i\pi}{(\alpha+2i\pi f)^2}\\
+    X_1(f)=\displaystyle-\frac{1}{2i\pi}\frac{\df}{\df f}X(f)\to-\frac{1}{2i\pi}(-2i\pi tx(t))=te^{-\alpha t}u(t)
+\end{gather*}
+\begin{equation}
+    x_1(t)=te^{-\alpha t}u(t)
+\end{equation}
+
+\subsubsection*{Esercizio 25}
+
+Calcolare l'energia segnale $x(t)$:
 \begin{gather*}
     x(t)=\displaystyle\frac{\sin(\pi t)}{\pi t}\cos(2\pi \alpha t)=\frac{1}{2}\sinc(t)(e^{2i\pi\alpha t}+e^{-2i\pi\alpha t})\\
 \end{gather*}
@@ -643,8 +869,8 @@ La sua energia si calcola come:
     E_x=\displaystyle\int_{-\infty}^{+\infty}|X(f)|^2\df f\\
     \displaystyle\frac{1}{4}\left(\int_{-\infty}^{+\infty}\left[\rect(f+\alpha)+\rect(f-\alpha)\right]^2\df f\right)\\
     E_x=\begin{cases}
-        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{-\alpha+1/2}\df f+\frac{1}{4}\int_{\alpha-1/2}^{\alpha+1/2}df& \alpha\geq1/2\\
-        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{\alpha-1/2}\df f+\frac{1}{2}\int_{\alpha-1/2}^{-\alpha+1/2}df+\frac{1}{4}\int_{-\alpha+1/2}^{\alpha+1/2}df&\alpha<1/2
+        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{-\alpha+1/2}\df f+\frac{1}{4}\int_{\alpha-1/2}^{\alpha+1/2}\df f& \alpha\geq1/2\\
+        \displaystyle\frac{1}{4}\int_{-\alpha-1/2}^{\alpha-1/2}\df f+\frac{1}{2}\int_{\alpha-1/2}^{-\alpha+1/2}\df f+\frac{1}{4}\int_{-\alpha+1/2}^{\alpha+1/2}\df f&\alpha<1/2
     \end{cases}
 \end{gather*}
 \begin{gather}
@@ -654,10 +880,14 @@ La sua energia si calcola come:
     \end{cases}
 \end{gather}
 
+\subsubsection*{Esercizio 26}
 
-Calcolare la trasformata del segnale $x$, tramite la proprietà di ribaltamento e di scala: 
+Calcolare la trasformata del segnale $x(t)$: 
 \begin{gather*}
-    x(t)=e^{3t}u(-t)\\
+    x(t)=e^{3t}u(-t)
+\end{gather*}
+Tramite la proprietà di ribaltamento e di scala: 
+\begin{gather*}
     x_1(t)=e^{-3t}u(t)\\
     X_1(f)=X(-f)=\displaystyle\frac{1}{3+2i\pi f}
 \end{gather*}
@@ -665,10 +895,14 @@ Calcolare la trasformata del segnale $x$, tramite la proprietà di ribaltamento 
     X(f)=\displaystyle\frac{1}{3-2i\pi f}
 \end{gather}
 
+\subsubsection*{Esercizio 27}
 
-Calcolare la trasformata del segnale $x$, per la proprietà della traslazione del tempo:
+Calcolare la trasformata del segnale $x(t)$: 
 \begin{gather*}
-    x(t)=e^{-2t+4}u(t-2)=e^{-2*(t-2)}u(t-2)\\
+    x(t)=e^{-2t+4}u(t-2)=e^{-2*(t-2)}u(t-2)
+\end{gather*}
+Per la proprietà della traslazione nel tempo:
+\begin{gather*}
     x_1(t)=e^{-2t}u(t)\\
     X_1(f)=\displaystyle\frac{1}{2+2i\pi f}
 \end{gather*}
@@ -676,9 +910,14 @@ Calcolare la trasformata del segnale $x$, per la proprietà della traslazione de
     X(f)=\displaystyle\frac{1}{2+2i\pi f}e^{-4i\pi f}
 \end{gather}
 
-Calcolare la trasformata del segnale $x$, si applica la proprietà di modulazione: 
+\subsubsection*{Esercizio 28}
+
+Calcolare la trasformata del segnale $x(t)$:
 \begin{gather*}
-    x(t)=e^{-t/2}\cos(100\pi t)u(t)\\
+    x(t)=e^{-t/2}\cos(100\pi t)u(t)
+\end{gather*}
+Si applica la proprietà di modulazione:
+\begin{gather*}
     x_1(t)=e^{-t/2}u(t)\\
     X_1(f)=\displaystyle\frac{1}{1/2+2i\pi f}\\
     X(f)=\displaystyle\frac{1}{2}\left(X_1(f-50)+X_1(f+50)\right)\\
@@ -688,8 +927,9 @@ Calcolare la trasformata del segnale $x$, si applica la proprietà di modulazion
     X(f)=\displaystyle\frac{1}{1+4i\pi (f-50)}+\frac{1}{1+4i\pi (f+50)}
 \end{gather}
 
+\subsubsection*{Esercizio 29}
 
-Calcolare l'autoconvoluzione del segnale $x$, passando per la sua trasformata: 
+Calcolare l'autoconvoluzione del segnale $x(t)$, passando per la sua trasformata: 
 \begin{gather*}
     x(t)=A\,\rect\displaystyle\left(\frac{2(t-3T/4)}{T}\right)-A\,\rect\displaystyle\left(\frac{2(t-T/4)}{T}\right)\\
     X(f)=\displaystyle\frac{AT}{2}\,\sinc\left(\frac{Tf}{2}\right)e^{-3i\pi fT/2}-\displaystyle\frac{AT}{2}\,\sinc\left(\frac{T}{2}f\right)e^{-i\pi fT/2}\\
@@ -711,9 +951,11 @@ triangolo e una combinazione lineare di impulsi:
 \begin{gather}
     x(t)*x(t)=\displaystyle\frac{A^2T^2}{4}\left(\tri \left(\frac{2}{T}(t-3T/2)\right)+\tri \left(\frac{2}{T}(t-T/2)\right)-2\,\tri \left(\frac{2}{T}(t-T)\right)\right)
 \end{gather}
-%% grafo segnale convoluzione 
+%% grafico segnale convoluzione 
 
-Calcolare la trasformata del segnale $x$: 
+\subsubsection*{Esercizio 30}
+
+Calcolare la trasformata del segnale $x(t)$: 
 \begin{gather*}
     x(t)=\rect(3t-1/2)=\rect(3(t-1/6))
 \end{gather*}
@@ -722,14 +964,15 @@ Per la proprietà di scala e di traslazione nel tempo:
     X(f)=\displaystyle\frac{1}{3}\sinc\left(\frac{f}{3}\right)e^{-i\pi f/3}
 \end{gather}
 
+\subsubsection*{Esercizio 31}
 
-Calcolare la trasformata del segnale $x$, esprimibile come un segnale triangolo moltiplicato per un gradino, oppure una retta moltiplicata per una finestra, si sceglie 
+Calcolare la trasformata del segnale $x(t)$, esprimibile come un segnale triangolo moltiplicato per un gradino, oppure una retta moltiplicata per una finestra, si sceglie 
 quest'ultima rappresentazione per facilitare il calcolo:
 \begin{gather*}
     x(t)=A\,\displaystyle\tri \left(\frac{t+T/2}{T}\right)u(t+T/2)\lor x(t)=A\left(\frac{1}{2}-\frac{t}{T}\right)\rect\left(\frac{t}{T}\right)\\
     \displaystyle\frac{A}{2}\rect\left(\frac{t}{T}\right)-\frac{A}{T}t\,\rect\left(\frac{t}{T}\right)
 \end{gather*}
-%% grafo segnale
+%% grafico segnale
 Per la proprietà duale alla derivazione, si calcola il secondo componente: 
 \begin{gather*}
     x_1(t)=-2i\pi tx_2(t)\\
@@ -766,8 +1009,9 @@ Il segnale $x_1$ presente una discontinuità in $-T/2$, e rimane costante fino a
     X_1(f)=\displaystyle-\frac{Ai}{2\pi f}\left[e^{i\pi fT}-\sinc(Tf)\right]
 \end{gather}
 
+\subsubsection*{Esercizio 32}
 
-Calcolare l'antitrasformata di $X_1$:
+Calcolare l'antitrasformata del segnale $X_1(f)$:
 \begin{gather*}
     X_1(f)=\displaystyle\frac{1}{2}\left[X(f-f_0)+X(f+f_0)\right]\cos(2\pi f/f_0)
 \end{gather*}
@@ -781,8 +1025,9 @@ Poiché il coseno è traslato di un periodo $1/f_0$:
     x_1(t)=\left[\displaystyle\frac{1}{2}x\left(t+\frac{1}{f_0}\right)+\frac{1}{2}x\left(t-\frac{1}{f_0}\right)\right]\cos(2\pi tf_0)
 \end{gather}
 
+\subsubsection*{Esercizio 33}
 
-Calcolare la trasformata del segnale $x$:
+Calcolare la trasformata del segnale $x(t)$:
 \begin{gather*}
     x(t)=2\,\rect(2t)-\rect(t)=\rect(2t)-\rect\left[\displaystyle4\left(t-\frac{3}{2}\right)\right]-\rect\left[\displaystyle4\left(t-\frac{3}{8}\right)\right]\\
     X(f)=\displaystyle\frac{1}{2}\sinc\left(\frac{f}{2}\right)-\frac{1}{4}\sinc\left(\frac{f}{4}\right)e^{-3i\pi f/4}-\frac{1}{4}\sinc\left(\frac{f}{4}\right)e^{-3i\pi f}
@@ -791,6 +1036,7 @@ Calcolare la trasformata del segnale $x$:
     X(f)=\displaystyle\frac{1}{2}\left[\sinc\left(\frac{f}{2}\right)-\sinc\left(\frac{f}{4}\right)\cos\left(\frac{3\pi f}{4}\right)\right]
 \end{gather}
 
+\subsubsection*{Esercizio 34}
 
 Si considera una finestra di base $T$ moltiplicata per un coseno di frequenza costante $f_0$, ovvero modulata di una frequenza $f_0$:
 \begin{gather*}
@@ -814,7 +1060,7 @@ Per la linearità della trasformata e per la proprietà di traslazione nel tempo
     2iT\displaystyle\frac{\sin(\pi fT)}{\pi fT}\sin(\pi fT)=2i\frac{\sin^2(\pi fT)}{\pi f}
 \end{gather*}
 
-
+\subsubsection*{Esercizio 35}
 
 Calcolare la trasformata del seguente segnale onda quadra di base $\tau$ e di periodo $T$:
 \begin{gather*}
@@ -825,20 +1071,10 @@ Calcolare la trasformata del seguente segnale onda quadra di base $\tau$ e di pe
     c_k=\displaystyle\frac{\tau}{T}\sinc\left(\frac{\tau k}{T}\right)
 \end{gather}
 
-Calcolare la trasformata del treno campionatore, o segnale pettine:
-\begin{gather*}
-    \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\delta(t-kT)\\
-    c_k=\displaystyle\frac{1}{k}\\
-    \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}e^{2i\pi kt/T}
-\end{gather*}
-\begin{gather}
-    \Pi(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}\delta\left(f-\frac{k}{T}\right)
-\end{gather}
-Questo è uno dei pochi segnali oltre alla gaussiana che si auto-trasforma. 
+\subsubsection*{Esercizio 36}
 
-
-Calcolare la trasformata di un treno di trapezi di base maggiore $2T$, di base minore $T$ e di altezza $T$, di periodo $\overline T=5T/2$:
-%% grafo segnale 
+Calcolare la trasformata di un treno di trapezi di base maggiore $2T$, di base minore $T$, di altezza $T$ e di periodo $\overline T=5T/2$:
+%% grafico segnale 
 \begin{gather*}
     X(f)=\displaystyle\sum_{k=-\infty}^{+\infty}c_k\delta\left(f-\frac{k}{\overline T}\right)
 \end{gather*}
@@ -857,7 +1093,9 @@ trasformata di un singolo trapezio per ottenere i coefficienti:
     X(f)=\displaystyle\frac{2}{5T}\sum_{n=-\infty}^{+\infty}\left[\frac{3T}{5}\sinc\left(\frac{3k}{2}\right)\sinc\left(\frac{k}{2}\right)\right]\delta\left(f-\frac{2k}{5T}\right)
 \end{gather}
 
-Calcolare la seguente convoluzione:
+\subsubsection*{Esercizio 37}
+
+Calcolare la seguente convoluzione, passando per il dominio della frequenza:
 \begin{gather*}
     x(t)=\left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*\displaystyle\frac{\sin(3\pi f_0t)}{\pi t}\\
     \left[\cos(2\pi f_0t)\sin(2\pi f_0t)\right]*\displaystyle3f_0\frac{\sin(3\pi f_0t)}{3\pi f_0t}\\
@@ -875,8 +1113,9 @@ Poiché il valore $2/3$ è esterno all'intervallo di valori non nulli del segnal
     x(t)=0
 \end{gather}
 
+\subsubsection*{Esercizio 38}
 
-Calcolare il segnale $x$, passando per il dominio della frequenza:
+Calcolare il segnale $x(t)$, passando per il dominio della frequenza:
 \begin{gather*}
     x(t)=\cos(2\pi f_0t)\left[\sin(2\pi f_0t)*\displaystyle\frac{\sin(3\pi f_0t)}{\pi t}\right]\\
     x_1(t)=\sin(2\pi f_0t)*\displaystyle\frac{\sin(3\pi f_0t)}{\pi t}\\
@@ -886,12 +1125,14 @@ Calcolare il segnale $x$, passando per il dominio della frequenza:
     X_1(f)=\displaystyle\frac{1}{2i}\left[\delta(f-f_0)-\delta(f+f_0)\right]\\
     x_1(t)=\sin(2\pi f_0t)
 \end{gather*}
+Per la formula di duplicazione del seno: 
 \begin{gather}
     x(t)=\cos(2\pi f_0t)\sin(2\pi f_0t)=\displaystyle\frac{\sin(4\pi f_0t)}{2}
 \end{gather}
-Per la formula di duplicazione del seno. 
 
-Dato il segnale $x$, calcolare il periodo, i coefficienti di Fourier, la potenza, e la sua trasformata:
+\subsubsection*{Esercizio 39}
+
+Dato il segnale $x(t)$, calcolare il periodo, i coefficienti di Fourier, la potenza, e la sua trasformata:
 \begin{gather*}
     x(t)=2e^{2i\pi t/T_0}-e^{-i\pi t/2T_0}=2e^{2i\pi t/T_0}-e^{-2i\pi t/4T_0}
 \end{gather*}
@@ -926,7 +1167,7 @@ di trasformazione:
     X(f)=\displaystyle\frac{1}{4T_0}\delta\left(f+\frac{1}{4T_0}\right)+\frac{1}{2T_0}\delta\left(f-\frac{1}{T_0}\right)
 \end{gather}
 
-
+\subsubsection*{Esercizio 40}
 
 Calcolare la trasformata del segnale $x$:
 \begin{gather*}
@@ -965,7 +1206,9 @@ Si attua quindi una convoluzione nel dominio della frequenza per ottenere la tra
     X(f)=\displaystyle\frac{i}{4}\left[-\delta\left(f+\frac{5}{4T}\right)+\delta\left(f+\frac{3}{4T}\right)-\delta\left(f-\frac{3}{4T}\right)+\delta\left(f-\frac{5}{4T}\right)\right]
 \end{gather}
 
-Dato un filtro di risposta impulsiva $h(t)$, calcolare la sua funzione di trasferimento, e la la risposta ad un gradino:
+\subsubsection*{Esercizio 41}
+
+Dato un filtro di risposta impulsiva $h(t)$, calcolare la sua funzione di trasferimento, e la risposta ad un gradino:
 \begin{gather*}
     h(t)=\delta(t-2T)+\delta(t)-\delta(t-T)
 \end{gather*}
@@ -981,27 +1224,25 @@ Dato un filtro di risposta impulsiva $h(t)$, calcolare la sua funzione di trasfe
     \end{tikzpicture}
 \end{center}
 
-\clearpage
+\subsubsection*{Esercizio 42}
 
-\section{Trasformata di Fourier Tempo Discreto}
-Data una sequenza di valore costante:
+Calcolare l'uscita $Y(f)$ di un sistema di risposta impulsiva $h(t)$ con un'entrata $x(t)$:
 \begin{gather*}
-    x[n]=1
+    h(t)=\displaystyle\frac{1}{T}\sinc\left(\frac{t}{T}\right)\\
+    x(t)=\cos(2\pi f_0t)
 \end{gather*}
-Si determina la trasformata della sequenza tramite la definizione:
-\begin{gather}
-    X_c(f)=\displaystyle\sum_{n=-\infty}^{+\infty}e^{-2i\pi nfT}
-\end{gather}
-Altrimenti si considera il segnale da cui si è campionata la sequenza:
+Per la proprietà di scala:
 \begin{gather*}
-    x(t)=1\\
-    X(f)=\delta(f)
+    H(f)=\rect(Tf)\\
+    X(f)=\displaystyle\frac{1}{2}\delta(f-f_0)+\frac{1}{2}\delta(f+f_0)
 \end{gather*}
-Per cui la trasformata del segnale campionato si può esprimere come un treno di delta:
-\begin{gather}
-    X_c(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{T}\right)
-\end{gather}
-Poiché la sequenza considerata coincide con il treno campionatore $x[n]=\pi(t)$. 
+\begin{equation}
+    Y(f)=\frac{1}{2}\rect(Tf)(\delta(f-f_0)+\delta(f+f_0))
+\end{equation}
+
+\subsection{Trasformata di Fourier Tempo Discreto}
+
+\subsubsection*{Esercizio 43}
 
 Calcolare la trasformata della sequenza $x[n]$:
 \begin{gather*}
@@ -1019,7 +1260,7 @@ Per cui si esprime la trasformata della sequenza come:
 \end{gather}
 Se $T$ il passo di campionamento non è abbastanza grande, i triangoli si sovrappongono tra di loro. 
 
-
+\subsubsection*{Esercizio 44}
 
 Calcolare la convoluzione $y$ tempo discreta tra $x$ e $h$, esponenziali unilateri: 
 \begin{gather*}
@@ -1065,8 +1306,9 @@ Per cui il segnale convoluzione si esprime come:
     y[n]=\displaystyle\frac{a}{a-b}a^nu[n]+\displaystyle\frac{b}{b-a}b^nu[n]
 \end{gather}
 
+\subsubsection*{Esercizio 45}
 
-Calcolare la trasformata di Fourier della sequenza $x$:
+Calcolare la trasformata di Fourier della sequenza $x[n]$:
 \begin{gather*}
     x[n]=\displaystyle\frac{\sin(\pi n/3)}{\pi n}\cos\left(\frac{2\pi n}{6}\right)
 \end{gather*}
@@ -1076,16 +1318,16 @@ Si considera $T=1$, e si esprime il segnale da cui è stata campionata la sequen
 \end{gather*}
 Si determina la trasformata di questo segnale tempo continuo:
 \begin{gather*}
-    X(f)=\displaystyle\rect(3f)*\frac{1}{2}\left[\delta\left(f-\frac{1}{6}\right)+delta\left(f+\frac{1}{6}\right)\right]\\
+    X(f)=\displaystyle\rect(3f)*\frac{1}{2}\left[\delta\left(f-\frac{1}{6}\right)+\delta\left(f+\frac{1}{6}\right)\right]\\
     X(f)=\displaystyle\frac{1}{2}\rect\left(3f-\frac{1}{2}\right)+\frac{1}{2}\rect\left(3f+\frac{1}{2}\right)
 \end{gather*}
 \begin{gather}
     X_c(f)=\displaystyle\frac{1}{T}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T}\right)=\frac{1}{T}\sum_{n=-\infty}^{+\infty}\left[\frac{1}{2}\rect\left(3f-\frac{1}{2}-3n\right)+\frac{1}{2}\rect\left(3f+\frac{1}{2}-3n\right)\right]
 \end{gather}
 
+\subsubsection*{Esercizio 46}
 
-
-Calcolare la trasformata di Fourier della sequenza $x$:
+Calcolare la trasformata di Fourier della sequenza $x[n]$:
 \begin{gather*}
     x[n]=\left[\displaystyle\frac{\sin(\pi n/3)}{\pi n}\right]^2=\frac{1}{9}\sinc^2\left(\frac{n}{3}\right)\\
     T=1\\
@@ -1096,9 +1338,9 @@ Calcolare la trasformata di Fourier della sequenza $x$:
     X_c(f)=\displaystyle\frac{1}{3}\sum_{n=-\infty}^{+\infty}\tri (3f-n)
 \end{gather}
 
-\clearpage
+\subsection{Campionamento}
 
-\section{Campionamento}
+\subsubsection*{Esercizio 47}
 
 Dato un segnale coseno di frequenza $f_0$ si determina la frequenza di Nyquist:
 \begin{gather*}
@@ -1123,13 +1365,13 @@ corrispondenti alle repliche antecedenti e posteriori alla replica centrata in $
 segnale coseno originario. 
 Il segnale ricostruito si ottiene antitrasformando il segnale ottenuto in frequenza:
 \begin{gather*}
-    Y(f)=X_c(f)H(f)=\displaystyle\frac{1}{2}\left(f-\frac{1}{T}-f_0\right)+\frac{1}{2}\left(f-\frac{1}{T}+f_0\right)\\
-    y(t)=\cos\left[2\pi \left(f_0-\frac{1}{T}\right)t\right]
+    Y(f)=X_c(f)H(f)=\displaystyle\frac{1}{2}\left(f-\frac{1}{T}-f_0\right)+\frac{1}{2}\left(f-\frac{1}{T}+f_0\right)
 \end{gather*}
+\begin{equation}
+    y(t)=\cos\left[2\pi \left(f_0-\frac{1}{T}\right)t\right]
+\end{equation}
 
-
-
-
+\subsubsection*{Esercizio 48}
 
 Dato il segnale campionato $x(t)$, determinare la frequenza di Nyquist: 
 \begin{gather*}
@@ -1146,7 +1388,7 @@ Non è presente aliasing quando la frequenza assume valori maggiori di:
 \end{gather*}
 Il tempo di campionamento deve essere:
 \begin{gather}
-    T>\displaystyle\frac{2}{f_{max}}=\frac{2}{40\,Hz}=25\,ms
+    T>\displaystyle\frac{2}{f_{\max}}=\frac{2}{40\,Hz}=25\,ms
 \end{gather}
 Si suppone si stia campionando con un passo di campionamento doppio al valore massimo $\overline{T}=2T=50\,ms$. Lo spettro del segnale campionato corrisponde a:
 \begin{gather*}
@@ -1165,12 +1407,13 @@ Si effettua ora quest'analisi nel dominio del tempo:
     x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta(t-50\times10^{-3}n)+400\delta(t)
 \end{gather*}
 La sua trasformata corrisponde a:
-\begin{gather*}
+\begin{gather}
     X_c(f)=\displaystyle\sum_{n=-\infty}^{+\infty}\delta\left(f-\frac{n}{50\times10^{-3}}\right)\frac{1}{50\times10^{-3}}+400
-\end{gather*}
+\end{gather}
 
+\subsubsection*{Esercizio 49}
 
-Dato il segnale $x$, si vuole calcolare il massimo intervallo di campionamento:
+Dato il segnale $x(t)$, si vuole calcolare il massimo intervallo di campionamento:
 \begin{gather*}
     x(t)=\cos^2\left(\displaystyle\frac{2\pi t}{T_0}\right)=\frac{1}{2}+\frac{1}{2}\cos\left(\frac{4\pi t}{T_0}\right)
 \end{gather*}
@@ -1202,7 +1445,9 @@ Si vuole calcolare lo spettro del segnale considerando questo tempo di campionam
 \end{gather}
 %% grafico 
 
-Dato il segnale $x$ calcolare il periodo di campionamento:
+\subsubsection*{Esercizio 50}
+
+Dato il segnale $x(t)$ calcolare il periodo di campionamento:
 \begin{gather*}
     x(t)=2f_0\sinc(2f_0t)\cos(6\pi f_0t)\\
     X(f)=\displaystyle2\,\tri \left(\frac{f}{f_0}\right)*\left[\frac{1}{2}\delta\left(f-3f_0\right)+\frac{1}{2}\delta(f+3f_0)\right]\\
@@ -1230,7 +1475,7 @@ frequenze $[-2f_0,+2f_0]$, si considera un tempo di campionamento pari ad $1$:
     x(t)=2f_0\sinc^2(f_0t)\cos(2\pi f_0t)
 \end{gather} 
 
-
+\subsubsection*{Esercizio 51}
 
 Dato un segnale che occupa una banda $[-6\,kHz, 6\,kHz]$. Il segnale viene campionato con passo $T$. Il segnale viene filtrato per essere ricostruito da un filtro 
 la cui funzione di trasferimento assume una forma trapezoidale in frequenza:
@@ -1257,12 +1502,12 @@ Il passo di campionamento è quindi:
     T=\displaystyle\frac{1}{f}=55\,\mu Hz
 \end{gather}
 
-
+\subsubsection*{Esercizio 52}
 
 Un segnale viene campionato con frequenza di campionamento (di Nyquist) $f_c=100\,Hz$, dando origine ai seguenti campioni:
 \begin{gather*}
     T_c=\displaystyle\frac{1}{100}\,s=10\,ms\\
-    f_{max}=\frac{f_c}{2}=50\,Hz\\
+    f_{\max}=\frac{f_c}{2}=50\,Hz\\
     x(nT)=\begin{cases}
         -1&n=-2,-1\\
         1&n=1,2\\
@@ -1291,8 +1536,9 @@ Si calcola l'uscita del filtro DAC:
     y(5\,ms)=\displaystyle\frac{8}{5\pi}
 \end{gather}
 
+\subsubsection*{Esercizio 53}
 
-Dato un segnale $x$ di banda $[-\omega,\omega]$, campionato con un passo $T_c=\displaystyle\frac{1}{2\omega}$. Si considerano tre filtri, di risposta impulsiva:
+Dato un segnale $x(t)$ di banda $[-\omega,\omega]$, campionato con un passo $T_c=\displaystyle\frac{1}{2\omega}$. Si considerano tre filtri, di risposta impulsiva:
 \begin{gather*}
     h_1(t)=\sinc\left(\displaystyle\frac{t}{T}\right)\to H_1(f)=T\sinc(Tf)\\
     h_2(t)=\tri \left(\displaystyle\frac{t}{T}\right)\\
@@ -1321,6 +1567,7 @@ Considerando il terzo filtro:
 \end{gather}
 Questo filtro non ricostruisce a pieno il segnale. 
 
+\subsubsection*{Esercizio 54}
 
 Dato il segnale $x$:
 \begin{gather*}
@@ -1340,13 +1587,16 @@ nel tempo, per cui il suo campionamento produce una sequenza limitata, ovvero no
     x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)=x(-T)\delta(t+T)+x(0)\delta(t)=\delta(t)-\delta(t+T)
 \end{gather*}
 Il segnale ricostruito è quindi:
+\begin{gather*}
+    y(t)=x_c(t)*h(t)=\left[\delta(t)-\delta(t+T)\right]*\frac{1}{T}\sinc\left(\frac{t}{T}\right)=\frac{1}{T}\sinc\left(\frac{t}{T}\right)-\frac{1}{T}\sinc\left(\frac{t+T}{T}\right)
+\end{gather*}
 \begin{gather}
-    y(t)=x_c(t)*h(t)=\left[\delta(t)-\delta(t+T)\right]*\frac{1}{T}\sinc\left(\frac{t}{T}\right)=\frac{1}{T}\sinc\left(\frac{t}{T}\right)-\frac{1}{T}\sinc\left(\frac{t+T}{T}\right)\\
     Y(f)=\rect(Tf)-\rect(Tf)e^{2i\pi fT}
 \end{gather}
 
+\subsubsection*{Esercizio 55}
 
-Dato il segnale $x$:
+Dato il segnale $x(t)$, determinare il segnale campionato $x_c$ e la sua trasformata di Fourier $X_c$:
 \begin{gather*}
     x(t)=\sinc\left(\displaystyle\frac{t}{2T}\right)+\cos\left(\frac{2\pi t}{T}\right)
 \end{gather*}
@@ -1364,7 +1614,6 @@ La banda del segnale è limitata nell'intervallo $[-1/T, 1/T]$, per cui la frequ
     \overline{T}=2T
 \end{gather*}
 
-Determinare il segnale campionato $x_c$ e la sua trasformata di Fourier $X_c$:
 \begin{gather*}
     x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x(n\overline{T})\delta(t-n\overline{T})=\sum_{n=-\infty}^{+\infty}\left[\sinc\left(\frac{2nT}{2T}\right)+\cos\left(\frac{4\pi nT}{T}\right)\right]\delta(t-2nT)\\
     x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}\left[\sinc(n)+\cancelto{1}{\cos(4\pi n)}\right]\delta(t-2nT)
@@ -1382,46 +1631,114 @@ Si svolge ora la medesima analisi in frequenza:
 \end{gather}
 Si ottiene lo stesso risultato della trasformata del segnale campionato nel tempo. 
 
+\subsubsection*{Esercizio 56}
+
+Dato il segnale $x(t)$:
+\begin{equation*}
+    x(t)=2\sinc(4t)\cos(6\pi t)
+\end{equation*}
+Calcolare la frequenza minima di campionamento per cui non sia presente aliasing. In seguito campionato con il tempo di campionamento massimo $T_c$, determinare 
+l'espressione analitica di $x'(t)$ e $X'(f)$ del segnale ricostruito da un filtro $H(f)$ passa basso ideale definito sull'intervallo $[-3,3]$. 
+Si determina la frequenza massima del segnale:
+\begin{gather*}
+    X(f)=\displaystyle\frac{1}{2}\rect\left(\frac{f}{4}\right)\left[\frac{1}{2}\delta(f-3)+\frac{1}{3}\delta(f+3)\right]\\
+    X(f)=\rect\left(\displaystyle\frac{f-3}{4}\right)+\rect\left(\frac{f+3}{4}\right)
+    f_{\max}=5
+\end{gather*}
+\begin{equation}
+    f_c=2f_{\max}=10\to T_c=\displaystyle\frac{1}{10}
+\end{equation}
+Si campiona con questo tempo $T_c$:
+\begin{gather*}
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x\left(\frac{n}{10}\right)\delta\left(t-\frac{n}{10}\right)\\
+    X_c(f)=10\displaystyle\sum_{n=-\infty}^{+\infty}X(f-10n)
+\end{gather*}
+Si filtra tramite $H(f)$:
+\begin{gather*}
+    H(f)=\displaystyle\rect\left(\frac{f}{6}\right)\\
+    X'(f)=\left[10\displaystyle\sum_{n=-\infty}^{+\infty}X(f-10n)\right]\cdot\rect\left(\frac{f}{6}\right)\\
+    \left[10\displaystyle\sum_{n=-\infty}^{+\infty}\rect\left(\displaystyle\frac{f-3-10n}{4}\right)+\rect\left(\frac{f+3-10n}{4}\right)\right]\cdot\rect\left(\frac{f}{6}\right)
+\end{gather*}
+\begin{equation}
+    X'(f)=10\left[\displaystyle\rect\left(\frac{f-2}{2}\right)+\rect\left(\frac{f+2}{2}\right)\right]
+\end{equation}
+Antitrasformando si ottiene il segnale ricostruito nel tempo:
+\begin{equation}
+    x'(t)=40\sinc(2t)\cos(4\pi t)
+\end{equation}
+
+\subsubsection*{Esercizio 57}
+
+Il segnale $x(t)$ viene campionato con il massimo passo di campionamento tale da non provocare aliasing, producendo solamente due campioni diversi da zero:
+\begin{gather*}
+    x[n]=
+    \begin{cases}
+        1 &n=\pm1\\
+        0 &n\neq\pm1
+    \end{cases}
+\end{gather*}
+Viene poi ricostruito da un filtro passa basso ideale sull'intervallo $[-1/2T,1/2T]$ e di ampiezza $T$:
+\begin{gather*}
+    H(f)=\rect\displaystyle\left(Tf\right)
+\end{gather*} 
+Determinare il segnale ricostruito $x'(t)$ e la sua trasformata $X'(f)$. 
+Si determina il segnale campionato:
+\begin{gather*}
+    x_c(t)=\displaystyle\sum_{n=-\infty}^{+\infty}x[n]\delta(t-nT)=x[1]\delta(t-T)+x[-1]\delta(t+T)\\
+    X_c(f)=2\cos(2T\pi f)
+\end{gather*}
+Passando questo segnale attraverso il filtro si ottiene:
+\begin{gather}
+    X'(f)=X_c(f)\cdot H(f)=2\cos(2T\pi f)T\rect(Tf)
+\end{gather}
+Antitrasformando si ottiene il segnale ricostruito nel tempo:
+\begin{equation}
+    x'(t)=\displaystyle\sinc\left(\frac{t-T}{T}\right)+\sinc\left(\frac{t+T}{T}\right)
+\end{equation}
+
 \clearpage
 
 \section{Fenomeni Aleatori}
 
+\subsubsection*{Esercizio 58}
+
 Si consideri una sorgente $S$ ed un destinatario $D$ che possono trasmettere e ricevere solamente $1$ o $0$. La probabilità che si ricevi uno $0$, 
 quando viene trasmesso uno $0$ è dell'$80\%$, mentre la probabilità che si ricevi un $1$ quando viene trasmesso uno $0$ è del $20\%$:
 \begin{gather*}
-    P(D=0|S=0)=0.8\\
-    P(D=1|S=1)=0.2
+    \Pr(D=0|S=0)=0.8\\
+    \Pr(D=1|S=1)=0.2
 \end{gather*}
 Mentre la probabilità di errore nella trasmissione di un $1$ è:
 \begin{gather*}
-    P(D=1|S=1)=0.7\\
-    P(D=0|S=1)=0.3
+    \Pr(D=1|S=1)=0.7\\
+    \Pr(D=0|S=1)=0.3
 \end{gather*}
 Per cui si conosco le probabilità di errore del canale di trasmissione.
 I simboli $0$ e $1$ non sono equiprobabili alla sorgente:
 \begin{gather*}
-    P(S=0)=0.6\\
-    P(S=1)=0.4
+    \Pr(S=0)=0.6\\
+    \Pr(S=1)=0.4
 \end{gather*}
 
 Si vuole calcolare la probabilità sia stato trasmesso un $1$ dalla sorgente quando viene misurato un $1$:
 \begin{gather*}
-    P(S=1|D=1)
+    \Pr(S=1|D=1)
 \end{gather*}
 Si esprime tramite il teorema di Bayes:
 \begin{gather*}
-    P(S=1|D=1)=\displaystyle\frac{P(D=1|S=1)P(S=1)}{P(D=1)}=\frac{0.7\cdot0.4}{P(D=1)}
+    \Pr(S=1|D=1)=\displaystyle\frac{\Pr(D=1|S=1)\Pr(S=1)}{\Pr(D=1)}=\frac{0.7\cdot0.4}{\Pr(D=1)}
 \end{gather*}
 
 Per determinare la probabilità che il ricevitore misuri $1$ si determina tramite il teorema delle proprietà totali:
 \begin{gather*}
-    P(D=1)=P(D=1|S=1)P(S=1)+P(D=1|S=0)P(S=0)=0.7\cdot0.4+0.3\cdot0.6
+    \Pr(D=1)=\Pr(D=1|S=1)\Pr(S=1)+\Pr(D=1|S=0)\Pr(S=0)=0.7\cdot0.4+0.3\cdot0.6
 \end{gather*}
 La probabilità che si misuri un $1$ quando viene effettivamente trasmesso un $1$ dalla sorgente risulta essere:
 \begin{gather}
-    P(S=1|D=1)=\displaystyle\frac{0.7\cdot0.4}{0.7\cdot0.4+0.2\cdot0.6}=0.7
+    \Pr(S=1|D=1)=\displaystyle\frac{0.7\cdot0.4}{0.7\cdot0.4+0.2\cdot0.6}=0.7
 \end{gather}
 
+\subsubsection*{Esercizio 59}
 
 Sia data la probabilità di una variabile aleatoria $X$:
 \begin{gather*}
@@ -1438,7 +1755,7 @@ Si calcola la densità di probabilità della variabile aleatoria $Y$:
 \end{gather}
 Per cui se $X$ ha una statistica gaussiana, anche $Y$ ha una statistica gaussiana, ma non centrata nell'origine. 
 
-
+\subsubsection*{Esercizio 60}
 
 La densità di probabilità della variabile aleatoria $X$ è uniformemente distribuita sull'intervallo $[2,3]$. Sia data una variabile aleatoria $Y$ legata da una relazione 
 lineare:
@@ -1453,7 +1770,7 @@ Determinare la distribuzione di probabilità della variabile aleatoria $Y$:
     P_Y(y)=P_X(g(y))|g'(y)|=\displaystyle\frac{1}{|a|}\rect\left(\frac{2y-2b-5a}{2a}\right)
 \end{equation}
 
-
+\subsubsection*{Esercizio 61}
 
 Data la densità di probabilità gaussiana di una variabile aleatoria $X$, calcolare la densità di probabilità di una variabile $Y$ legata dalla relazione:
 \begin{gather*}
@@ -1466,7 +1783,7 @@ Data la densità di probabilità gaussiana di una variabile aleatoria $X$, calco
     P_Y(y)=P_X(g(y))|g'(y)|=\displaystyle\frac{e^{-\left(\frac{\sqrt[3]{y}}{\sqrt{2}{\sigma_x}}\right)^2}}{\sqrt{2\pi}\sigma_x}\frac{1}{3\sqrt[3]{y^2}}
 \end{equation}
 
-
+\subsubsection*{Esercizio 62}
 
 Sia data una variabile aleatoria $X$ uniformemente distribuita sull'intervallo $[0,\pi]$ ed una variabile $Y$ dipendente dalla prima, tramite la seguente relazione:
 \begin{gather*}
@@ -1483,6 +1800,7 @@ compresa nell'intervallo $[-1,+1]$. Si applica quindi la formula su questo inter
     P_Y(y)=\displaystyle\rect\left(\frac{y}{2}\right)\frac{1}{\sqrt{1-y^2}}
 \end{equation}
 
+\subsubsection*{Esercizio 63}
 
 Date due variabili aleatori legate dalla relazione $y=f(x)=\cos(x)$, con $X$ uniformemente distribuita sull'intervallo $[0,2\pi]$, calcolare la densità di probabilità 
 della variabile $y$:
@@ -1516,6 +1834,8 @@ Si vuole calcolare il valore atteso, può essere calcolato sul dominio $y$ o $x$
     \mu_x=0
 \end{equation}
 
+\subsubsection*{Esercizio 64}
+
 Calcolare la densità di probabilità della variabile aleatoria $Y$, nota la densità di una variabile indipendente $X$ e la loro relazione:
 \begin{gather*}
     y=f(x)=\begin{cases}
@@ -1542,7 +1862,7 @@ Per cui la densità della variabile $Y$ si ottiene dalla somma di quest'ultime:
     P_Y(y)=\displaystyle\frac{1}{8}\left(\rect\left(\frac{y-1/2}{3}\right)+\rect\left(\frac{y}{2}\right)+\rect\left(\frac{y+1/2}{3}\right)\right)
 \end{equation}
 
-
+\subsubsection*{Esercizio 65}
 
 Sia data la densità di probabilità $P_X(x)$ e la relazione con la variabile aleatoria $Y$, determinare la densità di probabilità di $Y$:
 \begin{gather*}
@@ -1570,7 +1890,7 @@ Si considera la seguente densità di probabilità per la variabile $X$:
     P_Y(y)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_x}\left(e^{-\left(\frac{y}{\sqrt2\sigma_x}\right)^2}+\frac{1}{2\sqrt{y}}e^{-\frac{y}{2\sigma_x^2}}\right)u(y)
 \end{equation}
 
-
+\subsubsection*{Esercizio 66}
 
 Sia data una variabile aleatoria discreta $X$, la sua densità di probabilità e la relazione con la variabile aleatoria $Y$. Determinare la densità di probabilità di $Y$:
 \begin{gather*}
@@ -1581,6 +1901,7 @@ Sia data una variabile aleatoria discreta $X$, la sua densità di probabilità e
     P_Y(y)=\displaystyle\frac{1}{4}\delta(y-1)+\frac{1}{2}\delta(y)+\frac{1}{4}\delta(y-1)=\frac{1}{2}\left[\delta(y)+\delta(y-1)\right]
 \end{equation}
 
+\subsubsection*{Esercizio 67}
 
 Sia data la variabile aleatoria $X$ di statistica gaussiana centrata in $x=1$, e la relazione con la variabile aleatoria $Y$, tramite un rettificatore:
 \begin{gather*}
@@ -1599,6 +1920,7 @@ $Y$ corrisponde a due impulsi:
     P_Y(y)=\displaystyle\frac{1}{2}\delta(y-2)+\frac{1}{2}\delta(y+1)
 \end{equation}
 
+\subsubsection*{Esercizio 68}
 
 Sia data la distribuzione di probabilità della variabile $X$, e la funzione che la associa alla variabile aleatoria $Y$. Determinare la densità della probabilità $Y$:
 \begin{gather*}
@@ -1616,7 +1938,7 @@ La variabile aleatoria $Y$ è una variabile mista:
     P_Y(y)=\displaystyle\frac{1}{2}\delta(y-\pi)+\frac{1}{4\pi}\rect\left(\frac{y-3\pi/2}{\pi}\right)
 \end{equation}
 
-
+\subsubsection*{Esercizio 69}
 
 Sia data la variabile aleatoria $X$ e la sua relazione con la variabile aleatoria $Y$, determinare la densità di probabilità di quest'ultima:
 \begin{gather*}
@@ -1631,6 +1953,8 @@ Sia data la variabile aleatoria $X$ e la sua relazione con la variabile aleatori
 \begin{equation}
     P_Y(y)=\displaystyle\frac{1}{4}\left[\delta(y+a)+\delta(y-a)+\frac{1}{a}\rect\left(\frac{y}{2a}\right)\right]
 \end{equation}
+
+\subsubsection*{Esercizio 70}
 
 Determinare il valore medio e deviazione standard della seguente densità di probabilità:
 \begin{gather*}
@@ -1650,17 +1974,20 @@ Determinare il valore medio e deviazione standard della seguente densità di pro
     \sigma_x^2=\displaystyle\frac{7}{3}
 \end{equation}
 
-
+\subsubsection*{Esercizio 71}
 
 Date due variabili aleatorie indipendenti $X$ e $Y$ di statistica gaussiana, determinare la densità di probabilità della variabile dipendente $Z=X+Y$. 
 Si può risolvere sia nel dominio di $z$ oppure in frequenza tramite la funzione caratteristica:
 \begin{gather*}
     P_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_x}e^{-\frac{(x-\mu_x)^2}{2\sigma_x^2}}\\
     P_Y(y)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_y}e^{-\frac{(y-\mu_y)^2}{2\sigma_y^2}}\\
-    P_Z(z)=P_X(x)*P_Y(y)=\displaystyle\frac{1}{\sqrt{2\pi(\sigma_x^2+\sigma_y^2)}}e^{-\frac{z-\mu_x-\mu_y}{2(\sigma_x^2+\sigma_y^2)}}\\
-    P_Z(z)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_y}e^{-\frac{z-\mu_z}{2\sigma_z^2}}\\
-\end{gather*} 
+    P_Z(z)=P_X(x)*P_Y(y)=\displaystyle\frac{1}{\sqrt{2\pi(\sigma_x^2+\sigma_y^2)}}e^{-\frac{z-\mu_x-\mu_y}{2(\sigma_x^2+\sigma_y^2)}}
+\end{gather*}
+\begin{gather}
+    P_Z(z)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma_y}e^{-\frac{z-\mu_z}{2\sigma_z^2}}
+\end{gather} 
 
+\subsubsection*{Esercizio 72}
 
 Data la variabile aleatoria $Z$ data dalla combinazione lineare di due variabili aleatorie uniformemente distribuite sull'intervallo $[-1/2,1/2]$:
 \begin{gather*}
@@ -1686,16 +2013,16 @@ Si calcolano le densità di probabilità di queste nuove variabili aleatorie:
     \end{cases}
 \end{equation}
 
-
+\subsubsection*{Esercizio 73}
 
 Data la variabile aleatoria dipendente $Y$, combinazione lineare di due variabili aleatorie $X_1$ e $X_2$. Determinare date le densità di probabilità 
 di queste ultime la densità di probabilità di $Y$:
 \begin{gather*}
     y=7x_1+x_2-3\\
-    P_{X_1}(x_1=-2)=0.6\\
-    P_{X_1}(x_1=2)=0.4\\
-    P_{X_2}(x_2=-1)=0.5\\
-    P_{X_2}(X_2=1)=0.5
+    \Pr(x_1=-2)=0.6\\
+    \Pr(x_1=2)=0.4\\
+    \Pr(x_2=-1)=0.5\\
+    \Pr(X_2=1)=0.5
 \end{gather*}
 Poiché sono possibili solo $4$ realizzazioni della variabile $Y$, è possibile creare una tabella caratterizzata dai quattro possibili valori:
 \begin{center}
@@ -1728,27 +2055,26 @@ Si sostituiscono due variabili di appoggio:
     P_Y(y)=\displaystyle\frac{3}{10}\delta(y+18)+\frac{1}{5}\delta(y-10)+\frac{3}{10}\delta(y+16)+\frac{1}{5}\delta(y-12)
 \end{gather*}
 
+\subsubsection*{Esercizio 74}
 
-
-Dato il processo aleatorio $x(t)$ stazionario, avente densità di probabilità uniforme sull'intervallo $[-2,10]$, ed  
-ha una covarianza:
+Dato il processo aleatorio $x(t)$ stazionario, avente densità di probabilità uniforme sull'intervallo $[-2,10]$, ed una covarianza:
 \begin{gather*}
-    C_X(\tau)=A\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)
+    C_x(\tau)=A\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)
 \end{gather*}
 Calcolare il valor medio e $A$:
 \begin{gather*}
     \mu_x=\displaystyle\int_{-\infty}^{+\infty}xP_X(x)\df x=\int_{-2}^{10}\frac{x}{12}\df x=4\\
-    C_X(\tau)=E[(x(t+\tau)-\mu_x)(x(t)-\mu_x)]\\
-    C_X(0)=E[(x(t)-\mu_x)^2]=\sigma_x^2\\
+    C_x(\tau)=E[(x(t+\tau)-\mu_x)(x(t)-\mu_x)]\\
+    C_x(0)=E[(x(t)-\mu_x)^2]=\sigma_x^2\\
     \mu_x^{(2)}=\displaystyle\int_{-\infty}^{+\infty}xP_X(x)\df x=\int_{-2}^{10}\frac{x^2}{12}\df x=28\\
     \sigma_x^2=\mu_x^{(2)}-\mu_x^2=28-16=12
 \end{gather*}
 \begin{equation}
-    C_X(0)=A=12
+    C_x(0)=A=12
 \end{equation}
-Calcolare la funzione di autocorrelazione do $X$:
+Calcolare la funzione di autocorrelazione di $X$:
 \begin{gather}
-    R_X(\tau)=C_X(\tau)+\mu_x^2=12\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+16
+    R_x(\tau)=C_x(\tau)+\mu_x^2=12\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+16
 \end{gather}
 Sia: 
 \begin{gather*}
@@ -1759,19 +2085,20 @@ Determinare il valore medio e la funzione di autocorrelazione di $y(t)$:
     \mu_y=E[y(t)]=E[x(t)]+E[x(t-1)]=2\mu_x=8
 \end{equation}
 \begin{gather*}
-    R_Y(\tau)=E[t(t+\tau)y(t)]=E[(x(t+\tau)+x(t+\tau-1))(x(t)+x(t-1))]\\
+    R_y(\tau)=E[t(t+\tau)y(t)]=E[(x(t+\tau)+x(t+\tau-1))(x(t)+x(t-1))]\\
     E[x(t+\tau)x(t)]+E[x(t+\tau)x(t-1)]+E[x(t+\tau-1)x(t)]+E[x(t+\tau-1)x(t-1)]\\
-    R_X(\tau)+R_X(\tau-1)+R_X(\tau+1)+R_X(\tau)=2R_X(\tau)+2R_X(\tau+1)\\
-    R_Y(\tau)=24\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+32+24\mathrm{tri}\left(\frac{\tau+1}{2}\right)+32
+    R_x(\tau)+R_X(\tau-1)+R_x(\tau+1)+R_x(\tau)=2R_X(\tau)+2R_x(\tau+1)\\
+    R_y(\tau)=24\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+32+24\mathrm{tri}\left(\frac{\tau+1}{2}\right)+32
 \end{gather*}
 \begin{equation}
-    R_Y(\tau)=24\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+24\mathrm{tri}\left(\frac{\tau+1}{2}\right)+64
+    R_y(\tau)=24\mathrm{tri}\displaystyle\left(\frac{\tau}{2}\right)+24\mathrm{tri}\left(\frac{\tau+1}{2}\right)+64
 \end{equation}
 Determinare la potenza di $Y$:
 \begin{equation}
-    P_Y=R_Y(0)=24+24\displaystyle\frac{1}{2}+64=100    
+    P_y=R_y(0)=24+24\displaystyle\frac{1}{2}+64=100    
 \end{equation}
 
+\subsubsection*{Esercizio 75}
 
 Date tre variabili aleatorie indipendenti tra di loro $A$, $B$ e $\theta$, determinare il valore medio e la densità spettrale di potenza del processo $x(t)$:
 \begin{gather*}
@@ -1806,7 +2133,7 @@ Poiché le variabili $A$ e $B$ sono distribuite uniformemente su un intervallo c
 \end{gather*}
 Per calcolare la densità spettrale di potenza si calcola la funzione di autocorrelazione e si pone $\tau=0$:
 \begin{gather*}
-    R_X(\tau)=E[x(t+\tau)x^*(t)]\\
+    R_x(\tau)=E[x(t+\tau)x^*(t)]\\
     E\left[\left\{(A+2B)\cos[300\pi (t+\tau)+\theta]+n(t+\tau)\right\}\left\{(A+2B)\cos[300\pi t+\theta]+n(t)\right\}\right]\\
     E[(A+2B)^2\cos\{300\pi(t+\tau)+\theta\}\cos(300\pi t+\theta)]+E[(A+2B)\cos\{300\pi (t+\tau)+\theta\}n(t)]\\
     +E[(A+2B)\cos(300\pi t+\theta)n(t+\tau)]+E[n(t+\tau)n(t)]
@@ -1823,13 +2150,14 @@ Poiché sono indipendenti tra di loro, si possono calcolare i contributi di cias
 \end{gather*}
 Per cui la funzione di autocorrelazione del processo $x(t)$ risulta essere:
 \begin{equation*}
-    R_X(\tau)=\displaystyle\frac{17}{6}\cos(300\pi\tau)+10\delta(\tau)
+    R_x(\tau)=\displaystyle\frac{17}{6}\cos(300\pi\tau)+10\delta(\tau)
 \end{equation*}
 Si applica quindi la trasformata di Fourier per ottenere la densità spettrale di potenza:
 \begin{equation}
-    G_X(f)=\displaystyle\frac{17}{12}\left[\delta(f-150)+\delta(f+150)\right]+10
+    G_x(f)=\displaystyle\frac{17}{12}\left[\delta(f-150)+\delta(f+150)\right]+10
 \end{equation}
 
+\subsubsection*{Esercizio 76}
 
 Dato il segnale stocastico $x(t)$, sia $y(t)$ il segnale definito dalla seguente espressione:
 \begin{gather*}
@@ -1842,21 +2170,22 @@ Il segnale $y(t)$ può essere espresso come un integrale su $[-\infty,+\infty]$,
 \end{gather*}
 Per cui la finestra rappresenta la risposta impulsiva $h(t)$ di un filtro, per cui la densità spettrale di potenza dell'uscita di un filtro si ottiene come:
 \begin{gather}
-    G_Y(f)=|H(f)|^2G_X(f)=4T^2\sinc^2(2Tf)G_X(f)
+    G_y(f)=|H(f)|^2G_X(f)=4T^2\sinc^2(2Tf)G_x(f)
 \end{gather}
 Calcolare la potenza del segnale $y(t)$, nel caso in cui $x(t)$ sia un segnale bianco e densità spettrale di potenza:
 \begin{gather*}
-    G_X(f)=\displaystyle\frac{N_0}{2}
+    G_x(f)=\displaystyle\frac{N_0}{2}
 \end{gather*}
 Si calcola la potenza integrando la densità spettrale di $y$, oppure si calcola la funzione di autocorrelazione di $y$ in $\tau=0$:
 \begin{gather*}
-    R_Y(\tau)=\mathscr{F}^{-1}\left\{4T^2\sinc^2(2Tf)\displaystyle\frac{N_0}{2}\right\}=2T\mathrm{tri}\left(\frac{\tau}{2T}\right)\frac{N_0}{2}
+    R_y(\tau)=\mathscr{F}^{-1}\left\{4T^2\sinc^2(2Tf)\displaystyle\frac{N_0}{2}\right\}=2T\mathrm{tri}\left(\frac{\tau}{2T}\right)\frac{N_0}{2}
 \end{gather*}
 La potenza è quindi:
 \begin{equation}
-    P_Y(0)=N_0T
+    R_y(0)=N_0T=P_y
 \end{equation}
 
+\subsubsection*{Esercizio 77}
 
 Dato un processo $y(t)$:
 \begin{gather*}
@@ -1864,7 +2193,7 @@ Dato un processo $y(t)$:
 \end{gather*}
 Dove $x(t)$ è un processo stazionario a valor medio nullo, e di funzione di autocorrelazione:
 \begin{gather*}
-    R_X(\tau)=3e^{-|\tau|}
+    R_x(\tau)=3e^{-|\tau|}
 \end{gather*}
 Calcolare la densità spettrale di potenza di $y(t)$, il suo valore atteso, la sua funzione di autocorrelazione e la sua potenza. 
 Si calcola il valore atteso:
@@ -1873,38 +2202,38 @@ Si calcola il valore atteso:
 \end{gather}
 Si calcola ora la funzione di autocorrelazione:
 \begin{gather*}
-    R_Y(\tau)=E[y(t+\tau)y^*(t)]=E[\{4x(t+\tau-3)+4x(t+\tau+3)\}\{4x(t-3)+4x(+3)\}]\\
+    R_y(\tau)=E[y(t+\tau)y^*(t)]=E[\{4x(t+\tau-3)+4x(t+\tau+3)\}\{4x(t-3)+4x(+3)\}]\\
     16E[x(t+\tau-3)x(t-3)]+16E[x(t+\tau-3)x(t+3)]\\
     +16E[x(t+\tau+3)x(t-3)]+16E[x(t+\tau+3)x(t+3)]\\
-    16R_X(\tau-6)+16R_X(\tau)+16R_X(\tau)+16R_X(\tau+6)\\
-    R_Y(\tau)=16R_X(\tau-6)+32R_X(\tau)+16R_X(\tau+6)
+    16R_x(\tau-6)+16R_x(\tau)+16R_x(\tau)+16R_X(\tau+6)\\
+    R_y(\tau)=16R_x(\tau-6)+32R_x(\tau)+16R_x(\tau+6)
 \end{gather*}
 \begin{equation}
-    R_Y(\tau)=16\left(3e^{-|\tau-6|}+6e^{-|\tau|}+3e^{-|\tau+6|}\right)
+    R_y(\tau)=16\left(3e^{-|\tau-6|}+6e^{-|\tau|}+3e^{-|\tau+6|}\right)
 \end{equation}
 Si calcola ora la potenza:
 \begin{equation}
-    P_Y=R_Y(0)=16(3e^{-6}+6+3e^{-6})=96+96e^{-6}
+    P_y=R_y(0)=16(3e^{-6}+6+3e^{-6})=96+96e^{-6}
 \end{equation}
 Si calcola la densità spettrale di potenza come il transito attraverso un filtro, poiché il segnale $y(t)$ può essere espresso come:
 \begin{gather*}
     y(t)=x(t)*[4\delta(t-3)+4\delta(t+3)]\\
     h(t)=4\delta(t-3)+4\delta(t+3)\\
     H(f)=\displaystyle8\cos(6\pi f)\\
-    G_X(f)=\mathscr{F}\left\{3e^{-|\tau|}\right\}=\displaystyle\frac{3}{1+2i\pi f}+\frac{3}{1-2i\pi f}=\frac{6}{1+4\pi f}
+    G_x(f)=\mathscr{F}\left\{3e^{-|\tau|}\right\}=\displaystyle\frac{3}{1+2i\pi f}+\frac{3}{1-2i\pi f}=\frac{6}{1+4\pi f}
 \end{gather*}
 \begin{equation}
-    G_Y(f)=64\cos^2(6\pi f)\displaystyle\frac{6}{1+4\pi f}
+    G_y(f)=64\cos^2(6\pi f)\displaystyle\frac{6}{1+4\pi f}
 \end{equation}
 
-
+\subsubsection*{Esercizio 78}
 
 Dato un processo $x(t)$ stazionario, avente potenza $P_X=19$ e covarianza $C_X(\tau)=3\tri(\tau)$, determinare il valor medio e la varianza: 
 \begin{gather}
-    C_X(0)=E[(x(t)-\mu_x)^2]=\sigma_x^2=3
+    C_x(0)=E[(x(t)-\mu_x)^2]=\sigma_x^2=3
 \end{gather}
 \begin{gather*}
-    R_X(0)=E[x^2(t)]=P_X=\mu_x^{(2)}=19
+    R_x(0)=E[x^2(t)]=P_X=\mu_x^{(2)}=19
 \end{gather*}
 \begin{gather}
     \mu_x=\sqrt{\sigma_x^2-\mu_x^{(2)}}=\sqrt{16}=4
@@ -1914,26 +2243,27 @@ Si suppone il segnale attraversa un filtro di risposta impulsiva $h(t)=\rect(t/3
     \mu_y=E[y(t)]=E[x(t)*h(t)]=E[x(t)]*h(t)=\displaystyle\int_{-\infty}^{+\infty}\mu_x\rect\left(\frac{t}{3}\right)\df t=4\int_{-3}^3\df t=24
 \end{gather}
 
+\subsubsection*{Esercizio 79}
 
 Dato un processo $x(t)$ stazionario, di valore medio $\mu_x=-3$, potenza $P_X=12$ e coefficiente di correlazione $\rho_X(\tau)=\sinc(\tau/4)$, calcolare la densità spettrale 
 di potenza:
 \begin{gather*}
     \sigma_x^2=P_X-\mu_X^2=12-9=3\\
-    C_X(\tau)=\rho_X(\tau)\sigma_x^2=3\sinc\displaystyle\left(\frac{\tau}{4}\right)\\
-    R_X(\tau)=C_X(\tau)+\mu_x^2=3\sinc\displaystyle\left(\frac{\tau}{4}\right)+9
+    C_x(\tau)=\rho_x(\tau)\sigma_x^2=3\sinc\displaystyle\left(\frac{\tau}{4}\right)\\
+    R_x(\tau)=C_x(\tau)+\mu_x^2=3\sinc\displaystyle\left(\frac{\tau}{4}\right)+9
 \end{gather*}
 \begin{equation}
-    G_X(f)=\mathscr{F}\{R_X(\tau)\}=12\rect(4f)+9\delta(f)
+    G_x(f)=\mathscr{F}\{R_X(\tau)\}=12\rect(4f)+9\delta(f)
 \end{equation}
 Questo processo viene filtrato con un filtro avente una funzione di trasferimento $H(f)=\cos(4\pi f)$, calcolare la potenza 
 di $y(t)$:
 \begin{gather*}
-    G_Y(f)=|H(f)|^2G_X(f)=\cos^2(4\pi f)\left[12\rect(4f)+9\delta(f)\right]\\
-    P_Y=\displaystyle\int_{-\infty}^{+\infty}G_Y(f)\df f=12\int_{-1/8}^{1/8}\cos^2(4\pi f)\df f+9=6\cancelto{0}{\int_{-1/8}^{1/8}\cos(8\pi f)\df f}+6\int_{-1/8}^{1/8}\df f+9\\
+    G_y(f)=|H(f)|^2G_x(f)=\cos^2(4\pi f)\left[12\rect(4f)+9\delta(f)\right]\\
+    P_y=\displaystyle\int_{-\infty}^{+\infty}G_y(f)\df f=12\int_{-1/8}^{1/8}\cos^2(4\pi f)\df f+9=6\cancelto{0}{\int_{-1/8}^{1/8}\cos(8\pi f)\df f}+6\int_{-1/8}^{1/8}\df f+9\\
     \displaystyle6\frac{2}{8}+9
 \end{gather*}
 \begin{equation}
-    P_Y=\displaystyle\frac{21}{2}
+    P_y=\displaystyle\frac{21}{2}
 \end{equation}
 Sia il processo $z(t)$:
 \begin{gather*}
@@ -1944,23 +2274,23 @@ Determinare il valore medio, la varianza e la funzione di autocorrelazione di $z
     \mu_z=E[z(t)]=E[x(t)+x(t-6)]=2\mu_x=-6
 \end{equation}
 \begin{gather*}
-    R_Z(\tau)=E[z(t+\tau)z(t)]=E[x(t+\tau)x(t)]+E[x(t+\tau-6)x(t)]+E[x(t+\tau)x(t-6)]\\
-    +E[x(t+\tau-6)x(t-6)]=R_X(\tau)+R_X(\tau-6)+R_X(\tau+6)+R_X(\tau)\\
-    2R_X(\tau)+2R_X(\tau-6)+R_X(\tau-6)\\
+    R_z(\tau)=E[z(t+\tau)z(t)]=E[x(t+\tau)x(t)]+E[x(t+\tau-6)x(t)]+E[x(t+\tau)x(t-6)]\\
+    +E[x(t+\tau-6)x(t-6)]=R_x(\tau)+R_x(\tau-6)+R_x(\tau+6)+R_X(\tau)\\
+    2R_x(\tau)+2R_x(\tau-6)+R_x(\tau-6)\\
     6\sinc\displaystyle\left(\frac{\tau}{4}\right)+18+3\sinc\left(\frac{\tau-6}{4}\right)+9+3\sinc\left(\frac{\tau+6}{4}\right)+9
 \end{gather*}
 \begin{equation}
-    R_Z(\tau)=6\sinc\left(\displaystyle\frac{\tau}{4}\right)+6\sin\left(\frac{\tau+6}{4}\right)+36
+    R_z(\tau)=6\sinc\left(\displaystyle\frac{\tau}{4}\right)+6\sin\left(\frac{\tau+6}{4}\right)+36
 \end{equation}
 \begin{equation}
-    \sigma_z^2=P_Z-\mu_z^2=R_Z(0)-36=42+6\sinc\displaystyle\left(\frac{3}{2}\right)-36=6\left[1+\sinc\left(\frac{3}{2}\right)\right]
+    \sigma_z^2=P_z-\mu_z^2=R_z(0)-36=42+6\sinc\displaystyle\left(\frac{3}{2}\right)-36=6\left[1+\sinc\left(\frac{3}{2}\right)\right]
 \end{equation}  
 
-
+\subsubsection*{Esercizio 80}
 
 Dato un processo $x(t)=A+n(t)$, il rumore è bianco, ha varianza $\sigma_n^2$ nota e valor medio nullo $\mu_n=0$, calcolare la potenza del processo $x$:
 \begin{gather}
-    P_X=E[x^2(t)]=E[A^2]+2A\cancelto{0}{E[n(t)]}+E[n^2(t)]=A^2+\sigma_n^2
+    P_x=E[x^2(t)]=E[A^2]+2A\cancelto{0}{E[n(t)]}+E[n^2(t)]=A^2+\sigma_n^2
 \end{gather}
 Il segnale viene filtrato in un filtro istantaneo:
 \begin{gather*}
@@ -1968,14 +2298,108 @@ Il segnale viene filtrato in un filtro istantaneo:
 \end{gather*}
 Calcolare la potenza del segnale in uscita dal filtro:
 \begin{gather*}
-    P_Y=E[y^2(t)]=E[(x(t)+x(t-1))^2]=E[x^2(t)]+2E[x(t)x(t-1)]+E[x^2(t-1)]\\
-    P_X+2R_X(1)+P_X=2A^2+2\sigma_n^2+2R_X(1)\\
-    R_X(\tau)=E[(A+n(t+\tau))(A+n(t))]=A^2+A\cancelto{0}{E[n(t)]}+A\cancelto{0}{E[n(t+\tau)]}+R_n(\tau)=A^2+\sigma_n^2\delta(\tau)\\
-    P_Y=2A^2+\sigma_n^2+2A^2+2\sigma_n^2\cancelto{0}{\delta(1)}
+    P_y=E[y^2(t)]=E[(x(t)+x(t-1))^2]=E[x^2(t)]+2E[x(t)x(t-1)]+E[x^2(t-1)]\\
+    P_x+2R_x(1)+P_x=2A^2+2\sigma_n^2+2R_x(1)\\
+    R_x(\tau)=E[(A+n(t+\tau))(A+n(t))]=A^2+A\cancelto{0}{E[n(t)]}+A\cancelto{0}{E[n(t+\tau)]}+R_n(\tau)=A^2+\sigma_n^2\delta(\tau)\\
+    P_y=2A^2+\sigma_n^2+2A^2+2\sigma_n^2\cancelto{0}{\delta(1)}
 \end{gather*}
 \begin{equation}
-    P_Y=4A^2+2\sigma_n^2
+    P_y=4A^2+2\sigma_n^2
 \end{equation}
 
+\subsubsection*{Esercizio 81}
+
+Dati due processi aleatori $x(t)$ e $y(t)$ statisticamente indipendenti, bianchi nella banda $[-W,W]$ con densità di probabilità uniforme nell'intervallo $[-A,A]$. Calcolare il 
+valore medio $\mu_z$, la potenza $P_z$, la correlazione $R_z(\tau)$, la densità spettrale di potenza $G_z(f)$ e la densità di probabilità $P_z(z)$ del 
+processo $z(t)$:
+\begin{gather*}
+    z(t)=x(t)+y(t)
+\end{gather*}
+Si calcola il valore medio, la potenza, la densità spettrale di potenza e la correlazione del processo $x(t)$:
+\begin{gather*}
+    P_X(x)=\displaystyle\frac{1}{2A}\rect\left(\frac{x}{2A}\right)\\
+    \mu_x=\intinf xP_X(x)\df x=\frac{1}{2A}\int_{-A}^Ax\df x=0\\
+    P_x=\intinf x^2P_X(x)\df x=\frac{1}{2A}\int_{-A}^Ax^2\df x=\frac{A^2}{3}\\
+    G_x(f)=\displaystyle\frac{P_x}{2W}\rect\left(\frac{f}{2W}\right)=\frac{A^2}{6W}\rect\left(\frac{f}{2W}\right)\\
+    R_x(\tau)=\displaystyle\frac{A^2}{3}\sinc(2W\tau)
+\end{gather*}
+Poiché il processo $y(t)$ è definito analogamente ad $x(t)$, i suoi parametri caratteristici sono anch'essi analoghi:
+\begin{gather*}
+    P_Y(f)=\displaystyle\frac{1}{2A}\rect\left(\frac{y}{2A}\right)\\
+    \mu_y=0\\
+    P_y=\displaystyle\frac{A^2}{3}\\
+    G_y(f)=\displaystyle\frac{A^2}{6W}\rect\left(\frac{f}{2W}\right)\\
+    R_y(\tau)=\displaystyle\frac{A^2}{3}\sinc(2W\tau)
+\end{gather*}
+Si calcola ora la densità di probabilità del processo $z(t)$, ed il suo valore medio: 
+\begin{gather*}
+    P_Z(z)=P_X(x)*P_Y(y)=\frac{1}{4A^2}\left[\rect\left(\frac{z}{2A}\right)*\rect\left(\frac{z}{2A}\right)\right]
+\end{gather*}
+\begin{equation}
+    P_Z(z)=\displaystyle\frac{1}{4A^2}\tri\left(\frac{z}{2A}\right)
+\end{equation}
+Poiché il triangolo è simmetrico, e centrato in $z=0$, il valore medio è nullo:
+\begin{equation}
+    \mu_z=0
+\end{equation}
+Si calcola la potenza e la correlazione di $z(t)$:
+\begin{gather}
+    P_z=E[z^2(t)]=E[(x(t)+y(t))^2]=P_x+P_y+2\mu_x\mu_y=\displaystyle\frac{2A^2}{3}\\
+    R_z(\tau)=E[z(t+\tau)z(t)]=R_x(\tau)+R_y(\tau)+2\mu_x\mu_y=\displaystyle\frac{2A^2}{3}\sinc(2W\tau)
+\end{gather}
+Si calcola la densità spettrale del processo $z(t)$:
+\begin{equation}
+    G_z(f)=\displaystyle\frac{2A^3}{6W}\rect\left(\frac{f}{2W}\right)
+\end{equation}
+
+\subsubsection*{Esercizio 82}
+
+Dato il processo $y(t)$:
+\begin{gather*}
+    y(t)=x(t-T)+x(t+T)
+\end{gather*}
+Dove $x(t)$ è un processo armonico:
+\begin{gather*}
+    x(t)=\displaystyle\cos\left(2\pi f_0t+\varphi\right)\\
+    P_{\Phi}(\varphi)=\displaystyle\frac{1}{2\pi}\rect\left(\frac{\varphi-\pi}{2\pi}\right)
+\end{gather*}
+Calcolare il valore medio $\mu_y$ la potenza $P_y$, la funzione correlazione a la densità spettrale di potenza $G_y(f)$ del processo $y(t)$. 
+Si considera il processo $y(t)$ l'uscita di un filtro di risposta impulsiva $h(t)$:
+\begin{gather*}
+    y(t)=x(t)[\delta(t-T)+\delta(t+T)]\\
+    h(t)=\delta(t-T)+\delta(t+T)\\
+    H(f)=2\cos\left(2\pi fT\right)
+\end{gather*}
+Si calcola il valore medio del processo $x(t)$:
+\begin{gather*}
+    \mu_x=E[\cos(2\pi f_0t+\varphi)]=0
+\end{gather*}
+Si calcola ora il valore medio del processo $y(t)$:
+\begin{gather}
+    \mu_y=E[y(t)]=E[x(t-T)]+E[x(t+T)]=2\mu_x
+\end{gather}
+Si considera la correlazione e la densità spettrale di potenza del processo armonico $x(t)$:
+\begin{gather*}
+    R_x(\tau)=\displaystyle\frac{1}{2}\cos(2\pi f_0\tau)\\
+    G_x(f)=\displaystyle\frac{1}{4}\left[\delta(f-f_0)+\delta(f+f_0)\right]
+\end{gather*}
+Per le formule di passaggio attraverso un filtro si calcola la correlazione e la densità spettrale di energia del processo $y(t)$:
+\begin{gather*}
+    G_y(f)=G_x(f)|H(f)|^2=\displaystyle\frac{1}{4}\left[\delta(f-f_0)+\delta(f+f_0)\right]\cdot4\cos^2(2\pi fT)\\
+    \cos^2(2\pi f_0T)\delta(f-f_0)+\cos^2(-2\pi f_0T)\delta(f+f_0)
+\end{gather*}
+\begin{equation}
+    G_y(f)=\cos^2(2\pi f_0T)[\delta(f-f_0)+\delta(f+f_0)]
+\end{equation}
+Antitrasformando la densità spettrale di energia si ottiene la funzione di autocorrelazione del processo $y(t)$:
+\begin{equation}
+    R_y(\tau)=2\cos^2(2\pi f_0T)\cos(2\pi f_0\tau)
+\end{equation}
+Si determina la potenza, calcolando la funzione di autocorrelazione in $\tau=0$:
+\begin{equation}
+    P_y=R_y(0)=2\cos^2(2\pi f_0T)
+\end{equation}
+
+\clearpage
 
 \end{document}
