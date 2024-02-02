@@ -3,8 +3,8 @@
 \tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm}}
 \begin{document}
 \begin{tikzpicture}[scale=2]
-    \node[block](tx)at(-0.5,0){$Tx$};
-    \node[block](rx)at(2.5,0){$Rx$};
+    \node[block](tx)at(-0.5,0){$\mathrm{T}_x$};
+    \node[block](rx)at(2.5,0){$\mathrm{R}_x$};
     \node[block](c)at(1,0){Canale};
     \draw[->,very thick](tx.0)--(c.180);
     \draw[->,very thick](c.0)--(rx.180);

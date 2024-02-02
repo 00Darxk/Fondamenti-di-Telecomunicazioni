@@ -6,7 +6,7 @@
     \draw[->](-0.5,-1)--(-0.5,1.25)node[right]{$x(t)$};
     \draw[very thick,,smooth, domain=-0.25:0.25]plot(\x,{sin(4*pi*\x r)/(4*pi*\x)});
     \node[below]at(0,0){$1$};
-    \draw[very thick,,smooth, domain=0.5:1]plot(\x,{-sin(4*pi*(\x-0.75) r)/(4*pi*(\x-0.75))});
-    \node[above]at(0.75,0){$0$};
+    \draw[very thick](0.5,0)--(1,0);
+    \node[below]at(0.75,0){$0$};
 \end{tikzpicture}
 \end{document}

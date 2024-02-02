@@ -2656,7 +2656,7 @@ Si definisce la variabile aleatoria $X$ una rappresentazione matematica di un pr
 un possibile 
 valore assunto dalla variabile aleatoria $X$. Si vuole quindi calcolare la probabilità che la variabile aleatoria assuma un certo valore $x$:
 \begin{gather*}
-    P(X=x)
+    \Pr(X=x)
 \end{gather*}
 Lo spazio di valori che può assumere la variabile aleatoria può essere discreto o continuo, in base alla descrizione dell'evento. Dato uno spazio degli eventi $\Omega$ ed 
 un suo sottoinsieme evento $E$, la probabilità che avvenga l'evento appartiene al codominio $[0,1]$, mentre l'insieme delle determinazioni della variabile aleatoria 
@@ -3004,8 +3004,8 @@ Corrisponde alla trasformata di Fourier della densità di probabilità.
 
 Si può calcolare il valore medio di una variabile aleatoria $X$, data la sua funzione caratteristica:
 \begin{gather*}
-    \displaystyle\frac{\df}{\df f}\mathbf{P}_x(f)=-2i\pi\int_{-\infty}^{+\infty}xP_X(x)e^{-2i\pi fx}\df x\\
-    \displaystyle-\frac{1}{2i\pi}\frac{\df}{\df f}\mathbf{P}_x(f)\bigg|_{f=0}=\int_{-\infty}^{+\infty}xP_X(x)\df x=\mu_x
+    \displaystyle\frac{\df\mathbf{P}_x(f)}{\df f}=-2i\pi\int_{-\infty}^{+\infty}xP_X(x)e^{-2i\pi fx}\df x\\
+    \displaystyle-\frac{1}{2i\pi}\frac{\df\mathbf{P}_x(f)}{\df f}\bigg|_{f=0}=\int_{-\infty}^{+\infty}xP_X(x)\df x=\mu_x
 \end{gather*}
 
 Si calcola la funzione caratteristica di una statistica uniforme, gaussiana ed esponenziale:
@@ -3367,7 +3367,7 @@ Per la variabile aleatoria $Z$ la sua densità spettrale di energia si calcola c
     G_z(f)=\int_{-\infty}^{+\infty}\left(R_x(\tau)+R_y(\tau)+2\mu_x\mu_y\right)e^{-2i\pi f\tau}\df \tau=G_x(f)+G_y(f)+2\mu_x\mu_y\delta(f)
 \end{gather}
 
-\subsubsection{Processo Ergotico}
+\subsubsection{Processo Ergodico}
 
 Questa caratteristica è indipendente dalla stazionarietà, ma viene trattata come se fosse associata ad essa. 
 Questi processi vengono descritti da un unica realizzazione. Ovvero le caratteristiche del processo dipendono dalla stessa realizzazione,traslata nel tempo. 
@@ -3385,7 +3385,7 @@ Formalmente l'integrale rispetto al tempo si esprime tramite un limite, come per
 \end{gather*}
 
 
-Un processo armonico è un processo stazionario ed ergotico, per cui si calcola il suo valore medio rispetto al tempo:
+Un processo armonico è un processo stazionario ed ergodico, per cui si calcola il suo valore medio rispetto al tempo:
 \begin{gather*}
     \mu_x=\overline{x(t)}^t=\lim_{\Delta T\to+\infty}\displaystyle\frac{1}{\Delta T}\int_{-\Delta T/2}^{\Delta T/2}\cos\left(\frac{2\pi t}{T}+\varphi\right)\df t=0
 \end{gather*}
@@ -3399,7 +3399,7 @@ Per un processo armonico, il suo spettro densità di potenza si ottiene come:
 
 \subsubsection{Rumore}
 Il rumore viene classificato come un processo aleatorio, dipendente dal tempo, e nella maggior parte dei casi si indica come rumore additivo gaussiano bianco 
-``Additive White Gaussian Noise'' (AVGN) $n(t)$. 
+``Additive White Gaussian Noise'' (AWGN) $n(t)$. 
 Si dice additivo, poiché quando si analizza un segnale, si somma il rumore se è presente nel sistema:
 \begin{gather*}
     x(t)+n(t)
@@ -3579,7 +3579,7 @@ varianza del segnale.
 \end{equation}
 Spesso invece di lavorare in una scala lineare, si lavora in scala logaritmica $\log_{10}$ o decibel $\df B$:
 \begin{gather*}
-    \left(P_e\right)_{\df B}=10\log_{10}P_e=10\log_{10}\displaystyle\frac{V^2}{3}-10\log_{10}M^2=10\log_{10}\displaystyle\frac{V}{3}-10\log_{10}2^{2k}\\
+    \left(P_e\right)_{\df B}=10\log_{10}P_e=10\log_{10}\displaystyle\frac{V^2}{3}-10\log_{10}M^2=10\log_{10}\displaystyle\frac{V^2}{3}-10\log_{10}2^{2k}\\
     (P_e)_{\df B}=10\log_{10}\displaystyle\frac{V^2}{3}-2k\cancelto{3}{10\log_{10}2}=10\log_{10}\displaystyle\frac{V^2}{3}-6k
 \end{gather*}
 Per cui aumentando il numero di bit, ad ogni bit l'errore diminuisce di $6\,\df B$. Così come l'errore, anche il 
@@ -3612,16 +3612,13 @@ Quindi per trasmettere un unico canale telefonico, bisogna trasmettere un simbol
     k\cdot f_c=64\,\mathrm{kb/s}
 \end{equation}
 
-Questa tecnica si chiama PCM ``Parse Coded Modulation'', e forma il canale base su cui si sono impostano le gerarchie numeriche, poiché si inviano più 
-canali insieme su una stessa linea. 
-
-
+In questo modo si forma il canale base, su cui su impostano le gerarchie numeriche, quando si inviano più canali insieme su una stessa linea. 
 Tipicamente si effettua una codifica di sorgente, poiché se venisse permesso a più utenti di trasmettere simultaneamente sulla la stessa banda, 
 si saturerebbe immediatamente. 
 
 Una codifica naturale associa ad ogni valore possibile di ingresso al quantizzatore una sequenza di $k$ bit, ma alcuni simboli non vengono trasmessi con la stessa frequenza, 
 per cui la densità di probabilità dei valori dei campioni in entrata al quantizzatore non è uniformemente distribuita. Se è nota a priori è possibile 
-creare una codifica alla sorgente associando i simboli più probabili a meno bit ed i simboli più probabili a più bit. Per cui ad ogni simbolo viene associato un numero 
+creare una codifica alla sorgente associando i simboli più probabili a meno bit ed i simboli meno probabili a più bit. Per cui ad ogni simbolo viene associato un numero 
 diverso di bit. 
 
 Quindi le parole di codice hanno un numero di bit massimo pari a $k$, e minimo definito dalla codifica a sorgente, in questo modo si diminuisce il bitrate richiesto da un 
@@ -3641,8 +3638,8 @@ verso sinistra, ed uno $0$ andando verso destra. Ogni volta che si raggiunge un 
 effettuato per raggiungerlo dalla radice dell'albero. 
 Tutti i nodi associati a simboli sono delle foglie, per come è stato costruito l'albero, posti a diversi livelli di profondità in base alla loro probabilità. 
 
-In questo modo i simboli più probabili, essendo posizionati ad una profondità minore, sono associati ad una sequenza di bit di lunghezza minore. Si crea un albero per associare univocamente una sequenza di bit ad un 
-dato simbolo, poiché avendo lunghezza diversa possono essere confusi come preambolo di un'altra sequenza. 
+In questo modo i simboli più probabili, essendo posizionati ad una profondità minore, sono associati ad una sequenza di bit di lunghezza minore. Si crea lo stesso albero in 
+ricezione per associare univocamente una sequenza di bit ad un dato simbolo, poiché avendo lunghezza diversa possono essere confusi come preambolo di un'altra sequenza. 
 
 
 Per ottenere il bitrate di questa codifica bisogna moltiplicare la frequenza in cui vengono trasmessi i simboli $f_c$ per il numero medio di bit:
@@ -3714,9 +3711,9 @@ una limitazione in banda, questo valore $B$ rappresenta la frequenza massima ges
 Questa funzione di trasferimento è simmetrica, e generalmente si considera sia un filtro passa basso ideale, ovvero una finestra, anche se non rappresenta pienamente il 
 suo comportamento reale:
 \begin{equation*}
-    H(f)=\displaystyle\frac{1}{2B}\rect\left(\frac{f}{2B}\right)
+    H(f)=\displaystyle\rect\left(\frac{f}{2B}\right)
 \end{equation*}
-Su questo canale si aggiunge il rumore AVGN $n(t)$. 
+Su questo canale si aggiunge il rumore AWGN $n(t)$. 
 
 Questo segnale raggiunge poi il ricevitore che deve demodulare il segnale ricevuto. Prima di attuare quest'operazione filtra il segnale sulla stessa banda del canale per 
 eliminare i contributi fuori banda del rumore. La potenza del rumore, e quindi la sua varianza, si calcola sulla banda del canale:
@@ -3748,7 +3745,10 @@ bisogna diminuire la potenza media utilizzata dal trasmettitore. Ciò viene effe
 verso opposto, in modo che il valor medio sia vicino allo zero, consumando meno corrente. Questo tipo di codifica viene chiamata bipolare:
 \begin{figure}[H]%
     \centering
-    \includegraphics{modulazione-corrente.pdf}%
+    \subfloat[\centering Unipolare]{\includegraphics{modulazione-corrente-unipolare.pdf}}%
+    \qquad
+    \subfloat[\centering Bipolare]{\includegraphics{modulazione-corrente.pdf}}%
+    \caption{Codifica di Bit}
 \end{figure}
 Un segnale associato a zero ed uno rappresenta il modello più semplice per trasmettere un segnale, ma questo non è efficiente, poiché è anche il metodo più lento per 
 trasmettere informazione. Quindi i bit vengono raggruppati in codici formati da un certo numero di bit consecutivi, chiamati simboli. Si genera così un alfabeto con un 
@@ -3757,9 +3757,12 @@ capacità di trasmissione del sistema, mantenendo invariata la velocità di tras
 Per trasmettere questo tipo di alfabeto sorgente sono necessari lo stesso numero di livelli possibili per il segnale trasmesso sul canale, inoltre bisogna poterli distinguere 
 in ricezione, quindi all'aumentare del numero di simboli nell'alfabeto in sorgente, si aumenta la probabilità di errore in ricezione. Per poter distinguere $M$ 
 simboli diversi sono necessari $M-1$ valori di soglia. Costruendo il diagramma ad occhio si osservano vari livelli, che rappresentano i diversi simboli trasmessi sul canale. Questo tipo di codifica si 
-chiama ``Pulse Amplitude Modulation'' PAM, poiché modifica solamente l'ampiezza dell'impulso associato ad un simbolo. 
+chiama ``Pulse Amplitude Modulation'' PAM, poiché modifica solamente l'ampiezza dell'impulso associato ad un simbolo. Se il numero di simboli $M$ 
+corrisponde al numero di intervalli $\Delta_q$ allora si parla di una codifica PCM ``Pulse Coded Modulation'', dove i valori dell'alfabeto rappresentano 
+i valori quantizzati e confrontati con una soglia dei campioni del segnale originale $x(t)$, a differenza della PAM dove il numero dei simboli viene scelto 
+arbitrariamente. 
 
-\subsubsection{Codifica M-aria}
+\subsubsection{Codifica PAM}
 
 Invece di effettuare una codifica binaria, si applica una codifica M-aria, utilizzando $M$ simboli diversi per aumentare la banda del canale. 
 
@@ -3838,7 +3841,7 @@ Si suppone per semplicità $x(t)*h(t)=x(t)$:
 \begin{gather*}
     y(t)=x(t)+n(t)
 \end{gather*}
-Poiché il rumore agisci su tutte le frequenze, mentre il segnale è limitato in banda, si inserisce un altro filtro a valle, di funzione di trasferimento $H_0(f)$, per 
+Poiché il rumore agisce su tutte le frequenze, mentre il segnale è limitato in banda, si inserisce un altro filtro a valle, di funzione di trasferimento $H_0(f)$, per 
 eliminare i contributi fuori banda del rumore, prima di ricevere il segnale $y(t)$.
 In questo modo è presente solo nella banda $[-B,B]$ ed ha una varianza $BN_0$. Si vuole calcolare ora la probabilità di errore di trasmissione dovuto al rumore $n(t)$. 
 Da questo processo si estrae la variabile aleatoria $Y$, dato un istante di tempo $t_0$:
@@ -3871,7 +3874,7 @@ Si calcola quindi la probabilità che il rumore sia tale da rendere il segnale a
 \end{gather*}
 Si applica la sostituzione $t=\displaystyle\frac{c_2-y}{\sqrt{2}\sigma_n}$, l'integrale diventa quindi:
 \begin{gather*}
-    \displaystyle\int_{-\infty}^{\frac{c_2-\overline{c}}{\sqrt2\sigma_n}}\frac{1}{\sqrt{2\pi}\sigma_n}e^{-t^2}\left(-\sqrt2\sigma_n\df t\right)=\int_{\frac{c_2-\overline{c}}{\sqrt2\sigma_n}}^{+\infty}\frac{1}{\sqrt\pi}e^{-t^2}\df t
+    \displaystyle\int_{+\infty}^{\frac{c_2-\overline{c}}{\sqrt2\sigma_n}}\frac{-\sqrt2\sigma_n}{\sqrt{2\pi}\sigma_n}e^{-t^2}\df t=\int_{\frac{c_2-\overline{c}}{\sqrt2\sigma_n}}^{+\infty}\frac{e^{-t^2}}{\sqrt\pi}\df t
 \end{gather*}
 Questo integrale si può esprimere rispetto alla funzione di errore complementare $\mathrm{erfc}(x)$, oppure rispetto alla funzione $Q(x)$:
 \begin{gather}
@@ -3891,9 +3894,9 @@ i simboli $c_1$ e $c_2$ è uguale, il BER corrisponde alla media tra le due perc
 \begin{equation*}
     \mathrm{BER}=\displaystyle\frac{1}{2}Q\left(\frac{c_2-\overline{c}}{\sigma_n}\right)+\frac{1}{2}Q\left(\frac{\overline{c}-c_1}{\sigma_n}\right)
 \end{equation*}
-In generale il BER si calcola come la somma tra gli errori di trasmissione $P_{e,c_i}$ di un simbolo $c_i$ moltiplicato per la sua probabilità di errore $P_i$:
+In generale il BER si calcola come la somma tra gli errori di trasmissione $P_E(c_i)$ di un simbolo $c_i$ moltiplicato per la sua probabilità di errore $P_i$:
 \begin{equation*}
-    \mathrm{BER}=\displaystyle\sum_{i=1}^MP_{i}P_{e,c_i}
+    \mathrm{BER}=\displaystyle\sum_{i=1}^MP_{i}P_E(c_i)
 \end{equation*}
 
 Quando gli argomenti di entrambe le $\mathrm{erfc}(x)$ sono uguali allora il BER è minimo, per cui la soglia corrisponde al valore intermedio tra i due valori $c_1$ e $c_2$:
@@ -3904,7 +3907,7 @@ Nella realtà la statistica del rumore è diversa per i due valori, e generalmen
 più vicino al valore basso $c_1$.  
 Si indica con $d$ la distanza tra i due livelli, per cui sostituendo la precedentemente relazione, il BER si ottiene come:
 \begin{equation}
-    \mathrm{BER}=Q\left(\frac{c_2-c_1}{\sigma_n}\right)=Q\left(\frac{d}{2\sqrt{BN_0}}\right)
+    \mathrm{BER}=Q\left(\frac{c_2-c_1}{2\sigma_n}\right)=Q\left(\frac{d}{2\sqrt{BN_0}}\right)
 \end{equation}
 Generalmente con un BER nell'ordine di grandezza di $10^{-9}$ si considera un errore nullo, ciò viene ottenuto quando l'argomento della funzione $Q$ corrisponde a $6$. 
 La probabilità di errore diminuisce maggiore è la distanza tra i due valori, ed è inversamente proporzionale alla banda del canale. 
@@ -3939,9 +3942,10 @@ La sua potenza si ottiene integrando su tutte le frequenza la sua densità spett
 \begin{gather*}
     P_n=\intinf \frac{N_0}{2}|H_0(f)|^2\df f
 \end{gather*}
-Si calcola il rapporto potenza tra il segnale utile ed il rumore:
+Il rapporto potenza segnale rumore è definito come il rapporto tra la potenza utile del segnale, identificata dalla potenza ricevuta $P_R$, e la potenza del rumore:
 \begin{gather*}
-    \mathrm{SNR}=\displaystyle\frac{c_n^2\left|\intinf G(f)H_0(f)\df f\right|^2}{\intinf \frac{N_0}{2}|H_0(f)|^2\df f}
+    P_R=|y'(0)|^2\\
+    \mathrm{SNR}=\displaystyle\frac{P_R}{P_n}=\frac{c_n^2\left|\intinf G(f)H_0(f)\df f\right|^2}{\intinf \frac{N_0}{2}|H_0(f)|^2\df f}
 \end{gather*}
 Si applica la disuguaglianza di Schwarz, e si ottiene la seguente relazione:
 \begin{gather*}
@@ -4016,8 +4020,7 @@ Per trasferire questa potenza è necessario considerare il fattore di perdita $L
 In generale in telecomunicazioni si aumenta la potenza, e le grandezze richieste in generale, per allontanarsi dal valore di soglia, considerando un certo margine di 
 tolleranza, e quindi mantenere le specifiche richieste. 
 
-\subsection{Codifica di Linea in Banda Portante}
-
+\subsection{Codifica di Linea in Banda Passante}
 
 Tutti i sistemi wireless utilizzano una portante $f_0$.Il segnale viene modulato da un coseno nel tempo, quindi in frequenza viene 
 traslato di un fattore $\pm f_0$, la sua funzione di trasferimento è quindi formata da due filtri passa bassi centrati in $\pm f_0$, di larghezza $B$:
@@ -4027,6 +4030,8 @@ traslato di un fattore $\pm f_0$, la sua funzione di trasferimento è quindi for
 \end{figure}
 Mentre i sistemi di telecomunicazione a fibra ottica possono essere considerati a banda base, i sistemi wireless vengono modulati, e lavorano sulle frequenze ISM ``Industrial Scientific and Medical'' 
 le bande non licenziate da nessun ente statale o privato, oppure in caso di telefonia mobile si lavora su bande licenziate che variano da paese a paese. 
+
+\subsubsection{Modulazione ASK}
 
 Il segnale $x(t)$ viene modulato da un oscillatore locale, montato a monte del canale:
 \begin{gather*}
@@ -4046,16 +4051,15 @@ Questa tecnica varia l'impulso del segnale e risulta in una risposta in funzione
     \includegraphics{ask.pdf}
 \end{figure}
 Si chiama ASK ``Amplitude Shift Keying'', dove l'oscillazione dell'ampiezza dipende dalla frequenza del coseno $f_0$. 
-Poiché le due repliche in frequenza non sono centrate nell'origine, bisogna verificare che il segnale modulato rientri all'interno della banda:
-\begin{equation*}
-    f_{\max}\leq \displaystyle\frac{B}{2}
-\end{equation*}
-Considerando un seno cardinale come impulso base, la sua frequenza massima corrisponde alla metà del baud $R_s$:
+Poiché le due repliche in frequenza non sono centrate nell'origine, bisogna verificare che il segnale modulato rientri all'interno della banda. Viene sprecata banda poiché 
+lo stesso segnale viene ripetuto sulla stessa banda, effettivamente dimezzando la banda utile del sistema, dato che la frequenza massima deve essere minore di metà della banda. 
+Per cui il baud risulta essere:
 \begin{gather*}
-    f_{\max}=\displaystyle\frac{1}{2T_s}=\frac{R_s}{2}\\
-    R_s\leq B
+    f_{\max}=\displaystyle\frac{1}{2T_s}=\frac{R_s}{2}\leq\frac{B}{2}
 \end{gather*}
-Il baud massimo è la metà rispetto ad una codifica in banda base, poiché il baud in banda portante corrisponde alla metà del baud in banda base. 
+\begin{equation}
+    R_s\leq B
+\end{equation}
 
 
 In ricezione bisogna poi togliere questa modulazione, per ora si trascura il rumore nel canale. Per ritornare ad un segnale in banda base si moltiplica l'uscita del 
@@ -4063,7 +4067,7 @@ canale $y(t)$ per un altro coseno alla stessa frequenza $f_0$:
 \begin{gather*}
     y(t)=z(t)\cdot2\cos(2\pi f_0t)=x(t)\cdot2\cos^2(2\pi f_0t)=x(t)\left[1+\cos(4\pi f_0t)\right]\\
     x(t)+x(t)\cdot\cos(4\pi f_0t)\\
-    Y(f)=X(f)+\displaystyle\frac{1}{2}X(f-2f_0)+\frac{1}{2}X(f+f_0)
+    Y(f)=X(f)+\displaystyle\frac{1}{2}X(f-2f_0)+\frac{1}{2}X(f+2f_0)
 \end{gather*}
 In seguito viene filtrato da un filtro passa basso $H_{\mathrm{LP}}(f)$, per eliminare le frequenze centrate in $\pm2f_0$:
 \begin{figure}[H]%
@@ -4074,13 +4078,13 @@ Moltiplicando per un coseno alla stessa frequenza si applica una demodulazione o
 restituisce un segnale ad una frequenza poco minore. 
 
 Il problema di questa modulazione consiste nello spreco di banda effettuato, poiché lo stesso segnale viene copiato due volte sulla stessa banda, risultando in un baud 
-dimezzato rispetto ad una modulazione in banda base. 
+dimezzato rispetto ad una modulazione in banda base. La codifica ASK quindi non è ottimale. 
 
 \subsubsection{Modulazione QAM}
 
 Questo problema si risolve comunemente applicando una modulazione in fase in quadratura QAM ``Quadrature Amplitude Modulation''. 
-Si considerano due segnali in uscita dal modulatore $x_1(t)$ e $x_2(t)$. %uguali tra di loro $x_1(t)=x_2(t)$. 
-Il primo viene moltiplicato per un coseno, mentre eil secondo per un 
+Si considerano due segnali in uscita dal modulatore $x_1(t)$ e $x_2(t)$. 
+Il primo viene moltiplicato per un coseno, mentre il secondo per un 
 seno, poi vengono sommati per generare il segnale $z(t)$:
 \begin{gather*}
     z(t)=x_1(t)\cdot\cos(2\pi f_0t)+x_2(t)\cdot\sin(2\pi f_0t)\\
@@ -4092,7 +4096,7 @@ Per demodulare il segnale si moltiplica divide un due parti e si moltiplica uno 
 \begin{gather*}
     y_1(t)=z(t)\cdot2\cos(2\pi f_0t)\\
     2x_1(t)\cos^2(2\pi f_0t)+2x_2(t)\sin(2\pi f_0t)\cos(2\pi f_0t)\\
-    x_1(t)+x_1(t)\cos(4\pi f_0t)+x_2(t)\sin(4\pi f_0t)\\
+    x_1(t)+x_1(t)\cos(4\pi f_0t)+x_2(t)\sin(4\pi f_0t)
 \end{gather*}
 Passando attraverso un filtro passa basso, si rimuovono le frequenze centrate in $\pm 2f_0$, e si ottiene il segnale $x_1(t)$ in uscita. 
 Analogamente per il seno, si ottiene:
@@ -4107,20 +4111,25 @@ Data l'espressione del baud:
 \begin{gather*}
     R_b=R_s\log_2M\leq B\log_2M
 \end{gather*}
-Poiché uno stesso segnale viene diviso in due parti $x_1(t)$ e $x_2(t)$, ed è possibile quindi raddoppiare la velocità di trasmissione di uno stesso simbolo, 
+Poiché uno stesso segnale viene diviso in due parti $x_1(t)$ e $x_2(t)$, è possibile raddoppiare la velocità di trasmissione di uno stesso simbolo, 
 inviando due bit contemporaneamente. 
 In questo modo è possibile trasmettere un segnale senza aver perso capacità di canale, poiché trasmette come trasmetterebbe in banda base. Il segnale $x_1(t)$ in 
-uscita è un fase, mentre il segnale $x_2(t)$ si dice in quadratura di fase. 
-
+uscita è un fase, mentre il segnale $x_2(t)$ si dice in quadratura di fase. Per cui rappresentano due funzioni ortogonali tra di loro, e quindi non interferiscono l'una 
+dall'altra. Dal contenuto informativo di questi due segnali è possibile identificare univocamente un unico simbolo $c_n$. Poiché nella codifica QAM viene identificato in un piano 
+dalle coordinate $(a_n,b_n)$, codificate la prima nel segnale in fase $x_1(t)$ e la seconda nel segnale in quadratura $x_2(t)$. 
 
 
 Per osservare in che modo funziona, si considera il piano complesso, con un alfabeto di quattro simboli $M=4$. I numeri possono assumere parte reale ed immaginaria pari 
-a $\pm1$. In questo modo si creano numeri complessi ognuno associato ad un simbolo $m$, dove la sua parte reale coincide al segnale in fase, mentre la sua parte immaginaria coincide con il segnale in 
-quadratura di fase:
+a $\pm1$. In questo modo si hanno quattro possibili combinazioni che individuano i quattro possibili simboli dell'alfabeto $c_m$. 
+Dalla rappresentazione polare di un numero complesso si ottiene:
 \begin{gather*}
-    I_m=\Re\left\{e^{2i\pi f_0t}\right\}=\cos(2\pi f_0t)\\
-    Q_m=\Im\left\{e^{2i\pi f_0t}\right\}=\cos(2\pi f_0t)\\
+    I=\Re\left\{e^{2i\pi f_0t}\right\}=\cos(2\pi f_0t)\\
+    Q=\Im\left\{e^{2i\pi f_0t}\right\}=\sin(2\pi f_0t)\\
 \end{gather*}
+La parte reale di questo numero complesso rappresenta il segnale in fase, mentre la parte immaginaria corrisponde al segnale in quadratura. Per cui i due segnali 
+rappresentano due sistemi di coordinate ortogonali tra di loro. 
+
+
 Sul piano complesso si costruisce una ``costellazione'' 4 QAM:
 \begin{figure}[H]%
     \centering\
@@ -4133,14 +4142,17 @@ Nella realtà la sequenza di bit $x(t)$ viene divisa in due sequenza $x_1(t)$ e 
     x_1(t)=\displaystyle\sum_{n=-\infty}^{+\infty}a_ng(t-nT_s)\\
     x_2(t)=\displaystyle\sum_{n=-\infty}^{+\infty}b_ng(t-nT_s)
 \end{gather*}
-Dove $a_n$ e $b_n$ assumono valori compresi nell'intervallo $[-1,1]$. Per capire quale a quale simbolo corrisponde è 
+Dove $a_n$ e $b_n$ assumono valori $\pm1$. Per capire quale a quale simbolo corrisponde è 
 necessario conoscere simultaneamente il valore di $a_n$ e $b_n$, per individuare il suo punto nella costellazione. 
-Per mantenere invariata la distanza minima tra due simboli è possibile scalare i loro valori di un fattore $1/\sqrt2$. In questo modo assumono 
-valore compreso nell'intervallo $[-1/\sqrt2,1/\sqrt2]$. In generale il segnale ricevuto non coincide esattamente con il punto nella costellazione, ma si trova 
+Da questo punto si identifica il simbolo associato: $(a_n,b_n)\to c_n$. 
+
+
+Per mantenere invariata la distanza minima tra due simboli è possibile scalare i valori di un fattore $1/\sqrt2$. In questo modo assumono 
+valore compreso nell'intervallo $\pm1/\sqrt2$. In generale il segnale ricevuto non coincide esattamente con il punto nella costellazione, ma si trova 
 nello stesso quadrante. In caso il rumore sia eccessivo, può essere spostato negli altri quadranti della costellazione, generando un errore in ricezione. 
 Non si misura il BER poiché si ha una base binaria, e poiché è necessario considerare l'errore su entrambi i 
 valori simultaneamente. 
-Quando sono presenti più bit, si crea un quadrato di lato pari al numero di bit, contenente $M$ numeri complessi associati a simboli. In questo caso si considera un 
+Quando sono presenti più bit, si crea un quadrato di lato pari al numero di bit, contenente $M$ punti sul piano associati ad altrettanti simboli. In questo caso si considera un 
 intorno del numero complesso per determinare se il segnale corrisponde a quel simbolo, questo intorno diminuisce all'aumentare dei simboli dell'alfabeto. Per cui 
 una grandezza importante da considerare è la distanza minima tra due simboli nella costellazione, per diminuire l'errore di ricadere in una zona associata ad un 
 altro simbolo.  
@@ -4172,7 +4184,7 @@ Si suppone che $G(f)$ non si sovrapponga quando è centrata in $\pm f_0$, per cu
 \end{gather*}
 L'energia di simbolo è quindi:
 \begin{gather*}
-    E_s=\intinf |Z(f)|^2\df f=\frac{1}{2}(a_n^2+b_n^2)\intinf |G(f-f_0)|^2\df f+\frac{1}{2}(a_n^2+b_n^2)\intinf |G(f+f_0)|^2\df f
+    E_s=\intinf |Z(f)|^2\df f=\frac{1}{4}(a_n^2+b_n^2)\intinf |G(f-f_0)|^2\df f+\frac{1}{4}(a_n^2+b_n^2)\intinf |G(f+f_0)|^2\df f
 \end{gather*}
 \begin{equation}
     E_s=\displaystyle\frac{a_n^2+b_n^2}{2}E_g
@@ -4202,7 +4214,7 @@ Poiché sono equidistanti, l'angolo tra due simboli può essere espresso rispett
 \end{gather*}
 La distanza minima tra due simboli è quindi il doppio dell'altezza del simbolo $i$: 
 \begin{gather*}
-    d_{\min}=2h_i=A\sin\left(\displaystyle\frac{\pi}{M}\right)
+    d_{\min}=2h_i=2A\sin\left(\displaystyle\frac{\pi}{M}\right)
 \end{gather*}
 Si chiama modulazione in fase, poiché i simbolo sono posizionati sulla fase del coseno:
 \begin{gather*}
@@ -4210,15 +4222,17 @@ Si chiama modulazione in fase, poiché i simbolo sono posizionati sulla fase del
     a_m=A\cos(\varphi_m)\\
     b_m=A\sin(\varphi_m)
 \end{gather*}
-I simboli vengono posizionati sulla fase iniziale del coseno $\phi_m$:
+In questo modo si può ritornare ad una QAM, associando il simbolo $c_m$ alla coppia di valori $(a_m,b_m)$. 
+Nella rappresentazione PSK i simboli $c_m$ vengono individuati unicamente dalla fase $\\varphi_m$ del coseno. 
 \begin{gather*}
-    \varphi_m=\displaystyle\frac{2\pi}{M}
+    \varphi_m=\displaystyle\frac{(2m+1)\pi}{M}\to c_m
 \end{gather*}
+Ogni simbolo si trova ad una diversa fase del coseno, e quindi ad una diversa posizione sulla circonferenza. 
 
 \subsection{Secondo Teorema di Shannon}
 
 Il secondo teorema di Shannon fornisce un limite massimo del bitrate in trasmissione, in funzione del rapporto segnale rumore. 
-Sia dato un canale limitato in banda $B$, corrotto da un rumore AVGN, il teorema afferma che esiste un codice tramite cui è possibile, se usato, trasmettere con una 
+Sia dato un canale limitato in banda $B$, corrotto da un rumore AWGN, il teorema afferma che esiste un codice tramite cui è possibile, se usato, trasmettere con una 
 probabilità di errore sufficientemente piccola. 
 
 Si dimostra che la capacità di canale, corrispondente al bitrate massimo, è data dalla seguente formula:
@@ -4259,10 +4273,12 @@ Per determinare l'efficienza di un canale, si rappresentano le curve associate a
 rispetto all'energia di bit:
 \begin{gather*}
     P_R=\displaystyle\frac{E_b}{T_b}=E_bC\\
-    C=B\log_2\left(\displaystyle 1+\frac{E_bC}{N_0B}\right)\\
+    C=B\log_2\left(\displaystyle 1+\frac{E_bC}{N_0B}\right)
+\end{gather*}
+\begin{gather*}
     \displaystyle\frac{C}{B}=\log_2\left(1+\frac{E_b}{N_0}\frac{C}{B}\right)\\
-    e^{\frac{C}{B}}=1+\displaystyle\frac{E_b}{N_0}\frac{C}{B}\\
-    \displaystyle\frac{E_b}{N_0}=\frac{e^{\frac{C}{B}}-1}{\displaystyle\frac{C}{B}}
+    2^{\frac{C}{B}}=1+\displaystyle\frac{E_b}{N_0}\frac{C}{B}\\
+    \displaystyle\frac{E_b}{N_0}=\frac{2^{\frac{C}{B}}-1}{\displaystyle\frac{C}{B}}
 \end{gather*}
 
 Generalmente l'energia del bit si misura in decibel, e le curve vengono rappresentate in funzione di questo rapporto $E_b/N_0$:
@@ -4274,14 +4290,13 @@ Su questa curva è possibile confrontare l'efficienza delle codifiche trattate, 
 Si calcola l'energia del bit corrispondente ad una capacità $C=0$:
 \begin{gather*}
     C=B\log_2\left(\displaystyle 1+\frac{E_b}{N_0}\frac{C}{B}\right)\\
-    \displaystyle\frac{E_b}{N_0}=\frac{N_0B}{E_bC}\log_2\left(1+\frac{E_b}{N_0}\frac{C}{B}\right)\\
-    \lambda=\displaystyle\frac{E_b}{N_0}\frac{C}{B}\\
-    \displaystyle\frac{E_b}{N_0}=\frac{1}{\lambda}\log_2\left(1+\lambda\right)\\
-    \displaystyle\frac{E_b}{N_0}=\frac{1}{\lambda}\frac{\ln(1+\lambda)}{\ln2}\\
-    \lim_{\lambda\to0}\displaystyle\frac{E_b}{N_0}=\frac{1}{\ln2}\cancelto{1}{\lim_{\lambda\to0}\frac{\ln(1+\lambda)}{\lambda}}
+    \displaystyle\frac{N_0}{E_b}=\frac{N_0B}{E_bC}\log_2\left(1+\frac{E_b}{N_0}\frac{C}{B}\right)\\
+    \lambda=\displaystyle\frac{N_0}{E_b}\frac{C}{B}\\
+    \displaystyle\frac{N_0}{E_b}=\frac{1}{\lambda}\log_2\left(1+\lambda\right)=\frac{1}{\lambda}\frac{\ln(1+\lambda)}{\ln2}\\
+    \lim_{\lambda\to0}\displaystyle\frac{N_0}{E_b}=\frac{1}{\ln2}\cancelto{1}{\lim_{\lambda\to0}\frac{\ln(1+\lambda)}{\lambda}}
 \end{gather*}
 \begin{equation}
-    E_b=\ln2
+    \displaystyle\frac{E_b}{N_0}=\ln2
 \end{equation}
 Questo rappresenta il limite inferiore per l'energia di bit, oltre il quale non è possibile trasmettere segnali, poiché la capacità massima di canale si annulla.  
 
@@ -4308,10 +4323,10 @@ Questo valore si chiama limite di banda illimitata, o di potenza limitata.
 Se il rapporto segnale rumore, è molto maggiore di uno, allora si può esprimere la capacità massima come:
 \begin{gather*}
     \displaystyle\frac{P_R}{N_0B}>>1\\
-    C\approx B\log_2\displaystyle\frac{P_R}{N_0B}=B\left(\log_{10}\frac{P_R}{N_0B}\right)\frac{1}{\log_{10}2}\approx B(\mathrm{SNR})_{\df B}\cdot3.3
+    C=B\log_2(1+\mathrm{SNR})\approx B\log_2\displaystyle\frac{P_R}{N_0B}=B\displaystyle\frac{10\log_{10}(\mathrm{SNR})}{10\log_{10}2}= B\frac{(\mathrm{SNR})_{\df B}}{3}
 \end{gather*}
 \begin{equation}
-    C\approx B(\mathrm{SNR})_{\df B}\cdot3.3
+    C\approx B(\mathrm{SNR})_{\df B}\cdot0.33
 \end{equation}
 
 \subsubsection{Codifica di Hamming}
