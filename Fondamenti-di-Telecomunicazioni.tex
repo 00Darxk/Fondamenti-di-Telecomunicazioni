@@ -17,6 +17,7 @@
 \usepackage{romanbarpagenumber}
 \usepackage{float}
 \usepackage{subfig}
+\allowdisplaybreaks
 
 \setlength{\headheight}{12.0pt}
 \addtolength{\topmargin}{-12.0pt}
@@ -37,6 +38,8 @@
 \newcommand{\intinf}{\displaystyle\int_{-\infty}^{+\infty}}
 \newcommand{\intpinf}{\displaystyle\int_{0}^{+\infty}}
 \newcommand{\intninf}{\displaystyle\int_{-\infty}^{0}}
+\newcommand{\vect}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\tageq}{\tag{\stepcounter{equation}\theequation}}
 
 \numberwithin{equation}{subsection}
 
@@ -658,28 +661,22 @@ in forma analitica.
 \subsubsection{Proprietà}
 
 La convoluzione è un'operazione commutativa:
-\begin{equation}
-    x(t)*y(t)=y(t)*x(t)
-\end{equation}
 \begin{gather*}
+    x(t)*y(t)=y(t)*x(t)\tageq\\
     x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y(t-\tau)\df\tau\\
     {T=t-\tau}\\
     \int_{-\infty}^{+\infty}y(T)x(t-T)\df T=y(t)*x(t)
 \end{gather*}
 Vale la proprietà distributiva:
-\begin{equation}
-    (x_1(t)+x_2(t))*y(t)=x_1(t)*y(t)+x_2(t)*y(t)
-\end{equation}
 \begin{gather*}
+    (x_1(t)+x_2(t))*y(t)=x_1(t)*y(t)+x_2(t)*y(t)\tageq\\
     (x_1(t)+x_2(t))*y(t)=\displaystyle\int_{-\infty}^{+\infty}(x_1(\tau)+x_2(\tau))y(t-\tau)\df\tau\\
     \int_{-\infty}^{+\infty}x_1(\tau)y(t-\tau)\df\tau+\int_{-\infty}^{+\infty}x_2(\tau)y(t-\tau)\df\tau=x_1(t)*y(t)+x_2(t)*y(t)
 \end{gather*}
 
 Se uno dei due segnali convoluti, o entrambi, sono traslati allora il segnale convoluzione risultante è traslato della traslazione complessiva dei due segnali originali:
-\begin{equation}
-    x(t-t_{x0})*y(t-t_{y0})=z(t-t_{x0}-t_{y0})
-\end{equation}
 \begin{gather*}
+    x(t-t_{x0})*y(t-t_{y0})=z(t-t_{x0}-t_{y0})\tageq\\
     x(t-t_{x0})*y(t-t_{y0})=\displaystyle\int_{-\infty}^{+\infty}x(\tau-t_{x0})y[t-(\tau+t_{y0})]\df\tau\\
     {T=\tau-t_{x0}}\\\
     \int_{-\infty}^{+\infty}x(T)y[(t-t_{x0}-t_{y0})+T]\df T=z(t-t_{x0}-t_{y0})
@@ -715,10 +712,8 @@ Una correlazione si applica quando due segnali sono simili tra loro, viene defin
     R_{xy}(t)=x(t)\otimes y(t)=\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)\df\tau
 \end{equation}
 Viene definito $R_{xy}$ il fattore di correlazione tra i due segnali $x$ e $y$. La correlazione al contrario della convoluzione non commuta: 
-\begin{equation}
-    R_{xy}(t)=R_{yx}^*(-t)
-\end{equation}
 \begin{gather*}
+    R_{xy}(t)=R_{yx}^*(-t)\tageq\\
     \displaystyle R_{xy}(t)=\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)\df\tau\\
     T=t+\tau\\
     \displaystyle\int_{-\infty}^{+\infty}x(T)y^*(-t+T)\df T=\left[\int_{-\infty}^{+\infty}x^*(T)y(-t+T)\df T\right]^*=R_{yx}^*(-t)
@@ -729,11 +724,9 @@ quindi la correlazione è un'operazione anticommutativa. La correlazione tra due
     x(t)\otimes y(t)=\displaystyle\int_{-\infty}^{+\infty}x(t+\tau)y^*(\tau)\df\tau\\
     x(t)*y^*(-t)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)y^*(-(t-\tau))\df\tau\\
     T=\tau-t\\
-    -\int_{+\infty}^{-\infty}x(t+T)y^*(T)\df T=\int_{-\infty}^{+\infty}x(t+T)y^*(T)\df T=R_{xy}(t)
+    -\int_{+\infty}^{-\infty}x(t+T)y^*(T)\df T=\int_{-\infty}^{+\infty}x(t+T)y^*(T)\df T=R_{xy}(t)\\
+    x(t)\otimes y(t)=x(t)*y^*(-t)\tageq
 \end{gather*}
-\begin{equation}
-    x(t)\otimes y(t)=x(t)*y^*(-t)
-\end{equation}
 Quando si analizza la correlazione tra due segnali $x$ e $y$, uno dei quali pari $y(t)=y(-t)$ e reale $y\in\mathbb{R}$, la correlazione tra di loro è uguale alla convoluzione 
 tra di loro:
 \begin{equation*}
@@ -994,7 +987,6 @@ coefficienti di Fourier per un fattore esponenziale, chiamato armonica, di frequ
     \subfloat[\centering Ordine $1$]{\includegraphics{armonica-1.pdf}}%
     \qquad
     \subfloat[\centering Ordine $2$]{\includegraphics{armonica-2.pdf}}%
-    \caption{Armoniche}
 \end{figure}
 Il fattore $c_k$ indica se una data frequenza è presente nel segnale analizzato. Le armoniche sono note a priori, dal punto di vista fisico non esistono armoniche di frequenze 
 negative, ma in ambito matematico sono necessarie per esprimere il segnale. Considerando la rappresentazione di Eulero si può esprimere la serie di Fourier come:
@@ -1007,24 +999,24 @@ espresso data una base ortonormale.
 
 \subsection{Spazio Vettoriale}
 
-Si considera uno spazio euclideo $\mathbb{R}^3$ descritto da tre vettori ortonormali $\hat{\mathbf{x}}=(1,0,0)$, $\hat{\mathbf{y}}=(0,1,0)$ e $\hat{\mathbf{z}}=(0,0,1)$, chiamati base canonica dello spazio vettoriale. 
+Si considera uno spazio euclideo $\mathbb{R}^3$ descritto da tre vettori ortonormali $\hat{\vect{x}}=(1,0,0)$, $\hat{\vect{y}}=(0,1,0)$ e $\hat{\vect{z}}=(0,0,1)$, chiamati base canonica dello spazio vettoriale. 
 Dei vettori di uno spazio vettoriale si dicono base, se sono ortonormali tra di loro, quindi il prodotto scalare tra di loro è nullo ovvero sono linearmente indipendenti, 
 mentre si dicono basi canoniche se il quadrato di un vettore, il prodotto scalare per sé stesso, equivale ad uno. 
-Il prodotto scalare è un'operazione binaria interna ad uno spazio vettoriale $V$ che restituisce uno scalare:
+Il prodotto scalare è un'operazione binaria interna ad uno spazio vettoriale $\vect{V}$ che restituisce uno scalare:
 \begin{equation*}
-    \langle \cdot \; , \; \cdot \rangle : V \times V  \rightarrow \mathbb{R}
+    \langle \cdot \; , \; \cdot \rangle : \vect{V} \times \vect{V}  \rightarrow \mathbb{R}
 \end{equation*}
 Si definisce come il prodotto matriciale tra il primo vettore per la trasposta del secondo:
 \begin{equation*}
-    \langle\vec v,\,\vec w\rangle=\vec v\cdot \vec w^T=\begin{pmatrix}
+    \langle\vect{v},\,\vect{w}\rangle=\vect{v}\cdot \vect{w}^T=\begin{pmatrix}
         v_x &v_y&v_z
     \end{pmatrix}\cdot\begin{pmatrix}
         w_x\\ w_y \\ w_z
     \end{pmatrix}
 \end{equation*} 
-Per ottenere una certa componente di un generico vettore $\mathbf{v}$ si considera il prodotto tra quel vettore e la base della componente desiderata:
+Per ottenere una certa componente di un generico vettore $\vect{v}$ si considera il prodotto tra quel vettore e la base della componente desiderata:
 \begin{equation*}
-    \langle\vec v,\,\hat{\mathbf{x}}\rangle=\vec v\cdot \hat{\mathbf{x}}^T=\begin{pmatrix}
+    \langle\vect{v},\,\hat{\vect{x}}\rangle=\vect{v}\cdot \hat{\vect{x}}^T=\begin{pmatrix}
         v_x &v_y&v_z
     \end{pmatrix}\cdot\begin{pmatrix}
         1\\ 0 \\0
@@ -1070,7 +1062,7 @@ Per $k=0$ l'armonica corrispondente è un segnale costante. In generale un'armon
 \end{equation*}
 Per cui la parte reale di un'armonica oscilla come un segnale coseno di frequenza dell'armonica. 
 
-\subsection{Proprietà}
+\subsection{Proprietà della Serie}
 
 Generalmente si differenziano i casi dove l'esponenziale assume valore unitario, per $k=0$, dai casi dove è presente un'armonica generica $c_k$, nel calcolo 
 dei coefficienti di un segnale $x(t)$. 
@@ -1080,12 +1072,8 @@ Poiché segnali $x(t)$ e $y(t)$, periodici di periodo $T$, possono essere espres
 può essere espressa come una combinazione lineare dei coefficienti delle due serie di Fourier:
 \begin{gather*}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi  k t}{T}}\\    
-    y(t)=\displaystyle\sum_{k=-\infty}^{+\infty}d_ke^{i\frac{2\pi  k t}{T}}
-\end{gather*}
-\begin{equation}
-    ax(t)+by(t)=\displaystyle\sum_{k=-\infty}^{+\infty}(ac_k+bd_k)e^{i\frac{2\pi  k t}{T}}
-\end{equation}
-\begin{gather*}
+    y(t)=\displaystyle\sum_{k=-\infty}^{+\infty}d_ke^{i\frac{2\pi  k t}{T}}\\
+    ax(t)+by(t)=\displaystyle\sum_{k=-\infty}^{+\infty}(ac_k+bd_k)e^{i\frac{2\pi  k t}{T}}\tageq\\
     \displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}(ax(t)+by(t))\df t=\frac{a}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)e^{-i\frac{2\pi  k t}{T}}\df t
     +\frac{b}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}y(t)e^{-i\frac{2\pi  k t}{T}}\df t=ac_k+bd_k
 \end{gather*}
@@ -1135,21 +1123,17 @@ Si ottiene lo stesso risultato, i coefficienti associati alle armoniche vengono 
 Quando un segnale viene moltiplicato per un coseno ad una determinata frequenza si indica quest'operazione come modulazione. 
 \begin{gather*}
     y(t)=x(t)\cos\displaystyle\left(\frac{2\pi t}{T}\right)=x(t)\left[\frac{e^{i\frac{2\pi t}{T}}+e^{-i\frac{2\pi t}{T}}}{2}\right]=\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\frac{e^{i\frac{2\pi t}{T}}+e^{-i\frac{2\pi t}{T}}}{2}\\
-    y(t)=\displaystyle\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k+1)t}{T}}+\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k-1)t}{T}}=\frac{1}{2}\left(\sum_{m=-\infty}^{+\infty}c_{m-1}e^{i\frac{2\pi mt}{T}}+\sum_{m=-\infty}^{+\infty}c_{m+1}e^{i\frac{2\pi mt}{T}}\right)
+    y(t)=\displaystyle\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k+1)t}{T}}+\frac{1}{2}\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi (k-1)t}{T}}=\frac{1}{2}\left(\sum_{m=-\infty}^{+\infty}c_{m-1}e^{i\frac{2\pi mt}{T}}+\sum_{m=-\infty}^{+\infty}c_{m+1}e^{i\frac{2\pi mt}{T}}\right)\\
+    d_k=\displaystyle\frac{1}{2}c_{k-1}+\frac{1}{2}c_{k+1}\tageq
 \end{gather*}
-\begin{equation}
-    d_k=\displaystyle\frac{1}{2}c_{k-1}+\frac{1}{2}c_{k+1}
-\end{equation}
 
 \subsubsection{Teroema della Derivazione}
 
 Espansione di Fourier della derivata di un segnale $x(t)$:
 \begin{gather*}
-    y(t)=\displaystyle\frac{\df}{\df t}x(t)=\frac{\df}{\df t}\left(\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\right)=\sum_{k=-\infty}^{+\infty}c_k\frac{2i\pi k}{T}e^{i\frac{2\pi kt}{T}}
+    y(t)=\displaystyle\frac{\df}{\df t}x(t)=\frac{\df}{\df t}\left(\displaystyle\sum_{k=-\infty}^{+\infty}c_ke^{i\frac{2\pi kt}{T}}\right)=\sum_{k=-\infty}^{+\infty}c_k\frac{2i\pi k}{T}e^{i\frac{2\pi kt}{T}}\\
+    d_k=c_k\displaystyle\frac{2i\pi k}{T}\tageq
 \end{gather*}
-\begin{equation}
-    d_k=c_k\displaystyle\frac{2i\pi k}{T}
-\end{equation}
 Tramite la definizione, si risolve tramite integrazione per parti:
 \begin{gather*}
     d_k=\displaystyle\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\frac{\df}{\df t}x(t)e^{-i\frac{2\pi kt}{T}}\df t=
@@ -1293,7 +1277,7 @@ Data un'onda quadra:
 Si vuole descrivere l'espansione  di Fourier della derivata di questo segnale. Si esprime come la differenza tra due gradini:
 \begin{gather*}
     x(t)=\displaystyle\sum_{k=-\infty}^{+\infty}u\left(t-kT+\frac{\tau}{2}\right)-u\left(t-kT-\frac{\tau}{2}\right)\\
-    \displaystyle\frac{\df}{\df t}x(t)=\sum_{k=-\infty}^{+\infty}\delta\left(t-kT+\frac{\tau}{2}\right)-\delta\left(t-kT-\frac{\tau}{2}\right)
+    \displaystyle\frac{\df x(t)}{\df t}=\sum_{k=-\infty}^{+\infty}\delta\left(t-kT+\frac{\tau}{2}\right)-\delta\left(t-kT-\frac{\tau}{2}\right)
 \end{gather*}
 Poiché per definizione la derivata di un gradino è l'impulso di Dirac. La derivata corrisponde ad una serie di impulsi nei punti dove l'onda quadra presenta delle discontinuità. 
 
@@ -1473,11 +1457,9 @@ La trasformata di Fourier è un operatore lineare. Dati due segnali $x(t)$ e $y(
     y(t)\to Y(f)\\
     ax(t)+by(t)=\displaystyle\int_{-\infty}^{+\infty}(ax(t)+by(t))e^{-2i\pi ft}\df t\\
     a\int_{-\infty}^{+\infty}x(t)e^{-2i\pi ft}\df t+b\int_{-\infty}^{+\infty}y(t)e^{-2i\pi ft}\df t= 
-    aX(f)+bY(f)
+    aX(f)+bY(f)\\
+    ax(t)+by(t)\to aX(f)+bY(f)\tageq
 \end{gather*}
-\begin{equation}
-    ax(t)+by(t)\to aX(f)+bY(f)
-\end{equation}
 
 \subsubsection{Proprietà di Dualità}
 
@@ -1539,11 +1521,9 @@ Data la trasformata di Fourier di un segnale tempo continuo, è nota anche la tr
     \mathscr{F}\{x(t)\}=X(f)\\
     \mathscr{F}\{x(t-t_0)\}=\displaystyle\int_{-\infty}^{+\infty}x(t-t_0)e^{-2i\pi ft}\df t\\
     \tau=t-t_0\\
-    \displaystyle\int_{-\infty}^{+\infty}x(\tau)e^{-2i\pi f(\tau+t_0)}\df\tau=e^{-2i\pi ft_0}\int_{-\infty}^{+\infty}x(\tau)e^{-2i\pi f\tau}\df\tau=e^{-2i\pi ft_0}X(f)
+    \displaystyle\int_{-\infty}^{+\infty}x(\tau)e^{-2i\pi f(\tau+t_0)}\df\tau=e^{-2i\pi ft_0}\int_{-\infty}^{+\infty}x(\tau)e^{-2i\pi f\tau}\df\tau=e^{-2i\pi ft_0}X(f)\\
+    \mathscr{F}\{x(t-t_0)\}=X(f)e^{-2i\pi ft_0}\tageq
 \end{gather*}
-\begin{equation}
-    \mathscr{F}\{x(t-t_0)\}=X(f)e^{-2i\pi ft_0}
-\end{equation}
 
 \subsubsection{Traslazione in Frequenza}
 
@@ -1553,7 +1533,16 @@ Si considera un segnale moltiplicato per un armonica di frequenza costante $f_0$
     \mathscr{F}\left\{e^{2i\pi f_0t}x(t)\right\}=\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi(f-f_0)t}\df t=X(f-f_0)
 \end{gather}
 
-Quest'operazione si chiama modulazione di ampiezza (AM). Il segnale trasmesso corrisponde ad un coseno di ampiezza pari al segnale originario.
+\subsubsection{Proprietà della Modulazione}
+
+Si considera una finestra di base $T$ moltiplicata per un coseno di frequenza costante $f_0$, ovvero modulata di una frequenza $f_0$:
+\begin{gather*}
+    x(t)=\rect\displaystyle\left(\frac{t}{T}\right)\cos(2\pi f_0t)\\
+    \mathscr{F}\{x(t)\}=\frac{T}{2}\sinc((f-f_0)T)+\frac{T}{2}\sinc\left((f+f_0)T\right)
+\end{gather*}
+La sua trasformata corrisponde a due seni cardinali centrati in $\pm f_0$. 
+Quest'operazione si chiama modulazione di ampiezza (AM), utilizzata nella codifica in banda passante \ref{sec:banda-passante}. Il segnale trasmesso corrisponde ad un coseno di ampiezza pari al segnale originario 
+in quell'istante.
 \begin{gather*}
     \mathscr{F}\{x(t)\cos(2\pi f_0t)\}=\displaystyle\frac{1}{2}\int_{-\infty}^{+\infty}x(t)\left[e^{2i\pi f_0t}+e^{-2i\pi f_0t}\right]e^{-2i\pi ft}\df t\\
     \frac{1}{2}\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi(f-f_0)t}\df t+\frac{1}{2}\int_{-\infty}^{+\infty}x(t)e^{-2i\pi (f+f_0)t}\df t=\frac{X(f-f_0)}{2}+\frac{X(f+f_0)}{2}
@@ -1575,11 +1564,9 @@ Si inverte l'ordine di integrazione, possibile poiché i due integrali sono indi
     x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}Y(f)\left(\int_{-\infty}^{+\infty}x(t-\tau)e^{2i\pi f\tau}\df\tau\right)\df f\\
     t'=t-\tau\\
     \int_{-\infty}^{+\infty}Y(f)e^{2i\pi ft}\left(\int_{-\infty}^{+\infty}x(t')e^{-2i\pi ft'}\df t'\right)\df f\\
-    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}Y(f)X(f)e^{2i\pi ft}\df f
+    x(t)*y(t)=\displaystyle\int_{-\infty}^{+\infty}Y(f)X(f)e^{2i\pi ft}\df f\\
+    \mathscr{F}\{x(t)*y(t)\}=X(f)\cdot Y(f)\tageq
 \end{gather*}
-\begin{equation}
-    \mathscr{F}\{x(t)*y(t)\}=X(f)\cdot Y(f)
-\end{equation}
 
 \subsubsection{Teorema di Parseval}
 
@@ -1595,11 +1582,9 @@ Si considera ora la convoluzione tra $x(t)$ e $y^*(-t)$, sempre calcolata nell'o
 \end{gather*}
 Se si considera $y=x$, allora la convoluzione diventa un'auto-convoluzione. Calcolata nell'origine corrisponde all'energia di un segnale:
 \begin{gather*}
-    z(0)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)x^*(\tau)\df\tau=\int_{-\infty}^{+\infty}X(f)X^*(f)\df f
-\end{gather*}
-\begin{equation}
+    z(0)=\displaystyle\int_{-\infty}^{+\infty}x(\tau)x^*(\tau)\df\tau=\int_{-\infty}^{+\infty}X(f)X^*(f)\df f\\
     E_x=\displaystyle\int_{-\infty}^{+\infty}|x(\tau)|^2\df\tau=\int_{-\infty}^{+\infty}|X(f)|^2\df f
-\end{equation}
+\end{gather*}
 Per cui l'energia di un segnale si calcola esattamente allo stesso modo sia nel dominio del tempo che nel dominio della frequenza. 
 
 \subsubsection{Proprietà della Derivazione}
@@ -1609,14 +1594,14 @@ determinare la trasformata della derivata di un noto segnale $x$, di trasformata
 
 Si considera il segnale derivata $x_1$:
 \begin{gather*}
-    x_1(t)=\displaystyle\frac{\df}{\df t}x(t)\\
-    X_1(f)=\displaystyle\int_{-\infty}^{+\infty}\left(\frac{\df}{\df t}x(t)\right)e^{-2i\pi ft}\df t
+    x_1(t)=\displaystyle\frac{\df x(t)}{\df t}\\
+    X_1(f)=\displaystyle\int_{-\infty}^{+\infty}\frac{\df x(t)}{\df t}e^{-2i\pi ft}\df t
 \end{gather*}
 Si considera l'antitrasformata del segnale originale $x$ e si derivano entrambi i lati rispetto al tempo: 
 
 \begin{gather*}
     x(t)=\displaystyle\int_{-\infty}^{+\infty}X(f)e^{2i\pi ft}\df f\\
-    \displaystyle\frac{\df}{\df t}x(t)=\int_{-\infty}^{+\infty}2i\pi fX(f)e^{2i\pi ft}\df f=x_1(t)
+    \displaystyle\frac{\df x(t)}{\df t}=\int_{-\infty}^{+\infty}2i\pi fX(f)e^{2i\pi ft}\df f=x_1(t)
 \end{gather*}
 Quest'integrale rappresenta l'antitrasformata del segnale derivata $x_1$, per cui la sua trasformata può essere espressa come:
 \begin{gather} 
@@ -1629,11 +1614,9 @@ Dato un segnale $x(t)$ e la sua trasformata $X(f)$, si dimostra che vale la prop
     x_1(t)=2i\pi tx(t)\\
     X_1(f)=\displaystyle\int_{-\infty}^{+\infty}2i\pi tx(t)e^{-2i\pi ft}\df t\\
     X(f)=\displaystyle\int_{-\infty}^{+\infty}x(t)e^{-2i\pi ft}\df t\\
-    \displaystyle\frac{\df}{\df f}X(f)=\int_{-\infty}^{+\infty}-2i\pi t x(t)e^{2i\pi ft}\df t=-\int_{-\infty}^{+\infty}x_1(t)e^{2i\pi ft}\df t=-X_1(f)\\
+    \displaystyle\frac{\df X(f)}{\df f}=\int_{-\infty}^{+\infty}-2i\pi t x(t)e^{2i\pi ft}\df t=-\int_{-\infty}^{+\infty}x_1(t)e^{2i\pi ft}\df t=-X_1(f)\\
+    -2i\pi tx(t)\to\displaystyle\frac{\df X(f)}{\df f}\tageq
 \end{gather*}
-\begin{equation}
-    -2i\pi tx(t)\to\displaystyle\frac{\df}{\df f}X(f)
-\end{equation}
 
 \subsubsection{Proprietà dell'Integrazione}
 
@@ -1643,11 +1626,9 @@ Dato un segnale $x$ di trasformata $X$, si considera il suo integrale fino ad un
 \end{gather*}
 Nel domino della frequenza la trasformata del segnale $x_1$ è quindi il prodotto tra la trasformata di $x$ e del segnale gradino:
 \begin{gather*}
-    X_1(f)=X(f)\left[\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}\right]=\frac{1}{2}X(0)\delta(f)+\frac{X(f)}{2i\pi f}
+    X_1(f)=X(f)\left[\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}\right]=\frac{1}{2}X(0)\delta(f)+\frac{X(f)}{2i\pi f}\\
+    \displaystyle\int_{-\infty}^tx(\tau)d\tau\to\frac{1}{2}X(0)\delta(f)+\frac{X(f)}{2i\pi gf}\tageq
 \end{gather*}
-\begin{equation}
-    \displaystyle\int_{-\infty}^tx(\tau)d\tau\to\frac{1}{2}X(0)\delta(f)+\frac{X(f)}{2i\pi gf}
-\end{equation}
 
 \subsubsection{Proprietà del Coniugato}
 
@@ -1736,22 +1717,18 @@ Dato il segnale treno campionatore, o segnale rastrelliera, si calcola la sua tr
 \begin{gather*}
     \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\delta(t-kT)\\
     c_k=\displaystyle\frac{1}{k}\\
-    \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}e^{2i\pi kt/T}
+    \pi(t)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}e^{2i\pi kt/T}\\
+    \Pi(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}\delta\left(f-\frac{k}{T}\right)\tageq
 \end{gather*}
-\begin{gather}
-    \Pi(f)=\displaystyle\sum_{k=-\infty}^{+\infty}\frac{1}{T}\delta\left(f-\frac{k}{T}\right)
-\end{gather}
 Questo è uno dei pochi segnali oltre alla gaussiana che si auto-trasforma. 
 
 
 Dato il segnale coseno:
 \begin{gather*}
     x(t)=\cos(2\pi f_0t)\\
-    X(f)=\displaystyle\frac{1}{2}\int_{-\infty}^{+\infty}\left(e^{2i\pi f_0t}+e^{-2i\pi f_0t}\right)e^{-2i\pi ft}\df t=\frac{\delta(f-f_0)+\delta(f+f_0)}{2}
+    X(f)=\displaystyle\frac{1}{2}\int_{-\infty}^{+\infty}\left(e^{2i\pi f_0t}+e^{-2i\pi f_0t}\right)e^{-2i\pi ft}\df t=\frac{\delta(f-f_0)+\delta(f+f_0)}{2}\\
+    \cos(2\pi f_0t)\rightarrow X(f)=\displaystyle\frac{\delta(f-f_0)+\delta(f+f_0)}{2}\tageq
 \end{gather*}
-\begin{equation}
-    \cos(2\pi f_0t)\rightarrow X(f)=\displaystyle\frac{\delta(f-f_0)+\delta(f+f_0)}{2}
-\end{equation}
 Nella notazione di Fourier un coseno viene rappresentato come due frequenze $\pm f_0$. 
 Analogamente per il seno:
 \begin{gather}
@@ -1760,11 +1737,9 @@ Analogamente per il seno:
 Dato un coseno di ampiezza $A$ con un anticipo di fase $\phi$: 
 \begin{gather*}
     x(t)=A\cos(2\pi f_0t+\phi)\\
-    X(f)=\displaystyle\frac{A}{2}\int_{-\infty}^{+\infty}\left(e^{2i\pi f_0t}e^{i\phi}+e^{-2i\pi f_0t}e^{-i\phi}\right)e^{-2i\pi ft}\df t
+    X(f)=\displaystyle\frac{A}{2}\int_{-\infty}^{+\infty}\left(e^{2i\pi f_0t}e^{i\phi}+e^{-2i\pi f_0t}e^{-i\phi}\right)e^{-2i\pi ft}\df t\\
+    A\cos(2\pi f_0t+\phi)\to X(f)=\frac{A\delta(f-f_0)e^{i\phi}+A\delta(f+f_0)e^{-i\phi}}{2}\tageq
 \end{gather*}
-\begin{equation}
-    A\cos(2\pi f_0t+\phi)\to X(f)=\frac{A\delta(f-f_0)e^{i\phi}+A\delta(f+f_0)e^{-i\phi}}{2}
-\end{equation}
 
 
 Si considera la trasformata del segnale gaussiano:
@@ -1776,11 +1751,9 @@ Si considera la trasformata del segnale gaussiano:
 \end{gather*}
 Si applica la sostituzione $\tau=\sqrt{\alpha}(t+i\pi f/\alpha)$, l'integrale diventa allora:
 \begin{gather*}
-    e^{-\frac{\pi^2f^2}{\alpha}}\displaystyle\int_{-\infty}^{+\infty}e^{-\tau^2}\frac{\df\tau}{\sqrt{\alpha}}=e^{-\frac{\pi^2f^2}{\alpha}}\sqrt{\frac{\pi}{\alpha}}
+    e^{-\frac{\pi^2f^2}{\alpha}}\displaystyle\int_{-\infty}^{+\infty}e^{-\tau^2}\frac{\df\tau}{\sqrt{\alpha}}=e^{-\frac{\pi^2f^2}{\alpha}}\sqrt{\frac{\pi}{\alpha}}\\
+    e^{-\alpha t^2}\to \sqrt{\frac{\pi}{\alpha}}e^{-\frac{\pi^2f^2}{\alpha}}\tageq
 \end{gather*}
-\begin{equation}
-    e^{-\alpha t^2}\to \sqrt{\frac{\pi}{\alpha}}e^{-\frac{\pi^2f^2}{\alpha}}
-\end{equation}
 
 In forma normalizzata la gaussiana si esprime direttamente rispetto alla deviazione standard $\sigma$ e alla sua varianza $\sigma^2$:
 \begin{gather*}
@@ -1797,11 +1770,9 @@ Si determina la trasformata dell'esponenziale unilatero:
 \begin{gather*}
     x(t)=e^{-\alpha t}u(t)\\
     X(f)=\displaystyle\int_{-\infty}^{+\infty}e^{-\alpha t}u(t)e^{-2i\pi ft}\df t=\int_0^{+\infty}e^{-(2i\pi f+\alpha)t}\df t\\
-    \left[\displaystyle\frac{e^{-(2i\pi f+\alpha)t}}{-(\alpha+2i\pi f)}\right]^{+\infty}_0=0+\frac{1}{\alpha+2i\pi f}
+    \left[\displaystyle\frac{e^{-(2i\pi f+\alpha)t}}{-(\alpha+2i\pi f)}\right]^{+\infty}_0=0+\frac{1}{\alpha+2i\pi f}\\
+    e^{-\alpha t}u(t)\to\frac{1}{\alpha+ 2i\pi f}\tageq
 \end{gather*}
-\begin{equation}
-    e^{-\alpha t}u(t)\to\frac{1}{\alpha+ 2i\pi f}
-\end{equation}
 Il modulo quadro del segnale corrisponde ad una Lorentziana, una funzione simile ad una gaussiana: 
 \begin{equation*}
     \left|X(f)\right|^2=\frac{1}{\alpha^2+4\pi^2f^2}
@@ -1821,11 +1792,9 @@ Dato il segnale esponenziale del modulo. Si può esprimere il segnale come due e
     x(t)=e^{-\alpha|t|}\\
     x_1(t)=e^{-\alpha t}\\
     x(t)=x_1(t)+x_1(-t)\\
-    X(f)=X_1(f)+X_1(-f)=\displaystyle\frac{1}{\alpha+2i\pi f}+\frac{1}{\alpha-2i\pi ft}
+    X(f)=X_1(f)+X_1(-f)=\displaystyle\frac{1}{\alpha+2i\pi f}+\frac{1}{\alpha-2i\pi ft}\\
+    e^{-\alpha|t|}\to\frac{2\alpha}{\alpha^2+4\pi^2f^2}\tageq
 \end{gather*}
-\begin{equation}
-    e^{-\alpha|t|}\to\frac{2\alpha}{\alpha^2+4\pi^2f^2}
-\end{equation}
 Per cui la sua trasformata corrisponde alla Lorentziana. 
 
 
@@ -1833,11 +1802,9 @@ Dato il segnale Lorentziana, si può calcolare la sua trasformata tramite la pro
 \begin{gather*}
     x(t)=\displaystyle\frac{1}{\alpha+2i\pi t}\\
     x_1(t)=e^{-\alpha t}u(t)\\
-    X(f)=x(-f)=e^{\alpha f}u(-f)
+    X(f)=x(-f)=e^{\alpha f}u(-f)\\
+    \displaystyle\frac{1}{\alpha+2i\pi t}\to e^{\alpha f}u(-f)\tageq
 \end{gather*}
-\begin{equation}
-    \displaystyle\frac{1}{\alpha+2i\pi t}\to e^{\alpha f}u(-f)
-\end{equation}
 
 
 Dato il segnale gradino, si può esprimere come il limite di un esponenziale unilatero:
@@ -1874,11 +1841,9 @@ Per cui la trasformata di un gradino, segnale non impulsivo, risulta essere:
 Si considera il segnale segno, e si vuole determinare la sua trasformata:
 \begin{gather*}
     x(t)=\mathrm{sign}(t)=u(t)-u(-t)\\
-    X(f)=U(f)-U(-f)=\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}-\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}=\frac{1}{i\pi f}
-\end{gather*}
-\begin{equation}
+    X(f)=U(f)-U(-f)=\displaystyle\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}-\frac{1}{2}\delta(f)+\frac{1}{2i\pi f}=\frac{1}{i\pi f}\\
     \mathrm{sign}(t)\to\displaystyle\frac{1}{i\pi f}
-\end{equation}
+\end{gather*}
 
 
 Dato un segnale finestra e la sua trasformata:
@@ -2090,7 +2055,7 @@ per ottenere la relazione inversa, ovvero l'antitrasformata dal dominio della fr
     c_k=\displaystyle T\int_{-1/2T}^{1/2T}X(f)e^{2i\pi kfT}\df f=x[k]
 \end{gather}
 
-\subsection{Proprietà della Trasformata}
+\subsection{Proprietà della Trasformata Discreta}
 
 \subsubsection{Proprietà del Valor Medio}
 
@@ -2110,11 +2075,9 @@ segnale non traslato:
 \begin{gather*}
     \mathscr{F}\{x[n-n_0]\}=\displaystyle\sum_{n=-\infty}^{+\infty}x[n-n_0]e^{-2i\pi fnT}\\
     m=n-n_0\\
-    e^{-2i\pi fn_0T}\sum_{m=-\infty}^{+\infty}x[m]e^{-2i\pi mfT}=X(f)e^{-2i\pi fn_0T}
+    e^{-2i\pi fn_0T}\sum_{m=-\infty}^{+\infty}x[m]e^{-2i\pi mfT}=X(f)e^{-2i\pi fn_0T}\\
+    \mathscr{F}\{x[n-n_0]\}=X(f)e^{-2i\pi fn_0T}\tageq
 \end{gather*}
-\begin{equation}
-    \mathscr{F}\{x[n-n_0]\}=X(f)e^{-2i\pi fn_0T}
-\end{equation}
 Si considera la proprietà duale della traslazione in frequenza, nota una sequenza di campioni $x[n]$ e la sua trasformata di Fourier $X(f)$:
 \begin{gather}
     \mathscr{F}\left\{x[n]e^{2i\pi f_0nT}\right\}=\displaystyle\sum_{k=-\infty}^{+\infty}x[k]e^{2i\pi f_0kT}e^{-2i\pi fkT}=\sum_{k=-\infty}^{+\infty}x[k]e^{-2i\pi (f-f_0)kT}=X(f-f_0)
@@ -2467,7 +2430,7 @@ sommatoria di impulsi estratti dal segnale tempo continuo, ad intervalli regolar
 \end{figure}
 Nel dominio della frequenza lo spettro del segnale si periodicizza, ovvero corrisponde ad una serie di repliche di periodo $1/T_c$:
 \begin{gather*}
-    X_c(f)=X(f)*\Pi(f)=\displaystyle\frac{1}{T_c}\sum_{n=-\infty}^{+\infty}X(f)\delta\left(f-\frac{n}{T_c}\right)=\frac{1}{T_c}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T_c}\right)=\sum_{n=-\infty}^{+\infty}x[n]e^{-2i\pi nfT_c}
+    X_c(f)=X(f)*\Pi(f)=\displaystyle X(f)*\sum_{n=-\infty}^{+\infty}\frac{1}{T_c}\delta\left(f-\frac{n}{T_c}\right)=\frac{1}{T_c}\sum_{n=-\infty}^{+\infty}X\left(f-\frac{n}{T_c}\right)=\sum_{n=-\infty}^{+\infty}x[n]e^{-2i\pi nfT_c}
 \end{gather*}
 
 Nel dominio della frequenza si ottiene lo spettro periodicizzato con passo il reciproco del tempo di campionamento: 
@@ -2521,12 +2484,11 @@ limitare la banda del segnale. Analogamente bisogna utilizzare un tempo di campi
 
 La minore frequenza di campionamento possibile affinché non sia presente aliasing corrisponde a due volte la frequenza massima dello spettro del segnale. Questa condizione 
 si chiama criterio di Nyquist:
-\begin{gather*}
-    f_c>2f_{\max}\\
-    T_c<\displaystyle\frac{1}{2f_{\max}}
-\end{gather*}
+\begin{gather}
+    f_c\geq 2f_{\max}\to T_c\leq \displaystyle\frac{1}{2f_{\max}}
+\end{gather}
 La frequenza massima dipende dal segnale, mentre il tempo di campionamento viene scelto arbitrariamente per soddisfare il criterio di Nyquist. Quando la frequenza di campionamento 
-coincide con la frequenza di Nyquist le due repliche si sovrappongono al valore $f=f_{\max}$. 
+coincide con la frequenza di Nyquist le due repliche si sovrappongono solamente al valore $f=f_{\max}$. 
 
 Nel processamento di segnali audio si considera una banda di $4$kHz, per cui nella tecnica PCM ``Pulse Code Modulation" si campiona ad una frequenza di $8$kHz. 
 Ad ogni valore della sequenza vengono assegnati $8$ bit, per cui per un segnale audio vengono trasmessi $64$k bit al secondo. 
@@ -2832,11 +2794,9 @@ Poiché è una relazione lineare, questa relazione si può esprimere rispetto al
     y=f(x)=ax+b\\
     x=g(y)=\displaystyle\frac{y-b}{a}\\
     \Pr(Y\leq y)=\Pr\left(X\leq\displaystyle\frac{y-b}{a}\right)\\
-    D_Y(y)=D_X\left(\displaystyle\frac{y-b}{a}\right)=D_X(g(y))
+    D_Y(y)=D_X\left(\displaystyle\frac{y-b}{a}\right)=D_X(g(y))\\
+    D_Y(y)=D_X(g(y))\tageq
 \end{gather*}
-\begin{equation}
-    D_Y(y)=D_X(g(y))
-\end{equation}
 
 La densità di probabilità si ottiene derivando la distribuzione cumulativa:
 \begin{gather*}
@@ -2927,11 +2887,9 @@ Si calcola il valore medio di una statistica esponenziale:
 \begin{gather*}
     P_X(x)=\lambda e^{-\lambda x}u(x)\\
     \mu_x=\displaystyle\int_{-\infty}^{+\infty}xP(x)\df x=\lambda\int_{0}^{+\infty}xe^{-\lambda x}\df x=\cancelto{0}{\left[xe^{-\lambda x}\right]_0^{+\infty}}+\int_0^{+\infty}e^{-\lambda x}\df x\\
-    \displaystyle\cancelto{0}{\left[-xe^{-\lambda x}\right]_0^{+\infty}}+\left[-\frac{e^{-\lambda x}}{\lambda}\right]_0^{+\infty}=\frac{1}{\lambda}
+    \displaystyle\cancelto{0}{\left[-xe^{-\lambda x}\right]_0^{+\infty}}+\left[-\frac{e^{-\lambda x}}{\lambda}\right]_0^{+\infty}=\frac{1}{\lambda}\\
+    \mu_x=\displaystyle\frac{1}{\lambda}\tageq
 \end{gather*}
-\begin{equation}
-    \mu_x=\displaystyle\frac{1}{\lambda}
-\end{equation}
 
 Si definisce il valore atteso quadratico o il momento del secondo ordine $\mu_x^{(2)}$ come:
 \begin{equation}
@@ -2966,11 +2924,9 @@ integrale corrisponde al valore medio:
 Data una statistica esponenziale, si calcola il valore quadratico medio, tramite la sua definizione:
 \begin{gather*}
     \mu_x^{(2)}=\displaystyle\int_{-\infty}^{+\infty}x^2\lambda e^{-\lambda x}u(x)\df x=\cancelto{0}{\left[-x^2e^{-\lambda x}\right]_0^{+\infty}}+2\int_{0}^{+\infty}xe^{-\lambda x}\df x\\
-    \cancelto{0}{\left[-2\displaystyle\frac{e^{-\lambda x}}{\lambda}\right]_0^{+\infty}}+2\int_{0}^{+\infty}\frac{e^{-\lambda x}}{\lambda}\df x=\left[-\frac{2e^{-\lambda x}}{\lambda^2}\right]^{+\infty}_0=\frac{2}{\lambda^2}
+    \cancelto{0}{\left[-2\displaystyle\frac{e^{-\lambda x}}{\lambda}\right]_0^{+\infty}}+2\int_{0}^{+\infty}\frac{e^{-\lambda x}}{\lambda}\df x=\left[-\frac{2e^{-\lambda x}}{\lambda^2}\right]^{+\infty}_0=\frac{2}{\lambda^2}\\
+    \mu_x^{(2)}=\displaystyle\frac{2}{\lambda^2}\tageq
 \end{gather*}
-\begin{equation}
-    \mu_x^{(2)}=\displaystyle\frac{2}{\lambda^2}
-\end{equation}
 Mentre la sua varianza è:
 \begin{gather}
     \sigma_x^2=\mu_x^{(2)}-\mu_x^2=\displaystyle\frac{2}{\lambda^2}-\frac{1}{\lambda^2}=\frac{1}{\lambda^2}
@@ -3038,11 +2994,9 @@ relazione $f(x)=y$, si può calcolare il valore atteso della variabile $y$ rispe
 \begin{gather*}
     E[y]=\displaystyle\int_{-\infty}^{+\infty}yP_Y(y)\df y=\int_{-\infty}^{+\infty}f(x)P_Y(f(x))f'(x)\df x\\
     P_Y(f(x))f'(x)=P_X(x)\\
-    \int_{-\infty}^{+\infty}f(x)P_X(x)\df x=E[f(x)]
+    \int_{-\infty}^{+\infty}f(x)P_X(x)\df x=E[f(x)]\\
+    E[y]=E[f(x]]\tageq
 \end{gather*}
-\begin{equation}
-    E[y]=E[f(x)]
-\end{equation}
 
 La funzione valore atteso gode della della proprietà di linearità:
 \begin{gather}
@@ -3116,11 +3070,9 @@ Si esprime la covarianza tra due variabili aleatorie, diverse, tramite la funzio
     \displaystyle\iint_{\mathbb{R}^2}xyP_{X,Y}(x,y)\df x\df y-\mu_x\int_{-\infty}^{+\infty}y\left(\int_{-\infty}^{+\infty}P_{X,Y}(x,y)\df x\right)\df y\\
     -\displaystyle\mu_y\int_{-\infty}^{+\infty}x\left(\int_{-\infty}^{+\infty}P_{X,Y}(x,y)\df y\right)\df x+\mu_x\mu_y\cancelto{1}{\iint_{\mathbb{R}^2}P_{X,Y}(x,y)\df x\df y}\\
     \displaystyle\iint_{\mathbb{R}^2}xyP_{X,Y}(x,y)\df x\df y-\mu_x\int_{-\infty}^{+\infty}yP_Y(y)\df y-\mu_y\int_{-\infty}^{+\infty}xP_X(x)\df x+\mu_x\mu_y\\
-    \mu_{x,y}^{1,1}-\mu_x\mu_y-\mu_x\mu_y+\mu_x\mu_y
+    \mu_{x,y}^{1,1}-\mu_x\mu_y-\mu_x\mu_y+\mu_x\mu_y\\
+    \sigma_{x,y}=\mu_{x,y}^{1,1}-\mu_x\mu_y\tageq
 \end{gather*}
-\begin{equation}
-    \sigma_{x,y}=\mu_{x,y}^{1,1}-\mu_x\mu_y
-\end{equation}
 
 Tramite la covarianza si studia il grado di correlazione tra due variabili aleatorie per identificare se sono legate tra di loro. 
 Si quantifica dall'indice di correlazione $\rho_{x,y}$, definito come il rapporto tra la covarianza e la radice quadrata del prodotto tra le varianze delle due variabili:
@@ -3146,11 +3098,9 @@ Si determina la funzione caratteristica di $Z$:
 \begin{gather*}
     \mathbf{P}_z(f)=E[e^{-2i\pi fz}]=E[e^{-2i\pi f(x+y)}]\\
     E[e^{-2i\pi f(x+y)}]\displaystyle=\iint_{\mathbb{R}^2}e^{-2i\pi f(x+y)}P_{X,Y}(x,y)\df x\df y\\
-    \displaystyle\int_{-\infty}^{+\infty}e^{-2i\pi fx}P_X(x)\df x\int_{-\infty}^{+\infty}e^{-2i\pi fy}P_Y(y)\df y=\mathbf{P}_x(f)\mathbf{P}_y(f)
+    \displaystyle\int_{-\infty}^{+\infty}e^{-2i\pi fx}P_X(x)\df x\int_{-\infty}^{+\infty}e^{-2i\pi fy}P_Y(y)\df y=\mathbf{P}_x(f)\mathbf{P}_y(f)\\
+    \mathbf{P}_z(f)=\mathbf{P}_x(f)\cdot\mathbf{P}_y(f)\tageq
 \end{gather*}
-\begin{equation}
-    \mathbf{P}_z(f)=\mathbf{P}_x(f)\cdot\mathbf{P}_y(f)
-\end{equation}
 
 Poiché rappresentano la trasformata della densità di probabilità, ritornando nel dominio della variabile aleatoria, l'operazione rappresenta una convoluzione 
 tra le due densità di probabilità $P_X$ e $P_Y$:
@@ -3161,11 +3111,9 @@ tra le due densità di probabilità $P_X$ e $P_Y$:
 
 Si calcola il valore atteso di $Z$, utilizzando la proprietà di linearità della funzione valore atteso:
 \begin{gather*}
-    \mu_z=E[z]=E[x+y]=E[x]+E[y]=\mu_x+\mu_y
+    \mu_z=E[z]=E[x+y]=E[x]+E[y]=\mu_x+\mu_y\\
+    \mu_z=\mu_x+\mu_y\tageq
 \end{gather*}
-\begin{equation}
-    \mu_z=\mu_x+\mu_y
-\end{equation}
 
 Si calcola il momento del secondo ordine di $Z$:
 \begin{gather*}
@@ -3178,11 +3126,9 @@ Poiché le due variabili sono indipendenti si può esprimere come:
 
 Si calcola la varianza della variabile aleatoria $Z$:
 \begin{gather*}
-    \sigma_z^2=\mu_z^{(2)}-\mu_z^2=\mu_x^{(2)}+2\mu_x\mu_y+\mu_y^{(2)}-(\mu_x+\mu_y)^2=\mu_x^{(2)}-\mu_x^2+\mu_y^{(2)}-\mu_y^2=\sigma_x^2+\sigma_y^2
+    \sigma_z^2=\mu_z^{(2)}-\mu_z^2=\mu_x^{(2)}+2\mu_x\mu_y+\mu_y^{(2)}-(\mu_x+\mu_y)^2=\mu_x^{(2)}-\mu_x^2+\mu_y^{(2)}-\mu_y^2=\sigma_x^2+\sigma_y^2\\
+    \sigma_z^2=\sigma_x^2+\sigma_y^2\tageq
 \end{gather*}
-\begin{equation}
-    \sigma_z^2=\sigma_x^2+\sigma_y^2
-\end{equation}
 
 \subsection{Processi Aleatori}
 
@@ -3357,11 +3303,9 @@ Si indica come densità spettrale, poiché integrando su tutte le frequenza si o
 \begin{gather*}
     R_x(\tau)=\intinf G_x(f)e^{2i\pi f\tau}\df f\\
     \tau=0\\
-    R_x(\tau)=\intinf G_x(f)\df f=P_x
+    R_x(\tau)=\intinf G_x(f)\df f=P_x\\
+    \intinf G_x(f)\df f=P_x\tageq
 \end{gather*}
-\begin{equation}
-    \intinf G_x(f)\df f=P_x
-\end{equation}
 Per la variabile aleatoria $Z$ la sua densità spettrale di energia si calcola come:
 \begin{gather}
     G_z(f)=\int_{-\infty}^{+\infty}\left(R_x(\tau)+R_y(\tau)+2\mu_x\mu_y\right)e^{-2i\pi f\tau}\df \tau=G_x(f)+G_y(f)+2\mu_x\mu_y\delta(f)
@@ -3474,20 +3418,16 @@ Varianza:
 Funzione di autocorrelazione:
 \begin{gather*}
     R_y(\tau)=E[y(t+\tau)y(\tau)]=E[(ax(t+\tau)+b)(ax(t)+b)]\\
-    a^2E[x(t+\tau)x(t)]+abE[x(t+\tau)]+abE[x(t)]+b^2=a^2R_x(\tau)+2ab\mu_x+b^2
+    a^2E[x(t+\tau)x(t)]+abE[x(t+\tau)]+abE[x(t)]+b^2=a^2R_x(\tau)+2ab\mu_x+b^2\\
+    R_y(\tau)=a^2R_x(\tau)+2ab\mu_x+b^2\tageq\\
+    P_y=a^2P_z+2ab\mu_x+b^2\tageq
 \end{gather*}
-\begin{gather}
-    R_y(\tau)=a^2R_x(\tau)+2ab\mu_x+b^2\\
-    P_y=a^2P_z+2ab\mu_x+b^2
-\end{gather}
 Funzione di covarianza:
 \begin{gather*}
     C_y(\tau)=R_y(\tau)-\mu_y^2=a^2R_x(\tau)+2ab\mu_x+b^2-a^2\mu_x^2-2ab\mu_x-b^2\\
-    a^2(R_x(\tau)-\mu_x^2)=a^2C_x(\tau)
+    a^2(R_x(\tau)-\mu_x^2)=a^2C_x(\tau)\\
+    C_y(\tau)=a^2C_x(\tau)\tageq
 \end{gather*}
-\begin{equation}
-    C_y(\tau)=a^2C_x(\tau)
-\end{equation}
 Indice di correlazione:
 \begin{gather}
     \rho_y(\tau)=\displaystyle\frac{C_y(\tau)}{\sqrt{\sigma_y^2}}=\frac{a^2C_x(\tau)}{\sqrt{a^2\sigma_x^2}}=a\frac{C_x(\tau)}{\sqrt{\sigma_x^2}}=a\rho_y(\tau)
@@ -3511,11 +3451,9 @@ Prima di calcolare la funzione di autocorrelazione del processo $y(t)$, bisogna 
 La funzione di autocorrelazione di $y(t)$ è quindi:
 \begin{gather*}
     R_y(\tau)=E[y(t+\tau)y(t)]=E\left[y(t+\tau)\displaystyle\int_{-\infty}^{+\infty}h(t')x(t-t')\df t'\right]=\int_{-\infty}^{+\infty}h(t')E[y(t+\tau)x(t-t')]\df t'\\
-    \displaystyle\int_{-\infty}^{+\infty}h(t)R_{yx}(\tau+t')\df t'=h(\tau)\otimes R_{yx}(\tau)=h(-\tau)*R_{yx}(\tau)=h(-\tau)*h(t)*R_x(\tau)
+    \displaystyle\int_{-\infty}^{+\infty}h(t)R_{yx}(\tau+t')\df t'=h(\tau)\otimes R_{yx}(\tau)=h(-\tau)*R_{yx}(\tau)=h(-\tau)*h(t)*R_x(\tau)\\
+    R_y(\tau)=h(-\tau)*h(\tau)*R_x(\tau)\tageq
 \end{gather*}
-\begin{equation}
-    R_y(\tau)=h(-\tau)*h(\tau)*R_x(\tau)
-\end{equation}
 La densità spettrale dell'uscita si ottiene trasformando quest'ultima relazione:
 \begin{gather}
     G_y(f)=H^*(f)H(f)G_x(f)=|H(f)|^2G_x(f)
@@ -3758,7 +3696,7 @@ Per trasmettere questo tipo di alfabeto sorgente sono necessari lo stesso numero
 in ricezione, quindi all'aumentare del numero di simboli nell'alfabeto in sorgente, si aumenta la probabilità di errore in ricezione. Per poter distinguere $M$ 
 simboli diversi sono necessari $M-1$ valori di soglia. Costruendo il diagramma ad occhio si osservano vari livelli, che rappresentano i diversi simboli trasmessi sul canale. Questo tipo di codifica si 
 chiama ``Pulse Amplitude Modulation'' PAM, poiché modifica solamente l'ampiezza dell'impulso associato ad un simbolo. Se il numero di simboli $M$ 
-corrisponde al numero di intervalli $\Delta_q$ allora si parla di una codifica PCM ``Pulse Coded Modulation'', dove i valori dell'alfabeto rappresentano 
+corrisponde al numero di intervalli $\Delta_q$ allora si parla di una codifica PCM ``Pulse Code Modulation'', dove i valori dell'alfabeto rappresentano 
 i valori quantizzati e confrontati con una soglia dei campioni del segnale originale $x(t)$, a differenza della PAM dove il numero dei simboli viene scelto 
 arbitrariamente. 
 
@@ -3877,11 +3815,9 @@ Si applica la sostituzione $t=\displaystyle\frac{c_2-y}{\sqrt{2}\sigma_n}$, l'in
     \displaystyle\int_{+\infty}^{\frac{c_2-\overline{c}}{\sqrt2\sigma_n}}\frac{-\sqrt2\sigma_n}{\sqrt{2\pi}\sigma_n}e^{-t^2}\df t=\int_{\frac{c_2-\overline{c}}{\sqrt2\sigma_n}}^{+\infty}\frac{e^{-t^2}}{\sqrt\pi}\df t
 \end{gather*}
 Questo integrale si può esprimere rispetto alla funzione di errore complementare $\mathrm{erfc}(x)$, oppure rispetto alla funzione $Q(x)$:
-\begin{gather}
-    \mathrm{erfc}(x)=\displaystyle\int_{x}^{+\infty}\frac{2}{\sqrt\pi}e^{-t^2}{\df t}\\
-    Q(x)=\displaystyle\frac{1}{2}\mathrm{erfc}\left(\frac{x}{\sqrt2}\right)
-\end{gather}
 \begin{gather*}
+    \mathrm{erfc}(x)=\displaystyle\int_{x}^{+\infty}\frac{2}{\sqrt\pi}e^{-t^2}{\df t}\tageq\\
+    Q(x)=\displaystyle\frac{1}{2}\mathrm{erfc}\left(\frac{x}{\sqrt2}\right)\tageq\\
     \Pr(y<\overline{c}|c_2)=\displaystyle\frac{1}{2}\mathrm{erfc}\left(\frac{c_2-\overline{c}}{\sqrt{2}\sigma_n}\right)=Q\left(\frac{c_2-\overline{c}}{\sigma_n}\right)
 \end{gather*}
 Attuando un processo analogo si ottiene la probabilità di misurare un valore sopra la soglia, avendo trasmesso $c_1$:
@@ -3963,12 +3899,10 @@ Il rapporto segnale rumore corrisponde quindi a:
     \mathrm{SNR}=\displaystyle\frac{c_n^2\intinf |G(f)|^2\df f\intinf |G^*(f)|^2\df f}{\displaystyle\frac{N_0}{2}\intinf |G^*(f)|^2\df f}=\frac{2c_n^2\intinf |G(f)|^2\df f}{N_0}
 \end{equation*}
 Si può riscrivere rispetto all'energia dell'impulso in banda base:
-\begin{equation*}
-    E_g=\intinf |G(f)|^2\df f=\intinf |g(t)|^2\df t
-\end{equation*}
-\begin{equation}
-    \mathrm{SNR}=\displaystyle\frac{2c_n^2E_g}{N_0}
-\end{equation}
+\begin{gather*}
+    E_g=\intinf |G(f)|^2\df f=\intinf |g(t)|^2\df t\\
+    \mathrm{SNR}=\displaystyle\frac{2c_n^2E_g}{N_0}\tageq
+\end{gather*}
 
 Si calcola ora il BER nel caso di un filtro adattato, inserendo il rapporto segnale-rumore nell'argomento della funzione di errore $Q$:
 \begin{equation}
@@ -4021,7 +3955,7 @@ In generale in telecomunicazioni si aumenta la potenza, e le grandezze richieste
 tolleranza, e quindi mantenere le specifiche richieste. 
 
 \subsection{Codifica di Linea in Banda Passante}
-
+\label{sec:banda-passante}
 Tutti i sistemi wireless utilizzano una portante $f_0$.Il segnale viene modulato da un coseno nel tempo, quindi in frequenza viene 
 traslato di un fattore $\pm f_0$, la sua funzione di trasferimento è quindi formata da due filtri passa bassi centrati in $\pm f_0$, di larghezza $B$:
 \begin{figure}[H]%
@@ -4055,11 +3989,9 @@ Poiché le due repliche in frequenza non sono centrate nell'origine, bisogna ver
 lo stesso segnale viene ripetuto sulla stessa banda, effettivamente dimezzando la banda utile del sistema, dato che la frequenza massima deve essere minore di metà della banda. 
 Per cui il baud risulta essere:
 \begin{gather*}
-    f_{\max}=\displaystyle\frac{1}{2T_s}=\frac{R_s}{2}\leq\frac{B}{2}
+    f_{\max}=\displaystyle\frac{1}{2T_s}=\frac{R_s}{2}\leq\frac{B}{2}\\
+    R_s\leq B\tageq
 \end{gather*}
-\begin{equation}
-    R_s\leq B
-\end{equation}
 
 
 In ricezione bisogna poi togliere questa modulazione, per ora si trascura il rumore nel canale. Per ritornare ad un segnale in banda base si moltiplica l'uscita del 
@@ -4184,11 +4116,9 @@ Si suppone che $G(f)$ non si sovrapponga quando è centrata in $\pm f_0$, per cu
 \end{gather*}
 L'energia di simbolo è quindi:
 \begin{gather*}
-    E_s=\intinf |Z(f)|^2\df f=\frac{1}{4}(a_n^2+b_n^2)\intinf |G(f-f_0)|^2\df f+\frac{1}{4}(a_n^2+b_n^2)\intinf |G(f+f_0)|^2\df f
+    E_s=\intinf |Z(f)|^2\df f=\frac{1}{4}(a_n^2+b_n^2)\intinf |G(f-f_0)|^2\df f+\frac{1}{4}(a_n^2+b_n^2)\intinf |G(f+f_0)|^2\df f\\
+    E_s=\displaystyle\frac{a_n^2+b_n^2}{2}E_g\tageq
 \end{gather*}
-\begin{equation}
-    E_s=\displaystyle\frac{a_n^2+b_n^2}{2}E_g
-\end{equation}
 Corrisponde esattamente alla metà dell'energia di simbolo della codifica PAM. 
 
 In caso si considerasse anche il rumore sul canale, la statistica del rumore diventerebbe bidimensionale, poiché dipende dai campioni di $x_1$ e $x_2$. Rappresentano 
@@ -4273,12 +4203,10 @@ Per determinare l'efficienza di un canale, si rappresentano le curve associate a
 rispetto all'energia di bit:
 \begin{gather*}
     P_R=\displaystyle\frac{E_b}{T_b}=E_bC\\
-    C=B\log_2\left(\displaystyle 1+\frac{E_bC}{N_0B}\right)
-\end{gather*}
-\begin{gather*}
+    C=B\log_2\left(\displaystyle 1+\frac{E_bC}{N_0B}\right)\\
     \displaystyle\frac{C}{B}=\log_2\left(1+\frac{E_b}{N_0}\frac{C}{B}\right)\\
     2^{\frac{C}{B}}=1+\displaystyle\frac{E_b}{N_0}\frac{C}{B}\\
-    \displaystyle\frac{E_b}{N_0}=\frac{2^{\frac{C}{B}}-1}{\displaystyle\frac{C}{B}}
+    \displaystyle\frac{E_b}{N_0}=\frac{2^{\frac{C}{B}}-1}{\displaystyle\frac{C}{B}}\tageq
 \end{gather*}
 
 Generalmente l'energia del bit si misura in decibel, e le curve vengono rappresentate in funzione di questo rapporto $E_b/N_0$:
@@ -4293,11 +4221,9 @@ Si calcola l'energia del bit corrispondente ad una capacità $C=0$:
     \displaystyle\frac{N_0}{E_b}=\frac{N_0B}{E_bC}\log_2\left(1+\frac{E_b}{N_0}\frac{C}{B}\right)\\
     \lambda=\displaystyle\frac{N_0}{E_b}\frac{C}{B}\\
     \displaystyle\frac{N_0}{E_b}=\frac{1}{\lambda}\log_2\left(1+\lambda\right)=\frac{1}{\lambda}\frac{\ln(1+\lambda)}{\ln2}\\
-    \lim_{\lambda\to0}\displaystyle\frac{N_0}{E_b}=\frac{1}{\ln2}\cancelto{1}{\lim_{\lambda\to0}\frac{\ln(1+\lambda)}{\lambda}}
+    \lim_{\lambda\to0}\displaystyle\frac{N_0}{E_b}=\frac{1}{\ln2}\cancelto{1}{\lim_{\lambda\to0}\frac{\ln(1+\lambda)}{\lambda}}\\
+    \displaystyle\frac{E_b}{N_0}=\ln2\tageq
 \end{gather*}
-\begin{equation}
-    \displaystyle\frac{E_b}{N_0}=\ln2
-\end{equation}
 Questo rappresenta il limite inferiore per l'energia di bit, oltre il quale non è possibile trasmettere segnali, poiché la capacità massima di canale si annulla.  
 
 Considerando la potenza ricevuta $P_R$ una costante si può rappresentare l'andamento della capacità massima in funzione della banda del canale:
@@ -4313,21 +4239,17 @@ La capacità cresce all'aumentare della banda fino ad un valore massimo asintoti
     \displaystyle C=\frac{N_0B}{P_R}\frac{P_R}{N_0}\log_2\left(1+\frac{P_R}{N_0B}\right)\\
     \lambda=\displaystyle\frac{P_R}{N_0B}\\
     \displaystyle C=\frac{P_R}{N_0}\frac{1}{\lambda}\frac{\ln(1+\lambda)}{\ln2}\\
-    C=\displaystyle\frac{P_R}{\ln2 N_0}\cancelto{1}{\lim_{\lambda\to0}\frac{\ln(1+\lambda)}{\lambda}}
+    C=\displaystyle\frac{P_R}{\ln2 N_0}\cancelto{1}{\lim_{\lambda\to0}\frac{\ln(1+\lambda)}{\lambda}}\\
+    C\approx\displaystyle1.44\frac{P_R}{N_0}=1.44 B(\mathrm{SNR})\tageq
 \end{gather*}
-\begin{equation}
-    C\approx\displaystyle1.44\frac{P_R}{N_0}=1.44 B(\mathrm{SNR})
-\end{equation}
 Questo valore si chiama limite di banda illimitata, o di potenza limitata. 
 
 Se il rapporto segnale rumore, è molto maggiore di uno, allora si può esprimere la capacità massima come:
 \begin{gather*}
     \displaystyle\frac{P_R}{N_0B}>>1\\
-    C=B\log_2(1+\mathrm{SNR})\approx B\log_2\displaystyle\frac{P_R}{N_0B}=B\displaystyle\frac{10\log_{10}(\mathrm{SNR})}{10\log_{10}2}= B\frac{(\mathrm{SNR})_{\df B}}{3}
+    C=B\log_2(1+\mathrm{SNR})\approx B\log_2\displaystyle\frac{P_R}{N_0B}=B\displaystyle\frac{10\log_{10}(\mathrm{SNR})}{10\log_{10}2}= B\frac{(\mathrm{SNR})_{\df B}}{3}\\
+    C\approx B(\mathrm{SNR})_{\df B}\cdot0.33\tageq
 \end{gather*}
-\begin{equation}
-    C\approx B(\mathrm{SNR})_{\df B}\cdot0.33
-\end{equation}
 
 \subsubsection{Codifica di Hamming}
 
